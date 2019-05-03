@@ -48,5 +48,5 @@ API新增界面<br/>
 qq号:19892257
 
 许可证协议：
-![github](https://github.com/yellbuy/go-cloud-framework/edit/master/LICENSE.txt?raw=true "github")
+https://github.com/yellbuy/go-cloud-framework/edit/master/LICENSE.txt?raw=true
 
