@@ -45,7 +45,8 @@ API新增界面<br/>
 
 联系我
 ----
-qq群号:547564773
-欢迎交流，欢迎提交代码。
+qq号:19892257
 
+许可证协议：
+![github](https://github.com/yellbuy/go-cloud-framework/edit/master/LICENSE.txt?raw=true "github")
 
