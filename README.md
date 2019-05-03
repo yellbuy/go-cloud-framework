@@ -30,7 +30,7 @@ https://github.com/yellbuy/go-cloud-framework/edit/master/LICENSE.txt?raw=true
 
 ### 联系我
 ----
-qq：19892257
+QQ：19892257
 
 效果展示
 ----
