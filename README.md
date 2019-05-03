@@ -48,7 +48,8 @@ QQ：19892257
 ![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/5.2.png?raw=true)
 ### 某电商Demo<br/>
 1）小程序二维码
-![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/3.0.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/3.0.jpg?raw=true)
+<br/>
 2）电商后端
 ![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/3.1.png?raw=true)
 ![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/3.2.png?raw=true)
