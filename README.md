@@ -12,7 +12,7 @@
 ### 本框架开源部分涵盖了区域、流水号生成、基础代码管理等常用模块。
 ### 性能优越，集成Cache功能
 
-安装方法    
+### 安装方法    
 ----
 1、go get https://gitee.com/yellbuy/YbGoCloundFramework    
 2、创建mysql数据库，并将YbGoCloundFramework.sql导入    
@@ -24,13 +24,13 @@
 访问地址：http://your_host:8081
 用户名：admin 密码：123456
 
-联系我
-----
-qq：19892257
-
-许可证协议：
+### 许可证协议：
 ----
 https://github.com/yellbuy/go-cloud-framework/edit/master/LICENSE.txt?raw=true
+
+### 联系我
+----
+qq：19892257
 
 效果展示
 ----
