@@ -1,0 +1,18 @@
+[
+  {"code":"01","value":"联盟","children":[
+    {"code":"0101","value":"人类"},
+    {"code":"0102","value":"暗夜精灵"},
+    {"code":"0103","value":"侏儒"},
+    {"code":"0104","value":"德莱尼人"},
+    {"code":"0105","value":"矮人"},
+    {"code":"0104","value":"狼人"}
+  ]},
+  {"code":"02","value":"部落","children":[
+    {"code":"0201","value":"亡灵"},
+    {"code":"0202","value":"牛头人"},
+    {"code":"0203","value":"血精灵"},
+    {"code":"0204","value":"巨魔"},
+    {"code":"0205","value":"地精"},
+    {"code":"0206","value":"兽人"}
+  ]}
+]

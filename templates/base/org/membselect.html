@@ -1,0 +1,172 @@
+ {% extends "../../_share/base.html"%}
+{% block content %}
+<div class="layui-layout layui-layout-admin" style="padding-left: 10px;">
+    <div class="layui-row">
+        <div class="layui-col-xs4">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                </div>
+                <div class="layui-col-xs12">
+                    <table class="layui-hide" id="treeMain" lay-filter="treeMain">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs8">
+            <div class="layui-row">
+                <div class="layui-col-xs3">
+                    <div style="padding: 10px;">当前单位：<span id="curOrgSpan">{{ org.Name }}</span></div>
+                </div>
+                <div class="layui-col-xs9 search_text" style="text-align:right">
+                    <form class="layui-form" action="" onsubmit="javascript:return false;">
+                        <div class="demoTable">
+                            <div class="layui-inline">
+                                <input type="checkbox" id="fetchChild" name="fetchChild" title="所有下级" 
+                                    value="true" lay-skin="primary">
+                            </div>
+                            <div class="layui-inline">
+                                
+                                <input class="layui-input" name="name" id="name" style="width:100px" autocomplete="off" placeholder="真实姓名" >
+                            </div>
+                            <input type="hidden" name="parentid" id="parentid" value="{{org.Id}}">
+                            <button class="layui-btn" data-type="reload">查询</button>
+                            <a class="layui-btn btnSearch" data-type="reload"><i class="layui-icon"></i> 搜索</a>
+                            <a class="layui-btn btnOk"><i class="layui-icon">&#xe605;</i> 确定</a>
+                            <a class="layui-btn layui-btn-primary btnCancel" data-type="reload"><i class="layui-icon">&#xe65c;</i> 取消</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-col-xs12" style="padding: 10px;">
+                    <table id="memberTable" lay-filter="memberTable" lay-data="{id: 'userList'}"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+    var editObj=null,table = null, ptable=null,treeGrid=null,tableId='treeMain',layer=null;
+    layui.use(['larry','jquery','treeGrid','layer','table','form','element'], function(){
+        var $=layui.jquery;
+        var treeGrid = layui.treeGrid;//很重要
+        var layer=layui.layer;
+        table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+        ptable=treeGrid.render({
+            id:tableId
+            ,height: 'full-{{if .allowAdd}}130{{else}}70{{end}}'
+            ,elem: '#'+tableId
+            ,idField:'Id'
+            ,url:'/base/org/list'
+            ,cellMinWidth: 100
+            ,treeId:'Id'//树形id字段名称
+            ,treeUpId:'Parentid'//树形父id字段名称
+            ,treeShowName:'Name'//以树形式显示的字段
+            ,cols: [[
+                {field:'Name', width:300, title: '名称', event: 'select'}
+                ,{field:'Code', width:100, title: '编码'}
+            ]]
+            ,page:false
+        });
+
+        treeGrid.on('tool('+tableId+')',function (obj) {
+            if(obj.event === 'del'){ //删除行
+                del(obj.data);
+            } else if(obj.event === 'select'){ //删除行
+                var data = obj.data;
+            
+                $("#curOrgSpan").text(data.Name)
+                $("#parentid").val(data.Id)
+                //标注选中样式
+                obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+                active.reload()
+            }
+        });
+       
+        //方法级渲染
+        table.render({
+            elem: '#memberTable'
+            ,url: '/base/user/list'
+            ,id: 'userList'
+            ,even: true //开启隔行背景
+            ,limit:20
+            ,limits:[10,20,30,50,100,1000,10000]
+            ,page: true
+            ,height: "full-120"
+            ,cols: [[
+                {checkbox: true, fixed: true}
+                ,{field:'Username',title: '登录账号'}
+                ,{field:'Name', title: '真实姓名'}
+                ,{field:'mobile', title: '手机号码'}
+                ,{field:'email', title: '电子邮箱'}
+                ,{field:'enable', title: '状态'}
+            ]]
+            
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                table.reload('userList', {
+                    page: {
+                        curr: 1 //重新导航到首页
+                    },
+                    where: {
+                        fetchChild: $("input[name='fetchChild']:checked").val()||"false",
+                        name: $('#name').val(),
+                        parentid: $('#parentid').val()
+                    }
+                });
+            }
+        };
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    //确定
+    $(".btnOk").on("click",function(){
+        //当你在iframe页面关闭自身时
+        var checkStatus = table.checkStatus('userList'); //test即为基础参数id对应的值
+        
+        var userlist = checkStatus.data.map(function(value, index, array){
+            
+            return {headPic:'/static/img/avatar.jpg', personName:value.Name,userId:value.Id}
+        });
+        // console.log("userlist:",userlist)
+        // alert(JSON.stringify(checkStatus))
+        var data = { "userList": userlist, "tagList": [], "deptList": [] }
+        console.log(callback)
+        submitMembSelect && submitMembSelect(obj, callback, data)
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭  
+    });
+    //取消
+    $(".btnCancel").on("click",function(){
+        //当你在iframe页面关闭自身时
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index); //再执行关闭  
+    });
+
+    function print() {
+        console.log(treeGrid.cache[tableId]);
+        var loadIndex=layer.msg("对象已打印，按F12，在控制台查看！", {
+            time:3000
+            ,offset: 'auto'//顶部
+            ,shade: 0
+        });
+    }
+
+    var obj;
+    var callback;
+    var submitMembSelect;
+    function setCallback(el, callbackFunc,submitMembSelectFunc){
+        obj = el;
+        callback = callbackFunc;
+        submitMembSelect = submitMembSelectFunc;
+    }
+    </script>
+</script>
+{% endblock %}

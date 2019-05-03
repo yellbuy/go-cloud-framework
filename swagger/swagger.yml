@@ -1,0 +1,6153 @@
+swagger: "2.0"
+info: {}
+basePath: /api
+paths:
+  /v1/action/signin:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiActionController
+      description: 签到记录添加
+      operationId: ApiActionController.签到
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/action/signinlist:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiActionController
+      description: 获取签到记录
+      operationId: ApiActionController.签到记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/base/user/login:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiUserController
+      description: 账号登录，成功返回token
+      operationId: UserController.登录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiUserController
+      description: 账号登录，成功返回token
+      operationId: UserController.登录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    options:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiUserController
+      description: 账号登录，成功返回token
+      operationId: UserController.登录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/cms/article:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/cmsApiArticleController
+      description: 获取文章信息
+      operationId: ApiArticleController.文章列表
+      parameters:
+      - in: path
+        name: kind
+        description: 文章类别，news：动态，post：文章，forum：论坛
+        required: true
+        type: string
+      - in: path
+        name: key
+        description: 栏目Key，为空则查询所有栏目
+        type: string
+      - in: path
+        name: tid
+        description: 租户标识，为空则查询所有租户
+        required: true
+        type: integer
+        format: int32
+      - in: path
+        name: is_swiper
+        description: 是否轮播，-1：所有，0：不轮播，1：轮播
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cms.Article'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/cms/article/:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 文章发布
+      operationId: ApiMemberController.文章发布
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/cms/article/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 文章更新
+      operationId: ApiMemberController.文章更新
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 文章更新
+      operationId: ApiMemberController.文章更新
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/cms/article/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 文章删除，多篇文章按','分割
+      operationId: ApiMemberController.文章删除
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 文章删除，多篇文章按','分割
+      operationId: ApiMemberController.文章删除
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/cms/exam/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiExamController
+      description: 获取考试详细信息
+      operationId: ApiExamController.考试详情
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/cms.Poll'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/address/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 地址更新
+      operationId: ApiMemberController.地址更新
+      parameters:
+      - in: path
+        name: id
+        description: 地址标识
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 地址更新
+      operationId: ApiMemberController.地址更新
+      parameters:
+      - in: path
+        name: id
+        description: 地址标识
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/address/default/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 设置指定id的地址为默认地址
+      operationId: ApiMemberController.设置默认地址
+      parameters:
+      - in: path
+        name: kind
+        description: 0：发件地址，1：收件地址（默认）
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 设置指定id的地址为默认地址
+      operationId: ApiMemberController.设置默认地址
+      parameters:
+      - in: path
+        name: kind
+        description: 0：发件地址，1：收件地址（默认）
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/address/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 地址删除
+      operationId: ApiMemberController.地址删除
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 地址删除
+      operationId: ApiMemberController.地址删除
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/address/top/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 地址置顶
+      operationId: ApiMemberController.地址置顶
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 地址置顶
+      operationId: ApiMemberController.地址置顶
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/order:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单提交
+      operationId: ApiOrderController.订单提交
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/order/calc:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单金额计算
+      operationId: ApiOrderController.订单金额计算
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/order/cancel/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单取消
+      operationId: ApiOrderController.订单取消
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单取消
+      operationId: ApiOrderController.订单取消
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/order/eval/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单商品评价，Title：评价内容，Score：评价分数（0-5），id：OrderGoods的标识，Files：图片（id以,相隔）
+      operationId: ApiOrderController.订单商品评价
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单商品评价，Title：评价内容，Score：评价分数（0-5），id：OrderGoods的标识，Files：图片（id以,相隔）
+      operationId: ApiOrderController.订单商品评价
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/order/receive/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单确认收货
+      operationId: ApiOrderController.订单确认收货
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 订单确认收货
+      operationId: ApiOrderController.订单确认收货
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/eshop/order/reset/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 重置订单为非取消状态
+      operationId: ApiOrderController.重置订单为非取消状态
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 重置订单为非取消状态
+      operationId: ApiOrderController.重置订单为非取消状态
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  /v1/file/upload:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiFileController
+      description: 文件上传接口
+      operationId: ApiFileController.文件上传接口
+      parameters:
+      - in: body
+        name: file
+        description: 上传的文件
+        required: true
+        schema:
+          $ref: '#/definitions/.byte[]'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/common.Attfile'
+        "401":
+          description: No Admin
+        "404":
+          description: no enough input
+  v1/avatar/tenant/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/oauthApiAvatarController
+      description: 获取租户logo，id为0则为当前租户的logo
+      operationId: ApiAvatarController.获取租户logo
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: string
+  v1/avatar/user/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/oauthApiAvatarController
+      description: 获取用户头像，id为0则为用户头像
+      operationId: ApiAvatarController.获取用户头像
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: string
+  v1/base/orgs:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiUserController
+      description: 获取组织列表
+      operationId: UserController.获取组织列表
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/base.User'
+        "401":
+          description: unauthorized
+  v1/base/tenant/collect:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 进行商户收藏操作
+      operationId: ApiStatisticsTenantController.收藏商户
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/tenant/collect/clear:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 清空收藏
+      operationId: ApiStatisticsTenantController.清空收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 清空收藏
+      operationId: ApiStatisticsTenantController.清空收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/tenant/collect/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 取消商户收藏操作
+      operationId: ApiStatisticsTenantController.取消商户收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 取消商户收藏操作
+      operationId: ApiStatisticsTenantController.取消商户收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/tenant/favior:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 进行商户点赞操作
+      operationId: ApiStatisticsTenantController.商户点赞
+      parameters:
+      - in: path
+        name: models
+        description: 统计指标分组，多个以，分割，支持的指标有：广告：base_ad，文章：base_Tenant，商家：base_tenant，租户：base_tenant，订单：base_order_info，订单明细：base_order_tenant
+        type: string
+      - in: path
+        name: actTypes
+        description: 指标操作分类，多个以，分割，为空则为所有分类，支持的分类有：点击：1，点赞：2，收藏：10，购物车：30，评价：50，回复：100
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/tenant/favior/delete:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 取消商户点赞操作
+      operationId: ApiStatisticsTenantController.取消商户点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 取消商户点赞操作
+      operationId: ApiStatisticsTenantController.取消商户点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/tenant/reply:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 进行回复操作
+      operationId: ApiStatisticsTenantController.商户评论操作
+      parameters:
+      - in: body
+        name: RecordId
+        description: 文章标识
+        required: true
+        type: string
+      - in: body
+        name: Parentid
+        description: 回复文章为0，回复评论则为评论的的Id
+        type: string
+      - in: body
+        name: Content
+        description: 评论内容
+        required: true
+        type: string
+      - in: body
+        name: Pics
+        description: 上传图片的i值，以，分割
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/tenant/reply/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 删除回复
+      operationId: ApiStatisticsTenantController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsTenantController
+      description: 删除回复
+      operationId: ApiStatisticsTenantController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/user/auth:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiUserController
+      description: 测试错误码
+      operationId: UserController.认证测试
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/base/user/profile:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 获取当前登录用户的个人信息，如账户余额等
+      operationId: ApiMemberController.获取当前登录用户的个人信息，如账户余额等
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/base.User'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/base/user/profile/:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 获取组织列表
+      operationId: ApiMemberController.修改个人信息
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/base.User'
+        "401":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 获取组织列表
+      operationId: ApiMemberController.修改个人信息
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/base.User'
+        "401":
+          description: unauthorized
+  v1/base/users:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiUserController
+      description: 获取用户列表
+      operationId: UserController.获取用户列表
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/base.User'
+        "401":
+          description: unauthorized
+  v1/cms/article/collect:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 进行收藏操作
+      operationId: ApiStatisticsArticleController.收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/article/collect/delete:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 清空收藏
+      operationId: ApiStatisticsArticleController.清空收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 清空收藏
+      operationId: ApiStatisticsArticleController.清空收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/article/collect/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 取消收藏操作
+      operationId: ApiStatisticsArticleController.取消收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 取消收藏操作
+      operationId: ApiStatisticsArticleController.取消收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/article/favior:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 进行点赞操作
+      operationId: ApiStatisticsArticleController.点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/article/favior/delete:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 取消点赞操作
+      operationId: ApiStatisticsArticleController.取消点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 取消点赞操作
+      operationId: ApiStatisticsArticleController.取消点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/article/reply:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 进行回复操作
+      operationId: ApiStatisticsArticleController.回复操作
+      parameters:
+      - in: body
+        name: RecordId
+        description: 文章标识
+        required: true
+        type: string
+      - in: body
+        name: Parentid
+        description: 回复文章为0，回复评论则为评论的的Id
+        type: string
+      - in: body
+        name: Content
+        description: 评论内容
+        required: true
+        type: string
+      - in: body
+        name: Pics
+        description: 上传图片的i值，以，分割
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/article/reply/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 删除回复
+      operationId: ApiStatisticsArticleController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsArticleController
+      description: 删除回复
+      operationId: ApiStatisticsArticleController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/cms/articles:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/cmsApiArticleController
+      description: 测试错误码
+      operationId: ApiArticleController.通用查询
+      parameters:
+      - in: path
+        name: fields
+        description: 过滤的字段：fields=id,category.name
+        type: string
+      - in: path
+        name: query
+        description: 查询条件：query=id:eq:1,category.id:eq:2
+        type: string
+      - in: path
+        name: order
+        description: 排序，例如：order=id:desc,create_time:asc
+        type: string
+      - in: path
+        name: exclude
+        description: 排除条件，例如：exclude=id:eq:1表示id!=1
+        type: string
+      - in: path
+        name: offset
+        description: 0，从第offset条开始查询
+        type: integer
+        format: int32
+      - in: path
+        name: limit
+        description: 10，限制查询结果数量
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 0，页索引，如存在offset，则本参数将失效
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: 10，页面大小，如存在limit，则本参数将失效
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cms.Article'
+        "401":
+          description: unauthorized
+  v1/cms/category:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/cmsApiCategoryController
+      description: 测试错误码
+      operationId: ApiCategoryController.获取栏目类型
+      parameters:
+      - in: path
+        name: kind
+        description: news：动态，post：文章，forum：论坛
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Category'
+        "401":
+          description: unauthorized
+  v1/cms/exam/:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiExamController
+      description: 进入考试
+      operationId: ApiExamController.进入考试
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/cms/exam/{id}:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiExamController
+      description: 保存试卷或交卷
+      operationId: ApiExamController.保存试卷或交卷
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/cms/exam/voter/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiExamController
+      operationId: ApiExamController.参加考试记录通用查询 // @Description 测试错误码
+      parameters:
+      - in: path
+        name: fields
+        description: 过滤的字段：fields=id,category.name
+        type: string
+      - in: path
+        name: query
+        description: 查询条件：query=id:eq:1,category.id:eq:2
+        type: string
+      - in: path
+        name: order
+        description: 排序，例如：order=id:desc,create_time:asc
+        type: string
+      - in: path
+        name: exclude
+        description: 排除条件，例如：exclude=id:eq:1表示id!=1
+        type: string
+      - in: path
+        name: offset
+        description: 0，从第offset条开始查询
+        type: integer
+        format: int32
+      - in: path
+        name: limit
+        description: 10，限制查询结果数量
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 0，页索引，如存在offset，则本参数将失效
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: 10，页面大小，如存在limit，则本参数将失效
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cms.PollVoter'
+        "401":
+          description: unauthorized
+  v1/cms/exam/voters:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiExamController
+      operationId: ApiExamController.参加考试记录通用查询 // @Description 测试错误码
+      parameters:
+      - in: path
+        name: fields
+        description: 过滤的字段：fields=id,category.name
+        type: string
+      - in: path
+        name: query
+        description: 查询条件：query=id:eq:1,category.id:eq:2
+        type: string
+      - in: path
+        name: order
+        description: 排序，例如：order=id:desc,create_time:asc
+        type: string
+      - in: path
+        name: exclude
+        description: 排除条件，例如：exclude=id:eq:1表示id!=1
+        type: string
+      - in: path
+        name: offset
+        description: 0，从第offset条开始查询
+        type: integer
+        format: int32
+      - in: path
+        name: limit
+        description: 10，限制查询结果数量
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 0，页索引，如存在offset，则本参数将失效
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: 10，页面大小，如存在limit，则本参数将失效
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cms.PollVoter'
+        "401":
+          description: unauthorized
+  v1/cms/exams:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiExamController
+      description: 测试错误码
+      operationId: ApiExamController.通用查询
+      parameters:
+      - in: path
+        name: fields
+        description: 过滤的字段：fields=id,category.name
+        type: string
+      - in: path
+        name: query
+        description: 查询条件：query=id:eq:1,category.id:eq:2
+        type: string
+      - in: path
+        name: order
+        description: 排序，例如：order=id:desc,create_time:asc
+        type: string
+      - in: path
+        name: exclude
+        description: 排除条件，例如：exclude=id:eq:1表示id!=1
+        type: string
+      - in: path
+        name: offset
+        description: 0，从第offset条开始查询
+        type: integer
+        format: int32
+      - in: path
+        name: limit
+        description: 10，限制查询结果数量
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 0，页索引，如存在offset，则本参数将失效
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: 10，页面大小，如存在limit，则本参数将失效
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cms.Poll'
+        "401":
+          description: unauthorized
+  v1/eshop/activity/coupon:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiActivityController
+      description: 获取优惠活动列表信息
+      operationId: ApiActivityController.获取优惠活动列表信息
+      parameters:
+      - in: path
+        name: tid
+        description: 商户标识，传入值大于0则按商户标识进行过滤
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Coupon'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/activity/goods:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiActivityController
+      description: 商品促销活动信息列表
+      operationId: ApiActivityController.商品促销活动信息列表
+      parameters:
+      - in: path
+        name: tid
+        description: 商户标识，传入值大于0则按商户标识进行过滤
+        type: integer
+        format: int32
+      - in: path
+        name: actType
+        description: 促销类型,0：所有，1：限时限量 2：拍卖活动 4:超值礼包，5：预售活动，6：积分商城商品，8：砍价，10：团购 12：云购活动，当前仅支持1和10
+        type: integer
+        format: int32
+      - in: path
+        name: actName
+        description: 按活动名称进行模糊查询
+        type: integer
+        format: int32
+      - in: path
+        name: goodsName
+        description: 按商品名称进行模糊查询
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.GoodsActivity'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/activity/prepay:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiActivityController
+      description: 获取充值送活动列表信息
+      operationId: ApiActivityController.获取充值送活动列表信息
+      parameters:
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Prepay'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/address:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 获取当前登录用户的地址列表列表
+      operationId: ApiMemberController.获取当前登录用户的地址列表列表
+      parameters:
+      - in: path
+        name: kind
+        description: 0：发件，1：收件（默认）
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Coupon'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/address/:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 添加地址
+      operationId: ApiMemberController.添加地址
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/eshop/address/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 获取当前登录用户的一条地址
+      operationId: ApiMemberController.获取当前登录用户的一条地址
+      parameters:
+      - in: path
+        name: kind
+        description: 0：发件地址，1：收件地址（默认）
+        type: integer
+        format: int32
+      - in: path
+        name: id
+        description: 0：获取默认地址，其他：为标识的Id值
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            $ref: '#/definitions/exp.Address'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/ads:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiAdController
+      description: 查询广告信息
+      operationId: ApiAdController.查询广告信息
+      parameters:
+      - in: path
+        name: kind
+        description: 待获取的广告类型，APP端传入1
+        required: true
+        type: integer
+        format: int32
+      - in: path
+        name: kind
+        description: 待获取的广告类型，APP端传入1
+        required: true
+        type: integer
+        format: int32
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/eshop.AdPosition'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/area/group:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiAreaController
+      description: 获取区域树
+      operationId: ApiAreaController.获取区域分组
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Area'
+        "401":
+          description: unauthorized
+  v1/eshop/area/tree:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiAreaController
+      description: 获取区域树
+      operationId: ApiAreaController.获取区域树
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Area'
+        "401":
+          description: unauthorized
+  v1/eshop/category:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiGoodsController
+      description: 获取商品分类信息
+      operationId: ApiGoodsController.获取商品分类信息
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/eshop.Goods'
+        "401":
+          description: unauthorized
+  v1/eshop/coupon/{id}:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 新增
+      operationId: ApiMemberController.领劵
+      parameters:
+      - in: path
+        name: id
+        description: 优惠活动标识
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/eshop/coupon/count:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiActivityController
+      description: 获取用户可用的优惠劵数量，个人中心中可用本接口
+      operationId: ApiActivityController.获取用户可用的优惠劵数量
+      parameters:
+      - in: path
+        name: tid
+        description: 商户标识，传入值大于0则按商户标识进行过滤
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Coupon'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/coupons:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiMemberController
+      description: 获取当前登录用户领取的优惠劵列表
+      operationId: ApiMemberController.获取当前登录用户领取的优惠劵列表
+      parameters:
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Coupon'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiGoodsController
+      description: 查询商品列表信息
+      operationId: ApiGoodsController.查询商品信息
+      parameters:
+      - in: path
+        name: sortKind
+        description: 排序类型， 0:按推荐，1：按距离，2：按销量，3：按人气，4：按最新，5：按价格
+        required: true
+        type: integer
+        format: int32
+      - in: path
+        name: orderKind
+        description: 排序方式，0：按默认规则排序，1：升序 -1：降序
+        type: integer
+        format: int32
+      - in: path
+        name: tid
+        description: 商户标识，为0则为所有
+        type: integer
+        format: int32
+      - in: path
+        name: categoryFid
+        description: 分类标识完整路径（即分类信息的Fid字段），为空则为所有分类
+        type: string
+      - in: path
+        name: isOnSale
+        description: 是否在售，0：下架商品，1：在售商品
+        type: integer
+        format: int32
+      - in: path
+        name: isTop
+        description: 是否推荐商品，默认为-1，不限，0：未推荐商品，1：已推荐商品
+        type: integer
+        format: int32
+      - in: path
+        name: isAct
+        description: 是否参与商品促销状态，默认为-1，不限，0：未参与促销，1：促销中
+        type: integer
+        format: int32
+      - in: path
+        name: lng
+        description: 当前所在的经度
+        required: true
+        type: number
+        format: double
+      - in: path
+        name: lat
+        description: 当前所在的纬度
+        required: true
+        type: number
+        format: double
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/eshop.GoodsDto'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiAdminController
+      description: 新增商品
+      operationId: ApiAdminController.新增商品
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/eshop/goods/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiGoodsController
+      description: 获取商品详细信息
+      operationId: ApiGoodsController.获取商品详细信息
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/eshop.Goods'
+        "401":
+          description: unauthorized
+  v1/eshop/goods/cart:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 查询当前登录用户的购物车商品列表
+      operationId: ApiStatisticsGoodsController.购物车商品列表
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 进行添加到购物车操作
+      operationId: ApiStatisticsGoodsController.添加到购物车
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/cart/delete:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 清空购物车
+      operationId: ApiStatisticsGoodsController.清空购物车
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 清空购物车
+      operationId: ApiStatisticsGoodsController.清空购物车
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/cart/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 删除购物车指定商品，如果多个商品，以字符‘,’分割
+      operationId: ApiStatisticsGoodsController.删除购物车指定商品
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 删除购物车指定商品，如果多个商品，以字符‘,’分割
+      operationId: ApiStatisticsGoodsController.删除购物车指定商品
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/collect:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 进行收藏操作
+      operationId: ApiStatisticsGoodsController.收藏
+      parameters:
+      - in: path
+        name: models
+        description: 统计指标分组，多个以，分割，支持的指标有：广告：eshop_ad，文章：eshop_Goods，商家：base_tenant，商品：eshop_goods，订单：eshop_order_info，订单明细：eshop_order_goods
+        type: string
+      - in: path
+        name: actTypes
+        description: 指标操作分类，多个以，分割，为空则为所有分类，支持的分类有：点击：1，点赞：2，收藏：10，购物车：30，评价：50，回复：100
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/collect/delete:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 清空收藏
+      operationId: ApiStatisticsGoodsController.清空收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 清空收藏
+      operationId: ApiStatisticsGoodsController.清空收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/collect/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 取消收藏操作
+      operationId: ApiStatisticsGoodsController.取消收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 取消收藏操作
+      operationId: ApiStatisticsGoodsController.取消收藏
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/favior:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 进行点赞操作
+      operationId: ApiStatisticsGoodsController.点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/favior/delete:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 取消点赞操作
+      operationId: ApiStatisticsGoodsController.取消点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 取消点赞操作
+      operationId: ApiStatisticsGoodsController.取消点赞
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/reply:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 进行回复操作
+      operationId: ApiStatisticsGoodsController.回复操作
+      parameters:
+      - in: body
+        name: RecordId
+        description: 文章标识
+        required: true
+        type: string
+      - in: body
+        name: Parentid
+        description: 回复文章为0，回复评论则为评论的的Id
+        type: string
+      - in: body
+        name: Content
+        description: 评论内容
+        required: true
+        type: string
+      - in: body
+        name: Pics
+        description: 上传图片的i值，以，分割
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/goods/reply/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 删除回复
+      operationId: ApiStatisticsGoodsController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsGoodsController
+      description: 删除回复
+      operationId: ApiStatisticsGoodsController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/order:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 获取当前登录用户的订单列表
+      operationId: ApiOrderController.获取当前登录用户的订单列表
+      parameters:
+      - in: path
+        name: kind
+        description: 0，全部订单，1：待付款，2：待确认 5：待发货，6：待收货，9：待评价，10：已评价，99：退款售后 100：取消
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/eshop.OrderInfo'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/order/statistics:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiOrderController
+      description: 统计订单未付款，未发货，未收货，未评价等的记录数
+      operationId: ApiOrderController.订单统计
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/eshop.OrderInfoStatisticsResponseDto'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/ordergoods/reply:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsOrderGoodsController
+      description: 进行订单商品评论操作
+      operationId: ApiStatisticsOrderGoodsController.订单商品评论操作
+      parameters:
+      - in: body
+        name: RecordId
+        description: 文章标识
+        required: true
+        type: string
+      - in: body
+        name: Parentid
+        description: 回复文章为0，回复评论则为评论的的Id
+        type: string
+      - in: body
+        name: Content
+        description: 评论内容
+        required: true
+        type: string
+      - in: body
+        name: Pics
+        description: 上传图片的i值，以，分割
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/ordergoods/reply/delete/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsOrderGoodsController
+      description: 删除回复
+      operationId: ApiStatisticsOrderGoodsController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsOrderGoodsController
+      description: 删除回复
+      operationId: ApiStatisticsOrderGoodsController.删除回复
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/eshop/tenant/:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiTenantController
+      description: 新增
+      operationId: ApiTenantController.商户申请
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/eshop/tenant/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiTenantController
+      description: 获取商户详细信息
+      operationId: ApiTenantController.获取商户详细信息
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/base.Tenant'
+        "401":
+          description: unauthorized
+  v1/eshop/tenants:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiTenantController
+      description: 查询商户列表信息
+      operationId: ApiTenantController.查询商户信息
+      parameters:
+      - in: path
+        name: sortKind
+        description: 排序方式，1：按距离，2：按销量，3：按人气，4：按领劵
+        required: true
+        type: integer
+        format: int32
+      - in: path
+        name: lng
+        description: 当前所在的经度
+        required: true
+        type: number
+        format: double
+      - in: path
+        name: lat
+        description: 当前所在的纬度
+        required: true
+        type: number
+        format: double
+      - in: path
+        name: pageIndex
+        description: 分页索引
+        required: true
+        type: integer
+        format: int64
+      - in: path
+        name: pageSize
+        description: 分页大小
+        required: true
+        type: integer
+        format: int64
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/base.Tenant'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/oauth/weixin/login:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/oauthApiWeixinController
+      description: 微信授权，获取session
+      operationId: ApiWeixinController.微信授权，获取session
+      responses:
+        "0":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/oauth/weixin/pay:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/oauthApiWeixinController
+      description: 微信授权，获取session
+      operationId: ApiWeixinController.微信支付
+      responses:
+        "0":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/rhjj/category:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjFormController
+      description: 测试错误码
+      operationId: ApiRhjjFormController.获取表单类型
+      parameters:
+      - in: path
+        name: kind
+        description: inspect：监督检查，village：村居检查，patrol：纪律巡察，station：派驻监督
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/.Category'
+        "401":
+          description: unauthorized
+  v1/rhjj/form:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjFormController
+      description: 测试错误码
+      operationId: ApiRhjjFormController.获取表单列表
+      parameters:
+      - in: path
+        name: kind
+        description: inspect：监督检查，village：村居检查，patrol：纪律巡察，station：派驻监督
+        required: true
+        type: string
+      - in: path
+        name: pageIndex
+        description: "0"
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: "10"
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/oa.FormTemplate'
+        "401":
+          description: unauthorized
+  v1/rhjj/form/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjFormController
+      description: 获取表单详细信息
+      operationId: ApiRhjjFormController.获取表单
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/oa.FormTemplate'
+        "401":
+          description: unauthorized
+  v1/rhjj/forms:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjFormController
+      description: query中的查询条件中通常需设置kind，其中：inspect：监督检查，village：村居检查，patrol：纪律巡察，station：派驻监督
+      operationId: ApiRhjjFormController.通用查询
+      parameters:
+      - in: path
+        name: kind
+        description: "true"
+        type: string
+      - in: path
+        name: fields
+        description: 过滤的字段：fields=id,category.name
+        type: string
+      - in: path
+        name: query
+        description: 查询条件：query=id:eq:1,category.id:eq:2
+        type: string
+      - in: path
+        name: order
+        description: 排序，例如：order=id:desc,create_time:asc
+        type: string
+      - in: path
+        name: exclude
+        description: 排除条件，例如：exclude=id:eq:1表示id!=1
+        type: string
+      - in: path
+        name: offset
+        description: 0，从第offset条开始查询
+        type: integer
+        format: int32
+      - in: path
+        name: limit
+        description: 10，限制查询结果数量
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 0，页索引，如存在offset，则本参数将失效
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: 10，页面大小，如存在limit，则本参数将失效
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/oa.FormTemplate'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervision/:
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 新增
+      operationId: ApiRhjjSupervisionController.新增表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervision/{id}:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 获取表单记录详细信息
+      operationId: ApiRhjjSupervisionController.获取表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/rhjj.Supervision'
+        "401":
+          description: unauthorized
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 修改表单记录，办结设置FinishState=1，审核设置AuditState=-1或1
+      operationId: ApiRhjjSupervisionController.修改表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 修改表单记录，办结设置FinishState=1，审核设置AuditState=-1或1
+      operationId: ApiRhjjSupervisionController.修改表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervision/log/:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 回复表单记录（纪律巡察模块特定的功能），本操作需提交cms_article_log的模型机构，其opt_type=201（APP无需传入本参数，后台会自动设置）,ArticleId为当前表单的标识Id
+      operationId: ApiRhjjSupervisionController.回复表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 回复表单记录（纪律巡察模块特定的功能），本操作需提交cms_article_log的模型机构，其opt_type=201（APP无需传入本参数，后台会自动设置）,ArticleId为当前表单的标识Id
+      operationId: ApiRhjjSupervisionController.回复表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervision/log/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 审核表单记录，本操作将同时记录审核日志至cms_article_log中，其opt_type=110（APP无需传入本参数，后台会自动设置）
+      operationId: ApiRhjjSupervisionController.审核表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 审核表单记录，本操作将同时记录审核日志至cms_article_log中，其opt_type=110（APP无需传入本参数，后台会自动设置）
+      operationId: ApiRhjjSupervisionController.审核表单记录
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervision/view/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 设置表单已阅状态（纪律巡察模块特定的功能）
+      operationId: ApiRhjjSupervisionController.设置表单已阅状态
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 设置表单已阅状态（纪律巡察模块特定的功能）
+      operationId: ApiRhjjSupervisionController.设置表单已阅状态
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervisions:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: query中的查询条件中通常需设置kind，其中：inspect：监督检查，village：村居检查，patrol：纪律巡察，station：派驻监督
+      operationId: ApiRhjjSupervisionController.表单记录通用查询
+      parameters:
+      - in: path
+        name: fields
+        description: 过滤的字段：fields=id,category.name
+        type: string
+      - in: path
+        name: query
+        description: 查询条件：query=id:eq:1,category.id:eq:2
+        type: string
+      - in: path
+        name: order
+        description: 排序，例如：order=id:desc,create_time:asc
+        type: string
+      - in: path
+        name: exclude
+        description: 排除条件，例如：exclude=id:eq:1表示id!=1
+        type: string
+      - in: path
+        name: offset
+        description: 0，从第offset条开始查询
+        type: integer
+        format: int32
+      - in: path
+        name: limit
+        description: 10，限制查询结果数量
+        type: integer
+        format: int32
+      - in: path
+        name: pageIndex
+        description: 0，页索引，如存在offset，则本参数将失效
+        type: integer
+        format: int32
+      - in: path
+        name: pageSize
+        description: 10，页面大小，如存在limit，则本参数将失效
+        type: integer
+        format: int32
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/rhjj.Supervision'
+        "401":
+          description: unauthorized
+  v1/rhjj/supervisions/stat:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiRhjjSupervisionController
+      description: 表单统计查询
+      operationId: ApiRhjjSupervisionController.表单统计查询
+      parameters:
+      - in: path
+        name: kind
+        description: 类型，其中：inspect：监督检查，village：村居检查，patrol：纪律巡察，station：派驻监督
+        type: string
+      - in: path
+        name: startTime
+        description: 开始时间
+        type: string
+      - in: path
+        name: endTime
+        description: 结束时间
+        type: string
+      - in: path
+        name: orgFid
+        description: 组织路径
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/rhjj.SupervisionStatResponseDto'
+        "401":
+          description: unauthorized
+  v1/rhjj/tenant/{id}:
+    put:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiTenantController
+      description: 修改商户信息
+      operationId: ApiTenantController.商户信息修改
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+    post:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/eshopApiTenantController
+      description: 修改商户信息
+      operationId: ApiTenantController.商户信息修改
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/controllers.Response'
+        "401":
+          description: unauthorized
+  v1/setting/version:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/apiApiSettingController
+      description: 测试错误码
+      operationId: ApiSettingController.获取APP版本升级相关参数
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Setting'
+        "401":
+          description: unauthorized
+  v1/tenant/profile:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 查询统计结果
+      operationId: ApiStatisticsController.商家查询自身的统计结果
+      parameters:
+      - in: path
+        name: models
+        description: 统计指标分组，多个以，分割，支持的指标有：广告：eshop_ad，文章：cms_article，商家：base_tenant，商品：eshop_goods，订单：eshop_order_info，订单明细：eshop_order_goods
+        type: string
+      - in: path
+        name: actTypes
+        description: 指标操作分类，多个以，分割，为空则为所有分类，支持的分类有：点击：1，点赞：2，收藏：10，购物车：30，评价：50，回复：100
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/user/profile/click:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 个人中心查询用户自身的足迹列表
+      operationId: ApiStatisticsController.个人中心查询用户自身的足迹列表
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/user/profile/collect:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 个人中心查询用户自身的收藏列表
+      operationId: ApiStatisticsController.个人中心查询用户自身的收藏列表
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/user/profile/eval:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 个人中心查询用户自身的评价列表
+      operationId: ApiStatisticsController.个人中心查询用户自身的评价列表
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/user/profile/favior:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 个人中心查询用户自身的点赞列表
+      operationId: ApiStatisticsController.个人中心查询用户自身的点赞列表
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/user/profile/reply:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 个人中心查询用户自身的评论列表
+      operationId: ApiStatisticsController.个人中心查询用户自身的评论列表
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+  v1/user/profile/statistics:
+    get:
+      tags:
+      - yellbuy.com/YbGoCloundFramework/controllers/api/statisticsApiStatisticsController
+      description: 查询统计结果
+      operationId: ApiStatisticsController.个人中心查询用户自身的统计结果
+      parameters:
+      - in: path
+        name: uid
+        description: 指定的用户标识，未指定则为当前用户
+        type: integer
+        format: int32
+      - in: path
+        name: models
+        description: 统计指标分组，多个以，分割，支持的指标有：广告：eshop_ad；文章：cms_article；商家：base_tenant；商品：eshop_goods；订单：eshop_order_info；订单明细：eshop_order_goods
+        type: string
+      - in: path
+        name: actTypes
+        description: 指标操作分类，多个以，分割，为空则为所有分类，支持的分类有：点击：1；点赞：2；收藏：10；购物车：20；评价：50；回复：100；定位：200
+        type: string
+      responses:
+        "0":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/common.Statistics'
+        "100000":
+          description: 服务器端错误
+        "100001":
+          description: unauthorized
+definitions:
+  .Category:
+    type: object
+  .Coupon:
+    type: object
+  .GoodsActivity:
+    type: object
+  .Prepay:
+    type: object
+  .Time:
+    type: object
+  .byte[]:
+    type: object
+  .false:
+    type: object
+  base.Edition:
+    title: Edition
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int64
+      Id:
+        type: integer
+        format: int64
+      Kind:
+        type: integer
+        format: int32
+      Level:
+        type: integer
+        format: int32
+      Limit:
+        type: integer
+        format: int64
+      Mode:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      PermissionKey:
+        type: string
+      Price:
+        type: number
+        format: float
+      Remark:
+        type: string
+      State:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int64
+  base.Org:
+    title: Org
+    type: object
+    properties:
+      Addrcode:
+        type: string
+      Address:
+        type: string
+      Appid:
+        type: integer
+        format: int32
+      Balance:
+        type: number
+        format: float
+      Children:
+        type: array
+        items:
+          $ref: '#/definitions/base.Org'
+      ChildrenIds:
+        type: string
+      City:
+        type: string
+      Code:
+        type: string
+      Country:
+        type: string
+      Desc:
+        type: string
+      District:
+        type: string
+      Extattr:
+        type: string
+      Fid:
+        type: string
+      Fname:
+        type: string
+      GeoHash:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      IsHide:
+        type: integer
+        format: int32
+      IsVirtual:
+        type: integer
+        format: int32
+      Kind:
+        type: integer
+        format: int64
+      Lat:
+        type: number
+        format: float
+      Level:
+        type: integer
+        format: int32
+      Lng:
+        type: number
+        format: float
+      LongName:
+        type: string
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      Parentid:
+        type: integer
+        format: int64
+      Postcode:
+        type: string
+      Principal:
+        type: string
+      Province:
+        type: string
+      Rank:
+        type: integer
+        format: int64
+      Score:
+        type: integer
+        format: int64
+      Selected:
+        type: string
+      SourceIdentifier:
+        type: string
+      Street:
+        type: string
+      Streetnumber:
+        type: string
+      Tel:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Type:
+        type: integer
+        format: int64
+      UpdatedTime:
+        type: string
+        format: datetime
+      Url:
+        type: string
+  base.Tenant:
+    title: Tenant
+    type: object
+    properties:
+      Addr:
+        type: string
+      Amount:
+        type: number
+        format: float
+      Appid:
+        type: integer
+        format: int32
+      AreaId:
+        type: integer
+        format: int64
+      CertifyPics:
+        type: string
+      City:
+        type: string
+      County:
+        type: string
+      CreationTime:
+        $ref: '#/definitions/base.Time'
+      Desc:
+        type: string
+      Edition:
+        $ref: '#/definitions/base.Edition'
+      ExpireTime:
+        $ref: '#/definitions/base.Time'
+      FullName:
+        type: string
+      Id:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      Lat:
+        type: number
+        format: double
+      Linkman:
+        type: string
+      Lng:
+        type: number
+        format: double
+      Logo:
+        type: string
+      Mode:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      PermissionKey:
+        type: string
+      Phone:
+        type: string
+      PicArr:
+        type: array
+        items:
+          type: string
+      Pics:
+        type: string
+      Price:
+        type: number
+        format: float
+      Province:
+        type: string
+      Remark:
+        type: string
+      State:
+        type: integer
+        format: int32
+      Tag:
+        type: string
+      TenantKey:
+        type: string
+      Times:
+        type: integer
+        format: int32
+  base.TenantBase:
+    title: TenantBase
+    type: object
+    properties:
+      Addr:
+        type: string
+      Amount:
+        type: number
+        format: float
+      Appid:
+        type: integer
+        format: int32
+      AreaId:
+        type: integer
+        format: int64
+      City:
+        type: string
+      County:
+        type: string
+      CreationTime:
+        $ref: '#/definitions/base.Time'
+      ExpireTime:
+        $ref: '#/definitions/base.Time'
+      Id:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      Lat:
+        type: number
+        format: double
+      Linkman:
+        type: string
+      Lng:
+        type: number
+        format: double
+      Logo:
+        type: string
+      Mode:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      Phone:
+        type: string
+      Price:
+        type: number
+        format: float
+      Province:
+        type: string
+      State:
+        type: integer
+        format: int32
+      Tag:
+        type: string
+      Times:
+        type: integer
+        format: int32
+  base.User:
+    title: User
+    type: object
+    properties:
+      Addrcode:
+        type: integer
+        format: int32
+      Address:
+        type: string
+      Alias:
+        type: string
+      Appid:
+        type: integer
+        format: int32
+      Avatar:
+        type: string
+      Balance:
+        type: number
+        format: float
+      Birthdate:
+        type: string
+        format: datetime
+      City:
+        type: string
+      Code:
+        type: string
+      Country:
+        type: string
+      CreateTime:
+        type: string
+        format: datetime
+      District:
+        type: string
+      Email:
+        type: string
+      Enable:
+        type: integer
+        format: int32
+      Extattr:
+        type: string
+      ExternalProfile:
+        type: string
+      FrozenBalance:
+        type: number
+        format: float
+      Gender:
+        type: integer
+        format: int32
+      GeoHash:
+        type: string
+      Hiredate:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int32
+      Idno:
+        type: string
+      IsAdmin:
+        type: integer
+        format: int32
+      IsBoss:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsExternal:
+        type: integer
+        format: int32
+      IsHide:
+        type: integer
+        format: int32
+      IsSenior:
+        type: integer
+        format: int32
+      Isleader:
+        type: integer
+        format: int32
+      Isleaders:
+        type: array
+        items:
+          type: integer
+          format: int32
+      Kind:
+        type: integer
+        format: int32
+      Lat:
+        type: number
+        format: float
+      Lng:
+        type: number
+        format: float
+      Location:
+        type: string
+      LocationTime:
+        type: string
+        format: datetime
+      LoginDevice:
+        type: string
+      LoginTime:
+        type: string
+        format: datetime
+      MainOrg:
+        $ref: '#/definitions/base.Org'
+      Mobile:
+        type: string
+      Name:
+        type: string
+      Nickname:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      Orders:
+        type: array
+        items:
+          type: integer
+          format: int64
+      Orgs:
+        type: array
+        items:
+          type: integer
+          format: int64
+      Parentid:
+        type: integer
+        format: int32
+      Password:
+        type: string
+      PasswordConfirm:
+        type: string
+      PasswordNew:
+        type: string
+      Pinyin:
+        type: string
+      Point:
+        type: integer
+        format: int64
+      Position:
+        type: string
+      Positions:
+        type: array
+        items:
+          type: string
+      Postcode:
+        type: string
+      Province:
+        type: string
+      QrCode:
+        type: string
+      Rank:
+        type: integer
+        format: int32
+      Remark:
+        type: string
+      RoleIds:
+        type: string
+      Salt:
+        type: string
+      Score:
+        type: integer
+        format: int64
+      SourceIdentifier:
+        type: string
+      StateCode:
+        type: string
+      Street:
+        type: string
+      Streetnumber:
+        type: string
+      Tel:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Type:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        type: string
+        format: datetime
+      UserOrgs:
+        type: array
+        items:
+          $ref: '#/definitions/base.UserOrg'
+      Username:
+        type: string
+      WorkPlace:
+        type: string
+  base.UserBase:
+    title: UserBase
+    type: object
+    properties:
+      Avatar:
+        type: string
+      Balance:
+        type: number
+        format: float
+      Code:
+        type: string
+      Email:
+        type: string
+      FrozenBalance:
+        type: number
+        format: float
+      Gender:
+        type: integer
+        format: int32
+      Id:
+        type: integer
+        format: int32
+      Idno:
+        type: string
+      Mobile:
+        type: string
+      Name:
+        type: string
+      Nickname:
+        type: string
+      Parentid:
+        type: integer
+        format: int32
+      Point:
+        type: integer
+        format: int64
+      Rank:
+        type: integer
+        format: int32
+      Score:
+        type: integer
+        format: int64
+      Tel:
+        type: string
+      Username:
+        type: string
+  base.UserOrg:
+    title: UserOrg
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int32
+      Fid:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Isleader:
+        type: integer
+        format: int32
+      Order:
+        type: integer
+        format: int64
+      Org:
+        $ref: '#/definitions/base.Org'
+      OrgId:
+        type: integer
+        format: int64
+      Position:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      User:
+        $ref: '#/definitions/base.User'
+  cms.Article:
+    title: Article
+    type: object
+    properties:
+      AllowAnonymousComment:
+        type: integer
+        format: int32
+      AllowAnonymousJoin:
+        type: integer
+        format: int32
+      AllowComment:
+        type: integer
+        format: int32
+      AnonymousPublish:
+        type: integer
+        format: int32
+      Appid:
+        type: integer
+        format: int32
+      AudioId:
+        type: string
+      AudioUrl:
+        type: string
+      AuditBy:
+        type: string
+      AuditComment:
+        type: integer
+        format: int32
+      AuditState:
+        type: integer
+        format: int32
+      AuditTime:
+        $ref: '#/definitions/cms.Time'
+      Category:
+        $ref: '#/definitions/common.Category'
+      CategoryId:
+        type: integer
+        format: int64
+      CollectionNum:
+        type: integer
+        format: int64
+      CommentNum:
+        type: integer
+        format: int64
+      Content:
+        type: string
+      CreateBy:
+        type: string
+      CreateTime:
+        $ref: '#/definitions/cms.Time'
+      Description:
+        type: string
+      EndTime:
+        $ref: '#/definitions/cms.Time'
+      Extend:
+        type: integer
+        format: int64
+      FeeType:
+        type: integer
+        format: int32
+      FileNum:
+        type: integer
+        format: int32
+      Files:
+        type: string
+      HasDeadlineTime:
+        type: integer
+        format: int32
+      Id:
+        type: integer
+        format: int64
+      ImgUrl:
+        type: string
+      IsDel:
+        type: integer
+        format: int32
+      IsHome:
+        type: integer
+        format: int32
+      IsHot:
+        type: integer
+        format: int32
+      IsPrivary:
+        type: integer
+        format: int32
+      IsPromote:
+        type: integer
+        format: int32
+      IsPublic:
+        type: integer
+        format: int32
+      IsPublicComment:
+        type: integer
+        format: int32
+      IsPublish:
+        type: integer
+        format: int32
+      IsPublishNotice:
+        type: integer
+        format: int32
+      IsPublishSpec:
+        type: integer
+        format: int32
+      IsPushAgenda:
+        type: integer
+        format: int32
+      IsPushNotice:
+        type: integer
+        format: int32
+      IsShowCover:
+        type: integer
+        format: int32
+      IsSwiper:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      JoinDeadlineTime:
+        $ref: '#/definitions/cms.Time'
+      JoinFee:
+        type: number
+        format: float
+      JoinNum:
+        type: integer
+        format: int64
+      Keyname:
+        type: string
+      Kind:
+        type: string
+      Level:
+        type: integer
+        format: int64
+      LikeNum:
+        type: integer
+        format: int64
+      LimitNum:
+        type: integer
+        format: int64
+      LinkId:
+        type: string
+      Location:
+        type: string
+      LocationLat:
+        type: number
+        format: float
+      LocationLng:
+        type: number
+        format: float
+      Name:
+        type: string
+      PicArr:
+        type: array
+        items:
+          type: string
+      Pics:
+        type: string
+      Pid:
+        type: integer
+        format: int64
+      Position:
+        type: integer
+        format: int32
+      Price:
+        type: string
+      PublishDepts:
+        type: string
+      PublishTime:
+        $ref: '#/definitions/cms.Time'
+      PublishUsers:
+        type: string
+      QuitDeadlineTime:
+        $ref: '#/definitions/cms.Time'
+      SortId:
+        type: integer
+        format: int32
+      Source:
+        type: string
+      StartTime:
+        $ref: '#/definitions/cms.Time'
+      State:
+        type: integer
+        format: int32
+      Template:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      Type:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        $ref: '#/definitions/cms.Time'
+      UseOnlinePay:
+        type: integer
+        format: int32
+      VideoUrl:
+        type: string
+      ViewNum:
+        type: integer
+        format: int64
+  cms.Paper:
+    title: Paper
+    type: object
+    properties:
+      Kind:
+        type: integer
+        format: int64
+      Questions:
+        type: array
+        items:
+          $ref: '#/definitions/cms.PollQuestion'
+      Rule:
+        $ref: '#/definitions/cms.PaperRule'
+      Total:
+        type: number
+        format: double
+  cms.PaperRule:
+    title: PaperRule
+    type: object
+    properties:
+      HalfScore:
+        type: number
+        format: double
+      Num:
+        type: integer
+        format: int64
+      Score:
+        type: number
+        format: double
+  cms.Poll:
+    title: Poll
+    type: object
+    properties:
+      AllowAnonymousComment:
+        type: integer
+        format: int32
+      AllowAnonymousJoin:
+        type: integer
+        format: int32
+      AllowComment:
+        type: integer
+        format: int32
+      AllowUsers:
+        type: string
+      AnonymousPublish:
+        type: integer
+        format: int32
+      Appid:
+        type: integer
+        format: int32
+      AudioId:
+        type: integer
+        format: int64
+      AuditBy:
+        type: string
+      AuditComment:
+        type: integer
+        format: int32
+      AuditState:
+        type: integer
+        format: int32
+      AuditTime:
+        type: string
+        format: datetime
+      Category:
+        $ref: '#/definitions/common.Category'
+      Content:
+        type: string
+      CoverId:
+        type: integer
+        format: int64
+      Coverurl:
+        type: string
+      CreateBy:
+        type: string
+      CreateTime:
+        type: string
+        format: datetime
+      Description:
+        type: string
+      EndTime:
+        type: string
+        format: datetime
+      FeeType:
+        type: integer
+        format: int32
+      FinishMsg:
+        type: string
+      FocusNum:
+        type: integer
+        format: int64
+      HasDeadlineTime:
+        type: integer
+        format: int32
+      Id:
+        type: integer
+        format: int64
+      IsAnonymous:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsLock:
+        type: integer
+        format: int32
+      IsPublic:
+        type: integer
+        format: int32
+      IsPublishAnswer:
+        type: integer
+        format: int32
+      IsPublishNotice:
+        type: integer
+        format: int32
+      IsPublishScore:
+        type: integer
+        format: int32
+      IsPublishSpec:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      JoinDeadlineTime:
+        type: string
+        format: datetime
+      JoinFee:
+        type: number
+        format: float
+      Kind:
+        type: integer
+        format: int32
+      LastAnswerUid:
+        type: integer
+        format: int32
+      LimitBeginTime:
+        type: integer
+        format: int64
+      LimitCountDay:
+        type: integer
+        format: int64
+      LimitFinishTime:
+        type: integer
+        format: int64
+      LimitNum:
+        type: integer
+        format: int64
+      LimitTime:
+        type: integer
+        format: int64
+      LimitTotal:
+        type: integer
+        format: int64
+      Location:
+        type: string
+      LocationLat:
+        type: number
+        format: float
+      LocationLng:
+        type: number
+        format: float
+      Order:
+        type: integer
+        format: int64
+      Paper:
+        type: array
+        items:
+          $ref: '#/definitions/cms.Paper'
+      PaperJson:
+        type: string
+      Pics:
+        type: string
+      Progress:
+        type: integer
+        format: int32
+      PublishDepts:
+        type: string
+      PublishTime:
+        type: string
+        format: datetime
+      PublishUsers:
+        type: string
+      Questions:
+        type: array
+        items:
+          $ref: '#/definitions/cms.PollQuestion'
+      QuitDeadlineTime:
+        type: string
+        format: datetime
+      ResultPublishMode:
+        type: integer
+        format: int32
+      Rule:
+        $ref: '#/definitions/cms.Rule'
+      RuleJson:
+        type: string
+      StartTime:
+        type: string
+        format: datetime
+      State:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      Total:
+        type: number
+        format: double
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        type: string
+        format: datetime
+      UseOnlinePay:
+        type: integer
+        format: int32
+      ViewNum:
+        type: integer
+        format: int64
+      VoteMode:
+        type: integer
+        format: int32
+      VoteNum:
+        type: integer
+        format: int32
+      Voters:
+        type: array
+        items:
+          $ref: '#/definitions/cms.PollVoter'
+  cms.PollAnswer:
+    title: PollAnswer
+    type: object
+    properties:
+      Content:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Kind:
+        type: integer
+        format: int32
+      Order:
+        type: integer
+        format: int64
+      Pics:
+        type: string
+      PollQuestion:
+        $ref: '#/definitions/cms.PollQuestion'
+      Title:
+        type: string
+      VoteNum:
+        type: integer
+        format: int64
+  cms.PollQuestion:
+    title: PollQuestion
+    type: object
+    properties:
+      Answer:
+        type: string
+      AnswerState:
+        type: integer
+        format: int32
+      AnswerStr:
+        type: string
+      Answers:
+        type: array
+        items:
+          $ref: '#/definitions/cms.PollAnswer'
+      Appid:
+        type: integer
+        format: int32
+      Content:
+        type: string
+      Description:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Kind:
+        type: integer
+        format: int32
+      MaxSelectNum:
+        type: integer
+        format: int32
+      MinSelectNum:
+        type: integer
+        format: int32
+      Order:
+        type: integer
+        format: int64
+      Pics:
+        type: string
+      Poll:
+        $ref: '#/definitions/cms.Poll'
+      Score:
+        type: number
+        format: double
+      StandardAnswer:
+        type: string
+      State:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+  cms.PollVoter:
+    title: PollVoter
+    type: object
+    properties:
+      CreateTime:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      Name:
+        type: string
+      PaperJson:
+        type: string
+      Papers:
+        type: array
+        items:
+          $ref: '#/definitions/cms.Paper'
+      Poll:
+        $ref: '#/definitions/cms.Poll'
+      Score:
+        type: number
+        format: float
+      StandardAnswerJson:
+        type: string
+      StandardAnswers:
+        type: array
+        items:
+          $ref: '#/definitions/cms.VoterStandardAnswer'
+      State:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        type: string
+        format: datetime
+  cms.Rule:
+    title: Rule
+    type: object
+    properties:
+      CheckNum:
+        type: integer
+        format: int64
+      CheckScore:
+        type: number
+        format: double
+      Display:
+        type: integer
+        format: int64
+      ID:
+        type: integer
+        format: int64
+      Mode:
+        type: integer
+        format: int64
+      MultiHalfScore:
+        type: number
+        format: double
+      MultiSelectNum:
+        type: integer
+        format: int64
+      MultiSelectScore:
+        type: number
+        format: double
+      SimpleSelectNum:
+        type: integer
+        format: int64
+      SimpleSelectScore:
+        type: number
+        format: double
+  cms.VoterStandardAnswer:
+    title: VoterStandardAnswer
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      StandardAnswer:
+        type: string
+  common.Area:
+    title: Area
+    type: object
+    properties:
+      AreaCode:
+        type: integer
+        format: int64
+      Areaname:
+        type: string
+      CountryCode:
+        type: integer
+        format: int32
+      Id:
+        type: integer
+        format: int64
+      Lat:
+        type: number
+        format: float
+      Level:
+        type: integer
+        format: int32
+      Lng:
+        type: number
+        format: float
+      Parentid:
+        type: integer
+        format: int64
+      Pinyin:
+        type: string
+      Position:
+        type: string
+      Shortname:
+        type: string
+      Sort:
+        type: string
+      StateCode:
+        type: string
+      ZipCode:
+        type: integer
+        format: int64
+  common.Attfile:
+    title: Attfile
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int32
+      CreateTime:
+        type: string
+        format: datetime
+      Ext:
+        type: string
+      Id:
+        type: integer
+        format: int32
+      Location:
+        type: integer
+        format: int32
+      Md5:
+        type: string
+      Mime:
+        type: string
+      Name:
+        type: string
+      Savename:
+        type: string
+      Savepath:
+        type: string
+      Sha1:
+        type: string
+      Size:
+        type: integer
+        format: int64
+      Tid:
+        type: integer
+        format: int32
+      Url:
+        type: string
+  common.Category:
+    title: Category
+    type: object
+    properties:
+      AllowComment:
+        type: integer
+        format: int32
+      AllowEndTime:
+        $ref: '#/definitions/common.Time'
+      AllowModify:
+        type: integer
+        format: int32
+      AllowPublish:
+        type: integer
+        format: int32
+      AllowStartTime:
+        $ref: '#/definitions/common.Time'
+      Appid:
+        type: integer
+        format: int32
+      AuditDepts:
+        type: string
+      AuditState:
+        type: integer
+        format: int32
+      AuditUsers:
+        type: string
+      Check:
+        type: integer
+        format: int32
+      Children:
+        type: array
+        items:
+          $ref: '#/definitions/common.Category'
+      ChildrenTitle:
+        type: string
+      CommentAuditDepts:
+        type: string
+      CommentAuditState:
+        type: integer
+        format: int32
+      CommentAuditUsers:
+        type: string
+      CoverId:
+        type: integer
+        format: int64
+      CoverUrl:
+        type: string
+      CreateTime:
+        $ref: '#/definitions/common.Time'
+      Description:
+        type: string
+      Display:
+        type: integer
+        format: int32
+      Documentsorts:
+        type: string
+      EditTimeLimit:
+        type: integer
+        format: int64
+      Extend:
+        type: string
+      Fid:
+        type: string
+      Fname:
+        type: string
+      Groups:
+        type: string
+      Icon:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      IsPublishSpec:
+        type: integer
+        format: int64
+      IsPushNotice:
+        type: integer
+        format: int32
+      Isapp:
+        type: integer
+        format: int32
+      Key:
+        type: string
+      Keywords:
+        type: string
+      Kind:
+        type: string
+      Level:
+        type: integer
+        format: int32
+      LimitPublishTime:
+        type: integer
+        format: int32
+      LinkId:
+        type: integer
+        format: int64
+      ListRow:
+        type: integer
+        format: int32
+      MetaTitle:
+        type: string
+      Model:
+        type: string
+      ModelSub:
+        type: string
+      Mold:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      ParentName:
+        type: string
+      Parentid:
+        type: integer
+        format: int64
+      PublishDepts:
+        type: string
+      PublishUsers:
+        type: string
+      ReplyModel:
+        type: string
+      RequiredPics:
+        type: integer
+        format: int32
+      State:
+        type: integer
+        format: int32
+      TemplateDetail:
+        type: string
+      TemplateEdit:
+        type: string
+      TemplateIndex:
+        type: string
+      TemplateLists:
+        type: string
+      TemplateMDetail:
+        type: string
+      TemplateMIndex:
+        type: string
+      TemplateMLists:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      Type:
+        type: string
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        $ref: '#/definitions/common.Time'
+      lay_is_open:
+        type: boolean
+  common.Setting:
+    title: Setting
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int32
+      CreateTime:
+        $ref: '#/definitions/libs.Time'
+      Extra:
+        type: string
+      Extrastr:
+        type: array
+        items:
+          type: string
+      Group:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Key:
+        type: string
+      Kind:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      Remark:
+        type: string
+      State:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Type:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        $ref: '#/definitions/libs.Time'
+      Value:
+        type: string
+  common.Statistics:
+    title: Statistics
+    type: object
+    properties:
+      ActType:
+        type: integer
+        format: int32
+      Appid:
+        type: integer
+        format: int32
+      AudioUrl:
+        type: string
+      AuditState:
+        type: integer
+        format: int32
+      Content:
+        type: string
+      CreateTime:
+        type: string
+        format: datetime
+      ExtActType:
+        type: integer
+        format: int32
+      Files:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      ImgUrl:
+        type: string
+      Ip:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      IsExistCheck:
+        type: boolean
+      Location:
+        type: string
+      LocationLat:
+        type: number
+        format: float
+      LocationLng:
+        type: number
+        format: float
+      Model:
+        type: string
+      Num:
+        type: integer
+        format: int32
+      Parentid:
+        type: integer
+        format: int64
+      PicsArr:
+        type: array
+        items:
+          type: string
+      RecordId:
+        type: integer
+        format: int64
+      Score:
+        type: number
+        format: float
+      State:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      Uid:
+        type: integer
+        format: int32
+      VideoUrl:
+        type: string
+  common.StatisticsAction:
+    title: StatisticsAction
+    type: object
+    properties:
+      IsCart:
+        type: boolean
+      IsClick:
+        type: boolean
+      IsCollect:
+        type: boolean
+      IsEval:
+        type: boolean
+      IsFavior:
+        type: boolean
+      IsReply:
+        type: boolean
+  common.StatisticsAppResponseDto:
+    title: StatisticsAppResponseDto
+    type: object
+    properties:
+      ActType:
+        type: integer
+        format: int32
+      AppLogo:
+        type: string
+      AppName:
+        type: string
+      Appid:
+        type: integer
+        format: int32
+      AudioUrl:
+        type: string
+      AuditState:
+        type: integer
+        format: int32
+      CartCount:
+        type: integer
+        format: int64
+      CartNum:
+        type: integer
+        format: int64
+      ClickCount:
+        type: integer
+        format: int64
+      ClickNum:
+        type: integer
+        format: int64
+      CollectCount:
+        type: integer
+        format: int64
+      CollectNum:
+        type: integer
+        format: int64
+      Content:
+        type: string
+      CreateTime:
+        type: string
+        format: datetime
+      EvalCount:
+        type: integer
+        format: int64
+      EvalNum:
+        type: integer
+        format: int64
+      EvalScore:
+        type: number
+        format: float
+      ExtActType:
+        type: integer
+        format: int32
+      FaviorCount:
+        type: integer
+        format: int64
+      FaviorNum:
+        type: integer
+        format: int64
+      Files:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      ImgUrl:
+        type: string
+      Ip:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      IsExistCheck:
+        type: boolean
+      Location:
+        type: string
+      LocationLat:
+        type: number
+        format: float
+      LocationLng:
+        type: number
+        format: float
+      Model:
+        type: string
+      Num:
+        type: integer
+        format: int32
+      Parentid:
+        type: integer
+        format: int64
+      PicsArr:
+        type: array
+        items:
+          type: string
+      RecordId:
+        type: integer
+        format: int64
+      ReplyCount:
+        type: integer
+        format: int64
+      ReplyNum:
+        type: integer
+        format: int64
+      Score:
+        type: number
+        format: float
+      State:
+        type: integer
+        format: int32
+      TenantLogo:
+        type: string
+      TenantName:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      UName:
+        type: string
+      UNickname:
+        type: string
+      Uid:
+        type: integer
+        format: int32
+      UserAvatar:
+        type: string
+      UserName:
+        type: string
+      VideoUrl:
+        type: string
+  common.StatisticsSummary:
+    title: StatisticsSummary
+    type: object
+    properties:
+      CartCount:
+        type: integer
+        format: int64
+      CartNum:
+        type: integer
+        format: int64
+      ClickCount:
+        type: integer
+        format: int64
+      ClickNum:
+        type: integer
+        format: int64
+      CollectCount:
+        type: integer
+        format: int64
+      CollectNum:
+        type: integer
+        format: int64
+      EvalCount:
+        type: integer
+        format: int64
+      EvalNum:
+        type: integer
+        format: int64
+      EvalScore:
+        type: number
+        format: float
+      FaviorCount:
+        type: integer
+        format: int64
+      FaviorNum:
+        type: integer
+        format: int64
+      ReplyCount:
+        type: integer
+        format: int64
+      ReplyNum:
+        type: integer
+        format: int64
+  controllers.Response:
+    title: Response
+    type: object
+    properties:
+      data:
+        $ref: '#/definitions/3638.0xc0001bbda0.false'
+      errcode:
+        type: integer
+        format: int64
+      errmsg:
+        type: string
+  eshop.AdPosition:
+    title: AdPosition
+    type: object
+    properties:
+      AdHeight:
+        type: integer
+        format: int32
+      AdWidth:
+        type: integer
+        format: int32
+      Appid:
+        type: integer
+        format: int32
+      Id:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      Kind:
+        type: integer
+        format: int32
+      PositionDesc:
+        type: string
+      PositionName:
+        type: string
+      PositionStyle:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+  eshop.CouponActivity:
+    title: CouponActivity
+    type: object
+    properties:
+      ActDesc:
+        type: string
+      ActImg:
+        type: string
+      ActKind:
+        type: integer
+        format: int32
+      ActLimit:
+        type: integer
+        format: int32
+      ActName:
+        type: string
+      ActType:
+        type: integer
+        format: int32
+      Appid:
+        type: integer
+        format: int32
+      CouponNum:
+        type: integer
+        format: int32
+      DiscountAmount:
+        type: number
+        format: float
+      DiscountMaxAmount:
+        type: number
+        format: float
+      DiscountPercentage:
+        type: number
+        format: float
+      GoodsIds:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      MaxAmount:
+        type: number
+        format: float
+      MinAmount:
+        type: number
+        format: float
+      MinGoodsAmount:
+        type: number
+        format: float
+      NumPerUser:
+        type: integer
+        format: int32
+      SendCount:
+        type: integer
+        format: int64
+      SendEndDate:
+        $ref: '#/definitions/eshop.Time'
+      SendStartDate:
+        $ref: '#/definitions/eshop.Time'
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UseCount:
+        type: integer
+        format: int64
+      UseDays:
+        type: integer
+        format: int32
+      UseEndDate:
+        $ref: '#/definitions/eshop.Time'
+      UseStartDate:
+        $ref: '#/definitions/eshop.Time'
+      UseType:
+        type: integer
+        format: int32
+  eshop.Goods:
+    title: Goods
+    type: object
+    properties:
+      ActAudio:
+        type: string
+      ActId:
+        type: integer
+        format: int64
+      ActImg:
+        type: string
+      ActName:
+        type: string
+      ActType:
+        type: integer
+        format: int32
+      ActVideo:
+        type: string
+      Appid:
+        type: integer
+        format: int32
+      BonusTypeId:
+        type: integer
+        format: int32
+      BrandId:
+        type: integer
+        format: int64
+      BuyNum:
+        type: integer
+        format: int32
+      Buymax:
+        type: integer
+        format: int64
+      BuymaxEndDate:
+        $ref: '#/definitions/eshop.Time'
+      BuymaxStartDate:
+        $ref: '#/definitions/eshop.Time'
+      CategoryId:
+        type: integer
+        format: int64
+      CostPrice:
+        type: number
+        format: float
+      CouponActiviyList:
+        type: array
+        items:
+          $ref: '#/definitions/eshop.CouponActivity'
+      CreateTime:
+        $ref: '#/definitions/eshop.Time'
+      EvalList:
+        type: array
+        items:
+          $ref: '#/definitions/common.StatisticsAppResponseDto'
+      Exclusive:
+        type: string
+      ExtActType:
+        type: integer
+        format: int32
+      ExtensionCode:
+        type: string
+      FareId:
+        type: integer
+        format: int64
+      GhostClick:
+        type: integer
+        format: int64
+      GhostCount:
+        type: integer
+        format: int64
+      GiveIntegral:
+        type: integer
+        format: int64
+      GoodsAudio:
+        type: string
+      GoodsBrief:
+        type: string
+      GoodsDesc:
+        type: string
+      GoodsImg:
+        type: string
+      GoodsName:
+        type: string
+      GoodsNameStyle:
+        type: string
+      GoodsNumber:
+        type: integer
+        format: int32
+      GoodsPicArr:
+        type: array
+        items:
+          type: string
+      GoodsPics:
+        type: string
+      GoodsSn:
+        type: string
+      GoodsSpec:
+        type: string
+      GoodsThumb:
+        type: string
+      GoodsType:
+        type: integer
+        format: int32
+      GoodsVideo:
+        type: string
+      GoodsWeight:
+        type: number
+        format: float
+      Id:
+        type: integer
+        format: int64
+      Integral:
+        type: integer
+        format: int64
+      IsAloneSale:
+        type: integer
+        format: int32
+      IsBest:
+        type: integer
+        format: int32
+      IsBuy:
+        type: integer
+        format: int64
+      IsCatindex:
+        type: integer
+        format: int32
+      IsCheck:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsHot:
+        type: integer
+        format: int32
+      IsMorningMarket:
+        type: string
+      IsNew:
+        type: integer
+        format: int32
+      IsOnSale:
+        type: integer
+        format: int32
+      IsPromote:
+        type: integer
+        format: int32
+      IsReal:
+        type: integer
+        format: int32
+      IsShipping:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      IsVirtual:
+        type: integer
+        format: int64
+      Keywords:
+        type: string
+      LastUpdateTime:
+        $ref: '#/definitions/eshop.Time'
+      MarketPrice:
+        type: number
+        format: float
+      MorningMarketPrice:
+        type: number
+        format: float
+      Order:
+        type: integer
+        format: int64
+      OrderNum:
+        type: integer
+        format: int64
+      OriginalImg:
+        type: string
+      PromoteEndDate:
+        type: integer
+        format: int64
+      PromotePrice:
+        type: number
+        format: float
+      PromoteStartDate:
+        type: integer
+        format: int64
+      ProviderName:
+        type: string
+      RankIntegral:
+        type: integer
+        format: int64
+      SaleNum:
+        type: integer
+        format: int64
+      SellerNote:
+        type: string
+      ServiceDesc:
+        type: string
+      ShippingDesc:
+        type: string
+      ShippingKind:
+        type: integer
+        format: int32
+      ShopPrice:
+        type: number
+        format: float
+      Spec:
+        type: string
+      SupplierId:
+        type: integer
+        format: int64
+      SupplierState:
+        type: integer
+        format: int32
+      SupplierStateTxt:
+        type: string
+      SuppliersId:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      ValidDate:
+        $ref: '#/definitions/eshop.Time'
+      WarnNumber:
+        type: integer
+        format: int32
+      Zhekou:
+        type: number
+        format: float
+  eshop.GoodsBase:
+    title: GoodsBase
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int32
+      BonusTypeId:
+        type: integer
+        format: int32
+      BrandId:
+        type: integer
+        format: int64
+      Buymax:
+        type: integer
+        format: int64
+      BuymaxEndDate:
+        $ref: '#/definitions/eshop.Time'
+      BuymaxStartDate:
+        $ref: '#/definitions/eshop.Time'
+      CategoryId:
+        type: integer
+        format: int64
+      CostPrice:
+        type: number
+        format: float
+      CreateTime:
+        $ref: '#/definitions/eshop.Time'
+      Exclusive:
+        type: string
+      FareId:
+        type: integer
+        format: int64
+      GhostClick:
+        type: integer
+        format: int64
+      GhostCount:
+        type: integer
+        format: int64
+      GiveIntegral:
+        type: integer
+        format: int64
+      GoodsAudio:
+        type: string
+      GoodsBrief:
+        type: string
+      GoodsImg:
+        type: string
+      GoodsName:
+        type: string
+      GoodsNameStyle:
+        type: string
+      GoodsNumber:
+        type: integer
+        format: int32
+      GoodsSn:
+        type: string
+      GoodsSpec:
+        type: string
+      GoodsThumb:
+        type: string
+      GoodsType:
+        type: integer
+        format: int32
+      GoodsVideo:
+        type: string
+      GoodsWeight:
+        type: number
+        format: float
+      Id:
+        type: integer
+        format: int64
+      Integral:
+        type: integer
+        format: int64
+      IsAloneSale:
+        type: integer
+        format: int32
+      IsBest:
+        type: integer
+        format: int32
+      IsBuy:
+        type: integer
+        format: int64
+      IsCatindex:
+        type: integer
+        format: int32
+      IsCheck:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsHot:
+        type: integer
+        format: int32
+      IsMorningMarket:
+        type: string
+      IsNew:
+        type: integer
+        format: int32
+      IsOnSale:
+        type: integer
+        format: int32
+      IsPromote:
+        type: integer
+        format: int32
+      IsReal:
+        type: integer
+        format: int32
+      IsShipping:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      IsVirtual:
+        type: integer
+        format: int64
+      Keywords:
+        type: string
+      LastUpdateTime:
+        $ref: '#/definitions/eshop.Time'
+      MarketPrice:
+        type: number
+        format: float
+      MorningMarketPrice:
+        type: number
+        format: float
+      Order:
+        type: integer
+        format: int64
+      PromoteEndDate:
+        type: integer
+        format: int64
+      PromotePrice:
+        type: number
+        format: float
+      PromoteStartDate:
+        type: integer
+        format: int64
+      ProviderName:
+        type: string
+      RankIntegral:
+        type: integer
+        format: int64
+      SellerNote:
+        type: string
+      ShippingKind:
+        type: integer
+        format: int32
+      ShopPrice:
+        type: number
+        format: float
+      SupplierId:
+        type: integer
+        format: int64
+      SupplierState:
+        type: integer
+        format: int32
+      SuppliersId:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      ValidDate:
+        $ref: '#/definitions/eshop.Time'
+      WarnNumber:
+        type: integer
+        format: int32
+      Zhekou:
+        type: number
+        format: float
+  eshop.GoodsDto:
+    title: GoodsDto
+    type: object
+    properties:
+      ActId:
+        type: integer
+        format: int64
+      ActImg:
+        type: string
+      ActName:
+        type: string
+      ActType:
+        type: integer
+        format: int32
+      Appid:
+        type: integer
+        format: int32
+      BonusTypeId:
+        type: integer
+        format: int32
+      BrandId:
+        type: integer
+        format: int64
+      Buymax:
+        type: integer
+        format: int64
+      BuymaxEndDate:
+        $ref: '#/definitions/eshop.Time'
+      BuymaxStartDate:
+        $ref: '#/definitions/eshop.Time'
+      CategoryId:
+        type: integer
+        format: int64
+      CostPrice:
+        type: number
+        format: float
+      CreateTime:
+        $ref: '#/definitions/eshop.Time'
+      Distance:
+        type: number
+        format: float
+      Exclusive:
+        type: string
+      ExtActType:
+        type: integer
+        format: int32
+      FareId:
+        type: integer
+        format: int64
+      GhostClick:
+        type: integer
+        format: int64
+      GhostCount:
+        type: integer
+        format: int64
+      GiveIntegral:
+        type: integer
+        format: int64
+      GoodsAudio:
+        type: string
+      GoodsBrief:
+        type: string
+      GoodsImg:
+        type: string
+      GoodsName:
+        type: string
+      GoodsNameStyle:
+        type: string
+      GoodsNumber:
+        type: integer
+        format: int32
+      GoodsSn:
+        type: string
+      GoodsSpec:
+        type: string
+      GoodsThumb:
+        type: string
+      GoodsType:
+        type: integer
+        format: int32
+      GoodsVideo:
+        type: string
+      GoodsWeight:
+        type: number
+        format: float
+      Id:
+        type: integer
+        format: int64
+      Integral:
+        type: integer
+        format: int64
+      IsAloneSale:
+        type: integer
+        format: int32
+      IsBest:
+        type: integer
+        format: int32
+      IsBuy:
+        type: integer
+        format: int64
+      IsCatindex:
+        type: integer
+        format: int32
+      IsCheck:
+        type: integer
+        format: int32
+      IsDel:
+        type: integer
+        format: int32
+      IsHot:
+        type: integer
+        format: int32
+      IsMorningMarket:
+        type: string
+      IsNew:
+        type: integer
+        format: int32
+      IsOnSale:
+        type: integer
+        format: int32
+      IsPromote:
+        type: integer
+        format: int32
+      IsReal:
+        type: integer
+        format: int32
+      IsShipping:
+        type: integer
+        format: int32
+      IsTop:
+        type: integer
+        format: int32
+      IsVirtual:
+        type: integer
+        format: int64
+      Keywords:
+        type: string
+      LastUpdateTime:
+        $ref: '#/definitions/eshop.Time'
+      MarketPrice:
+        type: number
+        format: float
+      MorningMarketPrice:
+        type: number
+        format: float
+      Order:
+        type: integer
+        format: int64
+      PromoteEndDate:
+        type: integer
+        format: int64
+      PromotePrice:
+        type: number
+        format: float
+      PromoteStartDate:
+        type: integer
+        format: int64
+      ProviderName:
+        type: string
+      RankIntegral:
+        type: integer
+        format: int64
+      SaleNum:
+        type: integer
+        format: int64
+      SellerNote:
+        type: string
+      ShippingKind:
+        type: integer
+        format: int32
+      ShopPrice:
+        type: number
+        format: float
+      SupplierId:
+        type: integer
+        format: int64
+      SupplierState:
+        type: integer
+        format: int32
+      SuppliersId:
+        type: integer
+        format: int32
+      TenantName:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      ValidDate:
+        $ref: '#/definitions/eshop.Time'
+      WarnNumber:
+        type: integer
+        format: int32
+      Zhekou:
+        type: number
+        format: float
+  eshop.GoodsStatDto:
+    title: GoodsStatDto
+    type: object
+    properties:
+      ActAudio:
+        type: string
+      ActId:
+        type: integer
+        format: int64
+      ActImg:
+        type: string
+      ActName:
+        type: string
+      ActType:
+        type: integer
+        format: int32
+      ActVideo:
+        type: string
+      ExtActType:
+        type: integer
+        format: int32
+      OrderNum:
+        type: integer
+        format: int64
+      SaleNum:
+        type: integer
+        format: int64
+  eshop.OrderGoods:
+    title: OrderGoods
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int32
+      EvalState:
+        type: integer
+        format: int32
+      EvalTime:
+        $ref: '#/definitions/eshop.Time'
+      GoodsId:
+        type: integer
+        format: int64
+      GoodsImg:
+        type: string
+      GoodsName:
+        type: string
+      GoodsNums:
+        type: integer
+        format: int64
+      GoodsPrice:
+        type: number
+        format: float
+      GoodsShopPrice:
+        type: number
+        format: float
+      GoodsSn:
+        type: string
+      GoodsWeight:
+        type: number
+        format: float
+      Id:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      OrderId:
+        type: integer
+        format: int64
+      ProductId:
+        type: integer
+        format: int64
+      PromGoods:
+        type: string
+      RealPrice:
+        type: number
+        format: float
+      Shipments:
+        type: integer
+        format: int64
+      Spec:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+  eshop.OrderInfo:
+    title: OrderInfo
+    type: object
+    properties:
+      AgencyId:
+        type: integer
+        format: int64
+      AppFee:
+        type: number
+        format: float
+      Appid:
+        type: integer
+        format: int32
+      BestTime:
+        type: string
+      Bonus:
+        type: number
+        format: float
+      BonusId:
+        type: integer
+        format: int64
+      CardFee:
+        type: number
+        format: float
+      CardId:
+        type: integer
+        format: int32
+      CardMessage:
+        type: string
+      CardName:
+        type: string
+      ConfirmTime:
+        $ref: '#/definitions/eshop.Time'
+      Consignee:
+        type: string
+      CreateTime:
+        $ref: '#/definitions/eshop.Time'
+      Defaultbank:
+        type: string
+      Discount:
+        type: number
+        format: float
+      ExtensionCode:
+        type: string
+      ExtensionId:
+        type: integer
+        format: int64
+      FromAd:
+        type: integer
+        format: int64
+      Froms:
+        type: string
+      GoodsAmount:
+        type: number
+        format: float
+      HowOos:
+        type: string
+      HowSurplus:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      InsureFee:
+        type: number
+        format: float
+      Integral:
+        type: integer
+        format: int64
+      IntegralMoney:
+        type: number
+        format: float
+      InvConsigneeAddress:
+        type: string
+      InvConsigneeCity:
+        type: integer
+        format: int64
+      InvConsigneeCountry:
+        type: integer
+        format: int64
+      InvConsigneeDistrict:
+        type: integer
+        format: int64
+      InvConsigneeName:
+        type: string
+      InvConsigneePhone:
+        type: string
+      InvConsigneeProvince:
+        type: integer
+        format: int64
+      InvContent:
+        type: string
+      InvMoney:
+        type: number
+        format: float
+      InvPayee:
+        type: string
+      InvPayeeType:
+        type: string
+      InvRemark:
+        type: string
+      InvState:
+        type: string
+      InvType:
+        type: string
+      InvoiceNo:
+        type: string
+      IsDel:
+        type: integer
+        format: int32
+      IsPickup:
+        type: integer
+        format: int32
+      IsSeparate:
+        type: integer
+        format: int32
+      MoneyPaid:
+        type: number
+        format: float
+      OrderAmount:
+        type: number
+        format: float
+      OrderGoods:
+        type: array
+        items:
+          $ref: '#/definitions/eshop.OrderGoods'
+      OrderSn:
+        type: string
+      OrderState:
+        type: integer
+        format: int32
+      OrderType:
+        type: integer
+        format: int32
+      OutTradeNo:
+        type: string
+      OuterRefundsNo:
+        type: string
+      PackFee:
+        type: number
+        format: float
+      PackId:
+        type: integer
+        format: int32
+      PackName:
+        type: string
+      ParentId:
+        type: integer
+        format: int64
+      ParentOrderId:
+        type: integer
+        format: int64
+      PayFee:
+        type: number
+        format: float
+      PayId:
+        type: integer
+        format: int32
+      PayName:
+        type: string
+      PayNote:
+        type: string
+      PayState:
+        type: integer
+        format: int32
+      PayTime:
+        $ref: '#/definitions/eshop.Time'
+      PickupPoint:
+        type: integer
+        format: int64
+      Postscript:
+        type: string
+      PtCode:
+        type: string
+      PtLevel:
+        type: integer
+        format: int64
+      PtLuckyOrder:
+        type: integer
+        format: int32
+      PtPriceState:
+        type: integer
+        format: int32
+      PtState:
+        type: integer
+        format: int32
+      RebateId:
+        type: integer
+        format: int64
+      RebateIspay:
+        type: integer
+        format: int32
+      ReceiveAddr:
+        type: string
+      ReceiveCity:
+        type: string
+      ReceiveCityId:
+        type: integer
+        format: int64
+      ReceiveCountry:
+        type: string
+      ReceiveCounty:
+        type: string
+      ReceiveCountyId:
+        type: integer
+        format: int64
+      ReceiveEmail:
+        type: string
+      ReceiveMobile:
+        type: string
+      ReceiveName:
+        type: string
+      ReceiveProvince:
+        type: string
+      ReceiveProvinceId:
+        type: integer
+        format: int64
+      ReceiveStreet:
+        type: string
+      ReceiveStreetId:
+        type: integer
+        format: int64
+      ReceiveTel:
+        type: string
+      ReceiveZipcode:
+        type: string
+      Referer:
+        type: string
+      SendAddr:
+        type: string
+      SendCity:
+        type: string
+      SendCityId:
+        type: integer
+        format: int64
+      SendCountry:
+        type: string
+      SendCounty:
+        type: string
+      SendCountyId:
+        type: integer
+        format: int64
+      SendEmail:
+        type: string
+      SendMobile:
+        type: string
+      SendName:
+        type: string
+      SendProvince:
+        type: string
+      SendProvinceId:
+        type: integer
+        format: int64
+      SendStreet:
+        type: string
+      SendStreetId:
+        type: integer
+        format: int64
+      SendTel:
+        type: string
+      SendZipcode:
+        type: string
+      ShippingFee:
+        type: number
+        format: float
+      ShippingId:
+        type: integer
+        format: int32
+      ShippingName:
+        type: string
+      ShippingState:
+        type: integer
+        format: int32
+      ShippingTime:
+        $ref: '#/definitions/eshop.Time'
+      ShippingTimeEnd:
+        type: integer
+        format: int64
+      SignBuilding:
+        type: string
+      SupplierId:
+        type: integer
+        format: int64
+      Surplus:
+        type: number
+        format: float
+      Tax:
+        type: number
+        format: float
+      TbNick:
+        type: string
+      Tenant:
+        $ref: '#/definitions/base.Tenant'
+      Tid:
+        type: integer
+        format: int32
+      ToBuyer:
+        type: string
+      TransactionId:
+        type: string
+      Uid:
+        type: integer
+        format: int32
+      VatInvBankAccount:
+        type: string
+      VatInvCompanyName:
+        type: string
+      VatInvDepositBank:
+        type: string
+      VatInvRegistrationAddress:
+        type: string
+      VatInvRegistrationPhone:
+        type: string
+      VatInvTaxpayerId:
+        type: string
+      WxRefundState:
+        type: integer
+        format: int64
+  eshop.OrderInfoStatisticsResponseDto:
+    title: OrderInfoStatisticsResponseDto
+    type: object
+    properties:
+      NotEvalCount:
+        type: integer
+        format: int32
+      NotPaidCount:
+        type: integer
+        format: int32
+      NotReceiveCount:
+        type: integer
+        format: int32
+      NotSendCount:
+        type: integer
+        format: int32
+      OrderCount:
+        type: integer
+        format: int32
+  exp.Address:
+    title: Address
+    type: object
+    properties:
+      Addr:
+        type: string
+      Appid:
+        type: integer
+        format: int32
+      City:
+        type: string
+      CityId:
+        type: integer
+        format: int64
+      Country:
+        type: string
+      County:
+        type: string
+      CountyId:
+        type: integer
+        format: int64
+      ExternalId:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Idname:
+        type: string
+      Idno:
+        type: string
+      IsDefault:
+        type: integer
+        format: int32
+      Kind:
+        type: integer
+        format: int32
+      Mobile:
+        type: string
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      Phone:
+        type: string
+      Pic1:
+        type: integer
+        format: int64
+      Pic2:
+        type: integer
+        format: int64
+      Pics:
+        type: string
+      Postcode:
+        type: string
+      Province:
+        type: string
+      ProvinceId:
+        type: integer
+        format: int64
+      State:
+        type: integer
+        format: int32
+      Street:
+        type: string
+      StreetId:
+        type: integer
+        format: int64
+      Tid:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        $ref: '#/definitions/exp.Time'
+  libs.Time:
+    title: Time
+    type: object
+  oa.FlowNode:
+    title: FlowNode
+    type: object
+    properties:
+      appoint_dept_ids:
+        type: array
+        items:
+          type: integer
+          format: int64
+      endLevelNum:
+        type: string
+      flowNodeAuditAppointSetList:
+        type: array
+        items:
+          $ref: '#/definitions/32695.0xc00153f140.false'
+      flowNodeTimeSetVO:
+        $ref: '#/definitions/32955.0xc00153f1a0.false'
+      id:
+        type: string
+      isAddCountersign:
+        type: integer
+        format: int64
+      isAutomaticAudit:
+        type: integer
+        format: int64
+      isCanEnd:
+        type: integer
+        format: int64
+      isChoice:
+        type: integer
+        format: int64
+      isCreateFirst:
+        type: string
+      isLading:
+        type: string
+      isQuery:
+        type: integer
+        format: int64
+      isSign:
+        type: integer
+        format: int64
+      isSoter:
+        type: integer
+        format: int64
+      isTimeSet:
+        type: integer
+        format: int64
+      isUseHandWriteSign:
+        type: integer
+        format: int64
+      isUsePresetSign:
+        type: integer
+        format: int64
+      nodeGroupList:
+        type: array
+        items:
+          type: integer
+          format: int64
+      nodeName:
+        type: string
+      nodeType:
+        type: string
+      personList:
+        type: array
+        items:
+          $ref: '#/definitions/32340.0xc00153f050.false'
+      skip_dept_ids:
+        type: array
+        items:
+          type: integer
+          format: int64
+      skipLevelNum:
+        type: string
+      tagList:
+        type: array
+        items:
+          type: integer
+          format: int64
+      upAuditNum:
+        type: string
+  oa.FormTemplate:
+    title: FormTemplate
+    type: object
+    properties:
+      Appid:
+        type: integer
+        format: int32
+      Category:
+        $ref: '#/definitions/commonModels.Category'
+      Content:
+        type: string
+      CoverId:
+        type: integer
+        format: int64
+      CreateTime:
+        $ref: '#/definitions/oa.Time'
+      Deptids:
+        type: string
+      Description:
+        type: string
+      EndTime:
+        $ref: '#/definitions/oa.Time'
+      Ext:
+        type: string
+      FlowBranchJson:
+        type: string
+      FlowId:
+        type: integer
+        format: int64
+      FlowNodeJson:
+        type: string
+      FlowNodeList:
+        type: array
+        items:
+          $ref: '#/definitions/oa.FlowNode'
+      Flowids:
+        type: string
+      FormFieldJson:
+        type: string
+      FormFieldList:
+        $ref: '#/definitions/45331.0xc00156a3f0.false'
+      Formids:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      IsLicensing:
+        type: integer
+        format: int32
+      IsLimit:
+        type: integer
+        format: int32
+      IsTask:
+        type: integer
+        format: int32
+      Kind:
+        type: string
+      Mode:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      Order:
+        type: integer
+        format: int64
+      Ranges:
+        type: integer
+        format: int32
+      StartTime:
+        $ref: '#/definitions/oa.Time'
+      State:
+        type: integer
+        format: int32
+      StatisticsFieldJson:
+        type: string
+      Summary:
+        type: string
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      TitleTemplate:
+        type: string
+      Type:
+        type: integer
+        format: int32
+      Uid:
+        type: integer
+        format: int32
+      UpdateTime:
+        $ref: '#/definitions/oa.Time'
+      Userids:
+        type: string
+      Username:
+        type: string
+  rhjj.Supervision:
+    title: Supervision
+    type: object
+    properties:
+      Address:
+        type: string
+      Appid:
+        type: integer
+        format: int32
+      Audios:
+        type: string
+      AuditBy:
+        type: string
+      AuditContent:
+        type: string
+      AuditState:
+        type: integer
+        format: int32
+      AuditTime:
+        type: string
+        format: datetime
+      AuditTimeStr:
+        type: string
+      AuditUid:
+        type: integer
+        format: int32
+      CaseContent:
+        type: string
+      CaseState:
+        type: integer
+        format: int32
+      CaseTime:
+        type: string
+        format: datetime
+      Category:
+        $ref: '#/definitions/commonModels.Category'
+      CategoryId:
+        type: integer
+        format: int64
+      Content:
+        type: string
+      CreateBy:
+        type: string
+      CreateTel:
+        type: string
+      CreateTime:
+        type: string
+        format: datetime
+      Description:
+        type: string
+      Files:
+        type: string
+      FinishAudios:
+        type: string
+      FinishBy:
+        type: string
+      FinishContent:
+        type: string
+      FinishFiles:
+        type: string
+      FinishPics:
+        type: string
+      FinishState:
+        type: integer
+        format: int32
+      FinishTime:
+        type: string
+        format: datetime
+      FinishUid:
+        type: integer
+        format: int32
+      FinishVideos:
+        type: string
+      FlowId:
+        type: integer
+        format: int64
+      FlowNodeJson:
+        type: string
+      FormFieldJson:
+        type: string
+      FormFieldList:
+        $ref: '#/definitions/map[string][5429.0xc001582f30.false]'
+      FormId:
+        type: integer
+        format: int64
+      Id:
+        type: integer
+        format: int64
+      IsDel:
+        type: integer
+        format: int32
+      IsView:
+        type: integer
+        format: int32
+      JoinNum:
+        type: integer
+        format: int64
+      Kind:
+        type: string
+      Lat:
+        type: number
+        format: float
+      ListTime:
+        type: string
+        format: datetime
+      ListTimeStr:
+        type: string
+      Lng:
+        type: number
+        format: float
+      Mode:
+        type: integer
+        format: int32
+      Name:
+        type: string
+      OrgFid:
+        type: string
+      OrgId:
+        type: integer
+        format: int64
+      OrgName:
+        type: string
+      OrgPosition:
+        type: string
+      Pics:
+        type: string
+      Pid:
+        type: integer
+        format: int64
+      Problem:
+        type: string
+      ReactContent:
+        type: string
+      RelevantUserIds:
+        type: string
+      RelevantUserNames:
+        type: string
+      ReplyCount:
+        type: integer
+        format: int32
+      ReplyLastDate:
+        type: string
+        format: datetime
+      ReplyLimitCount:
+        type: integer
+        format: int32
+      ReplyLimitDate:
+        type: string
+        format: datetime
+      ReplyLimitDays:
+        type: integer
+        format: int32
+      ReplyState:
+        type: integer
+        format: int32
+      State:
+        type: integer
+        format: int32
+      Tid:
+        type: integer
+        format: int32
+      Title:
+        type: string
+      Uid:
+        type: integer
+        format: int32
+      Uname:
+        type: string
+      Unit:
+        type: string
+      UnitPrincipal:
+        type: string
+      UpdateBy:
+        type: string
+      UpdateTime:
+        type: string
+        format: datetime
+      UpdateUid:
+        type: integer
+        format: int64
+      Videos:
+        type: string
+  rhjj.SupervisionStatDto:
+    title: SupervisionStatDto
+    type: object
+    properties:
+      Count:
+        type: integer
+        format: int64
+      Name:
+        type: string
+  rhjj.SupervisionStatResponseDto:
+    title: SupervisionStatResponseDto
+    type: object
+    properties:
+      AuditedCount:
+        type: integer
+        format: int64
+      Category:
+        type: array
+        items:
+          $ref: '#/definitions/rhjj.SupervisionStatDto'
+      FinishedCount:
+        type: integer
+        format: int64
+      NotAuditCount:
+        type: integer
+        format: int64
+      NotFinishCount:
+        type: integer
+        format: int64
+      Problem:
+        type: array
+        items:
+          $ref: '#/definitions/rhjj.SupervisionStatDto'
+      Total:
+        type: integer
+        format: int64

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之tinymce扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>LarryMS框架之tinymce编辑器封装</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>tinymce编辑器简介：</cite>TinyMCE是一个功能强大且灵活的文本编辑器，强大的跨浏览器性能,改进了Word内容复制粘贴,拼写检查,文件管理
+                            辅助功能检查,链接检查,高级代码编辑器,增强的媒体嵌入，精美的主题（拥有多款主题），多语言支持等等，LarryMS框架对其进行了二次开发封装，下面是LarryMS框架中tinymce编辑器的使用示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            tinymce当前开源版本：version:v4.8.3 <em style="color: #ff5722;">【推荐使用】</em>
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-we">
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        tinymce编辑器【效果示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-editor" id="editor"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        tinymce编辑器【Code加载示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+layui.use('tinymce', function() {
+            var tinymce = layui.tinymce;
+            tinymce.init({
+                selector: '#editor',
+                language: 'zh_CN',
+                theme: 'modern',
+                mobile: {
+                    theme: 'mobile',
+                    plugins: ['autosave', 'lists', 'autolink']
+                },
+                branding: false,
+                plugins: [
+                    "advlist autolink lists link image charmap print preview anchor hr", 
+                    "searchreplace visualblocks code wordcount fullscreen insertdatetime", 
+                    "insertdatetime media table contextmenu paste imagetools",
+                    "save table contextmenu directionality paste textcolor"
+                ],
+                height:"300"
+            });
+});</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于编辑器组件深入场景使用文档与示例，请移步LarryMS框架开发者文档中查看，tinymce高级版本为收费版需单独购买，当前框架中所示例提供的开源免费版可以满足一般常规需求
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'tinymce'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

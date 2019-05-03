@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>cy-ui</title>
+    <link rel="shortcut icon" type="image/x-icon" href="statics/img/favicon.ico" media="screen"/>
+    <link rel="stylesheet" href="statics/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="statics/plugins/layer/skin/default/layer.css">
+    <link rel="stylesheet" href="statics/css/font-awesome.min.css">
+    <link rel="stylesheet" href="statics/css/index.css">
+    <link rel="stylesheet" href="common/css/cyStyle.css">
+    <link rel="stylesheet" href="statics/plugins/ContextJS/css/context.standalone.green.css">
+
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">cy-ui前端框架</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layui-this"><a href="javascript:createMenu('/statics/json/layuiMenu.json');">layui组件</a>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:createMenu('/statics/json/vueMenu.json');">vue组件</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="http://www.cymall.xin" target="_blank">cy官网</a></dd>
+                    <dd><a href="http://admin.cymall.xin" target="_blank">cy-security</a></dd>
+                    <dd><a href="http://fast.cymall.xin" target="_blank">cy-fast</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:reward();">捐赠作者</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:lockScreen();"><i class="fa fa-lock"></i>锁屏</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">通知<span class="layui-badge">9</span></a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="statics/images/index/head.jpg" class="layui-nav-img">
+                    chenyi
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;" class="cy-page" data-url="http://www.layui.com/">基本资料</a></dd>
+                    <dd><a href="javascript:;"  class="cy-page" data-url="http://www.baidu.com/">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;window.location.href='/login.html'">退了</a></li>
+        </ul>
+    </div>
+    <div class="toggle-collapse"></div>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <div class="layui-form component">
+                <div class="search-menu-back">
+                    <input type="text" placeholder="菜单名称 / url" value="" id="menuSearch" class="layui-input menu-search">
+                    <span class="menu-search-clear" style="display: none"><i class="layui-icon">&#x1006;</i>  </span>
+                </div>
+            </div>
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree">
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 1px;">
+            <div id="navTab" class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="tabs">
+                <div class="layui-tab-left"><i class="layui-icon">&#xe65a;</i></div>
+                <ul class="layui-tab-title ">
+                    <li class="layui-this main-tab" data-url="/page/main/main.html">我的主页</li>
+
+                </ul>
+                <div class="layui-tab-right"><i class="layui-icon">&#xe65b;</i></div>
+
+            </div>
+
+        </div>
+
+
+        <div id="main">
+            <iframe scrolling="yes" frameborder="0" class="cy-show" src="/page/main/main.html"></iframe>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © www.cymall.xin
+    </div>
+</div>
+<script src="statics/libs/jquery-1.10.2.min.js"></script>
+<script src="statics/plugins/ContextJS/js/context.js"></script>
+<script src="statics/plugins/layui/layui.js"></script>
+<script src="statics/plugins/layer/layer.js"></script>
+<script src="common/js/whole/utils.js"></script>
+<script src="common/js/whole/cyLayer.js"></script>
+<script src="statics/js/navTab.js"></script>
+<script src="statics/js/index.js"></script>
+<script>
+
+</script>
+</body>
+</html>

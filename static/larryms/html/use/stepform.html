@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LarryMS框架之消息推送功能使用示例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/demo/use.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+</head>
+
+<body class="larry-bg-grey step larryui">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 10]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="larry-fluid p15">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card">
+                    <div class="larry-card-body">
+                        <h1>分步表单示例：</h1>
+                        <p class="title pb5">larryms框架模板中提供的分步表单及表单验证均是在forms组件的基础上实现，通过<cite>larry-step属性，以及form.vaildator()</cite>方法进行<em style="color: #ff5722;">局部区域验证或局部验证提交</em>；下面展示的为larryms中关于分步表单的应用举例：</p>
+                    </div>
+                </section>
+            </div>
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card">
+                    <div class="larry-card-body">
+                        <form action="" class="larry-form pt15">
+                            <div class="larry-step mw1200 nobefore pt15 pb20 larry-row larry-col-space15">
+                                <div class="larry-step-li larry-col-xs4 on">
+                                    <span class="num"><em class="f-r5"></em><i>1</i></span>
+                                    <span class="line_bg lbg-r"></span>
+                                    <p class="lbg-txt">填写账户信息</p>
+                                </div>
+                                <div class="larry-step-li larry-col-xs4">
+                                    <span class="num"><em class="f-r5"></em><i>2</i></span>
+                                    <span class="line_bg lbg-l"></span>
+                                    <span class="line_bg lbg-r"></span>
+                                    <p class="lbg-txt">验证账户信息</p>
+                                </div>
+                                <div class="larry-step-li larry-col-xs4">
+                                    <span class="num"><em class="f-r5"></em><i>3</i></span>
+                                    <span class="line_bg lbg-l"></span>
+                                    <p class="lbg-txt">注册成功</p>
+                                </div>
+                            </div>
+                            <div class="larry-form-step mw1200 mb15 clearfix">
+                                <div class="larry-step-part larry-step-part1 larry-row larry-col-space15 pt20" id="larryStepPart1">
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>用户名：</label>
+                                        <div class="larry-input-block larry-step-block">
+                                            <input type="text" class="larry-input larry-input-shadow" lay-verify="required|chsAlphaNumDash|min:6|max:15" placeholder="请输入用户名，这里使用失去焦点即验证" lay-valid="blur" name="uname">
+                                        </div>
+                                        <div class="larry-word-aux larry-hide-xs">6-15位，中文、字母、数字、下划线组成</div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>手机号：</label>
+                                        <div class="larry-input-block larry-step-block">
+                                            <input type="text" class="larry-input larry-input-shadow" lay-verify="phone" placeholder="请输入手机号码" name="phone">
+                                        </div>
+                                        <div class="larry-word-aux larry-hide-xs">请填写正确有效的手机号码</div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>密码：</label>
+                                        <div class="larry-input-block larry-step-block">
+                                            <input type="password" id="password" class="larry-input larry-input-shadow" lay-verify="pwd|level:2" lay-error="|我自定义了第二项密码复杂度的错误提示，覆盖了内置规则默认的" data-level="2" data-eye="password" lay-valid="blur" lay-verType="below" placeholder="请输入密码 默认已开启密码强度检测" name="password">
+                                        </div>
+                                        <div class="larry-word-aux larry-hide-xs">6-32位字母(区分大小写)、数字、特殊字符</div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>确认密码：</label>
+                                        <div class="larry-input-block larry-step-block">
+                                            <input type="password" class="larry-input larry-input-shadow" lay-verify="isRepeat:password" lay-valid="blur" lay-verType="below" placeholder="这里通过id自动校验与上面的密码一致性">
+                                        </div>
+                                        <div class="larry-word-aux larry-hide-xs">请再输一遍上面的密码</div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>验证码：</label>
+                                        <div class="larry-input-block larry-step-block larry-code nobefore">
+                                            <input type="text" class="larry-input larry-input-shadow" lay-verify="required" name="code">
+                                        </div>
+                                        <div class="larry-word-aux"><img src="../../larryms/images/demo/yzm.jpg" alt=""></div>
+                                        <div class="larry-word-aux larry-hide-xs">输入验证码到左侧</div>
+                                        
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12 pt15 pr80 right">
+                                            <div class="larry-btn larry-btn-info pl30 pr30 mr70" id="part1" larry-step>下一步</div>
+                                    </div>
+                                </div>
+                                <!-- 表单2 -->
+                                <div class="larry-step-part larry-step-part2 larry-col-space15 pt15 larry-hide" id="larryStepPart2">
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <div class="larry-step-info p15">
+                                            短信已发送至您手机，请输入短信中的验证码，确保您的手机号真实有效
+                                        </div>
+                                    </div>
+
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label">手机号：</label>
+                                        <div class="larry-input-block larry-step-block larry-step-p">13429806016</div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>验证码：</label>
+                                        <div class="larry-input-block larry-step-block w160">
+                                            <input type="text" class="larry-input larry-input-shadow" lay-verify="required|number|minx:4|max:6" name="smscode">
+                                        </div>
+                                        <div class="larry-btn larry-btn-gray">发送验证码</div>
+                                        <div class="larry-word-aux larry-hide-xs">输入验证码到左侧</div>
+                                        
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12 pr80 right">
+                                        <div class="larry-btn larry-btn-secondary pl30 pr30 mr30 larry-step-goback">上一步</div>
+                                        <div class="larry-btn larry-btn-info pl30 pr30 mr70" id="part2" larry-step>下一步</div>
+                                    </div>
+                                </div>
+                                <!-- 表单3 -->
+                                <div class="larry-step-part larry-step-part3 larry-col-space15 pt15 larry-hide"  id="larryStepPart3">
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>真实姓名：</label>
+                                        <div class="larry-input-block larry-step-block">
+                                            <input type="text" class="larry-input larry-input-shadow" name="realname" lay-verify="required|chs|min:2|max:6" placeholder="请输入您的真实姓名" lay-valid="blur">
+                                        </div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12">
+                                        <label class="larry-form-label"><b class="larry-label-star">*</b>身份证号：</label>
+                                        <div class="larry-input-block larry-step-block">
+                                            <input type="text" class="larry-input larry-input-shadow" lay-valid="blur" name="idcard" lay-verify="isIdCard" placeholder="请输入有效的身份证号码">
+                                        </div>
+                                        <div class="larry-word-aux larry-hide-xs">可以校验身份证号码的真实性，不止是简单的位数验证</div>
+                                    </div>
+                                    <div class="larry-form-item larry-col-xs12 pr80 right">
+                                        <div class="larry-btn larry-btn-secondary pl30 pr30 mr30 larry-step-goback">上一步</div>
+                                        <div class="larry-btn larry-btn-info pl30 pr30 mr70"  lay-submit lay-filter="step">提交表单</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card">
+                    <div class="larry-card-body">
+                        <p class="title p10"><cite>由于时间原因，以上分步表单的示例仅仅为larryms框架模板应用中的冰山之一角，在后续更新中会提供更多实用示例，我们的目标：让Web开发更简单</cite></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../larryms/',
+        mods: 'demo/',
+        page: 'uidemo',
+
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry', 'forms'], function() {
+        var $ = layui.$,
+            larryms = layui.larryms,
+            forms = layui.forms;
+        //执行分步表单
+        $('#part1').on('click', function() {
+            if (!forms.vaildator('#larryStepPart1')) return;
+            $(".larry-step-part1").hide();
+            $(".larry-step-part2").removeClass('larry-hide').show();
+            $(".larry-step .larry-step-li").eq(1).addClass("on");
+        });
+        
+        $('#part2').on('click',function(){
+            if (!forms.vaildator('#larryStepPart2')) return;
+            $(".larry-step-part2").hide();
+            $(".larry-step-part3").removeClass('larry-hide').show();
+            $(".larry-step .larry-step-li").eq(2).addClass("on");
+        });
+        forms.on('submit(step)',function(data){
+            larryms.alert(JSON.stringify(data.field));
+            return false;
+        });
+
+        $('.larry-step-goback').on('click',function(){
+            var id = $(this).parents('.larry-step-part').attr('id');
+            var cur = id.substring(13),
+                prevId = 'larryStepPart'+(cur-1);
+            $('#'+id).addClass('larry-hide').hide();
+            $(".larry-step .larry-step-li").eq(cur-1).removeClass("on");
+            $('#'+prevId).removeClass('larry-hide').show();
+        });
+    });
+    </script>
+</body>
+
+</html>

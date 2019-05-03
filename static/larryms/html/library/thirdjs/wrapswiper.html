@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>移动端演示</title>
+    <meta name="viewport" content="initial-scale=1">
+    <script src="https://www.swiper.com.cn/demo/progressShow/js/swiper.min.js"></script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body,
+    #banner,
+    #banner .swiper-slide {
+        height: 100%;
+    }
+
+    body {
+        background: #000;
+        overflow: hidden;
+    }
+
+    #banner .swiper-slide {
+        overflow: hidden;
+
+    }
+
+    #banner .swiper-slide img {
+        width: 100%;
+    }
+
+    .thumb-list {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 5%;
+    }
+
+    .thumb {
+        width: 20%;
+        margin-left: 4% !important;
+        float: left;
+    }
+
+    .thumb .swiper-slide img {
+        width: 100%;
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="max-width:640px; margin:0 auto; height:100%; position:relative;">
+        <div class="swiper-container" id="banner">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="../../../larryms/images/demo/zhiling1.jpg"></div>
+                <div class="swiper-slide"><img src="../../../larryms/images/demo/zhiling2.jpg"></div>
+                <div class="swiper-slide"><img src="../../../larryms/images/demo/zhiling3.jpg"></div>
+                <div class="swiper-slide"><img src="../../../larryms/images/demo/zhiling4.jpg"></div>
+            </div>
+        </div>
+        <div class="thumb-list">
+            <div class="swiper-container thumb" id="thumb1">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb1.jpg"></div>
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb1_h.jpg"></div>
+                </div>
+            </div>
+            <div class="swiper-container thumb" id="thumb2">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb2.jpg"></div>
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb2_h.jpg"></div>
+                </div>
+            </div>
+            <div class="swiper-container thumb" id="thumb3">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb3.jpg"></div>
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb3_h.jpg"></div>
+                </div>
+            </div>
+            <div class="swiper-container thumb" id="thumb4">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb4.jpg"></div>
+                    <div class="swiper-slide"><img src="../../../larryms/images/demo/thumb4_h.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'swiperdemo'
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry'], function() {
+        var bannerSwiper = new Swiper('#banner', {
+            mousewheel: true,
+            effect: 'coverflow',
+            speed: 300,
+            watchSlidesProgress: true,
+            on: {
+                touchMove: function() {
+                    progress = this.progress
+                    for (i = 0; i < this.slides.length; i++) {
+                        slideProgress = this.slides[i].progress
+                        if (Math.abs(slideProgress) < 1) {
+                            thumbSwiper[i].setTranslate(thumbSwiper[i].width * (Math.abs(slideProgress) - 1))
+                        }
+                    }
+                },
+                transitionStart: function() {
+                    activeIndex = this.activeIndex
+                    for (i = 0; i < thumbSwiper.length; i++) {
+                        if (i == activeIndex) {
+                            thumbSwiper[i].slideTo(1);
+                        } else {
+                            thumbSwiper[i].slideTo(0);
+                        }
+                    }
+                },
+            }
+        });
+        var thumbSwiper = new Swiper('.thumb', {
+            watchSlidesProgress: true,
+            effect: 'cube',
+            touchRatio: 0,
+            cubeEffect: {
+                shadow: false
+            },
+            on: {
+                tap: function() {
+                    bannerSwiper.slideTo(this.$el.index());
+                },
+            },
+        });
+        thumbSwiper[0].slideTo(1, 0)
+
+    });
+    </script>
+</body>
+
+</html>

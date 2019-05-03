@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之剪贴板扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>剪贴板组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>剪贴板组件：</cite>一个不需要flash，直接将指定元素文本复制到剪贴板的组件库，在需要使用一键复制的场景该组件库就会变得特别实用，而且是一个很轻量级的JS库，下面是LarryMS框架中的使用示例：【其实在LarryMS图标库就使用到了该组件】
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;" id="printJS-top">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：version:2.0.0
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-water">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        剪贴板使用示例：
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="main markdown">
+                            <ul class="icon_lists clear">
+                                <li>
+                                    <i class="icon larry-icon larry-zhanghu"></i>
+                                    <div class="name">账户</div>
+                                    <div class="fontclass">.larry-zhanghu</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-guanliyuan"></i>
+                                    <div class="name">管理员</div>
+                                    <div class="fontclass">.larry-guanliyuan</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-bangzhu"></i>
+                                    <div class="name">帮助</div>
+                                    <div class="fontclass">.larry-bangzhu</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-gouwuchekong"></i>
+                                    <div class="name">购物车空</div>
+                                    <div class="fontclass">.larry-gouwuchekong</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-yingyongzhongxin"></i>
+                                    <div class="name">应用中心</div>
+                                    <div class="fontclass">.larry-yingyongzhongxin</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-pubuliu"></i>
+                                    <div class="name">瀑布流</div>
+                                    <div class="fontclass">.larry-pubuliu</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-gouwucheman"></i>
+                                    <div class="name">购物车满</div>
+                                    <div class="fontclass">.larry-gouwucheman</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-sousuo"></i>
+                                    <div class="name">搜索</div>
+                                    <div class="fontclass">.larry-sousuo</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-exit"></i>
+                                    <div class="name">退出</div>
+                                    <div class="fontclass">.larry-exit</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-shipin"></i>
+                                    <div class="name">视频</div>
+                                    <div class="fontclass">.larry-shipin</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-shengyin"></i>
+                                    <div class="name">声音</div>
+                                    <div class="fontclass">.larry-shengyin</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-pc"></i>
+                                    <div class="name">电脑 线框</div>
+                                    <div class="fontclass">.larry-pc</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-duocengjiegou"></i>
+                                    <div class="name">多层结构</div>
+                                    <div class="fontclass">.larry-duocengjiegou</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-liuyan"></i>
+                                    <div class="name">留言</div>
+                                    <div class="fontclass">.larry-liuyan</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-yiguanzhu"></i>
+                                    <div class="name">已关注</div>
+                                    <div class="fontclass">.larry-yiguanzhu</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-msnui-reg"></i>
+                                    <div class="name">注册</div>
+                                    <div class="fontclass">.larry-msnui-reg</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-msnui-map-location"></i>
+                                    <div class="name">地图定位</div>
+                                    <div class="fontclass">.larry-msnui-map-location</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-tuichu"></i>
+                                    <div class="name">退出</div>
+                                    <div class="fontclass">.larry-tuichu</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-nav"></i>
+                                    <div class="name">栏目</div>
+                                    <div class="fontclass">.larry-nav</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-xiaolian"></i>
+                                    <div class="name">笑脸</div>
+                                    <div class="fontclass">.larry-xiaolian</div>
+                                </li>
+                                <li>
+                                    <i class="icon larry-icon larry-biaodan"></i>
+                                    <div class="name">表单</div>
+                                    <div class="fontclass">.larry-biaodan</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-address-book fa-spin"></i>
+                                    <div class="fontclass">fa-address-book</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-address-book-o" style="color: #60B878;"></i>
+                                    <div class="fontclass">fa-address-book-o</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-address-card" style="color: #2EA1F7;"></i>
+                                    <div class="fontclass">fa-address-card</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-address-card-o" style="color: #FEC632;"></i>
+                                    <div class="fontclass">fa-address-card-o</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-bandcamp fa-spin" style="color: #F96534;"></i>
+                                    <div class="fontclass">fa-bandcamp</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-bath" style="color: #19D1B9;"></i>
+                                    <div class="fontclass">fa-bath</div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-bathtub" style="color: #BF52E9;"></i>
+                                    <div class="fontclass">fa-bathtub </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-drivers-license" style="color: #FEC632;"></i>
+                                    <div class="fontclass">fa-drivers-license </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-drivers-license-o" style="color: #2EA1F7;"></i>
+                                    <div class="fontclass">fa-drivers-license-o </div>
+                                </li>
+                                <li>
+                                    <i class="fa fa-eercast  fa-pulse" style="color: #ff5722;"></i>
+                                    <div class="fontclass">fa-eercast</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        剪贴板使用code示例：
+                    </div>
+                    <div class="layui-card-body library-code clipboard">
+                        <p>点击左侧任意图标即可将其class名称复制到剪贴板，ctrl+v即可粘贴；剪贴板组件来自github，其官网地址：https://clipboardjs.com/；在larryMS框架中可以如下代码区的示例方式使用，也可以直接 larryms.plugin('clipboard',callback);</p>
+                        <form class="layui-form">
+                            <textarea class="layui-textarea larryms-textarea" style="width: 100%;height: 50px;font-size: 16px;color: #ff5722;margin-top: 15px;" placeholder="可以在这里使用ctrl+v快捷键粘贴点击左侧后所复制的内容，验证效果"></textarea>
+                        </form>
+                        <pre class="layui-code">
+layui.use('clipboard',function(){
+    var clipboard = layui.clipboard;
+    $('.icon_lists').find('li').each(function(k, v) {
+        $(v).attr('data-clipboard-text', $(v).children('.fontclass').text());
+    });
+    var btns = document.querySelectorAll('li');
+    var clipboard = new clipboard(btns);
+    clipboard.on('success', function(e) {
+        larryms.message('已成功复制' + e.text+'到剪贴板', 'success');
+    });
+});
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于剪贴板组件深入场景使用文档与示例，请移步LarryMS框架开发者文档中查看
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'clipboard'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

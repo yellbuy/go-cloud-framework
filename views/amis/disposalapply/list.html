@@ -1,0 +1,165 @@
+<div class="layui-layout layui-layout-admin" style="padding-left: 10px;">
+    <div class="layui-row" style="margin-top: 20px;">
+        <div class="layui-col-xs6">
+            <a class="layui-btn" data-type="tabAdd" href="/disposalapply/add">新增</a>  
+            <button class="layui-btn" id="btnImport" data-type="import">导入</button>
+        </div>
+        <div class="layui-col-xs6 search_text">
+            <form class="layui-form" action="" onsubmit="javascript:return false;">
+                <div class="demoTable">
+                    <div class="layui-inline">
+                        <input class="layui-input" name="no" id="no" autocomplete="off" placeholder="编号" >
+                    </div>
+                    <button class="layui-btn" data-type="reload">查询</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <table class="layui-hide" id="tableMain" lay-filter="tableMain">
+    </table>
+    
+    <script type="text/html" id="bar">
+       <!--  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</div>
+<script>
+    var editObj=null,ptable=null,treeGrid=null,tableId='treeMain',layer=null;
+    layui.config({
+        base: '/static/layui/extend/'
+    }).extend({
+        treeGrid:'treeGrid'
+    }).use(['jquery','layer','table','form','element','upload'], function(){
+        var $=layui.jquery;
+        var layer=layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+       var upload = layui.upload;
+        //方法级渲染
+        table.render({
+            elem: '#tableMain'
+            ,url: '/disposalapply/list'
+            ,cols: [[
+                {field:'No', title: '处置单号',width:130}
+                ,{field:'Purchaser', title: '购买方',width:150}
+                ,{field:'Company', title: '单位名称',width:200}
+                ,{field:'Linkman', title: '联系人',width:100}
+                ,{field:'Phone',  title: '电话',width:150}
+                ,{field:'DisposalWay', align:'center', title: '处置形式',width:90}
+                ,{field:'Type', title: '资产类型', align:'center',width:90, templet: function(d){
+                        if(d.Type==1){
+                            return '<span class="layui-badge layui-bg-cyan">房屋</span>'
+                        }
+                        if(d.Type==2){
+                            return '<span class="layui-badge layui-bg-blue">汽车</span>'
+                        }
+                        return '<span class="layui-badge layui-bg-green">通用</span>'}
+                }
+                ,{field:'ApplyDate', title: '申请日期', width:110, templet: function(d){
+                        return d.ApplyDate.substr(0,10) }
+                }
+                ,{field:'Total', align:'right', title: '总金额',width:90}
+                
+                  ,{field:'State', title: '状态', align:'center', width:80, templet: function(d){
+                        if(d.State==1){
+                            return '<span class="layui-badge layui-bg-green">已上报</span>'
+                        }
+                        return '<span class="layui-badge layui-bg-red">草稿</span>'
+                  }
+                }   
+                ,{fixed: 'right', title: '操作',width:120, align:'center', templet: function(d){
+                    var str=""; // <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+                    if(d.State==0){
+                        str = str + '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>'
+                        str = str + '<a class="layui-btn layui-btn-xs" lay-event="del">删除</a>'
+                    }
+                    return str;
+                  }
+                }
+            ]]
+            ,id: 'mainList'
+            ,page: true
+            ,height: "full-125"
+        });
+        uploadListIns = upload.render({
+            elem: '#btnImport'
+            ,url: '/disposalapply/import'
+            ,accept: 'file'
+            ,multiple: false
+            ,auto: true
+            ,field: 'file'
+            ,size:10240
+            ,exts: 'xls|xlsx'
+            ,done: function(res, index, upload){
+                if(res.code == 0){ //上传成功
+                    active.reload()
+                    layer.msg('导入成功');
+                } else {
+                    layer.msg('导入失败：'+res.msg);
+                } 
+            }
+            ,error: function(index, upload){
+                layer.msg('上传失败');
+            }
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                table.reload('mainList', {
+                    page: {
+                    curr: 1 //重新从第 1 页开始
+                },where: {
+                        // fetchChild: $("input[name='fetchChild']:checked").val()||"false",
+                        no: $('#no').val()
+                    }
+                });
+            }
+        };
+
+        //监听工具条
+        table.on('tool(tableMain)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'edit'){
+                window.location.href="/disposalapply/edit?id="+data.Id
+            } else if(obj.event === 'del'){
+                acts = "删除";
+                layer.confirm('真的'+acts+'【'+data.No+'】吗？', function(index){
+                    var jsData = {'id':data.Id}
+                    $.post('{{urlfor "DisposalapplyController.Del"}}', jsData, function (out) {
+                        if (out.status == 0) {
+                             active.reload()
+                            layer.alert("操作成功！", {icon: 1},function(index){
+                                layer.close(index);
+                            });
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");
+                    // obj.del();
+                    layer.close(index);
+                })
+            } else{
+                layer.msg('操作不存在');
+            }
+        });
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    var i=1000;
+
+    function print() {
+        console.log(treeGrid.cache[tableId]);
+        var loadIndex=layer.msg("对象已打印，按F12，在控制台查看！", {
+            time:3000
+            ,offset: 'auto'//顶部
+            ,shade: 0
+        });
+    }
+</script>
+

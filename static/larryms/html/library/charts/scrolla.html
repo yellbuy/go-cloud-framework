@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之scrolla扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>scrolla组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>scrolla组件：</cite>是larryMS框架下封装的一款用于页面滚动时触发区块动画加载的组件，它来自github，事实上larryMS框架中提供的所有扩展组件（即便你只购买了标准版授权，对于三方组件也可以在LarryMS框架开发者文档中找到使用方法），因为larryMS框架的核心功能中也提供了另一种加载方式：larryms.plugin('插件名',callback)方式调用，当然对应版本的封装会让其使用更加方便，如下示例：<em style="color:#01AAED ">容器为：larryms-scrolla 或 window [鼠标移入示例区域滑动鼠标滑轮即可看的效果]</em>
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-water">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body larryms-scrolla" id="larrymsTpl">
+                        <section class="section section-demo">
+                            <div class="wrapper">
+                                <div class="items group">
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.0s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.5s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block offset animate" data-animate="bounceIn" data-duration="2.0s" data-delay="0.4s" data-offset="100"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block offset animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s" data-offset="200"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.0s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.0s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.4s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.0s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.0s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.0s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.1s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.3s"></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="block animate" data-animate="bounceIn" data-duration="1.0s" data-delay="0.2s"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        page: 'chartsdemo',
+        identified: 'scrolla'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

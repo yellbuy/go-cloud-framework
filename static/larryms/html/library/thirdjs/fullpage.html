@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之fullpage扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>fullpage组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>fullpage组件：</cite>该组件来自Github，它能够很方便、很轻松的制作出全屏网站,支持鼠标滚动、支持前进后退和键盘控制、多个回调函数、支持手机、平板触摸事件、支持 CSS3 动画、支持窗口缩放、窗口缩放时自动调整、可设置滚动宽度、背景颜色、滚动速度、循环选项、回调、文本对齐方式等等,浏览器支持IE8+，Chrome，Firefox，Opera，Safari等；LarryMS框架对其封装后更易于使用，下面是部分示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：v3.0.2
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <div class="layui-row  layui-col-space15 larryms-fullpage">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        fullpage示例一【效果示例】 垂直导航
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="fullpage-box">
+                            <iframe src="fullpage/vertical.html" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        fullpage示例一【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+#fullpage组件经过LarryMS框架封装后使用非常简介，无需页面加入任何js或依赖，撸起袖子直接干，如下代码所示即实现左侧的垂直导航效果，在左侧滑动鼠标可观看效果
+layui.use('fullpages', function() {
+    var fullpages = layui.fullpages;
+    var myFullpage = new fullpage('#fullpage', {
+        anchors: ['firstPage', 'secondPage', '3rdPage'],
+        sectionsColor: ['#009688', '#1BBC9B', '#01AAED','#FFB800'],
+        navigation: true,
+        navigationPosition: 'right',
+        navigationTooltips: ['First page', 'Second page', 'Third and last page']
+    });
+});
+<div id="fullpage">
+    <div class="section " id="section0">
+        <div class="intro"><h1>垂直导航 点</h1><p>一种简单而美观的导航方式</p></div>
+    </div>
+</div>
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="layui-row  layui-col-space15 larryms-fullpage">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        fullpage示例二【效果示例】 lazy-load
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="fullpage-box">
+                            <iframe src="fullpage/lazy.html" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        fullpage示例二【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+#fullpage组件经过LarryMS框架封装后使用非常简介，无需页面加入任何js或依赖，撸起袖子直接干，如下代码所示即实现左侧的惰性加载效果，在左侧滑动鼠标可观看效果
+layui.use('fullpages',function(){
+    var fullpages = layui.fullpages;
+
+    var myFullpage = new fullpage('#fullpage', {
+        sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+        onLeave: function(origin, destination, direction) {
+            if (destination.index === 2) {
+                destination.item.classList.add('load-background');
+            }
+        }
+    }); 
+    //#更多丰富示例可在LarryMS框架开发者文档中查看
+});
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-fullpage">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        fullpage示例三【效果示例】 固定页眉页脚
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="fullpage-box">
+                            <iframe src="fullpage/fiexheader.html" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        fullpage示例三【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+#fullpage组件经过LarryMS框架封装后使用非常简介，无需页面加入任何js或依赖，撸起袖子直接干，如下代码所示即实现左侧的固定页眉页脚效果，在左侧滑动鼠标可观看效果
+layui.use('fullpages', function() {
+    var fullpages = layui.fullpages;
+    var myFullpage = new fullpage('#fullpage', {
+        anchors: ['firstPage', 'secondPage', '3rdPage'],
+        sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C','#5FB878'],
+        css3: true
+    });
+});
+#html
+<div id="header">页面头部信息</div>
+<div id="footer">页面底部信息</div>
+<div id="fullpage">
+    <div class="section " id="section0">
+        #coding ...
+    </div>
+</div></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            关于fullpage组件深入场景使用文档与更多示例，请移步LarryMS框架开发者文档中查看 (备注：larryMS框架同时提供有fullage2.x系列的组件封装,原因是3.x系列商业使用可能需要自行前往fullpage获取商业许可;但也可以在遵循GPLv3的条件下放心使用3.x系列)
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'fullpage'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

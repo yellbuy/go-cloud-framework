@@ -1,0 +1,108 @@
+/**
+ * editGrid 1.0
+ * Created by yrm-xlh on 2015/12/6
+ */
+@charset "utf-8";
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;}
+ol,ul,li {list-style:none}
+body,button,input,select,textarea{ font:14px/1.5 arial,\5FAE\8F6F\96C5\9ED1, tahoma,\5b8b\4f53,sans-serif;}
+
+/*  ============== 输入框样式 start ============== */
+.textInput{ border: 1px solid #ddd; line-height: 28px; padding: 0 2px; width: 279px; vertical-align: middle; }
+.textInput.readonly, .textInput.disabled{ background-color: #F0F0F0 !important;}
+.textInput[type='text'],.textInput[type='password']{height: 28px;}
+textarea[readonly='readonly'],textarea[disabled='disabled'],.textInput[readonly='readonly'], .textInput[disabled='disabled']{ border-color:#dadada; background-color:#F6F6F6; color:#555;}
+/*  ============== 输入框样式 end ============== */
+
+/* ============== editGrid 1.0 start =========== */
+.edit-table{ width:100%;  border-collapse:collapse;}
+.edit-table th,.edit-table td{ text-align:center; word-break: keep-all;} /*IE禁止换行*/
+.edit-table th{ color:#333; background:#EEF1F5; padding:0 5px; height:38px; line-height: 38px; font-weight: bold; border:1px solid #e7eaec;}
+.edit-table td{ background:#fff; border: 1px solid #EEF1F5; padding:1px 5px; height: 32px; line-height: 32px;}
+.edit-table tr.e-row-bg td{ background-color: #FBFCFD;}
+.edit-table tr.e-row-hover td, .edit-table tr:hover td{ background-color: #fefff1;}
+.e-order{width: 2.5em;}
+.e-grid-left{ float: left; top:0px; display:block; }
+.e-grid-right{ top:0px;}
+.e-grid-hd-operate-cell{ padding:0; margin:0; overflow:hidden; text-align: left;border-right:1px solid #e7eaec; width: 85px;}
+.e-grid-hd-cell-text{ text-align:center; overflow:hidden;color:#333; height: 36px; line-height: 36px;white-space: nowrap; }
+.e-grid-hd-cell-inner{ text-align:center;}
+.e-grid-body-table tr.e-row-bg td{ background-color: #F5F9F5;}
+.e-grid-header { border-top: 1px solid #BDD0DB; border-bottom: 1px solid #BDD0DB;height: 38px; line-height: 38px; background: #E8F1F8; overflow: hidden;}
+.e-grid-row-cell-inner{text-align:center; overflow:hidden; color:#333;text-overflow: ellipsis;white-space: nowrap;}
+.e-grid-row-operate-cell a{display: inline-block; margin:0 5px;}
+.e-edit-row{margin: 4px 2px;}
+.e-grid-body-table tr{height: 36px;}
+.e-bar-group { float: left; background: none; margin-right: 10px; color:#676a6c;}
+.e-bar-message{}
+.e-bar-text,.e-bar-selectOption{height: 36px;line-height: 36px;}
+.e-bar-select{position: relative;top:20%;}
+.e-bar-group.e-bar-pagination { float: right; background: none; margin: 0px 5px; /*position: absolute;right: 0px;*/ }
+.e-bar-group .pagination ul{ overflow: hidden;}
+.e-bar-group .pagination li{ float: left; margin-left: 10px;}
+.e-bar-group .pagination li.jumpto .textInput{ height:15px; }
+.e-bar-group .pagination { float:right; padding-left:7px; background-position:0 -199px;}
+.e-bar-group .pagination a{ color:#333;}
+.e-bar-group .pagination a, .pagination li.hover a, .pagination li span { float:left; display:block; text-decoration:none; line-height:36px;}
+.e-bar-group .pagination li.selected a{color:red; font-weight:bold;}
+.e-bar-group .pagination span, .pagination li.hover span { float:left; display:block; height:36px; line-height:36px; cursor:pointer;}
+.e-bar-group .pagination li.disabled { background:none;}
+.e-bar-group .pagination li.disabled span, .grid .pagination li.disabled a { cursor:default;}
+.e-bar-group .pagination li.disabled span span { color:#999;}
+.e-bar-group .pagination li.jumpto { padding:7px 2px 0 7px; background-position:0 -200px;}
+.e-bar-group .pagination li.jumpto .textInput { float:left; width:30px; padding:0 1px; height:20px; line-height: 20px; border-color:#acaeaf;}
+.e-bar-group .pagination li.jumpto .goto { float:left; height: 20px; line-height: 20px; padding:0 2px; margin-left: 5px; background-color: #E8F1F7; border:1px solid #BDD0DB; cursor:pointer; color: #225577;}
+.e-bar-group .j-first .first span{ background:url(images/icon-first.png) no-repeat; padding-left: 12px;}
+.e-bar-group .j-prev .previous span{ background:url(images/icon-prev.png) no-repeat; padding-left: 18px;}
+.e-bar-group .j-next .next span{ background:url(images/icon-next.png) no-repeat; padding-left: 18px;}
+.e-bar-group .j-last .last span{ background:url(images/icon-last.png) no-repeat; padding-left: 12px;}
+.e-bar-group .j-first a.first span{ background-position: 0 12px;}
+.e-bar-group .j-first a.first:hover span{ background-position: 0 -60px;}
+.e-bar-group .j-first span.first span{ background-position: 0 -24px;}
+.e-bar-group .j-prev a.previous span{ background-position: 0 12px;}
+.e-bar-group .j-prev a.previous:hover span{ background-position: 0 -61px;}
+.e-bar-group .j-prev span.previous span{ background-position: 0 -25px;}
+.e-bar-group .j-next a.next span{ background-position: 0 12px;}
+.e-bar-group .j-next a.next:hover span{ background-position: 0 -61px;}
+.e-bar-group .j-next span.next span{ background-position: 0 -25px;}
+.e-bar-group .j-last a.last span{ background-position: 0 12px;}
+.e-bar-group .j-last a.last:hover span{ background-position: 0 -60px;}
+.e-bar-group .j-last span.last span{ background-position: 0 -24px;}
+.e-bar-group .pagination li.disabled .first span { background-position: 0 -24px;}
+.e-bar-group .pagination li.disabled .previous span { background-position: 0 -25px;}
+.e-bar-group .pagination li.disabled .next span { background-position: 0 -25px;}
+.e-bar-group .pagination li.disabled .last span { background-position: 0 -24px;}
+/*============== editGrid 1.0 end ===============*/
+
+/*================== 字体图标 start==================*/
+@font-face {font-family: "icon";
+    src: url('iconfont/iconfont.eot'); /* IE9*/
+    src: url('iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('iconfont/iconfont.woff') format('woff'), /* chrome, firefox */
+    url('iconfont/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('iconfont/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.a-link,a.a-link{ color:#2991D9;}
+a.icon, a.a-icon{ color:#2991D9;}
+a:link, a:visited { text-decoration: none;}
+a:hover, a:active { text-decoration: none; border: none;}
+
+.icon, .a-icon, .a-dis-icon, .i-icon{
+    font-family:"icon" !important;
+    font-size:16px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.a-icon, .a-dis-icon{ margin:0 3px;cursor: pointer}
+.a-icon, .a-dis-icon, .i-icon{ vertical-align: middle;}
+.a-dis-icon, .buttonDisabled .i-icon{ color:#959595;}
+
+.icon-delete:before, .a-del:before, .a-dis-del:before, .a-delete:before, .a-dis-delete:before, .i-del:before, .i-delete:before { content: "\e6f9"; }
+.icon-save:before, .a-save:before, .a-dis-save:before, .i-save:before { content: "\e6fa"; }
+.icon-cancel:before, .a-cancel:before, .a-dis-cancel:before, .i-cancel:before { content: "\e6ea"; }
+.icon-edit2:before, .a-edit:before, .a-dis-edit:before, .i-edit:before  { content: "\e6c0"; }
+.icon-add2:before, .a-add:before, .a-dis-add:before, .i-add:before{ content: "\e61d"; }
+/*================== 字体图标 end==================*/

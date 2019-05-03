@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之视频播放组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>视频播放组件</cite><em>【提供于专业版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>视频播放组件：</cite>视频播放JS库来自于github,在larryMS框架中进行了二次开发和封装使其符合layui规范，是一款基于HTML5的网络视频播放器。它支持HTML5和flash视频，支持在桌面和移动设备上播放视频,可直接用于视频直播等场景，下面是LarryMS框架中关于该组件的基础示例介绍：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            LarryMS框架中对视频播放器扩展了：视频播放列表UI、分辨率切换、音频/视频录制功能、三维全景播放/VR/3D鱼眼、flash支持、流媒体支持、HLS直播流、视频加密播放、视频自定义广告功能、播放器logo自定义、为视频动态添加水印（图像或文本水印）等功能，该组件完全是一个功能丰富的视频框架。
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：version: 7.2.4 【推荐使用】
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-video">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        视频播放【效果示例】
+                    </div>
+                    <div class="layui-card-body player-container">
+                        <div class="layui-row">
+                            <div class="layui-col-lg10 layui-col-md-9 layui-col-sm8 layui-col-xs12 video-box">
+                                <video id="video" class="video-js vjs-default-skin vjs-big-play-centered vjs-playlist" controls preload="auto" autoplay data-setup='{"example_option":true}' poster="http://media.w3.org/2010/05/sintel/poster.png"></video>
+                            </div>
+                            <div class="layui-col-lg2 layui-col-md3 layui-col-sm4 layui-xs-hide video-box">
+                                <div class="vjs-playlist">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于ckplayer组件深入场景使用文档与示例，请移步LarryMS框架开发者文档中查看【分辨率切换、音频/视频录制功能、三维全景播放/VR/3D鱼眼、flash支持、流媒体支持、HLS直播流、视频加密播放、视频自定义广告功能、播放器logo自定义、为视频动态添加水印等示例】
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'video'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

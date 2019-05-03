@@ -1,0 +1,12 @@
+<configuration version="">
+    <group key="WEB_SETTING" title="网站设置" state="0" order="0">
+        <item key="WEB_SITE_TITLE" type="1" kind="0" state="0" order="0"
+            title="前台网站标题" remark="网站标题前台显示标题">
+            <value>企业级多租户开发框架</value>
+            <options>
+                <option key="0">数字</option>
+                <option key="1">支付</option>
+            </options>
+        </item>
+    </group>
+</configuration>

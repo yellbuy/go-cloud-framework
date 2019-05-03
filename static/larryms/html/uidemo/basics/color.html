@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>配色方案</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/uidemo.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+</head>
+
+<body class="larry-bg-lightgrey">
+    <!--[if lt IE 10]>
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <div class="larry-fluid p20 color">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card">
+                    <div class="layui-card-header p5 pl15"><h3>配色方案</h3>
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larry-row larry-col-space20 color-box">
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-gray">#E2E2E2</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-darkgrey">#DDD</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-brightblue">#02CED1</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-lightgreen">#5FB878</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-brightgreen">#019486</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-blue">#1E9FFF</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-orange">#FFB800</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-red">#FF5722</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-deeppurple">#C71585</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-lilac">#9463F7</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-black">#393D49</div>
+                            </div>
+                            <div class="larry-col-lg1 larry-col-md2 larry-col-sm3 larry-col-xs4">
+                                <div class="bg larry-bg-cyan">#2F4056</div>
+                            </div>
+                        </div>
+                        <div class="two pt15">
+                            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                                <legend id="colorTest">颜色选择器</legend>
+                            </fieldset>
+                            <div class="layui-form">
+                                <div class="larry-form-item">
+                                    <div class="larry-inline-block mb15">
+                                        <label class="larry-form-label">预定义颜色：</label>
+                                        <div class="larry-inline-block">
+                                            <input type="text" value="" placeholder="请选择颜色" class="layui-input larry-input" id="test-form-input3">
+                                        </div>
+                                        <div class="larry-inline-block" style="left:-4px;">
+                                            <div id="test"></div>
+                                        </div>
+                                    </div>
+                                    <div class="larry-inline-block  mb15">
+                                        <label class="larry-form-label">常规使用：</label>
+                                        <div class="larry-inline-block">
+                                            <input type="text" value="" placeholder="请选择颜色" class="layui-input larry-input" id="test-form-input">
+                                        </div>
+                                        <div class="larry-inline-block" style="left:-4px;">
+                                            <div id="inputColor"></div>
+                                        </div>
+                                    </div>
+                                    <div class="larry-inline-block  mb15">
+                                        <label class="larry-form-label">rgba透明色：</label>
+                                        <div class="larry-inline-block">
+                                            <input type="text" value="" placeholder="请选择颜色" class="layui-input larry-input" id="test-form-input2">
+                                        </div>
+                                        <div class="larry-inline-block" style="left:-4px;">
+                                            <div id="rgba1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="larry-inline-block">
+                                        <div class="layui-btn layui-btn-normal ml80" id="resetTheme">重置主题色</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="three pb10">
+                            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                                <legend>色卡系列</legend>
+                            </fieldset>
+                            <div class="larry-row larry-col-space25 pt15">
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="larry-bg-e-300 list-group-item">
+                                            <span>#E36ED6</span>
+                                        </li>
+                                        <li class="larry-bg-e-400 list-group-item">
+                                            <span>#5E9BDA</span>
+                                        </li>
+                                        <li class="larry-bg-e-500 list-group-item">
+                                            <span>#21AA76</span>
+                                        </li>
+                                        <li class="larry-bg-e-600 list-group-item">
+                                            <span>#F3723A</span>
+                                        </li>
+                                        <li class="larry-bg-e-700 list-group-item">
+                                            <span>#006EE9</span>
+                                        </li>
+                                        <li class="larry-bg-e-800 list-group-item">
+                                            <span>#FA4462</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="larry-bg-a-300 list-group-item">
+                                            <span>#4CB4E7</span>
+                                        </li>
+                                        <li class="larry-bg-a-400 list-group-item">
+                                            <span>#FFC09F</span>
+                                        </li>
+                                        <li class="larry-bg-a-500 list-group-item">
+                                            <span>#FFEE93</span>
+                                        </li>
+                                        <li class="larry-bg-a-600 list-group-item">
+                                            <span>#E2DBBE</span>
+                                        </li>
+                                        <li class="larry-bg-a-700 list-group-item">
+                                            <span>#99D9EA</span>
+                                        </li>
+                                        <li class="larry-bg-a-800 list-group-item">
+                                            <span>#A3A380</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="larry-bg-b-300 list-group-item">
+                                            <span>#E03636</span>
+                                        </li>
+                                        <li class="larry-bg-b-400 list-group-item">
+                                            <span>#EDD0BE</span>
+                                        </li>
+                                        <li class="larry-bg-b-500 list-group-item">
+                                            <span>#FF534D</span>
+                                        </li>
+                                        <li class="larry-bg-b-600 list-group-item">
+                                            <span>#EDD0BE</span>
+                                        </li>
+                                        <li class="larry-bg-b-700 list-group-item">
+                                            <span>#25C6FC</span>
+                                        </li>
+                                        <li class="larry-bg-b-800 list-group-item">
+                                            <span>#A19AF9</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="bg-cyan-800 list-group-item">
+                                            <span>#007d96</span>
+                                        </li>
+                                        <li class="bg-cyan-700 list-group-item">
+                                            <span>#0099b8</span>
+                                        </li>
+                                        <li class="bg-cyan-600 list-group-item">
+                                            <span>#0bb2d4</span>
+                                        </li>
+                                        <li class="bg-cyan-500 list-group-item">
+                                            <span>#28c0de</span>
+                                        </li>
+                                        <li class="bg-cyan-400 blue-grey-700 list-group-item">
+                                            <span>#54cbe3</span>
+                                        </li>
+                                        <li class="bg-cyan-300 blue-grey-700 list-group-item">
+                                            <span>#77d9ed</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="larry-bg-d-300 list-group-item">
+                                            <span>#0DCEEF</span>
+                                        </li>
+                                        <li class="larry-bg-d-400 list-group-item">
+                                            <span>#4DE2B8</span>
+                                        </li>
+                                        <li class="larry-bg-d-500 list-group-item">
+                                            <span>#A5ED8A</span>
+                                        </li>
+                                        <li class="larry-bg-d-600 list-group-item">
+                                            <span>#FED86D</span>
+                                        </li>
+                                        <li class="larry-bg-d-700 list-group-item">
+                                            <span>#9165EC</span>
+                                        </li>
+                                        <li class="larry-bg-d-800 list-group-item">
+                                            <span>#D15FE8</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="bg-blue-grey-800 list-group-item">
+                                            <span>#263238</span>
+                                        </li>
+                                        <li class="bg-blue-grey-700 list-group-item">
+                                            <span>#37474f</span>
+                                        </li>
+                                        <li class="bg-blue-grey-600 list-group-item">
+                                            <span>#526069</span>
+                                        </li>
+                                        <li class="bg-blue-grey-500 list-group-item">
+                                            <span>#76838f</span>
+                                        </li>
+                                        <li class="bg-blue-grey-400 blue-grey-700 list-group-item">
+                                            <span>#a3afb7</span>
+                                        </li>
+                                        <li class="bg-blue-grey-300 blue-grey-700 list-group-item">
+                                            <span>#ccd5db</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="bg-grey-800 list-group-item">
+                                            <span>#424242</span>
+                                        </li>
+                                        <li class="bg-grey-700 list-group-item">
+                                            <span>#616161</span>
+                                        </li>
+                                        <li class="bg-grey-600 list-group-item">
+                                            <span>#757575</span>
+                                        </li>
+                                        <li class="bg-grey-500 list-group-item">
+                                            <span>#9e9e9e</span>
+                                        </li>
+                                        <li class="bg-grey-400 blue-grey-700 list-group-item">
+                                            <span>#bdbdbd</span>
+                                        </li>
+                                        <li class="bg-grey-300 blue-grey-700 list-group-item">
+                                            <span>#e0e0e0</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="larry-bg-c-300 list-group-item">
+                                            <span>#DB9019</span>
+                                        </li>
+                                        <li class="larry-bg-c-400 list-group-item">
+                                            <span>#5ED5D1</span>
+                                        </li>
+                                        <li class="larry-bg-c-500 list-group-item">
+                                            <span>#1A2D27</span>
+                                        </li>
+                                        <li class="larry-bg-c-600 list-group-item">
+                                            <span>#FF6E97</span>
+                                        </li>
+                                        <li class="larry-bg-c-700 list-group-item">
+                                            <span>#F1AAA6</span>
+                                        </li>
+                                        <li class="larry-bg-c-800 list-group-item">
+                                            <span>#CCCE8C</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="bg-teal-800 list-group-item">
+                                            <span>#008577</span>
+                                        </li>
+                                        <li class="bg-teal-700 list-group-item">
+                                            <span>#089e8f</span>
+                                        </li>
+                                        <li class="bg-teal-600 list-group-item">
+                                            <span>#17b3a3</span>
+                                        </li>
+                                        <li class="bg-teal-500 list-group-item">
+                                            <span>#28c7b7</span>
+                                        </li>
+                                        <li class="bg-teal-400 blue-grey-700 list-group-item">
+                                            <span>#45d6c8</span>
+                                        </li>
+                                        <li class="bg-teal-300 blue-grey-700 list-group-item">
+                                            <span>#6be3d7</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="larry-bg-f-300 list-group-item">
+                                            <span>#F088AB</span>
+                                        </li>
+                                        <li class="larry-bg-f-400 list-group-item">
+                                            <span>#2DBFD9</span>
+                                        </li>
+                                        <li class="larry-bg-f-500 list-group-item">
+                                            <span>#30C6A9</span>
+                                        </li>
+                                        <li class="larry-bg-f-600 list-group-item">
+                                            <span>#F0B08D</span>
+                                        </li>
+                                        <li class="larry-bg-f-700 list-group-item">
+                                            <span>#B23BA1</span>
+                                        </li>
+                                        <li class="larry-bg-f-800 list-group-item">
+                                            <span>#45AB90</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <li class="bg-blue-800 list-group-item">
+                                            <span>#0b69e3</span>
+                                        </li>
+                                        <li class="bg-blue-700 list-group-item">
+                                            <span>#247cf0</span>
+                                        </li>
+                                        <li class="bg-blue-600 list-group-item">
+                                            <span>#3e8ef7</span>
+                                        </li>
+                                        <li class="bg-blue-500 list-group-item">
+                                            <span>#589ffc</span>
+                                        </li>
+                                        <li class="bg-blue-400 blue-grey-700 list-group-item">
+                                            <span>#79b2fc</span>
+                                        </li>
+                                        <li class="bg-blue-300 blue-grey-700 list-group-item">
+                                            <span>#99c5ff</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="larry-col-lg2 larry-col-md3 larry-col-sm6 larry-col-xs12">
+                                    <ul class="larry-color-box list-group">
+                                        <div class="example-border">
+                                            <div class="bg-blue-grey-200"></div>
+                                            <div>
+                                                <p>边框颜色</p>
+                                                <span>#e4eaec</span>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: false,
+        base: '../../../larryms/',
+        mods: 'demo/',
+        page: 'uidemo',
+        identified: 'color'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

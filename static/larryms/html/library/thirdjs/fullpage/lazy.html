@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Lazy load - fullPage.js</title>
+    <meta name="author" content="Alvaro Trigo Lopez" />
+    <meta name="description" content="fullPage full-screen normal scrolling with autoScrolling." />
+    <meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,lazyload,lazy,passive,load,src,data-src,media" />
+    <meta name="Resource-type" content="Document" />
+    <link rel="stylesheet" type="text/css" href="examples.css" />
+    <style>
+    /* Style for our header texts
+    * --------------------------------------- */
+
+    h1 {
+        font-size: 26px;
+        font-family: arial, helvetica;
+        color: #fff;
+        margin: 0;
+        padding-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    .intro p {
+        color: #fff;
+        font-size: 16px;
+        line-height: 30px;
+    }
+    .fp-controlArrow.fp-prev{
+    border-width: 26px 26px 26px 0;
+  }
+  .fp-controlArrow.fp-next {
+
+    border-width: 26px 26px 26px 0;
+  }
+    /* Centered texts in each section
+    * --------------------------------------- */
+    .img-intro img{
+      display: block;
+      width: 75%;
+      height: auto;
+      margin: 0 auto;
+    }
+    .section {
+        text-align: center;
+    }
+    /* Bottom menu
+    * --------------------------------------- */
+
+    #infoMenu li a {
+        color: #fff;
+    }
+    /* Lazy loading background
+    * --------------------------------------- */
+
+    #section2.load-background {
+        background-image: url(../../../../larryms/images/library/bg2.jpg);
+    }
+    </style>
+    <!--[if IE]>
+        <script type="text/javascript">
+             var console = { log: function() {} };
+        </script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="fullpage">
+        <div class="section " id="section0">
+            <div class="intro">
+                <img data-srcset="../../../../larryms/images/library/1.png, imgs/2.png" alt="1" />
+                <h1>惰性加载</h1>
+                <p>只需给相应元素添加`data-src` or `data-srcset`属性.</p>
+            </div>
+        </div>
+        <div class="section" id="section1">
+            <div class="slide" id="slide1">
+                <div class="intro img-intro">
+                    <h1>图片惰性加载</h1>
+                    <img data-src="../../../../larryms/images/library/iphone-blue.png" alt="iphone" id="iphone-two" />
+                </div>
+            </div>
+            <div class="slide" id="slide2">
+                <h1>视频惰性加载</h1>
+                <video loop muted controls="false" data-autoplay>
+                    <source data-src="http://img.ksbbs.com/asset/Mon_1703/05cacb4e02f9d9e.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        <div class="section" id="section2">
+            <div class="intro">
+                <h1>惰性加载背景图 </h1>
+                <p>使用 `onLeave` 回调</p>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../../larryms/'
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry', 'fullpages'], function() {
+        var fullpages = layui.fullpages;
+        var myFullpage = new fullpage('#fullpage', {
+            sectionsColor: ['#1BBC9B', '#C63D0F', '#7E8F7C'],
+            onLeave: function(origin, destination, direction) {
+                if (destination.index === 2) {
+                    destination.item.classList.add('load-background');
+                }
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

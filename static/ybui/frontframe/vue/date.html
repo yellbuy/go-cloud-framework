@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .demonstration {
+            display: block;
+            color: #8492a6;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="button">
+    <h3 >选择日</h3>
+    <div>
+        <el-date-picker
+                v-model="value1"
+                type="date"
+                placeholder="选择日期">
+        </el-date-picker>
+    </div>
+
+
+    <h3 >日期和时间点</h3>
+    <div style="margin: 20px 0">
+        <el-date-picker
+                v-model="value2"
+                type="datetime"
+                placeholder="选择日期时间">
+        </el-date-picker>
+    </div>
+
+
+</div>
+
+
+</body>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#button',
+        data: {
+            value1: '',
+            value2: ''
+        }
+    });
+
+</script>
+</html>

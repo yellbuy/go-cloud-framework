@@ -1,0 +1,437 @@
+<!--link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/static/layui/extend/wang/wangeditor.css"-->
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css"/>
+<link rel="stylesheet" href="/static/layui/extend/steps/style.css">
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<!--script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script- type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script-->
+<div-- class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+<style>
+ .layui-form-label {
+     width:90px;
+ }
+</style>
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+<form class="layui-form" action="" method="post" >
+    <div id="step_apply" class="step-body">
+        <div class="step-header" style="width:100%;overflow: hidden;">
+            <ul>
+                <li>
+                    <span class="step-name">填写处置单</span>
+                </li>
+                <li>
+                    <span class="step-name">上传资料</span>
+                </li>
+                <li>
+                    <span class="step-name">提交处置申请</span>
+                </li>
+                <li>
+                    <span class="step-name">填处置收益</span>
+                </li>
+            </ul>
+        </div>
+        <hr class="layui-bg-green">
+        <div class="step-content" style="margin-top:10px">
+            <div class="step-list">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label">编号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"value="" placeholder="自动生成">
+                        </div>
+                        <label class="layui-form-label">接收方</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Purchaser"  value="" autocomplete="off" placeholder="请输入接收方">
+                        </div>
+                        <label class="layui-form-label">单位名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal"  lay-verify="required" name="Company" autocomplete="off" value="{{ .org.Name}}" readonly placeholder="请输入单位名称">
+                        </div>
+                    </div> 
+                                
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>联系人</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"  lay-verify="required" name="Linkman" value="" autocomplete="off" placeholder="请输入联系人">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"  lay-verify="required" name="Phone" value="" autocomplete="off" placeholder="请输入电话">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>申请日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="ApplyDate" name="ApplyDate" value="" lay-verify="required|date" autocomplete="off" placeholder="yyyy-MM-dd">
+                        </div>
+                        
+                    </div>
+                    <div class="layui-form-item">
+                        
+                        <label class="layui-form-label"><span class="text-red">*</span>总金额</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input" id="txtTotal"  lay-verify="required|number|amount" name="Total" value="0.00" readonly placeholder="请输入总金额">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>处置方式</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="DisposalWay" value="出售转让" title="出售转让" checked="" lay-skin="primary"/>
+                            <input type="radio" name="DisposalWay" value="报废/报损" title="报废/报损" lay-skin="primary"/>
+                            <input type="radio" name="DisposalWay" value="无偿划拨" title="无偿划拨" lay-skin="primary"/>
+                            <input type="radio" name="DisposalWay" value="捐赠" title="捐赠" lay-skin="primary"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="text-red">*</span>资产类型</label>
+                    <div class="layui-input-inline" style="width:300px">
+                        <input type="radio" lay-filter="type" name="Type" value="0" title="通用" checked="" lay-skin="primary"/>
+                        <input type="radio" lay-filter="type" name="Type" value="1" title="房屋" lay-skin="primary"/>
+                        <input type="radio" lay-filter="type" name="Type" value="2" title="车辆" lay-skin="primary"/>
+                    </div>
+                    <div class="layui-input-inline">
+                        <a class="layui-btn" id="btnSelAssetInfo">添加资产</a>
+                    </div>
+                    <div class="layui-input-inline">
+                        <a class="layui-btn layui-btn-danger" id="btnDelAssetInfo">删除资产</a>
+                    </div>
+                </div>
+                <div class="layui-input-block">
+                    <table class="layui-hide" id="tableMain" lay-filter="tableMain">
+                    </table>
+                </div>
+            </div>
+            <div class="step-list">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <div class="layui-upload">
+                            <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button> 
+                            <div class="layui-upload-list">
+                                <table class="layui-table">
+                                <thead>
+                                    <tr><th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr></thead>
+                                <tbody id="fileList"></tbody>
+                                </table>
+                            </div>
+                            <a type="button" class="layui-btn" id="testListAction">开始上传</a>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="step-list">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="OrgId" value="{{ .org.Id}}"/>
+                            <input type="hidden" name="OrgFid" value="{{ .org.Fid}}"/>
+                            <input type="hidden" name="OrgFname" value="{{ .org.Fname}}"/>
+                            <button class="layui-btn" lay-submit="" lay-filter="draft">保存草稿</button>
+                            <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="sub">立即上报</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step-list">填处置收益</div>
+        </div>
+    </div>
+    <hr class="layui-bg-green">
+   <div class="layui-row">
+        <div class="layui-input-block" style="text-align:center;margin-left:0px">
+            <a class="layui-btn layui-btn-normal" id="preBtn">上一步</a>
+            <a class="layui-btn layui-btn-normal" lay-submit lay-filter="nextBtn" id="nextBtn">下一步</a>
+        </div>
+    </div>
+    
+</form>
+</div>
+<script>
+
+    var $,form,mainTable,layer;
+    layui.config({
+            base : "/static/layui/extend/"
+    }).extend({
+        formSelects: 'formSelects-v4',
+        steps:"steps/steps"
+    });
+    layui.use(['form','layer', 'laydate','table','element','layer','jquery', 'formSelects','upload','steps'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      $ = layui.jquery;
+      table = layui.table;
+      layer=layui.layer
+      var formSelects = layui.formSelects;
+      var laydate = layui.laydate;
+      var upload = layui.upload;
+      var $step= $("#step_apply").step();
+     
+        form.on('radio(type)', function(radioData){
+            data = []
+            mainTable.reload({
+                data: data
+            });
+            sumTotal(data);
+        });  
+        $("#btnSelAssetInfo").click(function (event){
+            var type = $("input[name='Type']:checked").val();
+            loadDialog("/assetinfo/listselect", {type:type}, {title: "选择固定资产"});
+        });
+        $("#btnDelAssetInfo").click(function (event){
+            var checkStatus = table.checkStatus('tableMain'); //test即为基础参数id对应的值
+            delAssetInfo(data,checkStatus.data);
+        
+            mainTable.reload({
+                data: data
+            });
+            sumTotal(data);
+        });
+        
+        //方法级渲染
+            mainTable =table.render({
+                elem: '#tableMain'
+                ,cols: [[
+                    {checkbox: true}
+                    ,{field:'No', title: '编号', width:150}
+                    ,{field:'Name', title: '名称', width:150}
+                    ,{field:'Cate', title: '资产大类', width:150}
+                    ,{field:'ChildCate', title: '资产分类', width:150}
+                    ,{field:'Num',align:'right',  title: '数量'}
+                    ,{field:'ValuationType',  title: '价值类型'}
+                    ,{field:'Valuation',align:'right',  title: '价值'}
+                    ,{field:'Brand',  title: '品牌'}
+                    ,{field:'Spec',  title: '规格'}
+                    ,{field:'LicenseNo',  title: '车牌号'}
+                    ,{field:'Area', title: '面积'}
+                    ,{field:'Site', title: '存放地点'}
+                ]]
+                ,id: 'tableMain'
+                ,page: false
+                ,width:1100
+                ,height: 200
+            });
+
+        //  var wang=layui.wangeditor('wang');
+        //  wang.customConfig.uploadImgShowBase64 = true
+        // 普通的自定义菜单
+        // wang.config.menus = [
+        //     'source',
+        //     '|',     // '|' 是菜单组的分割线
+        //     'bold',
+        //     'underline',
+        //     'italic',
+        //     'strikethrough',
+        //     'eraser',
+        //     'forecolor',
+        //     'bgcolor'
+        // ];
+        // wang.create();
+        //多文件列表示例
+    var fileListView = $('#fileList')
+        ,uploadListIns = upload.render({
+            elem: '#testList'
+            ,url: '/upload/'
+            ,accept: 'file'
+            ,multiple: true
+            ,auto: false
+            ,field: 'file'
+            ,size:10240
+            ,exts: 'zip|rar|7z|jpg|png|gif|bmp|jpeg|jpg|doc|docx|xls|xlsx|pdf|ppt|pptx|txt|wps'
+            ,bindAction: '#testListAction'
+            ,choose: function(obj){   
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+            obj.preview(function(index, file, result){
+                var tr = $(['<tr id="upload-'+ index +'">'
+                ,'<td>'+ file.name +'</td>'
+                ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                ,'<td>等待上传</td>'
+                ,'<td>'
+                    ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                    ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                ,'</td>'
+                ,'</tr>'].join(''));
+                
+                //单个重传
+                tr.find('.demo-reload').on('click', function(){
+                obj.upload(index, file);
+                });
+                
+                //删除
+                tr.find('.demo-delete').on('click', function(){
+                delete files[index]; //删除对应的文件
+                tr.remove();
+                uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                });
+                
+                fileListView.append(tr);
+            });
+            }
+            ,done: function(res, index, upload){
+            if(res.code == 0){ //上传成功
+                var data = res.data;
+                var tr = fileListView.find('tr#upload-'+ index)
+                ,tds = tr.children();
+                tds.eq(0).html('<input type="hidden" name="Attfiles[]" value="'+data.id+'"/><a target="_blank" href="'+data.src+'">'+data.name+'<a>');
+                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                // tds.eq(3).html(''); //清空操作
+                return delete this.files[index]; //删除文件队列已经上传成功的文件
+            }
+            this.error(index, upload);
+            }
+            ,error: function(index, upload){
+            var tr = fileListView.find('tr#upload-'+ index)
+            ,tds = tr.children();
+            tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+            tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+            }
+        });
+        // loadDialog("/tenant/common/addressbook/deptEdit", {id:id}, {title: title,area: '600px'});
+        laydate.render({
+            elem: '#ApplyDate'
+            ,value: new Date()
+        });
+        
+        form.verify({
+            rate: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(value<0||value>1){
+                    return "输入数值只能在0和1之间"
+                }
+            }
+            ,amount: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(value<0){
+                    return "输入数值不能小于0"
+                }
+            }
+            ,num: function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(value<1){
+                    return "输入数值不能小于1"
+                }
+            }
+        });
+            //监听有无保险
+            form.on('switch(hasCarInsurance)', function(data){
+                this.checked ? $("#insuranceLayout").show() : $("#insuranceLayout").hide();
+            });
+            $("#preBtn").click(function(event) {
+                $step.preStep();//上一步
+            });
+            $("#goBtn").click(function(event) {
+                $step.goStep(3);//到指定步
+            });
+
+            form.on("submit(nextBtn)",function(value) {
+                if(!data || data.length == 0){
+                    layui.layer.msg("请选择待处置的资产")
+                } else {
+                    $step.nextStep();//下一步
+                }
+                return false;
+            }); 
+        // formSelects.render('orgIds')
+        form.on("submit(draft)",function(formdata) {
+     
+            // 草稿
+            var obj =  $("form").serializeObject();
+            var status = 0
+            obj.State=status
+            submitDisposal(obj)
+            return false;
+        });
+        form.on("submit(sub)",function(formdata) {
+            // 上报
+            var obj =  $("form").serializeObject();
+            var status = 1
+            obj.State=status
+            submitDisposal(obj)
+            return false;
+        });
+
+        form.render();
+            //但是，如果你的HTML是动态生成的，自动渲染就会失效
+            //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+            
+    }); 
+    // 选中的资产
+    var data = []
+    function getAssetinfoIds(arr){
+        var ids = [];
+        for (var i=0;i<arr.length;i++)
+        {
+            ids.push(arr[i].AssetinfoId)
+        }
+        return ids;
+    }
+    function submitDisposal(formdata){
+          var ids = getAssetinfoIds(data);
+          for(var i=0;i<ids.length;i++){
+              var id = ids[i];
+              formdata["Assetinfo["+i+"]"]=id;
+          }
+         console.log(formdata.Assetapply)
+        $.post('{{urlfor "DisposalapplyController.Add"}}', formdata, function (res) {
+            
+            if (res.status == 0) {
+                // layer.msg("操作成功")
+                layui.layer.alert('操作成功', {icon: 1},function(index){
+                    window.location.reload();
+                });
+            } else {
+                layui.layer.msg(res.message)
+            }
+        }, "json");
+    }
+    
+    function addAssetInfo(result){
+        checkSelArr(data,result)
+        mainTable.reload({
+            data: data
+        });
+        sumTotal(data);
+        layui.layer.closeAll();
+    }
+    function delAssetInfo(srcArr,targetArr){
+        for(var i=0;i<targetArr.length;i++){
+            var item = targetArr[i];
+            var len=srcArr.length;
+            for(var j=0;j<len;j++){
+                if(item.Id == srcArr[j].Id){
+                    srcArr.splice(j,1)
+                    break;
+                }
+            };
+        };
+    }
+
+    function checkSelArr(srcArr, targetArr){ 
+        for(var j=0;j<targetArr.length;j++){
+            var item = targetArr[j];
+            var len=srcArr.length;
+            var hasObj = false;
+            for(var i=0;i<len;i++){
+                if(item.Id == srcArr[i].Id){
+                    hasObj = true
+                    break;
+                }
+            };
+            if(!hasObj){
+                item.AssetinfoId = item.Id;
+                srcArr.push(item);
+            }
+    };
+    
+    }
+    function sumTotal(srcArr){ 
+        var total = 0;
+        for(var j=0;j<srcArr.length;j++){
+            var item = srcArr[j];
+            total += item.Valuation;
+    };
+    total = total.toFixed(2);
+    $("#txtTotal").val(total);
+    }
+</script>

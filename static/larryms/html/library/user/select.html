@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户自定义组件举例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/uidemo.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+    <style>
+        html,body{
+        	height: 100%;
+            overflow: auto !important;
+        }
+    </style>
+</head>
+
+<body class="larry-bg-lightgrey larryui">
+    <!--[if lt IE 10]>
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <div class="larry-fluid p20 color">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card bradius-5">
+                    <div class="larry-card-body pb15">
+                        <h1>【引用来自layui扩展平台的多选和级联扩展组件举例】</h1>
+                        <p class="title">larryms框架模板中支持第三方自定义符合layui模板定义规范的组件，如layui社区扩展平台分享的select组</cite><em>【larryms官方不提供当前自定义示例的组件维护，只是作为layui扩展平台下的组件在larryms框架模板的使用支持引入举例之一，larryms授权用户可以参看该示例介绍 使用其他自定义扩展组件，或文档中的关于自定义扩展组件的使用详细介绍】</em><cite>larryms中对用户自行加入的扩展组件支持良好，无需额外使用别名引入或页面手动引入 就像使用layui自带组件一样使用，真正的开箱即用，按需加载</cite></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card bradius-5">
+                    <div class="larry-card-body pt30">
+                        <form class="layui-form" method="post">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">无限联动</label>
+                                <div id="cat_ids1">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">多级2</label>
+                                <div id="cat_ids2">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">至多选择2项</label>
+                                <div class="layui-input-block" id="tag_ids1">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">无个数限制</label>
+                                <div class="layui-input-block" id="tag_ids2">
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="text-align:left;">
+                                <div class="layui-input-block">
+                                	<button type="button" class="layui-btn" lay-submit="" lay-filter="demo">提交表单</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card bradius-5">
+                    <div class="larry-card-body">
+                        <pre class="layui-code">
+//以下是部分代码是第三方组件在larryms中的使用举例，具体可查看demo源码中的详细示例
+layui.use(['form', 'selectN', 'selectM'], function() {
+      var $ = layui.$,
+          form = layui.form,
+          selectN = layui.selectN,
+          selectM = layui.selectM;
+         //这里的json数据实际项目中可以是来自后端接口请求返回，下面是layui扩展平台中分享的组件示例demo
+      var catData = [
+          {"id":1,"name":"周边旅游","children":[{"id":24,"name":"广东","status":0,"children":[{"id":7,"name":"广州"},{"id":23,"name":"潮州"}]}]},{"id":5,"name":"国内旅游","children":[{"id":8,"name":"华北地区","children":[{"id":9,"name":"北京"}]}]},{"id":6,"name":"出境旅游","children":[{"id":10,"name":"东南亚","children":[{"id":11,"name":"马来西亚","children":[{"id":20,"name":"沙巴","children":[{"id":21,"name":"美人鱼岛","children":[{"id":22,"name":"潜水"}]}]}]}]}]}];
+          //无限级分类-基本配置
+      var catIns1 = selectN({//元素容器【必填】
+            elem: '#cat_ids1',
+            search: [false, true],//候选数据【必填】
+            data: catData
+      });
+});	
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: true,
+        base: '../../../larryms/',
+        mods: 'demo/',
+        page: 'uidemo',
+        identified: 'select'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

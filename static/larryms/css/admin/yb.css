@@ -1,0 +1,69 @@
+.larry-container {
+    margin: 5px !important;
+}
+body {
+    font-size: 13px;
+}
+.yb-red,.text-red{
+    color:red
+}
+.larryms-body .larryms-left { border-right: 0px solid #18BAAC !important; }
+.larryms-unfold .larryms-footer{
+    left: 200px !important;
+}
+.layui-tab-title li {
+    /* border-right: 1px solid #f6f6f6;*/
+    border-right: 1px solid #ECF0F5;
+}
+.larryms-header {
+    /* border-bottom-width: 3px */
+}
+.larryms-body {
+    top: 60px;
+}
+.larryms-right .larryms-tab .larryms-title-box .larryms-tab-title{
+    /* border-bottom-color:#ECF0F5 !important */
+} 
+.larryms-layout-bgA {
+    background: #f2f2f2;
+}
+.layui-tab-title li {
+    padding-right: 5px !important;
+}
+.larryms-unfold .larryms-body .larryms-right {
+    left: 200px !important;
+}
+.layui-card-body .layui-table, .layui-table-view{
+    margin: 5px 0;
+}
+.layui-side-scroll .user-info p {
+    height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    margin-top: 15px;
+}
+.larryms-unfold .larryms-body .larryms-left{
+    margin-top:-2px;
+}
+
+.larryms-extend ul.layui-nav li.layui-nav-item-more a {
+    padding-right: 25px !important;
+    margin-top:3px;
+}
+.larryms-extend .layui-nav-item .layui-nav-more,
+.larryms-extend .layui-nav-item .layui-nav-mored {
+    top:55%
+}
+.larryms-extend .layui-nav .layui-nav-more{
+    right:8px
+}
+.larryms-extend .layui-nav-item-more .layui-nav-child  dd{
+    padding:0px 10px 5px 0px;
+}
+.larryms-extend .layui-nav-item-more .layui-nav-child  dd a.yb-page{
+    color:black !important;
+    height:30px !important;
+    line-height: 30px !important;
+    padding-right: 0px !important;
+    width:100%;
+}

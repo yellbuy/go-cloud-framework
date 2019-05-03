@@ -1,0 +1,14 @@
+<configuration version="">
+    <group key="CONFIG_GROUP_WEIXIN" name="微信" state="" order="6">
+        <item key="wx_AppID" name="AppID(应用ID)" state="" order="3" hide="false" type="1">
+            <remark>AppID(应用ID)&lt;/br&gt;&#xD;&#xA;URL(服务器地址):&lt;code&gt;http://或https://你的域名/home/wechat&lt;/code&gt;</remark>
+            <value>wx050169df24ba4652</value>
+            <options></options>
+        </item>
+        <item key="wx_AppSecret" name="AppSecret(应用密钥)" state="" order="4" hide="false" type="1">
+            <remark>AppSecret(应用密钥)</remark>
+            <value></value>
+            <options></options>
+        </item>
+    </group>
+</configuration>

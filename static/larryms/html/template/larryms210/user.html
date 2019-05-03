@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>员工管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/template/admin.css" media="all">
+</head>
+
+<body class="larry-bg-white">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="larry-fliud p15 pt10">
+        <div class="larry-row larry-col-space15">
+        <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+            <table class="larry-hide" id="userMange" lay-filter="userMange" data-url="../../../larryms/data/template/user.json"></table>
+        </div>
+    </div>
+    </div>
+    <script type="text/html" id="toolbar">
+        <button class="layui-btn layui-btn-sm" lay-event="add" data-url="../../../html/template/larryms210/userAdd.html">新增用户</button>
+        <button class="layui-btn layui-btn-sm layui-btn-danger isDelete" lay-event="del">批量删除</button>
+        <button class="layui-btn layui-btn-sm  layui-btn-normal" lay-event="reload">刷新</button>
+        <div class="larry-top-select ml15 mr5">
+            <input type="text" class="larry-input" name="username" id="searchbox" placeholder="可按用户名、姓名、部门等查询">
+        </div>
+        <button class="layui-btn layui-btn-sm" lay-event="search" id="search">查询</button>
+    </script>
+    <script type="text/html" id="opreateBar">
+       <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit"  data-url="../../../html/template/larryms210/userAdd.html">编辑</a>
+       <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    var table;
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'template/',
+        page: 'users',
+        isFunction: true
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

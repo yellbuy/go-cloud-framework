@@ -1,0 +1,131 @@
+{% extends "../../_share/minibase.html"%}
+{% block style %}
+<!--<link rel="stylesheet" href="/static/admin/js/zTree/metroStyle/metroStyle.css" type="text/css">-->
+
+{% endblock%}
+{% block content %}
+
+<ul class="layui-nav layui-bg-green" name="tab" lay-filter="nav">
+    <!-- <li class="layui-nav-item"><a type=0 >全部配置</a></li> -->
+    {% for item in tablist %}
+
+    <li class="layui-nav-item {% if item.Key == group %} layui-this {% endif %} "><a href='#' type={{item.Key}}>{{item.Name}}</a></li>
+
+    {% endfor %}
+
+
+</ul>
+<!-- <blockquote class="layui-elem-quote quoteBox"> -->
+
+<form class="layui-form">
+    <iframe src="/common/{{curController}}/settinggroupedit?group={{group}}" frameborder="0" id="demoAdmin" style="width: 100%; height: 500px;"></iframe>
+</form>
+
+{% endblock %}
+{% block footer %}
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<!-- <script type="text/javascript" src="/static/admin/js/wangEditor/wangEditor.min.js"></script> -->
+<script type="text/javascript">
+    layui.use(['larry','form', 'layer', 'laydate', 'table', 'laytpl', 'element'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.jquery,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl,
+            table = layui.table;
+        var element = layui.element;
+
+
+        //文章列表
+
+
+        // 监听导航点击
+        element.on('nav(nav)', function (elem) {
+            console.log(elem)
+            // layer.msg(elem.text());
+            var id = elem.context.type;
+            $('#group').val(id);
+            $(".searchVal").val("");
+            window.location.href = "/common/{{curController}}/settinggrouplist?group=" + id;
+            // loadDialog("/common/setconfig/setconfigedit", {
+            //     id: id
+            // }, {
+            //     title: "title"
+            // }, true);
+
+        });
+        //监听单元格编辑
+        table.on('edit(mainTable)', function (obj) {
+            if (obj.field == 'sort') {
+                var value = obj.value //得到修改后的值
+                if (!isFloat(value)) {
+                    layer.msg('输入的值不正确');
+                    return;
+                }
+                $.post('articleEdit', {
+                    id: obj.data.id,
+                    sort: value
+                }, function (data, status, xhr) {
+                    if (data.errcode == 0) {
+                        //layer.msg('保存成功',{icon: 16,time:true,shade:0.8});
+                        mainTable.reload();
+                    } else {
+                        layer.msg('保存失败：' + data.errmsg, {
+                            icon: 16,
+                            time: true,
+                            shade: 0.8
+                        });
+                    }
+                })
+            }
+        });
+    });
+    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
+    $(".btnSearch").on("click", function () {
+        table.reload("mainTable", {
+            page: {
+                curr: 1 //重新导航到首页
+            },
+            where: {
+                search: $(".searchVal").val(), //关键字
+                group: $('#group').val()
+            }
+        })
+    });
+
+    // var $ = layui.$, active = {
+    //     reload: function(){
+    //         table.reload('mainTable', {
+    //             page: {
+    //                 curr: 1 //重新导航到首页
+    //             },where: {
+    //                 // type: '{{  Type }}'
+    //                 //title: $('#title').val(),
+    //                 //bankno: $('#bankno').val()
+    //             }
+    //         });
+    //     }
+    // };
+
+
+
+
+    //文章管理
+    function edit(data) {
+        var id = data ? data.Id : '';
+        var title = id ? "编辑设置" : "添加设置";
+        // window.location.href= "/cms/articleaudit/articleauditedit/?id=" + id;
+        loadDialog("/common/{{curController}}/settingedit", {
+            id: id
+        }, {
+            title: title
+        }, true);
+    }
+    $(".btnAdd").click(function () {
+        edit();
+    })
+
+    //列表操作
+</script>
+
+{% endblock %}

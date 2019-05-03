@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>站点设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/template/admin.css" media="all">
+</head>
+
+<body>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="larry-fluid p15">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+               <section class="larry-card larry-worker-auth">
+                    <div class="larry-card-header">
+                        网站设置
+                    </div>
+                   <div class="larry-card-body">
+                       <div class="larry-form">
+                           <div class="larry-form-item">
+                               <label class="larry-form-label">网站名称</label>
+                               <div class="larry-input-block">
+                                    <input type="text" name="sitename" autocomplete="off" value="" placeholder="请输入网站名称" class="larry-input">
+                                </div>
+                           </div>
+                           <div class="larry-form-item">
+                               <label class="larry-form-label">网站默认风格</label>
+                               <div class="larry-input-block">
+                                    <input type="text" name="styles" autocomplete="off" value="larryms" placeholder="请输入网站默认风格" class="larry-input">
+                                </div>
+                           </div>
+                           <div class="larry-form-item">
+                                <label class="larry-form-label">最大文件上传</label>
+                                <div class="larry-input-inline" style="width: 80px;">
+                                    <input type="text" name="cache" lay-verify="number" value="2048" class="larry-input">
+                                </div>
+                                <div class="larry-input-inline larry-input-company">KB</div>
+                                <div class="layui-form-mid layui-word-aux">提示：1 M = 1024 KB</div>
+                            </div>
+                           
+                           
+                           
+                           <div class="larry-form-item">
+                               <label class="larry-form-label">网站默认关键词</label>
+                               <div class="larry-input-block">
+                                    <input type="text" name="sitename" autocomplete="off" value="" placeholder="请输入网站关键词" class="larry-input">
+                                </div>
+                           </div>
+                           <div class="larry-form-item">
+                               <label class="larry-form-label">站点描述</label>
+                               <div class="larry-input-block">
+                                    <textarea class="larry-textarea" placeholder="请输入站点描述"></textarea>
+                                </div>
+                           </div>
+                           <div class="larry-form-item">
+                               <label class="larry-form-label">邮件模板</label>
+                               <div class="larry-input-block">
+                                    <script id="mail_tpl" name="mail_tpl" class="larryms-html" type="text/plain">
+                                            <p>Hi，{username}:</p> <br/>
+                                                <p>&nbsp; &nbsp;  &nbsp;欢迎加入{title}！请点击下方链接认证您的邮箱，完成账号激活（本次验证链接30分钟内有效）。</p>
+                                                <p>{url}
+                                                    <br/>
+                                                </p>
+                                                <p>这是系统消息无须回复，{title}真诚欢迎您的加入！</p>
+                                    </script>
+                                </div>
+                           </div>
+                           <div class="larry-form-item">
+                               <label class="larry-form-label">网站备案号</label>
+                               <div class="larry-input-block">
+                                    <input type="text" name="sitename" autocomplete="off" value="鄂ICP备18000110号-1" placeholder="请输入网站备案号" class="larry-input">
+                                </div>
+                           </div>
+                           <div class="larry-form-item larry-form-text">
+                                <label class="larry-form-label">版权信息</label>
+                                <div class="larry-input-block">
+                                    <textarea name="copyright" class="larry-textarea">© 2018 www.larryms.com MIT license</textarea>
+                                </div>
+                            </div>
+                           <div class="larry-form-item">
+                                <div class="larry-input-block">
+                                  <button class="layui-btn" lay-submit lay-filter="set_website">保存提交</button>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+               </section>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="opreateBar">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" data-group='0' data-id="11" data-url="../../../html/template/larryms210/grantauth?id={{d.id}}" lay-event="grantauth">授权</a>
+        <a class="layui-btn layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    var table;
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'template/',
+        page: 'systemset',
+        pageCrumbs: false,
+        isFunction:true
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

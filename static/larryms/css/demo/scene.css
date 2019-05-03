@@ -1,0 +1,14 @@
+.larry-box-404{
+	background: #EAEFFD;
+}
+img.center{
+	display: block;
+	margin: 0 auto;
+}
+p.center{
+	display: block;
+	text-align: center;
+	color: #727D99;
+	font-size: 20px;
+	line-height: 50px;
+}

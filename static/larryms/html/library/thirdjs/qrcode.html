@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之swiper扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>qrcode组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>qrcode组件：</cite>QRCode是一个用于生成二维码的 JavaScript 库，主要是通过获取 DOM 的标签,再通过 HTML5 Canvas 绘制而成,不依赖任何库。支持该库的浏览器有：IE6~10, Chrome, Firefox, Safari, Opera, Mobile Safari, Android, Windows Mobile 等，下面就是qrcode在larryms框架中的应用举例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            Qrcode.js组件集成于LarryMS框架中，方便开发者以模块化方式加载使用，无需页面繁琐的手动引入，遵循layui开箱即用的理念，按需使用，随时可控；使用简单layui.use('qrcode',function(){# your code ...});
+                            <br>同时：larryms官方社区提供所有所提供扩展组件的维护和更新。
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-qrcode">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        二维码生成【效果示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <form action="" class="layui-form">
+                            <div class="layui-form-item qrcode-item">
+                                <label class="layui-form-label">待生成网址：</label>
+                                <div class="layui-inline">
+                                    <input type="text" name="url" id="url" value="https://www.larryms.com/" title="输入自定义网址一键转换成二维码" class="layui-input larryms-input">
+                                </div>
+                                <span class="layui-btn layui-btn-sm" id="makeqrcode">生成二维码</span>
+                            </div>
+                        </form>
+
+                        <div id="qrcode" class="larryms-qrcode-box"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        二维码生成【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+<pre class="layui-code">
+layui.use('qrcode',function(){
+    var $ = layui.$,
+        qrcode = layui.qrcode;//直接引入qrcode组件
+    $('#makeqrcode').on('click', function() {
+        var url = $('#url').val(),
+        $('#qrcode').empty();
+        qrcodes = new qrcode($('#qrcode')[0], {
+            width: 300,
+            height: 300
+        });
+        //生成二维码
+        qrcodes.makeCode(url); 
+    });  
+});</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            qrcode组件使用非常简单，这里只简单展示了利用qrcode组件将网址生成二维码，比如<em style="color: #ff5722;padding-left: 3px;padding-right: 3px;">二维码中带自定义logo、设置文字、彩色二维码、二维码存储其他信息</em>等内容可具体在larryms框架开发者文档中查看。
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified:'qrcode'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

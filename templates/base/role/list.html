@@ -1,0 +1,118 @@
+ {% extends "../../_share/base.html"%}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="layui-layout layui-layout-admin">
+    
+    
+    <table class="layui-hide" id="table_list" lay-filter="table_filter">
+    </table>
+    <script type="text/html" id="toolbar">
+        <div class="layui-row">
+            <div class="layui-col-xs12">
+                
+                <form class="layui-form" action="" onsubmit="javascript:return false;">
+                    <div class="demoTable">
+                        <div class="layui-inline">
+                            <input class="layui-input" name="name" id="name" autocomplete="off" placeholder="角色名称" >
+                        </div>
+                        <button class="layui-btn" data-type="reload">查询</button>
+                        <a class="layui-btn" data-type="tabAdd" href="/base/role/add">新增</a> 
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="bar">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+    layui.use(['table','form','element'], function(){
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+
+                //方法级渲染
+        var mainTable = table.render({
+            elem: '#table_list'
+            ,url: '/base/role/table'
+            ,id: 'listReload'
+            ,page: true
+            //,size:"sm"
+            ,height: "full-83"
+            ,toolbar:"#toolbar"
+            ,defaultToolbar: ['filter']
+            ,even: false //开启隔行背景
+            ,limit:20
+            ,cols: [[
+                // {checkbox: true, fixed: true},
+                {field:'id', title: 'ID', align:'center',sort: true, width:150}
+                ,{field:'code',title: '编码', width:150}
+                ,{field:'name',title: '角色名称', width:150}
+                ,{field:'is_static', title: '内置角色', align:'center', width:100, templet: function(d){
+                        if(d.is_static==1){
+                            return '<span class="layui-badge layui-bg-red">是</span>'
+                        }
+                        return '<span class="layui-badge layui-bg-green">否</span>'
+                    }}
+                ,{field:'remark', title: '备注'}
+                ,{fixed: 'right', width:160, align:'center', templet:function(d){
+                    if(d.is_static==1){
+                        return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>'
+                    }
+                   return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>'+
+                    '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>'
+                }}
+            ]]
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var str= $('#name').val();
+                table.reload('listReload', {
+                    page: {
+                        curr: 1 //重新导航到首页
+                    },where: {
+                        name: $('#name').val(),
+                    }
+                });
+                 $('#name').val(str);
+            }
+        };
+    $(document).on('click', '.demoTable .layui-btn', function(){
+        var type = $(this).data('type');
+        active[type] ? active[type].call(this) : '';
+    });
+    //监听工具条
+    table.on('tool(table_filter)', function(obj){
+        var data = obj.data;
+        if(obj.event === 'detail'){
+            //layer.msg('ID：'+ data.id + ' 的查看操作');
+        } else if(obj.event === 'del'){
+            layer.confirm('真的删除【'+data.name+'】角色么', function(index){
+            var jsData = {'id':data.id}
+            $.post('/base/role/ajaxdel', jsData, function (out) {
+                if (out.status == 0) {
+                    mainTable.reload(); 
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            
+            layer.close(index);
+        });
+        } else if(obj.event === 'edit'){
+            window.location.href="/base/role/edit?id="+data.id
+        }
+    });
+});
+
+</script>
+{% endblock %}

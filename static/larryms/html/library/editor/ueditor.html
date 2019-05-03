@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之Ueditor扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>LarryMS框架之ueditor编辑</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>ueditor编辑简介：</cite>UEditor是由百度WEB前端研发部开发的所见即所得的开源富文本编辑器，具有轻量、可定制、用户体验优秀等特点,虽然该编辑器的更新止于2016年，但其在各应用场景使用较为广泛，一款经典的编辑器，因此larryMS框架中在其基础上进行了符合layui模块化加载规范的二次封装，下面是ueditor在larryMS框架中的应用示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：version:v1.4.3.3
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-we">
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        ueditor编辑器【效果示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-editor" id="editor"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        ueditor编辑器【Code加载示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+layui.use('ueditor', function() {
+    var ueditor = layui.ueditor;
+
+    var ue = UE.getEditor('editor');
+    ue.ready(function() {
+        ue.setHeight(200);
+    });
+});
+//ueditor在larryms框架中加载使用如此简单，更深入的使用示例可以参考larryms开发者文档
+ueditor特性如下：
+1、体积小巧，性能优良，使用简单
+2、分层架构，方便定制与扩展
+3、满足不同层次用户需求，更加适合团队开发
+4、丰富完善的中文文档
+5、多个浏览器支持：Mozilla, MSIE, FireFox, Maxthon,Safari 和Chrome
+6、更好的使用体验
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于编辑器组件深入场景使用文档与示例，请移步LarryMS框架开发者文档中查看
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'ueditor'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

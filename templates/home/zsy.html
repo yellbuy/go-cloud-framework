@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>中国石油金江油库自助打印系统</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+
+        <link rel="stylesheet" href="/static/layui/css/layui.css">
+        <link rel="stylesheet" href="/static/css/apidoc.css?t={{ts}}" media="all">
+        <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" media="all">
+        <script language="javascript" src="/static/js/LodopFuncs.js"></script> 
+        
+        <style>
+        .layui-btn-lg {
+            height: 80px;
+            line-height: 80px;
+            padding: 0 50px;
+            font-size: 36px;
+            width:260px;
+        }
+        .layui-btn-danger {
+            background-color: #cc0000;
+        }
+        .layui-layer-page .layui-layer-btn {
+            padding-top: 0px;
+            font-size: 24pt;
+        }
+        .layui-layer-btn .layui-layer-btn0 {
+            border-color: #cc0000 !important;
+            background-color: #cc0000 !important;
+        }
+        .layui-layer-btn a {
+            height: 48px !important;
+            line-height: 48px !important;
+            margin: 5px 15px 0 !important;
+            padding: 0 30px !important;
+        }
+        </style>
+        <style media="print">
+            @page {
+              size: auto;  /* auto is the initial value */
+              margin: 0mm; /* this affects the margin in the printer settings */
+            }
+        </style>
+        <script language="javascript">
+            function GetCardID(){
+                var result = CardReader.GetCardID();
+                if(!result) {
+                    layer.msg(CardReader.Error);
+                    return "";
+                }  
+                return CardReader.CardID;
+            }
+           if(typeof Array.prototype.forEach != 'function'){
+               Array.prototype.forEach = function(callback){
+                   for(var i=0;i<this.length;i++){
+                       callback.apply(this,[this[i],i,this]);
+                   }
+               };
+           }
+        </script>
+    </head>
+    <body>
+    <div>
+        <object classid="clsid:7FB94FC6-ACE3-4CC0-8425-770495C4D760" id="CardReader" style="display:none" width="100" height="50" style="display:none"></object>
+        {# <object classid="clsid:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="WebBrowser" width="0" style="display:none"></object> #}
+        <input type=hidden value="直接打印" onclick="browser.ExecWB(6,1);"/>
+        <input type=hidden value="打印预览" onclick="browser.ExecWB(7,1);"/>
+        <input type=hidden value="页面设置" onclick="browser.ExecWB(8,1);"/>
+    </div>
+    
+    
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/html5.min.js"></script>
+      <script src="/static/js/respond.min.js"></script>
+    <![endif]--> 
+
+    <div class="layui-main layui-container">
+        <div class="layui-header">
+            <div style="float: left;height: 60px;line-height: 60px;text-align:left">
+                 <img src="/static/img/logo_zsy.png" style="height:48px" alt="中石油油库自助打印系统">
+                <span style="padding:15px;font-size:24pt;vertical-align:middle;font-weight:600;line-height: 60px;">中国石油金江油库自助打印系统</span>
+            </div>
+            
+        </div>
+        <div class="layui-header">
+            <div style="width:100%;height:50px;font-size:16pt;color:white;vertical-align:middle;background:#cc0000;line-height: 50px;font-weight:600;text-align:center;margin-top:10px">
+            当前卡号：<span id="txtCardId">无</span>
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-md9 layui-col-lg9">
+                <div class="layui-row">
+                    <div class="layui-col-md12 layui-col-lg12">
+                        <table class="layui-hide" id="tableMain" lay-filter="tableMain">
+                        </table>
+                    </div>
+                    <div class="layui-col-md12 layui-col-lg12">
+                        <table class="layui-hide" id="tableNotPrint" lay-filter="tableNotPrint">
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md3 layui-col-lg3 opt" style="text-align:center">
+                <div class="layui-row">
+                    <div class="layui-col-md12">
+                        <button id="btnReadCard" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-danger">读 卡</button>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md12">
+                        </br>
+                        <button id="btnCheckAll" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-danger">全 选</button>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md12">
+                        </br>
+                        <button id="btnPrint" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-danger">打 印</button>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md12">
+                        </br>
+                        <button id="btnExit" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-danger">退 出<span id="txtRemainTime"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/layui/layui.js?s=36"></script>
+    
+
+    <script>
+        var cardId="";
+        var layer,$,table;
+        // 默认操作延迟
+        var defRemainTime = 30; 
+        var countDown=0; 
+        var LODOP;
+        // 打印   
+        function printBill(contentArr){
+			LODOP=getLodop();  
+            LODOP.SET_LICENSES("","A86D9BF51F24D57AA7E51416388AACAA","C94CEE276DB2187AE6B65D56B3FC2848","");
+            LODOP.PRINT_INIT("出库单");
+            LODOP.SET_PRINT_PAGESIZE(1,2100,1500,"");
+            //LODOP.SET_SHOW_MODE("LANDSCAPE_DEFROTATED",0);//横向时的正向显示
+
+            contentArr.forEach(function(val){
+                LODOP.ADD_PRINT_HTM(0,0,"15cm", "21.0cm", val);
+                LODOP.NEWPAGEA();
+            });
+            {% if printPreviewEnable %}    
+            LODOP.PREVIEW();
+            {% else %}
+            LODOP.PRINT()
+            {% endif %}
+		}
+        function setRemainTime() { 
+            if (countDown == 0) { 
+                clearCardId();
+            } else { 
+                $('#txtRemainTime').text(' ('+countDown+'S)');
+                countDown--; 
+                setTimeout(function() { 
+                    setRemainTime() 
+                },1000);
+            } 
+        } 
+        function clearCardId(){
+            // window.location.reload();
+            countDown=0;
+            cardId="";
+            $("#txtCardId").text(cardId);
+            $('#txtRemainTime').text('');
+            window.location.reload();
+            //table.reload('tableMain', {
+            //    where:{kh:''}
+            //});
+        }
+        layui.use(['table','element', 'layer','form','jquery','laytpl'], function(){
+            layer = layui.layer;
+            $ = layui.jquery;
+            table = layui.table;
+            var element = layui.element;
+            var laytpl = layui.laytpl;
+            var form = layui.form;
+            var windowWidth    = $(document.body).outerWidth(true);
+            var windowHeight   = $(window).height();
+            var contentHeight = windowHeight-$('.layui-header').outerHeight(true);
+            //方法级渲染
+            table.render({
+                elem: '#tableMain'
+                ,url: '/'
+                ,where:{
+                    kh:cardId
+                }
+                ,id: 'tableMain'
+                ,page: false
+                ,limit:100
+                ,limits:[100]
+                ,height: "full-380"
+                ,skin: 'line'
+                ,title:'待打印记录'
+                ,even: true //开启隔行背景
+                ,size: 'lg'
+                ,cols: [[
+                    {checkbox: true}
+                    ,{field:'FHYSDBH', title: '出库调度单编号', width:210}
+                    ,{field:'FYTZDBH', title: '付油通知单编号', width:180                },
+                    {field:'DDY', title: '调度员', width:100 }
+                    ,{field:'YSFSMC', title: '运输方式', align:'center', width:90}
+                    ,{field:'CCBH', title: '车船编号',  width:90,hide:true}
+                    ,{field:'GH', align:'right', width:100, title: '油罐'}
+                    ,{field:'YFSL', align:'right', width:130, title: '通知提油数量'} 
+                    ,{field:'TZHSDJ_BZ', align:'right', width:130, title: '本次调度数量'}
+                    ,{field:'JLDW', align:'right', width:100, title: '计量单位'}
+                    ,{field:'ZDR', align:'right', width:90, title: '制单人'}
+                    ,{field:'BZ', align:'right', width:100, title: '备注'}
+                    ,{field:'YWLSH', align:'left', width:180, title: '业务流水号'}
+                ]],parseData: function(res){ //res 即为原始返回的数据
+                    var data=res.data;
+                    if(data&&data.length>0){
+                        data.forEach(function(v){
+                            v.LAY_CHECKED=true;
+                        })
+                    }
+                    return res;
+                }
+            
+            });
+            table.render({
+                elem: '#tableNotPrint'
+                ,url: '/home/notprintlist'
+                ,id: 'tableNotPrint'
+                ,page: false
+                ,where:{rand:new Date().getTime()}
+                ,limit:100
+                ,limits:[100]
+                ,height: "200"
+                ,skin: 'line'
+                ,title:'待打印记录'
+                ,even: true //开启隔行背景
+                ,size: 'lg'
+                ,cols: [[
+                    {field:'FHYSDBH', title: '出库调度单编号', width:210}
+                    ,{field:'FYTZDBH', title: '付油通知单编号', width:180                },
+                    ,{field:'CCBH', title: '车船编号',  width:110}
+                    ,{field:'THDWMC', title: '提货单位名称', width:240}
+                    ,{field:'SHDWMC', title: '收货单位名称', width:240}
+                ]]
+            });
+            function refreshNotPrintList(){
+                 // 防止IE缓存
+                var timestamp = new Date().getTime();
+                table.reload('tableNotPrint', {
+                    where:{rand:timestamp}
+                });
+            }
+            // 定时刷新未打印记录
+            setInterval(refreshNotPrintList,30000);
+            // 读卡
+            $(document).on('click','.opt #btnReadCard',function(){
+                cardId=GetCardID();
+				// 0000010000023257
+                // cardId="0000030000000310";
+                $("#txtCardId").text(cardId||"无");
+                if(cardId){
+                    if(countDown<=0){
+                        countDown=defRemainTime;
+                        setRemainTime();
+                    } else {
+                        countDown=defRemainTime;
+                    }
+                    // 防止IE缓存
+                    var timestamp = new Date().getTime();
+                    table.reload('tableMain', {
+                        where:{kh:cardId,rand:timestamp}
+                    });
+                } else {
+                    clearCardId();
+                }
+            });
+            // 全选
+            $(document).on('click','.opt #btnCheckAll',function(){
+                
+                var checkbox = $(document).find(".layui-table th div.laytable-cell-checkbox div.layui-unselect:not(.layui-form-checked) I");
+                if(checkbox.length!=0){
+                    checkbox.click();
+                }
+                form.render();
+            });
+            $(document).on("click",".layui-table-body table.layui-table tbody tr",function(){
+                var obj = event.target ? event.target : event.srcElement;
+                var tag = obj.tagName;
+                var checkbox = $(this).find("td div.laytable-cell-checkbox div.layui-form-checkbox I");
+                if(checkbox.length!=0){
+                    if(tag == 'DIV') {
+                        checkbox.click();
+                    }
+                }
+                
+            });
+            
+            $(document).on("click","td div.laytable-cell-checkbox div.layui-form-checkbox",function(e){
+                e.stopPropagation();
+            });
+            // 打印
+            $(document).on('click','.opt #btnPrint',function(){
+             
+                if(!cardId){
+                    layer.msg('请刷卡读取未打印记录');
+                    return;
+                }
+                var checkStatus = table.checkStatus('tableMain'); //idTest 即为基础参数 id 对应的值
+                var data=checkStatus.data
+                if(data.length==0){
+                    layer.msg('请选择待打印的记录');
+                    return;
+                }
+                var ywlsh="";
+                data.forEach(function(v){
+                    if(ywlsh){
+                        ywlsh = ywlsh+","+v.YWLSH
+                    } else {
+                        ywlsh = v.YWLSH
+                    }
+                });
+               
+                var loader = layer.load();
+                $.post("/home/print", {ywlsh:ywlsh,kh:cardId}).success(function(res) {
+                    layer.close(loader);
+                    if(res.status != 0){
+                        layer.msg(res.message);
+                        return;
+                    }
+                    var contentArr=res.message;
+                    if(contentArr && contentArr.length>0){
+                        printBill(contentArr);
+                    }
+                    // 防止IE缓存
+                    var timestamp = new Date().getTime();
+                    table.reload('tableMain', {
+                        where:{kh:cardId,rand:timestamp}
+                    });
+                    // 刷新未打印记录
+                    refreshNotPrintList();
+                }).error(function(){
+                    layer.close(loader);
+                });
+            });
+            // 退出
+            $(document).on('click','.opt #btnExit',function(){
+                clearCardId();
+            });
+        });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,229 @@
+body{
+    background: #f1f1f1;
+}
+.layui-container{
+	padding: 0px;
+}
+.layui-elem-field{
+	width: 500px;
+    margin: 0px auto 30px auto;
+    text-align: center;
+    color: #000;
+}
+.larryms-authorize{
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding-top: 30px;
+}
+.larryms-authorize .layui-elem-quote p{
+    line-height: 20px;
+    text-align: left;
+    color: #686868;
+    font-size: 12px;
+}
+.larryms-authorize .layui-elem-quote p em.remark{
+    color: #ff5722;
+}
+.layui-elem-field{
+    border-color: #c2c2c3;
+}
+.layui-field-title legend{
+    color: #ff5722;
+    font-size:26px;
+}
+.larryms-blockquote{
+    background: #f8f8f8;
+}
+.larryms-blockquote span{
+    color: #ff5722;
+}
+.larryms-authorize .layui-elem-quote ul li{
+    color: #555;
+}
+.larryms-authorize .layui-elem-quote p{
+    line-height: 20px;
+    text-align: left;
+    color: #555;
+    font-size: 12px;
+}
+.larryms-authorize .layui-elem-quote{
+    background: #fff;
+}
+.larryms-authorize .layui-elem-quote p em.remark{
+    color: #ff5722 !important;
+}
+.larryms-text{
+    position: relative;
+    padding: 25px 30px 30px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+    text-align: center;
+    transition: all .2s;
+    -webkit-transition: all .3s;
+    border: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    height: 575px;
+}
+.larryms-text:hover{
+    background: #F8F8F8;
+    border:1px solid transparent;
+    box-shadow: 5px 5px 20px #ccc;
+    /*transform: scale(1.05,1.05);*/
+}
+.larryms-text .top{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 115px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.larryms-text .top.b1{
+    background: #1e9fff;
+}
+.larryms-text .top.b2{
+    background: rgba(199, 21, 133, 1);
+}
+.larryms-text .top.b3{
+    background: rgba(57, 61, 73, 1);
+}
+.larryms-text .top h2{
+    display: block;
+    width: 100%;
+    padding-top: 25px;
+    line-height: 30px;
+    padding-bottom: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif;
+}
+.larryms-badge{
+    position: relative;
+    display: inline-block;
+    border: 1px solid #e6e6e6;
+    line-height: 28px;
+    padding: 0 15px;
+    border-radius: 2px;
+    color: #fff;
+}
+
+.larryms-buy{
+    display: block;
+    width: 100%;
+    height: 135px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    text-align: center;
+    padding: 25px 30px 30px;
+    box-sizing: border-box;
+}
+.layui-btn-container {
+    font-size: 0;
+}
+.larryms-buy .layui-btn {
+    width: 100%;
+    position: relative;
+}
+.larryms-buy .layui-btn:hover{
+    opacity: 1;
+}
+.larryms-buy .layui-btn.bb:hover{
+    background: #ff5722;
+}
+.layui-btn-container .layui-btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.larryms-buy .larry-xinxi{
+    position: absolute;
+    right: 70px;
+    top: 81px;
+    color: #fff;
+}
+.larryms-text .larryms-content{
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 115px;
+    left: 0px;
+    bottom: 135px;
+    right: 0px;
+    box-sizing: border-box;
+    padding: 15px 30px 15px 30px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.larryms-text ul li{
+    display: block;
+    width: 100%;
+    height: 26px;
+    list-style-type: none;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 26px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    position: relative;
+}
+.larryms-text ul li:before{
+    display: block;
+    width: 15px;
+    height: 100%;
+    content: '.';
+    font-size: 36px;
+    display: block;
+    line-height: 1px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.larryms-text ul li p{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    font-size: 14px;
+    padding-left: 15px;
+    text-align: left;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+}
+.larryms-text ul li:nth-child(1){
+    color: #ff5722;
+}
+.larryms-text ul li:nth-child(2){
+    color: #ff5722;
+}
+.larryms-text ul li:nth-child(3){
+    color: #ff5722;
+}
+.layui-col-md4:nth-child(1) .larryms-text ul li:nth-child(4){
+    color: #ff5722;
+}
+.layui-col-md4:nth-child(1) .larryms-text ul li:nth-child(5){
+    color: #ff5722;
+}
+.layui-col-md4:nth-child(1) .larryms-text ul li:nth-child(6){
+    color: #ff5722;
+}
+p.mark{
+    color: #888;
+    font-size: 14px;
+    line-height: 26px;
+}

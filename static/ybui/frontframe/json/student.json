@@ -1,0 +1,49 @@
+{"code":"0",
+    "page":
+    {
+        "totalCount":12,
+        "pageSize":10,
+        "totalPage":2,
+        "currPage":1,
+        "list":[
+            {"stuId":"1","state":"1","name":"张三","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"C","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"湖里区","address_CODE":"350206","note":"很好"},
+            {"stuId":"2","state":"0","name":"李四","age":"57","sex":"1","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"思明区","address_CODE":"350203","note":"很好"},
+            {"stuId":"3","state":"0","name":"王五","age":"57","sex":"1","yingjie":"1","sort":"1",
+                "xueli":"A","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"湖里区","address_CODE":"350206","note":"很好"},
+            {"stuId":"4","state":"0","name":"AAA","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"思明区","address_CODE":"350203","note":"很好"},
+            {"stuId":"5","state":"0","name":"BBB","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"湖里区","address_CODE":"350206","note":"很好"},
+            {"stuId":"6","state":"0","name":"CCC","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"思明区","address_CODE":"350203","note":"很好"},
+            {"stuId":"1","state":"1","name":"张三","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"C","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"湖里区","address_CODE":"350206","note":"很好"},
+            {"stuId":"2","state":"0","name":"李四","age":"57","sex":"1","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"思明区","address_CODE":"350203","note":"很好"},
+            {"stuId":"3","state":"0","name":"王五","age":"57","sex":"1","yingjie":"1","sort":"1",
+                "xueli":"A","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"湖里区","address_CODE":"350206","note":"很好"},
+            {"stuId":"4","state":"0","name":"AAA","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"思明区","address_CODE":"350203","note":"很好"},
+            {"stuId":"5","state":"0","name":"BBB","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"湖里区","address_CODE":"350206","note":"很好"},
+            {"stuId":"6","state":"0","name":"CCC","age":"57","sex":"0","yingjie":"0","sort":"1",
+                "xueli":"B","birth":"2015-04-24 12:10:43","sfzh":"650201198805072652",
+                "address":"思明区","address_CODE":"350203","note":"很好"}
+        ]
+    }
+
+}
+

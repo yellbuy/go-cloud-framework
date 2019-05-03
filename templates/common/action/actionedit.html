@@ -1,0 +1,140 @@
+{% extends "../../_share/minibase.html"%}
+{% block header %}
+<link rel="stylesheet" href="/static/admin/js/uploader/uploader.css" />
+
+<style>
+    .layui-layedit {
+        height:535px;
+    }
+.layui-form-select dl dd, .layui-form-select dl dt{
+    line-height: 30px;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="yb-childrenBbody">
+    <form class="layui-form layui-row" style="padding:10px">
+        <div class="layui-col-md11 layui-col-xs126">
+            <div class="layui-row">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="actName" value="{{info.Name}}" placeholder="请输入类别名称">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">标识</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="actKey" value="{{info.Key}}" placeholder="选填，如果填写则必须保证唯一">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>类型</label>
+                        <div class="layui-input-block">
+                            <select class="pidVal" name="actKind" lay-filter="Parentid">
+                                <option value="0" {%if info.Kind|integer==0%}selected{%endif%}>启用</option>
+                                <option value="1" {%if info.Kind|integer==1 %}selected{%endif%}>停用</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">行为描述</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" lay-verify="" name="actRemark" value="{{info.Remark}}" placeholder="行为描述">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">行为规则</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="order" name="actRule" value="{{info.Rule}}" placeholder="行为规则" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">日志规则</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="order" name="actLog" value="{{info.Log}}" placeholder="日志规则" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">状态</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="actState" value="0" title="禁用" lay-skin="primary" {%if info.State|integer==0%} checked {%endif%}>
+                            <input type="radio" name="actState" value="1" title="启用" lay-skin="primary" {%if info.State|integer==1%} checked {%endif%}>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <hr class="layui-bg-gray" />
+            <label class="layui-form-label"> </label>
+            {% if info.Id %}
+            <input type="hidden" name="actId" value="{{info.Id}}" />
+            {% endif %}
+            <button class="layui-btn" lay-submit lay-filter="action"><i class="layui-icon">&#xe605;</i>保存</button>
+            <!-- <a class="layui-btn" lay-submit="canal" id="btnClose"><i class="layui-icon">&#xe605;</i>取消</a> -->
+        </div>
+</div>
+
+</form>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+<script type="text/javascript">
+    var editIndex;
+    layui.use(['larry', 'form', 'layer', 'layedit'], function () {
+        var form = layui.form;
+
+        form.verify({
+            name: function (val) {
+                if (val == '') {
+                    return "栏目名称不能为空";
+                }
+            }
+        })
+        form.on("submit(action)", function (data) {
+            console.log("---data---")
+            data = data.field
+            data = $("form").serialize();
+            console.log(data)
+            $.post('/common/action/actionedit', data, function (out) {
+
+                if (out.status == 0) {
+                    layer.msg("操作成功");
+                    window.parent.document.location.href = "/common/action/actionlist?Id=0";
+
+                    // var iframe = window.parent.document.getElementById("actionform");
+                    // iframe.src = "/common/action/actionedit?id=" + data.Id;
+                    // iframe.contentWindow.location.reload();
+                    // layer.msg("操作成功");
+                } else {
+                    layer.msg(out.message)
+                }
+
+            }, "json");
+            // console.log("data")
+            return false;
+        });
+
+
+        form.render();
+
+    });
+</script>
+{% endblock %}

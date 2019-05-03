@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <meta name="keywords" content="404" />
+    <meta name="description" content="404" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgA box-blank library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>框架核心组件之菜单选项卡组件larryTab</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>larryTab组件简介：</cite>larryTab.js主要实现后台界面框架中菜单初始化与tab选项卡相关功能，依赖于larryms组件，实现以tab选项卡方式加载iframe，选项卡100种随机动画加载，框架刷新状态保存，切换刷新、菜单模式灵活切换（顶部菜单导航开启或关闭），自动定位伸展，页面选项卡方式打开、iframe内页任意选项卡方式打开、与导航菜单自动跟随一一对应等等，围绕后台界面展现多种功能灵活组合搭配，快速搭建后台界面。
+                        </p>
+                    </div>
+                </section>
+
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <h2>larryTab组件方法介绍</h2>
+                    </div>
+                    <div class="layui-card-body">
+                        <table class="layui-table library-talbe" lay-size="md">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="25%">
+                                <col width="30%">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">名称</th>
+                                    <th style="text-align: center;">参数</th>
+                                    <th style="text-align: center;">用法</th>
+                                    <th style="text-align: center;">说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>set</td>
+                                    <td>options <br>描述： options 参考开发者文档介绍 
+                                    </td>
+                                    <td>larryTab = layui.larryTab({tab_elem: '#larry_tab',tabMax: 20,spreadOne: true});</td>
+                                    <td>larryTab组件初始化 完成后台主体界面的初始化，设定相关必要参数，当然也可通过下面介绍的menuSet与tabSet方法分别细化配置</td>
+                                </tr>
+                                <tr>
+                                    <td>menuSet</td>
+                                    <td>options 描述： options 参考开发者文档介绍<br>支持针对'data', 'url', 'type', 'cached', 'spreadOne', 'top_menu', 'topFilter', 'left_menu', 'leftFilter'等参数的个性化配置设定   </td>
+                                    <td>larryTab.menuSet(options)</td>
+                                    <td>larryTab.menuSet方法也是LarryMS框架在iframe版本中后台界面的核心方法,用于导航菜单初始化，以json数据格式前后端交互 ，如果是网站前台或后台SPA版本中该组件用不到</td>
+                                </tr>
+                                <tr>
+                                    <td>tabSet</td>
+                                    <td>options 描述： options 参考开发者文档介绍<br>支持针对'tab_elem', 'tabFilter', 'tabSession', 'closed', 'tabMax', 'autoRefresh', 'tabShow', 'pageEffect','isPageEffect'等参数的个性化配置设定 </td>
+                                    <td>larryTab.tabSet(options)</td>
+                                    <td>tabSet用于tab选项卡相关功能的设定，如动画加载的开启关闭，选项卡默认打开个数，是否切换刷新，是否保持状态等等，具体以开发者文档详细示例为准。</td>
+                                </tr>
+                                <tr>
+                                    <td>tabAdd</td>
+                                    <td>data <br>描述：data具体参数参看larryMS框架文档</td>
+                                    <td>默认已于框架菜单功能中，用于tab选项卡方式的打开新增，larryTab.tabAdd(data);</td>
+                                    <td>支持子页面或框架非导航位置的选项卡新增或自动定位，可使用属性：larry-tab="[iframe|page]" 在选项卡中打开页面</td>
+                                </tr>
+                                <tr>
+                                    <td>tab系列方法</td>
+                                    <td colspan="3">tabChange、tabDelete、tabAuto、autoRefresh、getTabId、contentAddTab、tabInit、render等等二十多个方法已在框架相关功能上体现，用户无特殊开发需求情况下可以忽略，更为灵活的使用与结构变化时可以使用，提供于LarryMS框架文档中</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">更多功能,可在开发者文档中查看,同时也会根据VIP用户需求不断增加</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="margin-top: 15px;font-size: 14px;">
+                            更多关于larryTab组件方法介绍请查看官方开发者文档：
+                            <a href="http://www.larryms.com/docs/larryms/index.html" target="_blank" style="color:#01AAED;">LarryMS框架开发者文档</a>
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page:'library'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之wangEditor扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>LarryMS框架之wangEditor编辑器封装</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>wangEditor编辑器简介：</cite>wangEditor来源于github开源编辑器，一款基于javascript和css开发的Web富文本编辑器，轻量、简洁、易用、开源免费，LarryMS框架中对其进行了二次开发封装使其符合layui模块化加载规范成为一个模块化组件惰性加载，并进行了一些扩充【<em style="color: #ff5722;">如内置功能新增防XSS过滤功能、代码高亮、全屏、响应式自适应、字体颜色、背景、code等等</em>】，项目中应用更加方便高效，下面是wangEditor在LarryMS框架中的使用示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            LarryMS框架之wangEditor - 轻量级web富文本编辑器，配置方便，使用简单。支持IE10 +和现代浏览器。 <br>
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：version:v3.1.1 <em style="color: #ff5722;">【推荐使用】</em>
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-we">
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        wangEditor编辑器【效果示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-editor" id="editor"></div>
+                        <!-- <textarea id="text1" style="width:100%; height:200px;"></textarea> -->
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        wangEditor编辑器【Code加载示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+layui.use('wangEditor', function() {
+   var wangEditor = layui.wangEditor,
+       editor = new wangEditor('#editor');
+       editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+       editor.customConfig.uploadImgServer = '/upload'  // 上传图片到服务器
+       editor.create();
+});
+
+//对于wangEditor做了简单改造，作为轻量级web富文本编辑器，也是一个不错的选择，更多使用方法与配置示例可在larryMS框架开发者文档中找到
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于编辑器组件深入场景使用文档与示例，请移步LarryMS框架开发者文档中查看
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'wangEditor'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

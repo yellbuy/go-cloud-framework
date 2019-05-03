@@ -1,0 +1,261 @@
+
+<html>
+<head>
+    <title>表格控件</title>
+    <script src="../../statics/libs/jquery-1.7.2.js"></script>
+    <link rel="stylesheet" href="../../statics/css/font-awesome.min.css">
+    <!--layui ztree样式-->
+    <link rel="stylesheet" href="../../statics/plugins/layui/css/layui.css" media="all">
+    <script src="../../statics/plugins/layer/layer.js"></script>
+    <script src="../../statics/plugins/layui/layui.js"></script>
+    <script src="../../statics/plugins/ztree/jquery.ztree.all.min.js"></script>
+    <link rel="stylesheet" href="../../statics/plugins/ztree/css/metroStyle/metroStyle.css">
+    <!--js组件-->
+    <script src="../../common/js/pageGrid.js"></script>
+    <script src="../../common/js/selectTool.js"></script>
+    <script src="../../common/js/radioTool.js"></script>
+    <script src="../../common/js/checkboxTool.js"></script>
+    <script src="../../common/js/treeTool.js"></script>
+    <script src="../../common/js/labelTool.js"></script>
+    <script src="../../common/js/linkSelectTool.js"></script>
+    <script src="../../common/js/uploadTool.js"></script>
+    <script src="../../common/js/HuploadTool.js"></script>
+    <script src="../../common/js/tplTool.js"></script>
+    <script src="../../common/js/editGrid.js"></script>
+    <!--全局-->
+    <script src="../../common/js/whole/cyLayer.js"></script>
+    <script src="../../common/js/whole/common.js"></script>
+    <script src="../../common/js/whole/setting.js"></script>
+    <script src="../../common/js/whole/utils.js"></script>
+    <script src="../../common/js/whole/monitor.js"></script>
+    <!--样式-->
+    <link rel="stylesheet" href="../../common/css/cyStyle.css">
+    <link rel="stylesheet" href="../../common/css/cyType.css">
+    <script type="text/javascript" src="../demo/js/list.js"></script>
+</head>
+<body>
+<div class="layui-input-inline">
+    <button  style="display:none" class="layui-btn search-btn" table-id="commparaTable" lay-submit="" lay-filter="search"></button>
+</div>
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">代码</li>
+        <li>效果</li>
+        <li>参数详解</li>
+
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <code style="margin-top: 4px; display: block;">表格代码示例</code>
+            <textarea class="layui-textarea" rows="28">
+            <div class="layui-form ">
+              <table class="layui-table" id="studentTable" cyType="pageGrid"
+                     cyProps="url:'/frontframe/json/student.json',checkbox:'true',pageColor:'#2991d9'">
+        <thead>
+        <tr>
+            <!--复选框-->
+            <th width="1%" param="{type:'checkbox'}">
+                <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
+            </th>
+            <!--isPrimary：是否是主键-->
+            <th width="5%" param="{name:'stuId',isPrimary:'true',hide:'true'}">id</th>
+
+            <th width="10%" param="{name:'name'}">姓名</th>
+
+            <th width="5%" param="{name:'age'}">年龄</th>
+
+            <th width="10%" param="{name:'address'}">地址</th>
+
+            <th width="5%" param="{name:'sex',enumCode:'SexEnum'}">性别</th>
+
+            <th width="5%" param="{name:'yingjie',codeName:'whether'}">是否是应届</th>
+
+            <th width="5%" param="{name:'state',codeName:'state',render:'Render.customState'}">状态</th>
+
+            <th width="10%" param="{name:'note'}">备注</th>
+
+
+            <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">
+                操作
+            </th>
+        </tr>
+        </thead>
+    </table>
+            </div>
+            </textarea>
+            <code style="margin-top: 4px; display: block;">list.js示例  用于渲染表格列</code>
+            <textarea class="layui-textarea" rows="20">
+           //数据渲染对象
+           var Render = {
+               customState: function (rowdata,renderData index, value) {
+                  if(value == "启用"){
+                      return '<span style="color:green">'+value+'</span>';
+                  }
+                  if(value == "禁用"){
+                      return '<span style="color:red">'+value+'</span>';
+                  }
+                  return value;
+               },
+               edit:function(rowdata,renderData){
+                   var btn=' <button  onclick="editOne(\''+"/commpara/edit"+'\',\''+rowdata.paraId+'\')" class="layui-btn layui-btn-mini">修改</button>';
+                   return btn;
+               }
+            };
+         </textarea>
+        </div>
+
+        <div class="layui-tab-item" id="result">
+            <div class="layui-form">
+                <table class="layui-table" id="studentTable" cyType="pageGrid"
+                       cyProps="url:'/frontframe/json/student.json',checkbox:'true',pageColor:'#2991d9'">
+                    <thead>
+                    <tr>
+                        <!--复选框-->
+                        <th width="1%" param="{type:'checkbox'}">
+                            <input type="checkbox" lay-skin="primary" lay-filter="allChoose">
+                        </th>
+                        <!--isPrimary：是否是主键-->
+                        <th width="5%" param="{name:'stuId',isPrimary:'true',hide:'true'}">id</th>
+
+                        <th width="10%" param="{name:'name'}">姓名</th>
+
+                        <th width="5%" param="{name:'age'}">年龄</th>
+
+                        <th width="10%" param="{name:'address'}">地址</th>
+
+                        <th width="5%" param="{name:'sex',enumName:'SexEnum'}">性别</th>
+
+                        <th width="5%" param="{name:'yingjie',codeName:'whether'}">是否是应届</th>
+
+                        <th width="5%" param="{name:'state',codeName:'state',render:'Render.customState'}">状态</th>
+
+                        <th width="10%" param="{name:'note'}">备注</th>
+
+
+                        <th width="10%" param="{operate:'true',buttons:'Render.state,Render.edit,Render.delete'}">
+                            操作
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="layui-tab-item">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>表格参数</th>
+                    <th>描述</th>
+                    <th>默认值</th>
+                    <th>代码示例</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>表格id,用于查询表单关联</td>
+                    <td><span style="color:red">必填</span></td>
+                    <td>id="demo" || &lt;button table-id="demo"&gt;查询&lt;/button&gt;</td>
+                </tr>
+                <tr>
+                    <td>cyType</td>
+                    <td>控件类型</td>
+                    <td><span style="color:red">必填</span></td>
+                    <td>cyType="pageGrid"</td>
+                </tr>
+                <tr>
+                    <td>cyProps:url</td>
+                    <td>数据源</td>
+                    <td><span style="color:red">必填</span></td>
+                    <td> cyProps="url:'/syscode/list'"</td>
+                </tr>
+                <tr>
+                    <td>cyProps:checkbox</td>
+                    <td>是否开启复选框</td>
+                    <td>true</td>
+                    <td>yProps="checkbox:'true'"</td>
+                </tr>
+                <tr>
+                    <td>cyProps:pageColor</td>
+                    <td>分页样式</td>
+                    <td>#2991d9</td>
+                    <td>cyProps="pageColor:'#2991d9'"</td>
+                </tr>
+                <tr>
+                    <td>cyProps:pageSize</td>
+                    <td>每页显示条数</td>
+                    <td>10</td>
+                    <td>cyProps="pageSize:'20'"</td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>列参数</th>
+                    <th>描述</th>
+                    <th>默认值</th>
+                    <th>代码示例</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>param.name</td>
+                    <td>字段值</td>
+                    <td><span style="color:red">必填</span></td>
+                    <td>param="{name:'code'}"</td>
+                </tr>
+                <tr>
+                    <td>param.isPrimary</td>
+                    <td>该字段是否是主键,勾选复选框时对应的值</td>
+                    <td>false</td>
+                    <td>param="{isPrimary:'true'}"</td>
+                </tr>
+                <tr>
+                    <td>param.hide</td>
+                    <td>是否隐藏</td>
+                    <td>false</td>
+                    <td>param="{hide:'true'}"</td>
+                </tr>
+                <tr>
+                    <td>param.sort</td>
+                    <td>是否开启排序</td>
+                    <td>false</td>
+                    <td>param="{sort:'true'}"</td>
+                </tr>
+                <tr>
+                    <td>param.codeName</td>
+                    <td>通过字典自动渲染列</td>
+                    <td>null</td>
+                    <td>param="{codeName:'state'}"</td>
+                </tr>
+                <tr>
+                    <td>param.enumName</td>
+                    <td>通过枚举自动渲染列</td>
+                    <td>null</td>
+                    <td>param="{enumName:'stateEnum'}"</td>
+                </tr>
+                <tr>
+                    <td>param.render</td>
+                    <td>渲染列,进入js方法,自定义返回该列的数据与格式</td>
+                    <td>null</td>
+                    <td>param="{render:'Render.customState'}"</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    layui.use('element', function () {
+    });
+    function submitCode() {
+        var code = $("textarea").val();
+        $("#result").html(code);
+        $("#result").find("#demo").pageGrid();
+        alert("代码提交成功,请查看效果!");
+    }
+</script>
+</body>
+</html>

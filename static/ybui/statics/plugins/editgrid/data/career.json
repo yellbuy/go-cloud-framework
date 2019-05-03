@@ -1,0 +1,13 @@
+[
+    {"code":"A","value":"法师"},
+    {"code":"B","value":"术士"},
+    {"code":"C","value":"牧师"},
+    {"code":"D","value":"盗贼"},
+    {"code":"E","value":"德鲁伊"},
+    {"code":"F","value":"武僧"},
+    {"code":"G","value":"萨满"},
+    {"code":"H","value":"猎人"},
+    {"code":"I","value":"战士"},
+    {"code":"J","value":"圣骑士"},
+    {"code":"K","value":"死亡骑士"}
+]

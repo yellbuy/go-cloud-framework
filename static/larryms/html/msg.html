@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>LarryMS抢先版说明：</title>
+	<style>
+		.msg{
+			display: block;
+			width: 560px;
+			height: auto;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.msg h1{
+			display: inline-block;
+			width: 100%;
+			color: #ff5722;
+			font-size: 16px;
+			line-height: 30px;
+		}
+		.msg p{
+			display: inline-block;
+			vertical-align: top;
+			text-align: left;
+			padding: 0px;
+			margin: 0px;
+			width: 100%;
+			color: #666;
+			font-size: 14px;
+			white-space: normal;
+			line-height: 24px;
+			margin-bottom: 8px;
+		}
+		.msg p em{
+			font-style: normal;
+			color: #01AAED;
+			padding-left: 3px;
+			padding-right: 3px;
+		}
+		.layui-fixbar{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="msg">
+		<h1>关于LarryMS预览版说明</h1>
+		<p>
+			由于刚完成LarryMS社区上线，时间较为匆忙，先行开放在线演示与提供已通过商业授权的用户下载。<em>所有已列出的第三方扩展JS组件库均已完成封装提供于版本包中下载，这些组件库的使用范例会以日或周为单位更新，更为详尽的应用场景范例请查看VIP专属文档;未列出的会根据VIP用户需要扩展</em>因此在这里特别说明：所描述的模板数量和未提到的一些核心组件会持续更新提供与对应授权版本中下载。（对应版本的演示站点也会陆续上线，预览版中有相关版本备注；）
+		</p>
+		<p style="color:#333;margin-bottom: 0px;">LarryMS框架完全基于经典模块化前端layui框架，覆盖全端场景，紧贴业务需求，以简洁，高效敏捷开发为追求目标,开启高频更新模式，具体以LarryMS社区官方公告与产品动态为准。</p>
+	</div>
+	<!-- 加载js文件-->
+    <script type="text/javascript" src="../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.cache.page = 'console';
+    layui.config({
+        version: "2.0.8",
+        base: '../larryms/',
+        layertype: 2,
+        rightMenu: false
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<div class="layui-layout layui-layout-admin" style="padding-left: 10px;">
+    
+    <table class="layui-hide" id="tableList" lay-filter="tableList">
+    </table>
+    
+    <script type="text/html" id="bar">
+       <div class="layui-row" style="margin-top: 10px;">
+            <div class="layui-col-xs12">
+                <div class="selectTable">
+                    <div class="layui-inline">
+                        <input class="layui-input" name="no" id="no" autocomplete="off" placeholder="编号" >
+                    </div>
+                    <button class="layui-btn" lay-event="search">查询</button>
+                    <button class="layui-btn" lay-event="ok">确认</button>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+<script>
+    var table=null,ptable=null,layer=null;
+    layui.config({
+        base: '/static/layui/extend/'
+    }).use(['jquery','layer','table','form','element','upload'], function(){
+        var $=layui.jquery;
+        var layer=layui.layer;
+        table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+       var upload = layui.upload;
+        //方法级渲染
+        table.render({
+            elem: '#tableList'
+            ,url: '/assetinfo/list/?type={{.Type}}'
+            ,toolbar: '#bar'
+            ,defaultToolbar:[]
+            ,cols: [[
+                {checkbox: true}
+                ,{field:'No', title: '编号'}
+                ,{field:'Name', title: '资产名称'}
+                ,{field:'Cate', title: '所属大类'}
+                ,{field:'ChildCate', title: '资产分类'}
+                ,{field:'Num', align:'right', title: '数量'}
+                ,{field:'ValuationType', align:'center', title: '价值类型'}
+                ,{field:'Valuation', align:'right', title: '价值'}
+                ,{field:'Brand', align:'center', title: '品牌'}
+                ,{field:'Spec', align:'center', title: '规格'}
+                
+                 {{/* ,{field:'State', title: '状态', align:'center', width:100, templet: function(d){
+                        if(d.State==1){
+                            return '<span class="layui-badge layui-bg-green">进行中</span>'
+                        }
+                        return '<span class="layui-badge layui-bg-red">已结束</span>'
+                    
+                ,{fixed: 'right', width:160, align:'center', toolbar: '#bar'*/}}
+            ]]
+            ,id: 'mainList'
+            ,page: true
+            ,limit: 30
+            ,height: "full-185"
+        });
+        //头工具栏事件
+        table.on('toolbar(tableList)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+            case 'search':
+                var no = $('#no').val();
+                table.reload('mainList', {
+                    page: {
+                    curr: 1 //重新从第 1 页开始
+                },where: {
+                        no: no,
+                        type:{{.Type}}
+                    }
+                });
+                $('#no').val(no);
+            break;
+            case 'ok':
+                var data = checkStatus.data;
+                addAssetInfo(data)
+            break;
+            };
+        });
+    });
+
+</script>
+

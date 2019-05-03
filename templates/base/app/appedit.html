@@ -1,0 +1,477 @@
+<style>
+    /* .layui-form-label{
+            width:120px;
+        }
+        .layui-input-block {
+            margin-left: 150px;
+        }
+        .layui-layedit {
+        height:535px;
+    } */
+    .layui-upload-list .upload-block{
+        float:left;
+        margin-right:10px;
+        vertical-align:text-top;
+    }
+    .layui-upload-list .closeimg  
+    {  
+        position: relative;
+        top: -35px;
+        right: 5px;
+    } 
+    .layui-upload-list .closeimg:hover  
+    { 
+        cursor:pointer
+    }
+        </style>
+        
+<div class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+    <!--div style="margin: 10px 0px">
+                <blockquote class="layui-elem-quote">
+                    添加用户
+                </blockquote>
+            </div-->
+    <form class="layui-form" action="" method="post">
+        <div class="layui-col-md12 layui-col-xs12" style="padding:10px">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <!-- <div class="layui-form-item magt3"> -->
+                    <label class="layui-form-label"><span class="text-red">*</span>名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal" lay-verify="required" name="Name" value="{{info.Name}}"
+                            placeholder="请输入名称">
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label"><span class="text-red">*</span>计费方式</label>
+                    <div class="layui-input-inline">
+                        <select id="Mode" name="Mode" lay-verify="required">
+                            <option value="1" {%if info.Mode| integer==1%} selected {%endif%}>时间</option>
+                            <option value="2" {%if info.Mode| integer==2%} selected {%endif%}>计数</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">到期时间</label>
+                        <div class="layui-input-inline">
+                            <input type="Text" class="layui-input titleVal" id="expiretime" name="ExpireTime" value="{{info.ExpireTime.Time|date:"2006-01-02"}}"
+                                placeholder="请选择到期时间">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">计费次数</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input titleVal" name="Times" value="{{info.Times}}"
+                                placeholder="请输入次数">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">联系人</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" name="Linkman" value="{{info.Linkman}}"
+                                placeholder="请输入联系人">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-inline">
+                            <input type="Text" class="layui-input titleVal" name="Phone" value="{{info.Phone}}"
+                                placeholder="请输入电话">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">封面图</label>
+
+                        <div class="layui-inline layui-upload-list thumbBox mag0" style="width:150px;height:110px;line-height:110px;">
+                            <input type="hidden" id="Pin" name="Pin" value="{{info.Pin}}" />
+                            <img class="layui-upload-img thumbImg" style="width:150px;height:110px;" src="{{ info.Pin|filePath}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                   
+                        <label class="layui-form-label">版本</label>
+                        <div class="layui-input-inline">
+                            <select id="Edition" name="Edition">
+                                {%for item in editionlist%}
+                                <option value="{{item.Id}}" {%if item.Id| integer==info.Edition.Id|integer %} selected
+                                    {%endif%}>{{item.Name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label"><span class="text-red">*</span>状态</label>
+                    <div class="layui-input-inline">
+                        <select id="State" name="State">
+                            <option value="0" {%if info.State| integer==0%} selected {%endif%}>未审核</option>
+                            <option value="1" {%if info.State| integer==1%} selected {%endif%}>审核通过</option>
+                            <option value="-1" {%if info.State| integer==-1%} selected {%endif%}>审核未通过</option>
+                            
+
+                        </select>
+
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-block">
+                        <label class="layui-form-label">描述</label>
+
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input titleVal" name="Desc" value="{{info.Desc}}"
+                                placeholder="请输入描述">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">省</label>
+                        <div class="layui-input-inline">
+                            <select id="ProvinceId" name="ProvinceId" lay-filter="ProvinceId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.ProvinceId}};{{info.Province}}">{{info.Province}}</option>
+                                {% for val in provinceList%}
+                                <option value="{{val.Id}};{{val.Areaname}}">{{val.Areaname}}</option>
+                                {%endfor%}
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">市</label>
+                        <div class="layui-input-inline">
+                            <select id="CityId" name="CityId" lay-filter="CityId" lay-verify="required" lay-search="">
+                                <option value="{{info.CityId}};{{info.City}}">{{info.City}}</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">县/区</label>
+                        <div class="layui-input-inline">
+                            <select id="CountyId" name="CountyId" lay-filter="CountyId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.AreaId}};{{info.County}}">{{info.County}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                    <div class="layui-col-md6 layui-col-xs12">
+                            <div class="layui-inline">
+                                    <label class="layui-form-label">地址</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" class="layui-input titleVal" name="Address" value="{{info.Addr}}"
+                                            placeholder="请输入地址">
+                                    </div>
+                                </div>
+                    </div>
+                
+                
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">绑定域名</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="Domain" class="layui-input titleVal" name="Domain" value="{{info.Domain}}" placeholder="多个域名以,号分割"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">tub</label>
+                        <div class="layui-input-block layui-upload-list thumbBox1 mag1" style="width:150px;height:110px;line-height:110px;">
+                            <input type="hidden" id="Pics" name="Pics" value="{{info.Pics}}" />
+                            <img class="layui-upload-img thumbImg1" style="width:150px;height:110px;" src="{{ info.Pics|filePath}}">
+                        </div>
+                    </div>
+                </div> -->
+                <div class="layui-col-md12 layui-col-xs12">
+                        <div class="layui-form-item">
+                                <label class="layui-form-label">相关图片</label>
+                                <div class="layui-input-block">
+                                    <div class="layui-upload">                                     
+                                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                            <div class="layui-upload-list" style="height:70px;" id="picList">
+                                            {% if info.Pics %}
+                                            {% for picid in info.Pics|split:"," %}
+                                                <div class="upload-block">
+                                                <img class="layui-upload-img" heigh="55" width="55" src="{{picid|filePath}}" />
+                                                <i class="layui-icon closeimg" data-id="{{picid}}">&#x1007;</i>
+                                                </div>
+                                            {% endfor %}
+                                            {% endif %}
+                                            </div>
+                                        </blockquote>
+                                        <input type="hidden" id="pics" name="Pics" value="{{info.Pics}}"/>
+                                        <button type="button" class="layui-btn" id="picBtn"><i class="layui-icon">&#xe62f;</i>图片上传</button> 
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+            <div class="layui-row layui-col-space10">
+                
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入备注" name="Remark" class="layui-textarea">{{info.Remark}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block" style="text-align:left;">
+                <input type="hidden" name="Id" value="{{info.Id}}" />
+                <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
+                <a class="layui-btn layui-btn-primary" id="btnClose">关闭</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var $, form;
+    layui.use(['larry','form', 'laydate', 'element', 'layer', 'jquery', 'upload'], function () {
+        form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        $ = layui.jquery;
+        //   var formSelects = layui.formSelects;
+        var laydate = layui.laydate;
+        var upload = layui.upload;
+        form.verify({
+            rate: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (value < 0 || value > 1) {
+                    return "输入数值只能在0和1之间"
+                }
+            },
+            amount: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (value < 0) {
+                    return "输入数值不能小于0"
+                }
+            },
+            amortization: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    if (value < 3) {
+                        return "输入数值不能小于3"
+                    }
+                }
+                //我们既支持上述函数式的方式，也支持下述数组的形式
+                //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+                ,
+            pass: [
+                /^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+            ]
+        });
+        //监听有无保险
+        // form.on('switch(hasCarInsurance)', function(data){
+        //     this.checked ? $("#insuranceLayout").show() : $("#insuranceLayout").hide();
+        // });
+        // formSelects.render('orgIds')
+        form.on('select(ProvinceId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            console.log(data.value)
+            $("ProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选择市 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname + '">' +
+                            v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#CityId").html(html);
+                    $("#CountyId").html('<option value="">请选择区</option>');
+                    $("#aStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(CityId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            $("ProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选区县 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname + '">' +
+                            v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#CountyId").html(html);
+                    // $("#aStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        //上传缩略图
+        var uploadInst = upload.render({
+            elem: '.thumbBox',
+            url: '/upload',
+            // auto: false,
+            before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    // $('.thumbImg').attr('src', result); //图片链接（base64）
+                    // console.log(result);
+
+                });
+            },
+            done: function (res, index, upload) {
+                if (res.code == 0) {
+                    var data = res.data;
+                    $('#Pin').val(data.id);
+                    $('.thumbImg').attr('src', data.src);
+                    $('.thumbBox').css("background", "#fff");
+                    console.log(data);
+                } else {
+                    layer.alert('图片上传失败：' + res.msg, {
+                        icon: 5,
+                        title: '温馨提示'
+                    });
+                }
+            },
+            error: function (err) {
+                alert(err)
+            }
+        });
+      //多图片上传
+      upload.render({
+            elem: '#picBtn',
+            url: '/upload',
+            multiple: true,
+            acceptMime: 'image/*',
+            before: function(obj){
+            //预读本地文件示例，不支持ie8
+            obj.preview(function(index, file, result){
+                
+            });
+            }
+            ,done: function(res){
+                //上传完毕
+                var data = res.data;
+                $('#picList').append('<div class="upload-block"><img class="layui-upload-img" heigh="55" width="55" src="'
+                    + data.src +'" alt="'+ data.Title +'" ><i class="layui-icon closeimg" data-id="'+data.id+'">&#x1007;</i></div>');
+                var pics = $('#pics').val();
+                if(!pics){
+                    $('#pics').val(data.id);
+                }
+                else{
+                    $('#pics').val(pics+','+data.id);
+                }
+                
+            }
+        });
+        $(document).on('click' ,'.closeimg',function(){
+            var pics = $('#pics').val();
+            if(pics!='') {
+                var picArr = pics.split(',');
+                var id = $(this).data('id');
+                picArr.remove(id);
+                pics = picArr.join(',');
+                $('#pics').val(pics);
+            }
+            
+            $(this).parent().remove();
+        });
+        // form.on('select(CountyId)', function (data) {
+
+        //     var pn = data.value.split(";")
+
+        //     var pid = pn[0]
+        //     $.ajax({
+        //         url: "/common/area/getchildren",
+        //         data: {
+        //             "pid": pid,
+        //             limit: 100000
+        //         },
+        //         success: function (res) {
+        //             console.log(res)
+        //             var arr = ['<option value="">--- 请选街道---</option>']
+        //             $.each(res, function name(k, v) {
+        //                 arr.push('<option value="' + v.Id + ";" + v.Areaname + '">' +
+        //                     v.Areaname + '</option>')
+        //             })
+        //             var html = arr.join("")
+        //             $("#aStreetId").html(html);
+
+        //             form.render('select');
+        //         }
+        //     });
+        // });
+        form.on("submit(sub)", function (data) {
+            console.log(data)
+            data = data.field
+            data = $("form").serialize();
+            console.log(data)
+            $.post('/base/app/appedit', data, function (out) {
+
+                if (out.status == 0) {
+                    // layer.msg(out.message)
+                    layer.closeAll();
+                    window.location.reload();
+
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+        // formSelects.render('orgIds')
+        $("#btnClose").on("click", function () {
+            layer.closeAll()
+            return false;
+        })
+        laydate.render({
+            elem: '#expiretime',
+            // type: 'datetime',
+            // range: '到' //或 range: '~' 来自定义分割字符
+        });
+
+        form.render();
+    });
+</script>

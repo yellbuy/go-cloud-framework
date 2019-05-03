@@ -1,0 +1,237 @@
+<style>
+    .layui-form-label{
+            width:120px;
+        }
+        .layui-input-block {
+            margin-left: 150px;
+        }
+
+    .help-block {
+        color: gray;
+    }
+        </style>
+<div class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+    <!--div style="margin: 10px 0px">
+                <blockquote class="layui-elem-quote">
+                    添加用户
+                </blockquote>
+            </div-->
+    <form class="layui-form" action="" method="post">
+        <div class="layui-col-md12 layui-col-xs12" style="padding:10px">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <!-- <div class="layui-form-item magt3"> -->
+                    <label class="layui-form-label"><span class="text-red">*</span>名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal" lay-verify="required" name="Name" value="{{info.Name}}"
+                            placeholder="请输名称">
+                    </div>
+                    <!-- <input type="hidden" class="layui-input" lay-verify="required" name="ProductCompanyId" value="{{info.ProductCompanyId}}"
+                        placeholder="请输入项目名称"> -->
+
+                    <!-- </div> -->
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label"><span class="text-red">*</span>费方式</label>
+                    <div class="layui-input-inline">
+                        <select id="appmode" name="appmode">
+                            <option value="0" {%if info.Mode| integer==0%} selected {%endif%}>年</option>
+                            <option value="1" {%if info.Mode| integer==1%} selected {%endif%}>月</option>
+                            <option value="2" {%if info.Mode| integer==2%} selected {%endif%}>周</option>
+                            <option value="3" {%if info.Mode| integer==3%} selected {%endif%}>天</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">等级</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input titleVal" id="Level" name="Level" value="{{info.Level}}"
+                                placeholder="请输入等级">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">价格</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input titleVal" name="Price" value="{{info.Price|floatformat}}"
+                                placeholder="请输价格">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">记录限制</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" name="Limit" value="{{info.Limit}}"
+                                placeholder="请输记录限制">
+                            <span class="help-block m-b-none">(0:不限制)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input titleVal" name="Order" value="{{info.Order}}"
+                                placeholder="请输入排序">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-row layui-col-space10">
+
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label"><span class="text-red">*</span>类型</label>
+                    <div class="layui-input-inline">
+                        <select id="appstate" name="Kind">
+                            <option value="0" {%if info.Kind| integer==0%} selected {%endif%}>应用</option>
+                            <option value="1" {%if info.Kind| integer==1%} selected {%endif%}>租户</option>
+
+                        </select>
+
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label"><span class="text-red">*</span>数据状态</label>
+                    <div class="layui-input-inline">
+                        <select id="appstate" name="appstate">
+                            <option value="0" {%if info.State| integer==0%} selected {%endif%}>禁用</option>
+                            <option value="1" {%if info.State| integer==1%} selected {%endif%}>启用</option>
+                            <option value="-1" {%if info.State| integer==-1%} selected {%endif%}>删除</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <div class="layui-block">
+                        <label class="layui-form-label">说明</label>
+
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input titleVal" name="Remark" value="{{info.Remark}}"
+                                placeholder="请输入说明">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block" style="text-align:left;">
+                <input type="hidden" name="id" value="{{info.Id}}" />
+                <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
+                <a class="layui-btn layui-btn-primary" id="btnClose">关闭</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var $, form;
+    layui.use(['larry','form', 'laydate', 'element', 'layer', 'jquery', 'upload'], function () {
+        form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        $ = layui.jquery;
+        //   var formSelects = layui.formSelects;
+        var laydate = layui.laydate;
+        var upload = layui.upload;
+        form.verify({
+            rate: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (value < 0 || value > 1) {
+                    return "输入数值只能在0和1之间"
+                }
+            },
+            amount: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (value < 0) {
+                    return "输入数值不能小于0"
+                }
+            },
+            amortization: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    if (value < 3) {
+                        return "输入数值不能小于3"
+                    }
+                }
+                //我们既支持上述函数式的方式，也支持下述数组的形式
+                //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+                ,
+            pass: [
+                /^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+            ]
+        });
+        //监听有无保险
+        // form.on('switch(hasCarInsurance)', function(data){
+        //     this.checked ? $("#insuranceLayout").show() : $("#insuranceLayout").hide();
+        // });
+        // formSelects.render('orgIds')
+
+
+        // form.on('select(CountyId)', function (data) {
+
+        //     var pn = data.value.split(";")
+
+        //     var pid = pn[0]
+        //     $.ajax({
+        //         url: "/common/area/getchildren",
+        //         data: {
+        //             "pid": pid,
+        //             limit: 100000
+        //         },
+        //         success: function (res) {
+        //             console.log(res)
+        //             var arr = ['<option value="">--- 请选街道---</option>']
+        //             $.each(res, function name(k, v) {
+        //                 arr.push('<option value="' + v.Id + ";" + v.Areaname + '">' +
+        //                     v.Areaname + '</option>')
+        //             })
+        //             var html = arr.join("")
+        //             $("#aStreetId").html(html);
+
+        //             form.render('select');
+        //         }
+        //     });
+        // });
+        form.on("submit(sub)", function (data) {
+            console.log(data)
+            data = data.field
+            data = $("form").serialize();
+
+            $.post('/base/edition/editionedit', data, function (out) {
+
+                if (out.status == 0) {
+                    // layer.msg(out.message)
+                    layer.closeAll();
+                    window.location.reload();
+
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+        // formSelects.render('orgIds')
+        $("#btnClose").on("click", function () {
+            layer.closeAll()
+            return false;
+        })
+        laydate.render({
+            elem: '#expiretime',
+            // type: 'datetime',
+            // range: '到' //或 range: '~' 来自定义分割字符
+        });
+
+        form.render();
+    });
+</script>

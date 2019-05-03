@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .demonstration {
+            display: block;
+            color: #8492a6;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h3 >基础用法</h3>
+    <div style="width: 200px;">
+        <el-input  v-model="input" placeholder="请输入内容"></el-input>
+    </div>
+    <h3 >禁用状态</h3>
+    <div style="width: 200px;margin: 20px 0">
+        <el-input
+                placeholder="请输入内容"
+                v-model="input1"
+                :disabled="true">
+        </el-input>
+    </div>
+    <h3 >可清空</h3>
+    <div style="width: 200px;margin: 20px 0">
+        <el-input
+                placeholder="请输入内容"
+                v-model="input10"
+                clearable>
+        </el-input>
+    </div>
+
+    <h3 >带 icon 的输入框</h3>
+    <div style="width: 200px;margin: 20px 0;display: inline-block">
+        <el-input
+                placeholder="请选择日期"
+                suffix-icon="el-icon-date"
+                v-model="input2">
+        </el-input>
+    </div>
+    <div style="width: 200px;margin: 20px 0;display: inline-block">
+        <el-input
+                placeholder="请输入内容"
+                prefix-icon="el-icon-search"
+                v-model="input21">
+        </el-input>
+    </div>
+
+</div>
+
+
+</body>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {visible: false}
+        }
+    });
+
+</script>
+</html>

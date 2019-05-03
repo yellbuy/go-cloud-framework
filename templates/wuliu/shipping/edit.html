@@ -1,0 +1,721 @@
+{% extends "../../_share/base.html"%}
+{% block head %}
+
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+
+{% endblock %}
+
+{% block content %}
+<div class="layui-layout layui-layout-admin">
+    <form class="layui-form layui-row layui-col-space10">
+        <div class="layui-col-md12 layui-col-xs12" style="padding-left: 10px;margin-top:10px;">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item magt3">
+                        <input type="hidden" name="id" value="{{info.Id}}">
+                        <input type="hidden" name="No" value="{{info.No}}">
+                        <label class="layui-form-label"><span class="text-red">*</span>发货人 </label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" id="FromUnit" name="FromUnit" value="{{info.SendUnit}}" placeholder="发货人姓名">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" lay-verify="required|number|phone" id="FromTel" name="FromTel" value="{{info.SendMobile}}" placeholder="请输入电话">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>发货网点</label>
+                        <div class="layui-input-inline">
+                            <select id="Fromsit" name="Fromsit" lay-filter="Fromsit" lay-verify="required" lay-search="" placeholder="请输入国家">
+                                <option value="{{info.SendsiteFid}};{{info.SendsiteFname}}">{{info.SendsiteFname}}</option>
+                                {% for val in towebsit%}
+                                <option value="{{val.Id}}">{{val.Name}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <fieldset class="layui-elem-field layui-field-title" style="margin-top: 00px;">
+                        <legend>发货地址</legend>
+                    </fieldset> -->
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h3 class="layui-colla-title">发货地址</h3>
+                            <div class="layui-colla-content ">
+                                <div class="layui-form-item">
+
+                                    <label class="layui-form-label"><span class="text-red"></span>省</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ProvinceId" name="ProvinceId" lay-filter="ProvinceId" lay-verify="required" lay-search="">
+                                            <option value="{{farea.province}};{{info.SendProvince}}">{{info.SendProvince}}</option>
+                                            {% for val in provinceList%}
+                                            <option value="{{val.Id}};{{val.Areaname}}">{{val.Areaname}}</option>
+                                            {%endfor%}
+                                        </select>
+
+                                    </div>
+                                    <label class="layui-form-label"><span class="text-red">*</span>市</label>
+                                    <div class="layui-input-inline">
+                                        <select id="CityId" name="CityId" lay-filter="CityId" lay-verify="required" lay-search="">
+                                            <option value="{{farea.city}};{{info.SendCity}}">{{info.SendCity}}</option>
+                                        </select>
+                                    </div>
+                                    <label class="layui-form-label"><span class="text-red">*</span>县/区</label>
+                                    <div class="layui-input-inline">
+                                        <select id="CountyId" name="CountyId" lay-filter="CountyId" lay-verify="required" lay-search="">
+                                            <option value="{{farea.county}};{{info.SendCounty}}">{{info.SendCounty}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-col-md6 layui-col-xs6">
+                                        <label class="layui-form-label">详细地址</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" class="layui-input titleVal" lay-verify="required" id="Address" name="Address" value="{{info.SendAddr}}" placeholder="请输入详细地址">
+                                        </div>
+                                    </div>
+                                    <label class="layui-form-label"></label>
+                                    <div class="layui-input-inline">
+                                        <input type="checkbox" name="Fromaddrsave" ay-skin="primary" title="保存地址" checked>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>收货人</label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="ToUnit" id="ToUnit" value="{{info.ReceiveUnit}}" placeholder="请输入收货人">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" lay-verify="required|phone|number" name="ToTel" id="ToTel" value="{{info.ReceiveMobile}}" placeholder="请输入电话">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>到货网点</label>
+                        <div class="layui-input-inline">
+                            <select id="Tosit" name="Tosit" lay-filter="Tosit" lay-verify="required" lay-search="" placeholder="请输入网点">
+                                <option value="{{info.ReceivesiteFid}};{{info.ReceivesiteFname}}">{{info.ReceivesiteFname}}</option>
+                                {% for val in fromwebsit%}
+                                <option value="{{val.Id}}">{{val.Name}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h3 class="layui-colla-title">到货地址</h3>
+                            <div class="layui-colla-content ">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label"><span class="text-red"></span>省</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ToProvinceId" name="ToProvinceId" lay-filter="ToProvinceId" lay-verify="required" lay-search="">
+                                            <option value="{{tarea.province}};{{info.ReceiveProvince}}">{{info.ReceiveProvince}}</option>
+                                            {% for val in provinceList%}
+                                            <option value="{{val.Id}};{{val.Areaname}}">{{val.Areaname}}</option>
+                                            {%endfor%}
+                                        </select>
+
+                                    </div>
+                                    <label class="layui-form-label"><span class="text-red">*</span>市</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ToCityId" name="ToCityId" lay-filter="ToCityId" lay-verify="required" lay-search="">
+                                            <option value="{{tarea.city}};{{info.ReceiveCity}}">{{info.ReceiveCity}}</option>
+                                        </select>
+                                    </div>
+                                    <label class="layui-form-label"><span class="text-red">*</span>县/区</label>
+                                    <div class="layui-input-inline">
+                                        <select id="ToCountyId" name="ToCountyId" lay-filter="ToCountyId" lay-verify="required" lay-search="">
+                                            <option value="{{tarea.county}};{{info.ReceiveCounty}}">{{info.ReceiveCounty}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-col-md6 layui-col-xs6">
+                                        <label class="layui-form-label">地址</label>
+                                        <div class="layui-input-block" style="line-height:36px">
+                                            <input type="text" class="layui-input titleVal" lay-verify="required" id="ToAddress" name="ToAddress" value="{{info.ReceiveAddr}}" placeholder="请输入详细地址">
+                                        </div>
+                                    </div>
+                                    <label class="layui-form-label"></label>
+                                    <div class="layui-input-inline">
+                                        <input type="checkbox" name="Toaddrsave" ay-skin="primary" title="保存地址" checked>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">类型</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="Kind" value="1" title="个人" checked lay-skin="primary"/>
+                        <input type="radio" name="Kind" value="2" title="单位" lay-skin="primary"/>
+                    </div> -->
+                        <label class="layui-form-label"><span class="text-red">*</span>货物名称</label>
+                        <div class="layui-input-inline">
+                            <select id="ToCountyId" name="GoodsName" lay-filter="" lay-verify="required" lay-search="">
+                                <option value="{{info.GoodsName}}">{{info.GoodsName}}</option>
+                                {% for val in shippingcalss %}
+                                <option value="{{val}}">{{val}}</option>
+                                {% endfor%}
+                            </select>
+                        </div>
+
+                        <label class="layui-form-label">数量</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input" name="Amount" value="{{info.Amount}}" placeholder="请输入数量">
+                        </div>
+                        <label class="layui-form-label">重量</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Weight" value="{{info.Weight|floatformat}}" placeholder="请输入重量">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">附加条件</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="addition" value="1" title="回单" checked lay-skin="primary" />
+                            <input type="radio" name="addition" value="2" title="打收条" lay-skin="primary" />
+                            <input type="radio" name="addition" value="3" title="其他" lay-skin="primary" />
+                        </div> -->
+                        <label class="layui-form-label">收费方式</label>
+                        <div class="layui-input-block">
+
+                            <input type="radio" name="PayMode" value="1" title="现付" {%if info.PayMode==1 %}checked{%endif%}>
+                            <input type="radio" name="PayMode" value="2" title="到付" {%if info.PayMode==2 %}checked{%endif%}>
+                            <input type="radio" name="PayMode" value="3" title="月结" {%if info.PayMode==3 %}checked{%endif%}>
+                            <input type="radio" name="PayMode" value="4" title="回单付" {%if info.PayMode==4 %}checked{%endif%}>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">配送方式</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="DeliveryMode" value="1" title="自取" {%if info.DeliveryMode==1 %}checked{%endif%} lay-skin="primary" />
+                            <input type="radio" name="DeliveryMode" value="2" title="配送" {%if info.DeliveryMode==2 %}checked{%endif%} lay-skin="primary" />
+
+                        </div>
+                        <label class="layui-form-label">收费状态</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="PayStatus" value="1" title="未付" {%if info.PayState==1 %}checked{%endif%} lay-skin="primary" />
+                            <input type="radio" name="PayStatus" value="2" title="已付" {%if info.PayState==2 %}checked{%endif%} lay-skin="primary" />
+
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>运费</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="Freight" name="Freight" value="{{info.Freight|floatformat}}" placeholder="￥">
+                            <!-- <input type="hidden" class="layui-input" name="" value="{{info.PackFee|floatformat}}" placeholder="￥"> -->
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+
+
+
+                    </div>
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h3 class="layui-colla-title">其他费用</h3>
+                            <div class="layui-colla-content ">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">保价金额</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="PremiumAmount" value="{{info.PremiumAmount|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">保价费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="PremiumFee" value="{{info.PremiumFee|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">打包费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="PackFee" value="{{info.PackFee|floatformat}}" placeholder="￥">
+
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">代收款</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="AgencyFund" value="{{info.AgencyFund|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">垫付款</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="Disbursement" value="{{info.Disbursement|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">车号</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="TruckNo" value="{{info.TruckNo}}" placeholder="">
+                                    </div>
+
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">接货费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="FreightReciver" value="{{info.FreightReciver|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">送货费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="FreightSend" value="{{info.FreightSend|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">分拨费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="FreightDispatch" value="{{info.FreightDispatch|floatformat}}" placeholder="￥">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">拓展已付</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="ExpendPaid" value="{{info.ExpendPaid|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">拓展未付</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="ExpendUnpaid" value="{{info.ExpendUnpaid|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">短信费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="SmsFee" value="{{info.SmsFee|floatformat}}" placeholder="￥">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">出港仓储</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="LeaveStorage" value="{{info.LeaveStorage|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">进港仓储</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="ArrivalStorage" value="{{info.ArrivalStorage|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">叉吊费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="CarryFee" value="{{info.CarryFee|floatformat}}" placeholder="￥">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">代办费</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="CommissionFee" value="{{info.CommissionFee|floatformat}}" placeholder="￥">
+                                    </div>
+                                    <label class="layui-form-label">体积</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="Volume" value="{{info.Volume|floatformat}}" placeholder="请输入体积">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入备注" name="Comment" class="layui-textarea">{{info.Comment}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<!-- <script type="text/javascript" src="/static/layui/tableSelect.js"></script> -->
+<script>
+    var $, form;
+    // layui.config({
+    //     base: "/static/layui/extend/"
+    // })
+    // .extend({
+    //     // formSelects: 'formSelects-v4'
+    // });
+    layui.use(['larry', 'form', 'element', 'layer', 'jquery', 'tableSelect'], function () {
+        form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        $ = layui.jquery;
+
+        // var formSelects = layui.formSelects;
+        //佛曰, 格式不可变, 不喜欢 name,value 可以使用config重新定义
+        //同样适合剥去外皮, 同样可以使用config beforeSuccess处理数据, 不过你需要这么写
+
+        // formSelects.render('orgIds')
+        form.on("submit(sub)", function (data) {
+            console.log(data)
+            data = $("form").serialize();
+            $.post('/wuliu/shipping/edit', data, function (out) {
+
+                if (out.status == 0) {
+                    // layer.msg("操作成功")
+                    var it_id = out.message
+                    layer.alert('操作成功', {
+                        icon: 1
+                    }, function (index) {
+                        if (it_id == 0) {
+                            window.location.reload();
+                        } else {
+                            window.location.href = "/wuliu/shipping/edit/?id=" + it_id;
+                        }
+
+                    });
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+
+        var tableSelect = layui.tableSelect;
+        tableSelect.render({
+            elem: '#FromUnit',
+            searchKey: 'search',
+            checkedKey: 'Id',
+            searchPlaceholder: '输入姓名或手机号',
+            table: {
+                url: '/wuliu/address/searchlist',
+                cols: [
+                    [{
+                            type: 'radio'
+                        },
+
+                        {
+                            field: 'Name',
+                            title: '姓名'
+                        },
+                        {
+                            field: 'Mobile',
+                            title: '电话'
+                        },
+                        {
+                            field: 'Id',
+                            title: '地址',
+                            templet: function (row) {
+                                return row.Province + " " + row.City + " " + row.County + " " + row.Addr
+                            }
+                        },
+                    ]
+                ]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.username)
+
+
+                })
+
+                elem.val(data["data"][0].Name);
+                $("#FromTel").val(data["data"][0].Mobile);
+                $("#ProvinceId").html('<option value="' + data["data"][0].ProvinceId + ';' +
+                    data["data"][0].Province + '">' + data["data"][0].Province + '</option>');
+                $("#CityId").html('<option value="' + data["data"][0].CityId + ';' +
+                    data["data"][0].City + '">' + data["data"][0].City + '</option>');
+                $("#CountyId").html('<option value="' + data["data"][0].CountyId + ';' +
+                    data["data"][0].County + '">' + data["data"][0].County + '</option>');
+                $("#Address").val(data["data"][0].Addr);
+                form.render('select');
+
+            }
+        });
+        tableSelect.render({
+            elem: '#ToUnit',
+            searchKey: 'search',
+            checkedKey: 'Id',
+            searchPlaceholder: '输入姓名或手机号',
+            table: {
+                url: '/wuliu/address/searchlist',
+                cols: [
+                    [{
+                            type: 'radio'
+                        },
+
+                        {
+                            field: 'Name',
+                            title: '姓名'
+                        },
+                        {
+                            field: 'Mobile',
+                            title: '电话'
+                        },
+                        {
+                            field: 'Id',
+                            title: '地址',
+                            templet: function (row) {
+                                return row.Province + " " + row.City + " " + row.County + " " + row.Addr
+                            }
+                        },
+                    ]
+                ]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.username)
+
+
+                })
+
+                elem.val(data["data"][0].Name);
+                $("#ToTel").val(data["data"][0].Mobile);
+                $("#ToProvinceId").html('<option value="' + data["data"][0].ProvinceId + ';' +
+                    data["data"][0].Province + '">' + data["data"][0].Province + '</option>');
+                $("#ToCityId").html('<option value="' + data["data"][0].CityId + ';' +
+                    data["data"][0].City + '">' + data["data"][0].City + '</option>');
+                $("#ToCountyId").html('<option value="' + data["data"][0].CountyId + ';' +
+                    data["data"][0].County + '">' + data["data"][0].County + '</option>');
+                $("#ToAddress").val(data["data"][0].Addr);
+                form.render('select');
+            }
+        })
+
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        form.on('select(ProvinceId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            console.log(data.value)
+            $("ProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选择市 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#CityId").html(html);
+                    $("#CountyId").html('<option value="">请选择区</option>');
+                    $("#aStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(CityId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            $("ProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选区县 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#CountyId").html(html);
+                    $("#aStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(CountyId)', function (data) {
+
+            var pn = data.value.split(";")
+
+            var pid = pn[0]
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选街道---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#StreetId").html(html);
+
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(ToProvinceId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            console.log(data.value)
+            $("ToProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选择市 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#ToCityId").html(html);
+                    $("#ToCountyId").html('<option value="">请选择区</option>');
+                    // $("#ToStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(ToCityId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            // $("toProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选区县 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#ToCountyId").html(html);
+                    // $("#toStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(ToCountyId)', function (data) {
+
+            var pn = data.value.split(";")
+
+            var pid = pn[0]
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选街道---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    // $("#toStreetId").html(html);
+                    form.render('select');
+                }
+            });
+        });
+
+
+        form.on('select(Fromsit)', function (data) {
+            var pid = data.value
+            console.log(data.value)
+            var url = "/base/tenant/gettenantbyid";
+            $.post(url, {
+                id: pid
+            }, function (out) {
+                console.log(out)
+                var ht = $("#ProvinceId").html();
+                ht = '<option value="' + out.ProvinceId + ";" + out.Province + '">' + out.Province + '</option>' + ht;
+                $("#ProvinceId").html(ht);
+                $("#CityId").html('<option value="' + out.CityId + " ;" + out.City + '">' + out.City + '</option>');
+                $("#CountyId").html('<option value=""' + out.AreaId + ";" + out.County + '>' + out.County + '</option>');
+                $("#Address").val(out.Addr);
+                form.render('select');
+            });
+        });
+        form.on('select(Tosit)', function (data) {
+            var pid = data.value
+            console.log(data.value)
+            var url = "/base/tenant/gettenantbyid";
+            $.post(url, {
+                id: pid
+            }, function (out) {
+                console.log(out)
+                var ht = $("#ToProvinceId").html();
+                ht = '<option value="' + out.ProvinceId + " ;" + out.Province + '">' + out.Province + '</option>' + ht;
+                $("#ToProvinceId").html(ht);
+                $("#ToCityId").html('<option value="' + out.CityId + " ;" + out.City + '">' + out.City + '</option>');
+                $("#ToCountyId").html('<option value=""' + out.AreaId + ";" + out.County + '>' + out.County + '</option>');
+                $("#ToAddress").val(out.Addr);
+                form.render('select');
+            });
+        });
+        form.render();
+    });
+    // function fright(ob) {
+    //     var url = "/wuliu/shipping/fright_count/?id=" + ob;
+    //     $.get(url, function (html, status) {
+    //         var elem = $('#Freight');
+    //         // layer.open({
+    //         //     title: "运费计算",
+    //         //     type: 1,
+    //         //     anim: 2,
+    //         //     closeBtn: 0,
+    //         //     shadeClose: false, //开启遮罩关闭
+    //         //     content: html,
+    //         //     area: ['40%', '40%']
+    //         // });
+    //         var t = elem.offset().top + elem.outerHeight() + "px";
+    //         var l = elem.offset().left + "px";
+    //         var tableName = "tableSelect_table_" + new Date().getTime();
+    //         var tableBox = '<div class="tableSelect layui-anim layui-anim-upbit" style="left:' + l + ';top:' + t + ';border: 1px solid #d2d2d2;background-color: #fff;box-shadow: 0 2px 4px rgba(0,0,0,.12);padding:10px 10px 0 10px;position: absolute;z-index:66666666;margin: 5px 0;border-radius: 2px;min-width:530px;">';
+    //         tableBox += html;
+    //         tableBox += '</div>';
+    //         tableBox = $(tableBox);
+    //         $('body').append(tableBox);
+    //         //按钮选中
+    //         tableBox.find('.fright_sub').on('click', function () {
+    //             var checkStatus = table.checkStatus(tableName);
+    //             if (checkedData.length > 1) {
+    //                 checkStatus.data = checkedData;
+    //             }
+    //             selectDone(checkStatus);
+    //         });
+    //         //写值回调和关闭
+    //         function selectDone(checkStatus) {
+    //             if (opt.checkedKey) {
+    //                 var selected = [];
+    //                 for (var i = 0; i < checkStatus.data.length; i++) {
+    //                     selected.push(checkStatus.data[i][opt.checkedKey])
+    //                 }
+    //                 elem.attr("ts-selected", selected.join(","));
+    //             }
+    //             opt.done(elem, checkStatus);
+    //             tableBox.remove();
+    //             delete table.cache[tableName];
+    //             checkedData = [];
+    //         }
+
+    //         //点击其他区域关闭
+    //         $(document).mouseup(function (e) {
+    //             var userSet_con = $('#frieght,.tableSelect');
+    //             if (!userSet_con.is(e.target) && userSet_con.has(e.target).length === 0) {
+    //                 tableBox.remove();
+    //                 // delete table.cache[tableName];
+    //                 // checkedData = [];
+    //             }
+    // });
+    // })
+    // }
+</script>
+{% endblock %}

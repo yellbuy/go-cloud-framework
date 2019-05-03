@@ -1,0 +1,45 @@
+.wrapper-revise{
+  padding: 15px 15px 0px 15px;
+}
+.wrapper-revise .layui-table-view{
+  margin:0;
+  overflow: visible;
+}
+.nomargin{
+  margin:0
+}
+.layui-table .layui-table-view, 
+.layui-table-body td[data-field^="overflow-visible-"] .layui-table-cell{
+  overflow: visible
+}
+.layui-table-view .layui-table-fixed{
+  /* height: 90%;    */
+  /* height: 360px;    */
+  /* height: 90%;
+  max-height: 100% */
+  height: 90%;
+}
+.layui-table-view .layui-table-fixed .layui-table-body{
+  min-height: 99% !important;   
+}
+.layui-table-cell .dropdown-menu{
+  min-width: 80px
+}
+.layui-table-view .layui-table-fixed-r{
+  border-left:0px;
+  box-shadow: 0px 0 0px rgba(0,0,0,.1);
+}
+.layui-table-view .layui-table-fixed-r .layui-table{
+  border-left:1px solid #e2e2e2;
+  box-shadow: -1px 0 8px rgba(0,0,0,.1);
+}
+.layui-table-body table tr:nth-last-child(-n+5) td[data-field^="overflow-visible-"] .dropdown-menu
+{
+  top:auto;
+  bottom:100%
+}
+.layui-table-body table tr:nth-child(-n+5) td[data-field^="overflow-visible-"] .dropdown-menu
+{
+  top:100%;
+  bottom:auto
+}

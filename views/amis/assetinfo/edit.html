@@ -1,0 +1,110 @@
+<link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css"/>
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script>
+<div-- class="layui-layout layui-layout-admin" style="padding-left: 10px;margin-top: 20px;">
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+<form class="layui-form" action="" method="post" >
+    <div class="layui-col-md12 layui-col-xs12">
+		<div class="layui-row layui-col-space10">
+			<div class="layui-col-md9 layui-col-xs7">
+				<div class="layui-form-item magt3">
+                    <label class="layui-form-label"><span class="text-red">*</span>名称</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input titleVal"  lay-verify="required" name="Name" value="{{ .info.Name }}" placeholder="请输入姓名">
+					</div>
+					<label class="layui-form-label"><span class="text-red">*</span>证件号码</label>
+					<div class="layui-input-inline" style="line-height:36px">
+                        <input type="text" class="layui-input titleVal"  lay-verify="required" name="Username" value="{{ .info.Username }}" placeholder="请输入账号，不支持更改">
+					</div>
+				</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">类型</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="Kind" value="1" title="个人" {{ if eq .info.Kind 1}} checked {{end}} lay-skin="primary"/>
+                        <input type="radio" name="Kind" value="2" title="单位" {{ if eq .info.Kind 2}} checked {{end}} lay-skin="primary"/>
+                    </div>
+					<label class="layui-form-label"><span class="text-red">*</span>手机号</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"  lay-verify="required|phone" name="Mobile" value="{{ .info.Mobile }}" placeholder="请输入手机号">
+					</div>
+				</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">座机</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"  lay-verify="phone" name="Tel" value="{{ .info.Tel }}" placeholder="请输入座机号码">
+					</div>
+					<label class="layui-form-label">地址</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" name="Address" value="{{ .info.Address }}" placeholder="请输入地址">
+					</div>
+				</div>
+                <div class="layui-form-item newsTop">
+                    <label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+                        <textarea placeholder="请输入备注" name="Remark" class="layui-textarea">{{ .info.Remark }}</textarea>
+                    </div>
+				</div>
+			</div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <input type="hidden" name="Enable" value="1" />
+                    <input type="hidden" name="Id" value="{{ .info.Id }}" />
+                    <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+		</div>
+	</div>
+</form>
+</div>
+<div id="orgContent" class="menuContent" style="display:none; position: absolute;">
+    <ul id="treeOrg" class="ztree" style="margin-top:0; width:200px; height: 200px"></ul>
+</div>
+<script>
+
+var $,form;
+    layui.config({
+            base : "/static/layui/extend/"
+    }).extend({
+        formSelects: 'formSelects-v4'
+    });
+    layui.use(['form','element','layer','jquery', 'formSelects'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      $ = layui.jquery;
+      var formSelects = layui.formSelects;
+        //佛曰, 格式不可变, 不喜欢 name,value 可以使用config重新定义
+        //同样适合剥去外皮, 同样可以使用config beforeSuccess处理数据, 不过你需要这么写
+        
+       // formSelects.render('orgIds')
+      form.on("submit",function(data) {
+          console.log(data)
+          data =  $("form").serialize();
+            $.post('{{urlfor "contractController.Edit"}}', data, function (out) {
+                
+                if (out.status == 0) {
+                    // layer.msg("操作成功")
+                    layer.alert('操作成功', {icon: 1},function(index){
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+
+        form.render();
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        
+    }); 
+</script>

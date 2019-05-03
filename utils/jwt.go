@@ -1,0 +1,91 @@
+package utils
+
+import (
+	"errors"
+	"log"
+	"strconv"
+
+	"github.com/astaxie/beego/config"
+	"github.com/dgrijalva/jwt-go"
+)
+
+type EasyToken struct {
+	Username  string
+	Uid       uint
+	Roleids   string
+	Isleader  int8
+	ExpiresAt int64
+}
+
+var (
+	verifyKey  string
+	ErrAbsent  = "token absent"  // 令牌不存在
+	ErrInvalid = "token invalid" // 令牌无效
+	ErrExpired = "token expired" // 令牌过期
+	ErrOther   = "other error"   // 其他错误
+)
+
+func init() {
+	appConf, err := config.NewConfig("ini", "conf/app.conf")
+	if err != nil {
+		panic(err)
+	}
+	verifyKey = appConf.String("jwt::token")
+}
+
+func (e EasyToken) GetToken() (string, error) {
+	claims := &jwt.StandardClaims{
+		Id:        strconv.FormatInt(int64(e.Uid), 10),
+		Issuer:    e.Username,
+		Subject:   e.Roleids,
+		Audience:  strconv.FormatInt(int64(e.Isleader), 10),
+		ExpiresAt: e.ExpiresAt, //time.Unix(c.ExpiresAt, 0)
+	}
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte(verifyKey))
+	if err != nil {
+		log.Println(err)
+	}
+	return tokenString, err
+}
+
+func (e EasyToken) ValidateToken(tokenString string) (bool, *EasyToken, error) {
+	if tokenString == "" {
+		return false, nil, errors.New(ErrAbsent)
+	}
+	claims := jwt.StandardClaims{}
+	token, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(verifyKey), nil
+	})
+	if token == nil {
+		return false, nil, errors.New(ErrInvalid)
+	}
+	if token.Valid {
+
+		easyToken := new(EasyToken)
+		uid, err := strconv.ParseInt(claims.Id, 10, 64)
+		if err != nil {
+			return false, easyToken, nil
+		}
+		isleader, err := strconv.ParseInt(claims.Audience, 10, 8)
+		if err != nil {
+			return false, easyToken, nil
+		}
+		easyToken.Uid = uint(uid)
+		easyToken.Username = claims.Issuer
+		easyToken.Roleids = claims.Subject
+		easyToken.Isleader = int8(isleader)
+		easyToken.ExpiresAt = claims.ExpiresAt
+		return true, easyToken, nil
+	} else if ve, ok := err.(*jwt.ValidationError); ok {
+		if ve.Errors&jwt.ValidationErrorMalformed != 0 {
+			return false, nil, errors.New(ErrInvalid)
+		} else if ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0 {
+			return false, nil, errors.New(ErrExpired)
+		} else {
+			return false, nil, errors.New(ErrOther)
+		}
+	} else {
+		return false, nil, errors.New(ErrOther)
+	}
+}

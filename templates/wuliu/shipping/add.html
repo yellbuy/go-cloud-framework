@@ -1,0 +1,462 @@
+{% extends "../../_share/base.html"%}
+{% block head %}
+<link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css" />
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script>
+
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+{% endblock %}
+
+{% block content %}
+<div class="layui-layout layui-layout-admin" style="padding-left: 10px;margin-top: 20px;">
+    <form class="layui-form" action="" method="post">
+        <div class="layui-col-md12 layui-col-xs12">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md9 layui-col-xs7">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label"><span class="text-red">*</span>发货人 </label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="FromFname"
+                                value="" placeholder="发货人姓名">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="FromTel" value=""
+                                placeholder="请输入电话">
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发货地址:</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" name="Country" value="中国" placeholder="请输入国家">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red"></span>省</label>
+                        <div class="layui-input-inline">
+                            <select id="ProvinceId" name="ProvinceId" lay-filter="ProvinceId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.ProvinceId}};{{info.Province}}">选择省</option>
+                                {% for val in provinceList%}
+                                <option value="{{val.Id}};{{val.Areaname}}">{{val.Areaname}}</option>
+                                {%endfor%}
+                            </select>
+
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>市</label>
+                        <div class="layui-input-inline">
+                            <select id="CityId" name="CityId" lay-filter="CityId" lay-verify="required" lay-search="">
+                                <option value="{{info.CityId}};{{info.City}}">{{info.City}}</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>县/区</label>
+                        <div class="layui-input-inline">
+                            <select id="CountyId" name="CountyId" lay-filter="CountyId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.CountyId}};{{info.County}}">{{info.County}}</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label">街道</label>
+                        <div class="layui-input-inline">
+                            <select id="StreetId" name="StreetId" lay-filter="aStreetId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.StreetId}};{{info.Street}}">{{info.Street}}</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="Address" value=""
+                                placeholder="请输入详细地址">
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>收货人</label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="ToUnit" value=""
+                                placeholder="请输入收货人">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="Totel" value=""
+                                placeholder="请输入电话">
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">收货地址:</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" name="toCountry" value="中国" placeholder="请输入国家">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red"></span>省</label>
+                        <div class="layui-input-inline">
+                            <select id="toProvinceId" name="toProvinceId" lay-filter="toProvinceId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.ProvinceId}};{{info.Province}}">选择省</option>
+                                {% for val in provinceList%}
+                                <option value="{{val.Id}};{{val.Areaname}}">{{val.Areaname}}</option>
+                                {%endfor%}
+                            </select>
+
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>市</label>
+                        <div class="layui-input-inline">
+                            <select id="toCityId" name="toCityId" lay-filter="toCityId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.CityId}};{{info.City}}">{{info.City}}</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>县/区</label>
+                        <div class="layui-input-inline">
+                            <select id="toCountyId" name="toCountyId" lay-filter="toCountyId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.CountyId}};{{info.County}}">{{info.County}}</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label">街道</label>
+                        <div class="layui-input-inline">
+                            <select id="toStreetId" name="toStreetId" lay-filter="toStreetId" lay-verify="required"
+                                lay-search="">
+                                <option value="{{info.StreetId}};{{info.Street}}">{{info.Street}}</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label">地址</label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="toAddress"
+                                value="" placeholder="请输入详细地址">
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">类型</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="Kind" value="1" title="个人" checked lay-skin="primary"/>
+                        <input type="radio" name="Kind" value="2" title="单位" lay-skin="primary"/>
+                    </div> -->
+                        <label class="layui-form-label"><span class="text-red">*</span>货物名称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="GoodsName" value="" placeholder="请输入货物名称">
+                        </div>
+
+                        <label class="layui-form-label">数量</label>
+                        <div class="layui-input-inline">
+                            <input type="number" class="layui-input" name="Amount" value="" placeholder="请输入数量">
+                        </div>
+                        <label class="layui-form-label">重量</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Weight" value="" placeholder="请输入重量">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">附加条件</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="addition" value="1" title="回单" checked lay-skin="primary" />
+                            <input type="radio" name="addition" value="2" title="打收条" lay-skin="primary" />
+                            <input type="radio" name="addition" value="3" title="其他" lay-skin="primary" />
+                        </div> -->
+                        <label class="layui-form-label">收费方式</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="PayMode" value="1" title="现付" checked lay-skin="primary" />
+                            <input type="radio" name="PayMode" value="2" title="到付" lay-skin="primary" />
+                            <input type="radio" name="Paymode" value="3" title="月结" lay-skin="primary" />
+                            <input type="radio" name="PayMode" value="3" title="回单付" lay-skin="primary" />
+                        </div>
+                        <label class="layui-form-label">配送方式</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="deliverMode" value="1" title="自取" checked lay-skin="primary" />
+                            <input type="radio" name="deliverMode" value="2" title="配送" lay-skin="primary" />
+
+                        </div>
+                        <label class="layui-form-label">收费状态</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="PayState" value="1" title="未付" checked lay-skin="primary" />
+                            <input type="radio" name="PayState" value="2" title="已付" lay-skin="primary" />
+
+                        </div>
+                        <!-- <label class="layui-form-label"><span class="text-red">*</span>货物名称</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"  lay-verify="required|phone" name="Mobile" value="" placeholder="请输入货物名称">
+					</div>
+				 -->
+
+                        <!--    <label class="layui-form-label">重量</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"  name="Tel" value="" placeholder="请输入重量">
+                    </div> -->
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">体积</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Volume" value="" placeholder="请输入体积">
+                        </div>
+
+                        <label class="layui-form-label"><span class="text-red">*</span>运费</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Freight" value="" placeholder="￥">
+                        </div>
+
+                        <label class="layui-form-label">打包费</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="PackFee" value="" placeholder="￥">
+                        </div>
+                        <!--    <label class="layui-form-label">重量</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input"  name="Tel" value="" placeholder="请输入重量">
+                    </div> -->
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">保价金额</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="PremiumAmount" value="" placeholder="￥">
+                        </div>
+                        <label class="layui-form-label">保价费</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="PremiumFee" value="" placeholder="￥">
+                        </div>
+                        <label class="layui-form-label">代收款</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="AgencyFund" value="" placeholder="￥">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">垫付款</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="Disbursement" value="" placeholder="￥">
+                        </div>
+                        <label class="layui-form-label">车号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" name="TruckNo" value="" placeholder="">
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item ">
+
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-inline">
+                            <textarea placeholder="请输入备注" name="Comment" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="orgContent" class="menuContent" style="display:none; position: absolute;">
+    <ul id="treeOrg" class="ztree" style="margin-top:0; width:200px; height: 200px"></ul>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script>
+    var $, form;
+    layui.use(['larry','form', 'element', 'layer', 'jquery', 'formSelects'], function () {
+        form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        $ = layui.jquery;
+        var formSelects = layui.formSelects;
+        //佛曰, 格式不可变, 不喜欢 name,value 可以使用config重新定义
+        //同样适合剥去外皮, 同样可以使用config beforeSuccess处理数据, 不过你需要这么写
+
+        // formSelects.render('orgIds')
+        form.on("submit", function (data) {
+            console.log(data)
+            data = $("form").serialize();
+            $.post('/wuliu/shipping/add', data, function (out) {
+
+                if (out.status == 0) {
+                    // layer.msg("操作成功")
+                    layer.alert('操作成功', {
+                        icon: 1
+                    }, function (index) {
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+
+
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        form.on('select(ProvinceId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            console.log(data.value)
+            $("ProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选择市 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#CityId").html(html);
+                    $("#CountyId").html('<option value="">请选择区</option>');
+                    $("#aStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(CityId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            $("ProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选区县 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#CountyId").html(html);
+                    $("#aStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(CountyId)', function (data) {
+
+            var pn = data.value.split(";")
+
+            var pid = pn[0]
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选街道---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#StreetId").html(html);
+
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(toProvinceId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            console.log(data.value)
+            $("toProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选择市 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#toCityId").html(html);
+                    $("#toCountyId").html('<option value="">请选择区</option>');
+                    $("#toStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(toCityId)', function (data) {
+            var pn = data.value.split(";")
+            var pid = pn[0]
+            // $("toProvinceId").value = pn
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选区县 ---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#toCountyId").html(html);
+                    $("#toStreetId").html('<option value="">请选择街道</option>');
+                    form.render('select');
+                }
+            });
+        });
+        form.on('select(toCountyId)', function (data) {
+
+            var pn = data.value.split(";")
+
+            var pid = pn[0]
+            $.ajax({
+                url: "/common/area/getchildren",
+                data: {
+                    "pid": pid,
+                    limit: 100000
+                },
+                success: function (res) {
+                    console.log(res)
+                    var arr = ['<option value="">--- 请选街道---</option>']
+                    $.each(res, function name(k, v) {
+                        arr.push('<option value="' + v.Id + ";" + v.Areaname +
+                            '">' + v.Areaname + '</option>')
+                    })
+                    var html = arr.join("")
+                    $("#toStreetId").html(html);
+                    form.render('select');
+                }
+            });
+        });
+        form.render();
+    });
+</script>
+{% endblock %}

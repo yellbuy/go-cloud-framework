@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Vertical navigation dots - fullPage.js</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage full-screen navigation and sections control menu." />
+	<meta name="keywords"  content="fullpage,jquery,demo,screen,fullscreen,navigation,control arrows, dots" />
+	<meta name="Resource-type" content="Document" />
+	<link rel="stylesheet" type="text/css" href="examples.css" />
+	<style>
+
+	/* Style for our header texts
+	* --------------------------------------- */
+	h1 {
+        font-size: 26px;
+        font-family: arial, helvetica;
+        color: #fff;
+        margin: 0;
+        padding-top: 15px;
+        margin-bottom: 10px;
+    }
+	
+    .intro p {
+        color: #fff;
+        font-size: 16px;
+        line-height: 30px;
+    }
+	.fp-controlArrow.fp-prev{
+		left: 40px;
+		border-width: 26px 26px 26px 0;
+	}
+	.fp-controlArrow.fp-next {
+    right: 50px !important;
+    border-width: 26px 26px 26px 0;
+    border-color: transparent transparent transparent #fff;
+	}
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+
+	/* Overwriting styles for control arrows for slides
+	* --------------------------------------- */
+	.controlArrow.prev {
+		left: 50px;
+	}
+	.controlArrow.next{
+		right: 50px;
+	}
+
+
+	/* Bottom menu
+	* --------------------------------------- */
+	#infoMenu li a {
+		color: #fff;
+	}
+	</style>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+</head>
+<body>
+<div id="fullpage">
+	<div class="section " id="section0">
+		<div class="intro">
+			<h1>垂直导航 点</h1>
+			<p>一种简单而美观的导航方式</p>
+		</div>
+	</div>
+	<div class="section" id="section1">
+	      <div class="slide" id="slide1">
+			<div class="intro">
+				<h1>可点击切换</h1>
+				<img data-src="../../../../larryms/images/library/iphone-blue.png" alt="iphone" id="iphone-two" />
+			</div>
+		</div>
+	     <div class="slide" id="slide2">
+			<h1>幻灯片2</h1>
+		</div>
+		<div class="slide" id="slide3">
+			<h1>幻灯片3</h1>
+		</div>
+	</div>
+	<div class="section" id="section2">
+		<div class="intro">
+			<h1>your done</h1>
+		</div>
+	</div>
+	<div class="section" id="section3">
+		<div class="intro">
+			<h1>使用如此简单</h1>
+		</div>
+	</div>
+</div>
+
+	<!-- 加载js文件-->
+    <script type="text/javascript" src="../../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../../larryms/'
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry', 'fullpages'], function() {
+        var fullpages = layui.fullpages;
+        var myFullpage = new fullpage('#fullpage', {
+        anchors: ['firstPage', 'secondPage', '3rdPage'],
+        sectionsColor: ['#009688', '#1BBC9B', '#01AAED','#FFB800'],
+        navigation: true,
+        navigationPosition: 'right',
+        navigationTooltips: ['First page', 'Second page', 'Third and last page']
+    });
+    });
+    </script>
+</body>
+</html>

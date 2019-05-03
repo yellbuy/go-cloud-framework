@@ -1,0 +1,32 @@
+{"statusCode":"200","message":"操作成功","navTabId":null,"rel":null,"callbackType":null,
+    "forwardUrl":null,"confirmMsg":null,
+    "result":[
+        {"id":"1","header":"0","name":"泣血嫣然","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"D","joinTime":"20141015","racist":"0101","note":"战斗刺杀贼"},
+        {"id":"2","header":"0","name":"影入梦","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"J","joinTime":"20150715","racist":"0101","note":"奶骑"},
+
+        {"id":"3","header":"1","name":"吉安娜·普罗德摩尔","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"A","joinTime":"20160413","racist":"0101","note":"我的魔法能击败一切"},
+        {"id":"4","header":"0","name":"安度因","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"C","joinTime":"20160413","racist":"0101","note":"心灵控制"},
+        {"id":"5","header":"0","name":"古尔丹","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"J","joinTime":"20160413","racist":"0206","note":"你的灵魂将受到折磨"},
+
+        {"id":"6","header":"0","name":"瓦莉拉·萨古纳尔","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"D","joinTime":"20160413","racist":"0203","note":"小心你的背后"},
+        {"id":"7","header":"0","name":"玛法里奥·怒风","guild":"Blizzard","sex":"1","onLine":"1",
+            "career":"E","joinTime":"20160413","racist":"0102","note":"我是大自然的守护者"},
+
+        {"id":"8","header":"0","name":"萨尔","guild":"Blizzard","sex":"1","onLine":"1",
+            "career":"G","joinTime":"20160413","racist":"0206","note":"为了霜狼氏族"},
+        {"id":"9","header":"0","name":"雷克萨","guild":"Blizzard","sex":"1","onLine":"1",
+            "career":"H","joinTime":"20160413","racist":"0206","note":"你将成为我的猎物"},
+
+        {"id":"10","header":"0","name":"乌瑟尔","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"J","joinTime":"20160413","racist":"0101","note":"圣光赐予我力量"},
+        {"id":"11","header":"0","name":"地狱咆哮","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"I","joinTime":"20160413","racist":"0206","note":"为了地狱咆哮"}
+    ]
+}
+

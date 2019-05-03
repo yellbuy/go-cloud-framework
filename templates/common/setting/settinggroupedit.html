@@ -1,0 +1,180 @@
+{% extends "../../_share/minibase.html"%}
+{% block header %}
+<!-- <link rel="stylesheet" type="text/css" href="/static/layui/extend/wang/wangEditor.css"> -->
+<!-- <head> -->
+<!-- <link rel="stylesheet" href="/static/layui/css/layui.css"> -->
+<!-- <link rel="stylesheet" href="/static/css/main.css?s=1223"> -->
+<style>
+    .help-block{
+    color:gray;
+}
+</style>
+
+{% endblock %}
+{% block content %}
+<div class="layui-tab layui-tab-card">
+  <ul class="layui-tab-title">
+  {% for tab in groups %}
+    {% if !tab.Hide %}
+    <li {% if tab.Key == group %}class="layui-this"{% endif %}><a href="/common/setting/settinggroupedit/?group={{tab.Key}}">{{tab.Name}}</a></li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+  <div class="layui-tab-content">
+    <div class="layui-layout layui-layout-admin">
+        <form class="layui-form layui-row ">
+            <div class="layui-col-md12 layui-col-xs12" style="padding:10px">
+                {% for item in items %}
+                {% if !item.Hide %}
+                {%if item.Type|integer==0%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px">
+                        <span class="yb-red">{{item.Name }}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <input type="number" class="layui-input titleVal" lay-verify="title" name="{{item.Key}}" value="{{item.Value}}" placeholder="{{item.Remark}}">
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+
+                </div>
+                {% elif  item.Type|integer==1 %}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name}}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <input type="text" class="layui-input titleVal" lay-verify="title" name="{{item.Key}}" value="{{item.Value}}" placeholder="{{item.Remark}}">
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+
+                </div>
+                {% elif  item.Type|integer==2%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name }}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <textarea placeholder="{{item.Remark}}" name="{{item.Key}}" class="layui-textarea">{{item.Value}}</textarea>
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+
+                </div>
+                {% elif  item.Type|integer==3%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name }}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <textarea placeholder="{{item.Remark}}" name="{{item.Key}}" class="layui-textarea">{{item.Value}}</textarea>
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+
+                </div>
+                {% elif  item.Type|integer==4%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name }}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <select class="pidVal" name="{{item.Key}}" lay-filter="cateid">
+
+                            {% for it in item.Options %}
+                            <option value="{{it.Value}}" {%if it.Value==item.Value %} selected {%endif%}>{{it.Name}}</option>
+                            {% endfor %}
+                        </select>
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+
+                </div>
+                {%endif%}
+                {% endif %}
+                <hr>
+                {%endfor%}
+            </div>
+            <div class="layui-form-item">
+
+                <!-- <label class="layui-form-label"></label> -->
+                <div class="layui-input-block" style="text-align:left;">
+                    <input type="hidden" name="group" value="{{group}}" />
+                    <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
+                    <!-- <a class="layui-btn layui-btn-primary" id="btnClose">关闭</a> -->
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block footer %}
+<!-- <script src="/static/js/jquery.min.js"></script> -->
+<!-- <script src="/static/layui/layui.js?s=36"></script> -->
+<script type="text/javascript">
+    var editIndex;
+    layui.use(['larry', 'form', 'layer', 'layedit', 'laydate', 'upload'], function () {
+        var form = layui.form
+        layer = parent.layer === undefined ? layui.layer : top.layer,
+            // laypage = layui.laypage,
+            // upload = layui.upload,
+            // layedit = layui.layedit,
+            // laydate = layui.laydate,
+            $ = layui.jquery;
+        //用于同步编辑器内容到textarea
+        // layedit.sync(editIndex); 
+
+
+
+        form.verify({
+            title: function (val) {
+                if (val == '') {
+                    return "标题不能为空";
+                }
+            },
+            content: function (val) {
+                if (val == '') {
+                    return "文章内容不能为空";
+                }
+            }
+        });
+        form.on("submit", function (data) {
+            console.log(data)
+            data = data.field
+            data = $("form").serialize();
+            console.log(data)
+            $.post('/common/{{curController}}/settinggroupedit', data, function (out) {
+
+                if (out.status == 0) {
+                    layer.msg("操作成功")
+                    // success(data, status);
+                    window.location.reload()
+                } else {
+                    layer.msg(out.message)
+                }
+
+            }, "json");
+            console.log("data")
+            return false;
+        });
+
+        // 预览
+        // form.on("submit(look)",function(){
+        //     layer.alert("此功能需要前台展示，实际开发中传入对应的必要参数进行文章内容页面访问");
+        //     return false;
+        // });
+        // 创建一个编辑器
+        // editIndex = layedit.build('contentEdit',{
+        //     height : 335,
+        //     uploadImage : {
+        //         url : "/ext/attachment/adminfile/uploadPicForLayedit"
+        //     }
+        // });
+        // form.on('submit(savedata)',function(data){
+        //  layedit.sync(editIndex);
+        // var desc=$('.descriptionVal').val();
+        //未输入摘要，则去正文50个字的内容
+        // if(!desc){
+        // $('.descriptionVal').val(layedit.getText(editIndex).substring(0,50))
+        // }
+        //     var content = editor.$txt.html();
+        //     $("input[name='content']").val(content);
+        // 	var desc=$('.descriptionVal').val();
+        // 	//未输入摘要，则去正文50个字的内容
+        // 	if(!desc){
+        // 		$('.descriptionVal').val(content.substring(0,50))
+        // 	}
+        // 	return false;
+        // })
+        form.render();
+    });
+</script>
+{% endblock %}

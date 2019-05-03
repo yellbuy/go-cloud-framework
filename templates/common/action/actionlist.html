@@ -1,0 +1,115 @@
+{% extends "../../_share/base.html"%}
+{% block header %}
+<!--<link rel="stylesheet" href="/static/admin/js/zTree/metroStyle/metroStyle.css" type="text/css">-->
+
+{% endblock%}
+{% block content %}
+<div class="layui-layout layui-layout-admin" style="margin: 0px 0 0 ;">
+    <div class="layui-row">
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <script type="text/html" id="toolbar">
+                    <div class="layui-container">
+                        <button class="layui-btn layui-btn-sm" lay-event="AddRule">添加规则</button>
+                        <button class="layui-btn layui-btn-sm" lay-event="DelRule">删除规则</button>
+                    
+                </div>
+                </script>
+                <table class="layui-hide" id="mainTable" lay-filter="table"></table>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layui-form">
+                <!-- <input type="hidden" name= -->
+                {% if actionid!=0%}
+                <iframe src="/common/action/actionedit?id={{actionid}}" name="actionform" id="actionform" frameborder="0" style="width: 100%; height: 500px;"></iframe>
+                {% else %}
+                <iframe src="" name="actionform" id="actionform" frameborder="0" style="width: 100%; height: 500px;"></iframe>
+                {% endif %}
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+    layui.use(['larry', 'layer', 'table'], function () {
+        var table = layui.table;
+        var mainTable = table.render({
+            elem: '#mainTable',
+            url: '/common/action/actionlist',
+            title: '签到规则',
+            cellMinWidth: 95,
+            page: true,
+            height: "full-85",
+            toolbar: '#toolbar',
+            defaultToolbar: [],
+            id: "mainTable",
+            // even: true,
+            cols: [
+                [{
+                        type: "numbers",
+                        title: '',
+                        align: "right",
+                        fixed: "left"
+                    },
+                    {
+                        type: "checkbox",
+                        title: '',
+                        align: "right",
+                        fixed: "left"
+                    },
+                    {
+                        field: 'Name',
+                        title: '名称'
+                    },
+                    {
+                        // field: 'IsDel',
+                        title: '是否删除',
+                        templet: function (row) {
+                            var checked = "";
+                            if (row.IsDel) {
+                                checked = "checked";
+                            }
+                            return '<input type="checkbox" readonly="readonly" name="IsTop" data-id="' + row.Id +
+                                '" lay-filter="ajax_field_update" lay-skin="switch" lay-text="是|否"' +
+                                checked + '>'
+                        }
+                    },
+                ]
+            ]
+
+        });
+        table.on('row(table)', function (obj) {
+            var data = obj.data;
+            console.log(data) //得到当前行数据
+            // window.location.href = "/common/action/actionlist?Id=" + data.Id;
+            // var iframe = window.parent.document.getElementById("actionform");
+            // iframe.src = "/common/action/actionedit?id=" + data.Id;
+            // iframe.contentWindow.location.reload();
+            var iframe = document.getElementById("actionform");
+            iframe.contentWindow.location.href = "/common/action/actionedit?id=" + data.Id;
+            // iframe.contentWindow.location.reload();
+
+        });
+        table.on('toolbar(table)', function (obj) {
+            switch (obj.event) {
+                case 'AddRule':
+                    var iframe = document.getElementById("actionform");
+                    iframe.contentWindow.location.href = "/common/action/actionedit?id=-1";
+                    break;
+                case 'DelRule':
+
+                    break;
+                default:
+                    break;
+            }
+
+        });
+
+    });
+</script>
+{% endblock %}

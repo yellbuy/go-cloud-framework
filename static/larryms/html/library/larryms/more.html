@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于LarryMS框架核心组件库说明</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="LarryCMS Version:1.09" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/temp.css" media="all">
+</head>
+
+<body class="temp">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid larryms-svg-box">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                <h1 class="tit">关于LarryMS框架更多核心组件扩展计划</h1>
+                <blockquote class="layui-elem-quote">
+                    随着LarryMS官网社区基础功能的完善，框架版本的持续更新，产品也会打磨的更实用，在LarryMS框架主导方向下，以开发者用户的实际需求为导向（因为他们是开发生产第一线）不断完善，让后来者使用更高效易用，提高开发效率，节省开发时间成本，品质源于执着，坚持，卓尔不群。
+                </blockquote>
+                
+                <p>更多关于larryMS框架的动态请关注larryms社区，LarryCMS也会在larryms框架2.09版本发布时对外开放，LarryCRM等也会相继发布</p>
+            </div>
+                
+        </div>
+    </div>
+    <div id="loader" class="pageload-overlay" data-opening="m -5,-5 0,70 90,0 0,-70 z m 5,35 c 0,0 15,20 40,0 25,-20 40,0 40,0 l 0,0 C 80,30 65,10 40,30 15,50 0,30 0,30 z">
+        <svg width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+            <path d="m -5,-5 0,70 90,0 0,-70 z m 5,5 c 0,0 7.9843788,0 40,0 35,0 40,0 40,0 l 0,60 c 0,0 -3.944487,0 -40,0 -30,0 -40,0 -40,0 z" />
+        </svg>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.cache.page = 'temp';
+    layui.config({
+        version: "2.0.7",
+        base: '../../../larryms/',
+        mods:'demo/',
+        identified: 'one'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

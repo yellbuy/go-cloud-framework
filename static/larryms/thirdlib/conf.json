@@ -1,0 +1,22 @@
+{
+	"SiriWave": "SiriWave",
+	"cropperdemo":"cropperdemo",
+	"uploaders":"uploaders",
+	"dtree":"dtree/dtree",
+	"selectM":"selectM",
+    "selectN":"selectN",
+    
+	"xlsx":"xlsx",
+    "treeSelect":"treeSelect",
+    "treeGrid":"treeGrid",
+    "sysdata":"sysdata",
+    "moment":"moment",
+    "formSelects":"formSelects/formSelects-v4.min",
+    "fileSaver":"FileSaver",
+    "dltable":"dltable",
+    "authtree":"authtree",
+    "timePicker":"timePicker/timePicker",
+    "steps":"steps/steps",
+	
+	"inputTags":"inputTags/inputTags"
+}

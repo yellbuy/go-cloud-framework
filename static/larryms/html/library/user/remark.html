@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于用户自定义扩展组件功能说明</title>
+    <meta name="keywords" content="404" />
+    <meta name="description" content="404" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/temp.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+    <style>
+        .larry-code:before{
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="larryms-layout-bgB library-user">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>关于LarryMS框架用户自定义组件扩展使用说明</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            为了满足LarryMS框架使用者在项目开发中足够的灵活扩展，从beta2版本开始新增了用户自定义扩展功能（虽然larryms框架已自带大量优秀JS库，layui自身组件也在不断完善，增加底层支持用户自定义组件库会让larryms框架更为易用和实用），下面对用户自定义扩展组件在larryMS框架中的使用做下简要说明：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        自定义组件扩展功能使用说明
+                    </div>
+                    <div class="layui-card-body">
+                        <p><strong>1、用户自定义扩展组件功能的定义</strong></p>
+                        <p style="color: #888;padding-top: 5px;padding-bottom: 10px;">
+                            为了让LarryMS框架使用更为灵活更为使用，从beta2版本开始新增用于用户自定义组件扩展的底层支持，用户只需按照layui文档中定义的组件扩展规范扩展的组件均可加入LarryMS框架用户自定义的扩展目录中，即可像layui自带组件一样使用，无需别名，繁琐的路径配置，亦无任何延迟等开销，真正的开箱即用。该扩展功能的支持可以让用户对框架的使用更为灵活实用。
+                        </p>
+                        <p><strong>2、组件的引入与使用</strong></p>
+                        <p style="color: #888;padding-top: 5px;padding-bottom: 10px;">
+                            虽然在LarryMS框架中已提供丰富的扩展JS库，但也不能面面俱到，对用户自定义组件扩展灵活支持可以让项目开发更便捷高效，具体的使用可参考右侧关于用户自定义组件扩展的代码示例。
+                        </p>
+                        <p><strong>3、自定义组件的规范与layui扩展平台组件引用说明</strong></p>
+                        <p style="color: #888;padding-top: 5px;padding-bottom: 10px;">
+                            layui模块定义方法：layui.define([mods], callback)<br>
+                            通过该方法可定义一个 Layui模块。参数mods是可选的，用于声明该模块所依赖的模块。callback即为模块加载完毕的回调函数，它返回一个exports参数，用于输出该模块的接口。<br>
+                            跟Requirejs最大不同的地方在于接口输出，exports是一个函数，它接受两个参数，第一个参数为模块名，第二个参数为模块接口，当你声明了上述的一个模块后，你就可以在外部使用了，demo就会注册到layui对象下，即可通过 layui.demo() 去执行该模块的接口。
+                            <pre class="larry-code">
+layui.define(function(exports){
+  //do something
+  
+  exports('demo', function(){
+    alert('Hello World!');
+  });
+});
+</pre>
+                            亦可引用layui扩展平台或其他已封装好的模块组件到扩展目录下；如右侧示例中添加对应组件模块及路径到配置文件conf.json中。<br>
+                            自定义组件中若有css文件需引入的，可直接在组件中使用layui.link()方法添加
+                        </p>
+                        <p style="font-size: 14px;color: #01AAED;padding-top: 10px;">更多详情内容请查看LarryMS框架开发者文档</p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card explain">
+                    <div class="layui-card-header">
+                        自定义组件扩展使用代码示例
+                    </div>
+                    <div class="layui-card-body">
+                        <p>1、全局配置文件开启自定义扩展</p>
+                        <pre class="larry-code">
+#...省略
+thirdExtend:true,//开启用户自定义扩展组件目录 false时关闭
+thirdDir: 'thirdlib/',//用户自定义扩展组件目录，thirdlib为用户自定义目录名称（可以任意修改名称但路径需要在larryms目录下）
+                        </pre>
+                        <p>2、例如用户自定义扩展组件的目录为 <em>thirdlib</em>,则可以将用户自己写的扩展组件或layui扩展平台下的组件，或其他符合layui组件扩展规范的组件放入该目录下，并添加配置文件conf.js；假设用户在自定义组件目录中添加了custom1.js 和cus目录及cus/custom2.js组件</p>
+                        <pre class="larry-code">
+{
+    "custom1": "custom1",
+    "custom2":"cus/custom2"
+}
+                        </pre>
+                        <p>如上扩展组件配置文件，分别定义了custom1和custom2组件，键值对中键为组件名称，值为组件所在路径，均相对于用户扩展组件目录而设定</p>
+                        <p>3、使用用户自定义的组件(示例)</p>
+                        <pre class="larry-code">
+layui.use(['custom1','custom2'],function(){
+    var custom1 = layui.custom1,
+        custom2 = layui.custom2;
+    # your code ...
+});
+</pre>
+                        <p style="color:#ff5722;">使用起来是不是很方便，在任何位置都可以像layui自带组件一样使用，无需别名方式，无需关注底层实现，加载无任何延迟，快速而高效，这就是larryms框架的方便之处</p>
+                        <p style="font-size: 14px;color: #01AAED;padding-top: 10px;">更多详情内容请查看LarryMS框架开发者文档</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div id="loader" class="pageload-overlay" data-opening="m -5,-5 0,70 90,0 0,-70 z m 5,35 c 0,0 15,20 40,0 25,-20 40,0 40,0 l 0,0 C 80,30 65,10 40,30 15,50 0,30 0,30 z">
+        <svg width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+            <path d="m -5,-5 0,70 90,0 0,-70 z m 5,5 c 0,0 7.9843788,0 40,0 35,0 40,0 40,0 l 0,60 c 0,0 -3.944487,0 -40,0 -30,0 -40,0 -40,0 z" />
+        </svg>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'libraryuser,temp'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry')
+    </script>
+</body>
+
+</html>

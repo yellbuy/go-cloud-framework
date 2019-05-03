@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之neditor扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>LarryMS框架之neditor编辑器组件封装</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>neditor编辑器简介：</cite>neditor编辑器是一款基于ueditor二次开发的现代化的富文本编辑器，它来自于github（https://github.com/notadd/neditor，若不需要在LarryMS框架中运行，用户可自行下载其开源版本，larryMS框架的收费服务与开源库无关），因其对ueditor进行了外观和功能的改进，LarryMS框架中将其进行符合layui规范的封装，可于框架内简单使用，为用户多一种选择方案，下面是在LarryMS框架中的使用示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            neditor在ueditor基础上支持各种后端或者云存储、支持各种后端或者云存储、纯 ajax方式提交等新特性<br>
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：version:v2.1
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-we">
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        ueditor编辑器【效果示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-editor" id="editor"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        ueditor编辑器【Code加载示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+layui.use('neditor', function() {
+    var neditor = layui.neditor;
+
+    var ue = UE.getEditor('editor');
+    ue.ready(function() {
+        ue.setHeight(200);
+    });
+});
+//neditor是基于ueditor编辑器二开，这两款编辑器功能都非常丰富，如果只是简单应用也是一种不错的选择
+//但其文档的繁杂会有不少坑需要去踩，ueditor和neditor的文档地址：http://fex.baidu.com/ueditor/#start-start
+//larryMS框架中针对ue和ne这两款编辑器的封装只是让其加载使用更简便
+//框架中推荐使用wangEditor,tinymce,ckeditor亦或larryEditor(开发中..)或者传说中的layui官方编辑器暂未见到
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于编辑器组件深入场景使用文档与示例，请移步LarryMS框架开发者文档中查看
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'neditor'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

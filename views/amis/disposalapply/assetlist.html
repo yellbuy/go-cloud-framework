@@ -1,0 +1,230 @@
+<div class="layui-layout layui-layout-admin" style="padding-left: 20px;">
+        <div class="layui-row" style="margin-top: 20px;">
+            <div class="layui-col-xs4">
+                <div class="layui-btn-group">
+                  <!-- <button class="layui-btn" id="add_api">增加</button>
+                  <button class="layui-btn" id="add_audit">提交审核</button>
+                  <button class="layui-btn" id="audit">审核通过</button> -->
+                </div>
+                <!-- <a class="layui-btn" data-type="tabAdd" href="/api/add">新增</a>  -->
+                <!-- <a href="javascript:;" id="add_api" class="layui-btn"> 新增接口 </a>  
+                <a href="javascript:;" id="add_audit" class="layui-btn layui-btn-primary"> 提交审核 </a> -->
+            </div>
+            <div class="layui-col-xs8 search_text">
+                <form class="layui-form" action="" onsubmit="javascript:return false;">
+                    <div class="demoTable">
+                        <div class="layui-inline" style="width: 20%">
+                            <input class="layui-input" name="titleName" id="titleName" autocomplete="off" placeholder="项目名称" >
+                        </div>
+                        <div class="layui-input-inline" >
+                            <input type="radio" name="containself" id="containself" value="0" title="全部项目" >
+                            <input type="radio"  name="containself" id="containself" value="1" title="申报项目" checked>
+                        </div>
+                        <div class="layui-inline" style="width: 20%;text-align: left;">
+                            <select name="fetchchild" id="fetchchild" lay-verify="required"  lay-search="">
+                                <option value="0">全部申报</option>                            
+                                <option value="1">下级申报</option>
+                                
+                            </select>
+                        </div>
+                        <button class="layui-btn" data-type="reload" id="reload">查询</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+        <table class="layui-hide" id="table_list" lay-filter="table_filter">
+        </table>
+    
+        <script type="text/html" id="bar">
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">详细</a>
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="audit">审核</a>
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">启|停</a>
+    
+        </script>
+    </div>
+    <script>
+    
+        layui.use(['table','form','element'], function(){
+            var table = layui.table;
+            var form = layui.form;
+            var element = layui.element;
+    
+            //方法级渲染
+            table.render({
+                elem: '#table_list'
+                ,url: '/disposalapply/assetlist'
+                ,cols: [[
+                    {field:"Ad",checkbox: true, fixed: true},
+                    {field:'No', title: '处置单号',width:130}
+                    ,{field:'Purchaser', title: '购买方',width:150}
+                    ,{field:'Company', title: '单位名称',width:200}
+                    ,{field:'Linkman', title: '联系人',width:100}
+                    ,{field:'Phone',  title: '电话',width:150}
+                    ,{field:'DisposalWay', align:'center', title: '处置形式',width:90}
+                    ,{field:'Type', title: '资产类型', align:'center',width:90, templet: function(d){
+                            if(d.Type==1){
+                                return '<span class="layui-badge layui-bg-cyan">房屋</span>'
+                            }
+                            if(d.Type==2){
+                                return '<span class="layui-badge layui-bg-blue">汽车</span>'
+                            }
+                            return '<span class="layui-badge layui-bg-green">通用</span>'}
+                    }
+                    ,{field:'ApplyDate', title: '申请日期', width:110, templet: function(d){
+                            return d.ApplyDate.substr(0,10) }
+                    }
+                    ,{field:'Total', align:'right', title: '总金额',width:90}
+                    
+                      ,{field:'State', title: '状态', align:'center', width:80, templet: function(d){
+                            if(d.State==1){
+                                return '<span class="layui-badge layui-bg-green">已上报</span>'
+                            }
+                            return '<span class="layui-badge layui-bg-red">草稿</span>'
+                      }
+                    }   
+                    ,{fixed: 'right', title: '操作',width:120, align:'center', templet: function(d){
+                        var str=""; // <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+                        if(d.AssetAuditState==0){
+                             str = str + '<a class="layui-btn layui-btn-xs layui-bg-red" lay-event="audit">审核</a>'
+                        }else{
+                             str = str + '<a class="layui-btn layui-btn-xs " lay-event="audit">详情</a>'
+                   
+                        }
+                        return str;
+                      }
+                    }
+                ]]
+                ,id: 'listReload'
+                ,page: true
+                ,height: "full-130"
+            });
+    
+            var $ = layui.$, active = {
+                reload: function(){
+                    table.reload('listReload', {
+                        page: {
+                        curr: 1 //重新从第 1 页开始
+                    },where: {
+                            apiName: $('#apiName').val(),
+                            status:$("#status").val(),
+                            containself:$("input[name='containself']:checked").val(),
+                            fetchchild:$("#fetchchild").val()
+                        }
+                    });
+                }
+            };
+    
+            $("#add_api").on("click",function() {
+                window.location.href="/api/add"
+            })
+    
+            //提交审核
+            $("#add_audit").on("click",function() {
+                var checkStatus = table.checkStatus('listReload');
+                var ids = ""; 
+                $.each(checkStatus["data"],function(k,v){
+                    if (v.status==1) {
+                        ids += v.id+",";
+                    }
+                })
+    
+                ids = (ids.substring(ids.length-1)==',')?ids.substring(0,ids.length-1):ids;
+    
+                if (!ids) {
+                    layer.msg("请选择状态为正在开发的数据")
+                    return false;
+                }
+    
+                layer.confirm("确定要选中的接口提交审核吗？", function(){
+                    var add_audit_data = {"ids":ids,"status":1}
+                    $.post('{{urlfor "ApiController.AjaxChangeStatus"}}', add_audit_data, function (out) {
+                        if (out.status == 0) {
+                            layer.msg("操作成功",{icon: 1},function () {
+                                $("#reload").click();
+                            })
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");        
+                    return false;
+                });       
+            })
+    
+            //批量审核
+            $("#audit").on("click",function() {
+                var checkStatus = table.checkStatus('listReload');
+                var ids = ""; 
+                $.each(checkStatus["data"],function(k,v){
+                    if (v.status==2) {
+                        ids += v.id+",";
+                    }
+                })
+    
+                ids = (ids.substring(ids.length-1)==',')?ids.substring(0,ids.length-1):ids;
+    
+                if (!ids) {
+                    layer.msg("请选择状态为正在审核的数据")
+                    return false;
+                }
+    
+                layer.confirm("确定要选中的接口审核通过吗？", function(){
+                    var add_audit_data = {"ids":ids,"status":3}
+                    $.post('{{urlfor "ApiController.AjaxChangeStatus"}}', add_audit_data, function (out) {
+                        if (out.status == 0) {
+                            layer.msg("操作成功",{icon: 1},function () {
+                                $("#reload").click();
+                            })
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");        
+                    return false;
+                });       
+            })
+    
+            //监听工具条
+            table.on('tool(table_filter)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'detail'){
+                    window.location.href="/disposalapply/assetdetail?id="+data.Id
+                } else if(obj.event === 'del'){
+                    var msg = "";
+                    if(data.status==0){
+                        msg = '真的启用【'+data.api_name+'】么';
+                    }else{
+                        msg = '真的停用【'+data.api_name+'】么';
+                    }
+    
+                    layer.confirm(msg, function(){
+                        var del_data = {"id":data.id}
+                        $.post('{{urlfor "ApiController.AjaxDel"}}', del_data, function (out) {
+                            if (out.status == 0) {
+                                layer.msg("操作成功",{icon: 1},function () {
+                                    $("#reload").click();
+                                })
+                            } else {
+                                layer.msg(out.message)
+                            }
+                        }, "json");        
+                        return false;
+                    });
+                    return false;
+                    
+                }else if(obj.event === 'detail'){
+                    window.location.href="/disposalapply/assetdetail?id="+data.Id
+                }else if(obj.event === 'audit'){
+                    window.location.href="/disposalapply/assetdetail?id="+data.Id
+                }else{
+                    layer.msg('操作不存在');
+                }
+            });
+    
+            $('.demoTable .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+    
+    </script>

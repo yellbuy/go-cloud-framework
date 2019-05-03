@@ -1,0 +1,331 @@
+<link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css"/>
+<link rel="stylesheet" href="/static/layui/extend/wang/wangeditor.css">
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script>
+<div-- class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+<style>
+ .layui-form-label {
+     width:90px;
+ }
+</style>
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+<form class="layui-form" action="" method="post" >
+    <div class="layui-col-md12 layui-col-xs12">
+        <div class="layui-row layui-col-space10">
+            <div class="layui-col-md12 layui-col-xs12">
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label"><span class="text-red">*</span>资产编号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="required" name="No" value="" placeholder="请输入资产编号">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>资产名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="required" name="Name" value="" placeholder="请输入资产名称">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>所属单位</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="required" name="OrgName" value="" placeholder="请输入资产名称">
+                    </div>
+                   
+                </div> 
+                <div class="layui-form-item">
+                     <label class="layui-form-label"><span class="text-red">*</span>资产大类</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="required" name="Cate" value="" placeholder="请输入资产名称">
+                    </div>
+                     <label class="layui-form-label"><span class="text-red">*</span>资产分类</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="required" name="ChildCate" value="" placeholder="请输入资产名称">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>数量</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input titleVal"  lay-verify="required|number|num" name="Num" value="" placeholder="请输入数量">
+                    </div>
+                    
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="text-red"></span>面积</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input titleVal"  lay-verify="number" name="Area" value="" placeholder="请输入面积">
+                    </div>
+                    <label class="layui-form-label">价值类型</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="ValuationType" value="原始取得" title="原始取得" checked="" lay-skin="primary"/>
+                    </div>
+                    <label class="layui-form-label"><span class="text-red"></span>价值</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input titleVal"  lay-verify="required|number|amount" name="Valuation" value="" placeholder="请输入价值">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">取得方式</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="ObtainWay" value="新购" title="新购" checked="" lay-skin="primary"/>
+                    </div>
+                     <label class="layui-form-label"><span class="text-red">*</span>取得日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="ObtainDate" name="ObtainDate" value="" lay-verify="required|date" placeholder="yyyy-MM-dd">
+                    </div>
+                     <label class="layui-form-label"><span class="text-red">*</span>入账日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="RecordedDate" name="RecordedDate" value="" lay-verify="required|date" placeholder="yyyy-MM-dd">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="text-red">*</span>管理部门</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input"  lay-verify="required" name="ManagedDept" value="">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>使用部门</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="UsedDept" lay-verify="required" value="" placeholder="">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>使用状况</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="StateText" lay-verify="required" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="text-red">*</span>品牌</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input"  lay-verify="required" name="Brand" value="">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>规格型号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="Spec" lay-verify="required" value="" placeholder="">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>存放地点</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="Site" lay-verify="required" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">编制情况</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input"  name="Establishment" value="">
+                    </div>
+                    <label class="layui-form-label">证书号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="CertificateNo" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">车辆识别号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input"  name="Vin" value="">
+                    </div>
+                    <label class="layui-form-label">车牌号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="LicenseNo" value="" placeholder="">
+                    </div>
+                    <label class="layui-form-label">排气量</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="AirDisplacemint" lay-verify="required" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">发动机号</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input"  name="EngineNo" value="">
+                    </div>
+                    <label class="layui-form-label">坐落位置</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="Position" value="" placeholder="">
+                    </div>
+                    <label class="layui-form-label">权属证明</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="Ownership" lay-verify="required" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="text-red">*</span>财政资金</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input"  lay-verify="required|number|amount" name="FinanicalFund" value="" placeholder="￥">
+                    </div>
+                    <label class="layui-form-label"><span class="text-red">*</span>非财政资金</label>
+                    <div class="layui-input-inline">
+                        <input type="number" class="layui-input" name="NonfinanicalFund" lay-verify="required|number|amount" value="" placeholder="￥">
+                    </div>
+                    <label class="layui-form-label">会计凭证</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="VoucherNo" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item newsTop">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入备注" name="Remark" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</div>
+<script>
+
+var $,form;
+    layui.config({
+            base : "/static/layui/extend/"
+    }).extend({
+        formSelects: 'formSelects-v4'
+        ,wangeditor:'wang/wangeditor.min'
+    });
+    layui.use(['form', 'laydate','element','layer','jquery', 'formSelects','upload', 'wangeditor'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      $ = layui.jquery;
+      var formSelects = layui.formSelects;
+      var laydate = layui.laydate;
+      var upload = layui.upload;
+    //  var wang=layui.wangeditor('wang');
+    //  wang.customConfig.uploadImgShowBase64 = true
+    // 普通的自定义菜单
+    // wang.config.menus = [
+    //     'source',
+    //     '|',     // '|' 是菜单组的分割线
+    //     'bold',
+    //     'underline',
+    //     'italic',
+    //     'strikethrough',
+    //     'eraser',
+    //     'forecolor',
+    //     'bgcolor'
+    // ];
+    // wang.create();
+    //多文件列表示例
+  var fileListView = $('#fileList')
+    ,uploadListIns = upload.render({
+        elem: '#testList'
+        ,url: '/upload/'
+        ,accept: 'file'
+        ,multiple: true
+        ,auto: false
+        ,field: 'file'
+        ,size:10240
+        ,exts: 'zip|rar|7z|jpg|png|gif|bmp|jpeg|jpg|doc|docx|xls|xlsx|pdf|ppt|pptx|txt|wps'
+        ,bindAction: '#testListAction'
+        ,choose: function(obj){   
+        var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+        //读取本地文件
+        obj.preview(function(index, file, result){
+            var tr = $(['<tr id="upload-'+ index +'">'
+            ,'<td>'+ file.name +'</td>'
+            ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+            ,'<td>等待上传</td>'
+            ,'<td>'
+                ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+            ,'</td>'
+            ,'</tr>'].join(''));
+            
+            //单个重传
+            tr.find('.demo-reload').on('click', function(){
+            obj.upload(index, file);
+            });
+            
+            //删除
+            tr.find('.demo-delete').on('click', function(){
+            delete files[index]; //删除对应的文件
+            tr.remove();
+            uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+            });
+            
+            fileListView.append(tr);
+        });
+        }
+        ,done: function(res, index, upload){
+        if(res.code == 0){ //上传成功
+            var data = res.data;
+            var tr = fileListView.find('tr#upload-'+ index)
+            ,tds = tr.children();
+            tds.eq(0).html('<input type="hidden" name="attfiles[]" value="'+data.id+'"/><a target="_blank" href="'+data.src+'">'+data.name+'<a>');
+            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+            // tds.eq(3).html(''); //清空操作
+            return delete this.files[index]; //删除文件队列已经上传成功的文件
+        }
+        this.error(index, upload);
+        }
+        ,error: function(index, upload){
+        var tr = fileListView.find('tr#upload-'+ index)
+        ,tds = tr.children();
+        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+        tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+        }
+    });
+
+        //佛曰, 格式不可变, 不喜欢 name,value 可以使用config重新定义
+        //同样适合剥去外皮, 同样可以使用config beforeSuccess处理数据, 不过你需要这么写
+        //日期
+    laydate.render({
+        elem: '#ObtainDate'
+    });
+    laydate.render({
+        elem: '#RecordedDate'
+    });
+    
+    form.verify({
+        rate: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(value<0||value>1){
+                return "输入数值只能在0和1之间"
+            }
+        }
+        ,amount: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(value<0){
+                return "输入数值不能小于0"
+            }
+        }
+        ,num: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(value<1){
+                return "输入数值不能小于1"
+            }
+        }
+        //我们既支持上述函数式的方式，也支持下述数组的形式
+        //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+        ,pass: [
+            /^[\S]{6,12}$/
+            ,'密码必须6到12位，且不能出现空格'
+        ] 
+    });
+    //监听有无保险
+    form.on('switch(hasCarInsurance)', function(data){
+        this.checked ? $("#insuranceLayout").show() : $("#insuranceLayout").hide();
+    });
+       // formSelects.render('orgIds')
+      form.on("submit",function(data) {
+          console.log(data)
+          data =  $("form").serialize();
+            $.post('{{urlfor "assetinfoController.Add"}}', data, function (out) {
+                
+                if (out.status == 0) {
+                    // layer.msg("操作成功")
+                    layer.alert('操作成功', {icon: 1},function(index){
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+
+        form.render();
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        
+    }); 
+</script>

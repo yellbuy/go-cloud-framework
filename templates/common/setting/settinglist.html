@@ -1,0 +1,260 @@
+{% extends "../../_share/base.html"%}
+{% block style %}
+<!--<link rel="stylesheet" href="/static/admin/js/zTree/metroStyle/metroStyle.css" type="text/css">-->
+
+{% endblock%}
+{% block content %}
+
+        <ul class="layui-nav layui-bg-green" name="tab" lay-filter="nav">
+               <li class="layui-nav-item"><a  href='#' type=0 >全部配置</a></li>
+                {% for item in tablist %}
+                <li class="layui-nav-item"><a href='#' type={{item.Id}} >{{item.Name}}</a></li>
+                
+                 {% endfor %}
+                
+                
+              </ul>
+    <!-- <blockquote class="layui-elem-quote quoteBox"> -->
+       
+    <form class="layui-form">  
+           
+        <div class="layui-form-item">
+            <div class="layui-inline" >
+                <input type="hidden" id="group" value="0">
+                <label class="layui-form-label" style="width:60px;padding: 9px 0;">关键字：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" class="layui-input searchVal" placeholder="输入关键字" />
+                </div>
+                <a class="layui-btn btnSearch" data-type="reload" style="padding: 0 10px;"><i class="layui-icon"></i> 搜索</a>
+            </div>
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal btnAdd" style="padding: 0 10px;"><i class="layui-icon">&#xe608;</i> 添加</a>
+            </div>
+           
+            <div class="layui-inline"  style="right:170">
+                <a class="layui-btn layui-btn-normal btnOut" style="padding: 0 10px;"><i class="layui-icon">&#xe608;</i> 导出文件</a>
+            </div>
+           
+        </div>
+       
+       
+       
+    <!-- </blockquote> -->
+    <table id="mainTable" lay-filter="mainTable"></table>
+    <!--操作-->
+    <script type="text/html" id="mainTableBar">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+		<a class="layui-btn layui-btn-xs layui-btn-danger confirm" lay-event="del">删除</a>
+	</script>
+</form>
+
+{% endblock %}
+{% block footer %}
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<!-- <script type="text/javascript" src="/static/admin/js/wangEditor/wangEditor.min.js"></script> -->
+<script type="text/javascript">
+
+layui.use(['form', 'layer', 'laydate', 'table', 'laytpl','element'], function () {
+        var form = layui.form,
+            layer = layui.layer ,
+            $ = layui.jquery,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl,
+            table = layui.table;
+            var element = layui.element;
+
+
+        //文章列表
+        var mainTable = table.render({
+            elem: '#mainTable',
+            url: '/common/{{curController}}/settinglist',
+            cellMinWidth: 95,
+            page: true,
+            even: true,
+            height: "full-165",
+            id: "mainTable",
+            cols: [
+                [ {
+                        type: "checkbox",
+                        fixed: "left"
+                    },
+                    {
+                        field: "Id",
+                        title: 'ID',
+                        width: 100,
+                        align: "right",
+                        fixed: "left"
+                    },
+                   
+
+                    {
+                        field: 'Key',
+                        title: '名称',
+                        
+                        align: "left"
+                    },
+                    {
+                        field: 'Title',
+                        title: '标题',
+                       
+                        align: "left"
+                        
+                    },
+                    {
+                        field: 'Group',
+                        title: '分组',
+                        
+                        align: "center",
+                       
+                       
+                    },
+                    {
+                        // field: 'Type',
+                        title: '类型',
+                       
+                        align: "center",
+                        templet: function (row) {
+                           var ty="ewr"
+                            if (row.Type==0) 
+                            {ty="数字"}else  if (row.Type==1) {ty="字符"}else 
+                            if (row.Type==2){ty="文本"}else  if (row.Type==3){ty="数组" }
+                            else {ty="枚举"}
+                            return  '<a >'+ty+'</a>'
+
+                            }
+                       
+                    },
+                 
+                    {
+                        title: '操作',
+                        width: 120,
+                        templet: '#mainTableBar',
+                        fixed: "right",
+                        align: "center"
+                    }
+                ]
+            ]
+        });
+        // 监听导航点击
+        element.on('nav(nav)', function(elem){
+            console.log(elem)
+            // layer.msg(elem.text());
+            var id=elem.context.type;
+            $('#group').val(id);
+            $(".searchVal").val("");
+            if(id!=0){
+            $(".btnOut").css("display",'none');
+            }else{
+                $(".btnOut").css("display",'inline-block'); 
+            }
+            table.reload("mainTable", {
+                page: {
+                    curr: 1 //重新导航到首页
+                },
+                where: {
+                    search:"",
+                    group: id
+                }
+            })
+        });
+        //监听单元格编辑
+        table.on('edit(mainTable)', function (obj) {
+            if (obj.field == 'sort') {
+                var value = obj.value //得到修改后的值
+                if (!isFloat(value)) {
+                    layer.msg('输入的值不正确');
+                    return;
+                }
+                $.post('articleEdit', {
+                    id: obj.data.id,
+                    sort: value
+                }, function (data, status, xhr) {
+                    if (data.errcode == 0) {
+                        //layer.msg('保存成功',{icon: 16,time:true,shade:0.8});
+                        mainTable.reload();
+                    } else {
+                        layer.msg('保存失败：' + data.errmsg, {
+                            icon: 16,
+                            time: true,
+                            shade: 0.8
+                        });
+                    }
+                })
+            }
+        });
+
+     
+      
+        // var $ = layui.$, active = {
+        //     reload: function(){
+        //         table.reload('mainTable', {
+        //             page: {
+        //                 curr: 1 //重新导航到首页
+        //             },where: {
+        //                 // type: '{{  Type }}'
+        //                 //title: $('#title').val(),
+        //                 //bankno: $('#bankno').val()
+        //             }
+        //         });
+        //     }
+        // };
+
+      
+      
+       
+        //文章管理
+        function edit(data) {
+            var id = data ? data.Id : '';
+            var title = id ? "编辑设置" : "添加设置";
+            // window.location.href= "/cms/articleaudit/articleauditedit/?id=" + id;
+            loadDialog("/common/{{curController}}/settingedit", {
+                id: id
+            }, {
+                title: title
+            }, true);
+        }
+        $(".btnAdd").click(function () {
+            edit();
+        })
+        $(".btnOut").click(function () {
+       window.location.href= "/common/{{curController}}/settoxml";
+                // $.post('/common/{{curController}}/settoxml', {
+                //     // id: obj.data.id,
+                //     // sort: value
+                //     kind:1
+                // }, function (data, status, xhr) {
+                //     if (data.errcode == 0) {
+                //         //layer.msg('保存成功',{icon: 16,time:true,shade:0.8});
+                //         mainTable.reload();
+                //     } else {
+                //         layer.msg('保存失败：' + data.errmsg, {
+                //             icon: 16,
+                //             time: true,
+                //             shade: 0.8
+                //         });
+                //     }
+                // })
+          
+        })
+
+        //列表操作
+        table.on('tool(mainTable)', function (obj) {
+            var layEvent = obj.event,
+                data = obj.data;
+
+            if (layEvent === 'edit') { //编辑
+                edit(data);
+            } else if (layEvent === 'del') { //删除
+                delData('/common/{{curController}}/settingdel', {
+                    id: data.Id
+                }, function (data) {
+                    mainTable.reload();
+                });
+            }
+        });
+        
+
+    })
+</script>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.print_paper {
+  margin: 0 20px 0 20px;
+  border: none;
+  border-collapse: collapse;
+  width: 980px;
+  margin-top: -1px;
+
+  table-layout: fixed;
+}
+
+  .print_paper td {
+      border: solid #000 1px;
+padding:5px;
+
+  }
+.text-center{
+text-align:center;
+}
+.text-right{
+text-align:right;
+}
+.no_border td {
+  border: none;
+  vertical-align: top;
+}
+.margin50{
+margin-left:50px;
+margin-right:50px;
+}
+.fhei {
+  font-family: 'SimHei';
+}
+.fam {
+  font-family: "Microsoft YaHei";
+}
+.f30 {
+  font-size: 30pt;
+}
+.f24 {
+  font-size: 24pt;
+}
+.f20 {
+  font-size: 20pt;
+}
+.f16 {
+  font-size: 16pt;
+}
+.f15 {
+  font-size: 15pt;
+}
+.f13 {
+  font-size: 13pt;
+}
+.f12 {
+  font-size: 12pt;
+}
+.f11 {
+  font-size: 11pt;
+}
+.f10 {
+  font-size: 10pt;
+}
+.f9 {
+  font-size: 9pt;
+}
+.f8 {
+  font-size: 8pt;
+}
+.f7 {
+  font-size: 7pt;
+}
+.b {
+  font-weight: bold;
+}
+.tc {
+  text-align: center;
+}
+.vt {
+  vertical-align: top;
+}
+.print_paper .btn {
+  border-top: none;
+}
+.print_paper .bln {
+  border-left: none;
+}
+.print_paper .brn {
+  border-right: none;
+}
+.print_paper .bbn {
+  border-bottom: none;
+}
+.lh14 {
+  line-height: 14px;
+}
+.lh14 {
+  line-height: 16px;
+}
+.pp-bn td {
+  border: none;
+}
+.t-bn td {
+  border: none;
+}
+.pl5 {
+  padding-left: 5px;
+}
+.rel {
+  position: relative;
+}
+.abs {
+  position: absolute;
+}

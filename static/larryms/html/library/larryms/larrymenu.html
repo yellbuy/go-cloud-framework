@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <meta name="keywords" content="404" />
+    <meta name="description" content="404" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgA box-blank library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>框架核心组件之右键菜单larryMenu.js</h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>larryMenu组件简介：</cite>larryMenu.js组件之于larryMS框架中可能表现并不突出，也是容易被忽略的一个组件，甚至会因为demo中简单的右键功能觉得是鸡肋，它的灵活特别之处就是在于用户可以在任何地方定制右键功能，小到一个div span a标签等元素、一个页面的、iframe等都可以进行右键功能定制，虽然在常规web页面中可能会用到比较少，但比如基于web封装的桌面客户端或WEB桌面应用的开发就非常实用了<em style="color: #000;font-weight: bolder;">【因为LarryMS框架不仅仅只在后台开发场景使用，而是web全端开发的前端解决方案】</em>，该组件可灵活使用的范围较广，可以基于它开发出很丰富的功能
+                        </p>
+                    </div>
+                </section>
+                
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <h2>larryMenu组件方法介绍</h2>
+                    </div>
+                    <div class="layui-card-body">
+                        <table class="layui-table library-talbe" lay-size="md">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="25%">
+                                <col width="30%">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">名称</th>
+                                    <th style="text-align: center;">参数</th>
+                                    <th style="text-align: center;">用法</th>
+                                    <th style="text-align: center;">说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ContentMenu</td>
+                                    <td>data,options,obj <br>
+                                        描述：菜单数据，配置项，作用对象
+                                    </td>
+                                    <td>larryMenu.ContentMenu(larryMenuData, {name: 'body'}, $('body'));</td>
+                                    <td>用于右键菜单功能的定义，核心在于菜单数据项的定义，对应实现的功能是在data参数中定义，obj的为右键作用对象通过鼠标右键点击事件触发</td>
+                                </tr>
+                                <tr>
+                                    <td>hide</td>
+                                    <td>无</td>
+                                    <td>larryMenu.hide();</td>
+                                    <td>用于隐藏右键菜单，与remove()相近，更多实用示例详见larryMS框架文档</td>
+                                </tr>
+                                <tr>
+                                    <td>remove</td>
+                                    <td>无</td>
+                                    <td>larryMenu.remove();</td>
+                                    <td>用于移除右键菜单，如边界临界点上的移入移出，或菜单之外的点击事件 实现原生右键菜单功能</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">虽然larryMenu组件提供外部使用的方法较少，但也足够使用了，核心在于ContentMenu方法与菜单数据定义，和作用对象可以演变出层出不穷的丰富自定义功能</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">更多功能,可在开发者文档中查看,同时也会根据VIP用户需求不断增加</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="margin-top: 15px;font-size: 14px;">
+                            更多关于larryMenu组件方法介绍请查看官方开发者文档：
+                            <a href="http://www.larryms.com/docs/larryms/index.html" target="_blank" style="color:#01AAED;">LarryMS框架开发者文档</a>
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+   <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page:'library'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

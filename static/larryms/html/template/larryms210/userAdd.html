@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>添加员工</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/template/admin.css" media="all">
+</head>
+
+<body class="larry-bg-white">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="larry-fluid">
+        <div class="larry-row larry-col-space15 p15 pb0 pt20">
+            <div class="layui-col-md12">
+                <form class="larry-form larry-form-pane larry-menu-form pt5" id="larrymsAdd" autocomplete="off" lay-filter="larryMenuAdd" action="">
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">用户名</label>
+                        <div class="larry-input-block">
+                            <input type="text" name="username" class="larry-input" autocomplete="off" placeholder="请输入员工用户名">
+                        </div>
+                    </div>
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">初始密码</label>
+                        <div class="larry-input-block">
+                            <input type="password" name="password" lay-verify="pwd|level:2" lay-verType="below" class="larry-input larry-input-shadow boxshadow-success" lay-valid="blur" data-eye="password" data-level="2" autocomplete="off" placeholder="设置员工初始密码">
+                        </div>
+                    </div>
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">真实姓名</label>
+                        <div class="larry-input-block">
+                            <input type="text" name="realname" class="larry-input" autocomplete="off" placeholder="请输入员工真实姓名">
+                        </div>
+                    </div>
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">用户权限</label>
+                        <div class="larry-input-block">
+                            <select name="gid" multiple="multiple" placeholder="请选择所属权限角色分组">
+                                <option value="1">超级管理员</option>
+                                <option value="2">系统管理员</option>
+                                <option value="3">总经理</option>
+                                <option value="4" selected="selected">普通员工</option>
+                                <option value="5">销售部职员</option>
+                                <option value="6">销售总监</option>
+                            </select>
+
+                        </div> 
+                    </div> 
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">所属部门</label>
+                        <div class="larry-input-block">
+                            <select name="dpt_id" lay-search="search" lay-verify="required">
+                                <option value="1" >某某科技教育有限公司</option>
+                                <option value="2" >  ├─管理部门</option>
+                                <option value="3" >  ├─财务部门</option>
+                                <option value="4" >  ├─销售部门</option>
+                                <option value="5" >  ├─教学部门</option>
+                                <option value="10" > └─客服部门</option>
+                            </select>
+
+                        </div> 
+                    </div> 
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">职务职称</label>
+                        <div class="larry-input-block">
+                            <select name="zhiwei" lay-search="search" lay-verify="required">
+                            <option value="">请选择职位名称</option>
+                                                            <option value="董事长">董事长</option>
+                                                            <option value="总经理">总经理</option>
+                                                            <option value="副总经理">副总经理</option>
+                                                            <option value="市场总监">市场总监</option>
+                                                            <option value="市场经理">市场经理</option>
+                                                    </select>
+
+                        </div>
+                    </div>
+                    <div class="larry-form-item">
+                        <label class="larry-form-label">手机号码</label>
+                        <div class="larry-input-block">
+                            <input type="text" name="phone" class="larry-input" autocomplete="off" placeholder="请输入员工手机号">
+                        </div>
+                    </div>
+                    
+                    <div class="larry-form-item mt20">
+                        <label class="layui-form-label"></label>
+                        <div class="larry-input-block">
+                            <span class="layui-btn layui-btn-sm mr30 pl25 pr25" lay-submit lay-filter="userAdd">提交</span>
+                            <button class="layui-btn layui-btn-sm layui-btn-danger pl25 pr25" type="reset">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="larry-menu-add" id="menuAddTpl" style="display: none;"></div>
+    <!-- 加载js文件-->
+     <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        rightMenu: 'none',
+        layertype: 2
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry', 'forms', 'larryms'], function() {
+        var $ = layui.$,
+            larryms = layui.larryms,
+            forms = layui.forms;
+        var curIfr = parent.layer.getFrameIndex(window.name);
+        forms.on('submit(userAdd)', function(data) {
+            larryms.alert('您提交表单数据为：'+JSON.stringify(data.field)+"点击确定会关闭当前窗口，并自动异步刷新父级页面的用户列表",function(){
+                parent.layer.close(curIfr);
+                parent.table.reload('userMange', {});
+            });
+            // $.post(data.form.action, data.field, function(res) {
+            //     if (res.code == 2000) {
+            //         larryms.msg(res.msg, { icon: 1, time: 800 }, function() {
+            //             parent.layer.close(curIfr);
+            //             parent.table.reload('userMange', {});
+            //         });
+            //     } else {
+            //         larryms.msg(res.msg);
+            //     }
+            // });
+            return false;
+        });
+    });
+    </script>
+</body>
+
+</html>

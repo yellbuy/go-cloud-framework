@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之极验扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>Geetest组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>Geetest组件：</cite>该组件是larryMS框架中封装来自极验官网的收费组件（极验官网也提供的有免费版），极验「行为验证」是一项可以帮助你的网站与APP识别与拦截机器程序批量自动化操作的SaaS应用。它是由极验开发的新一代人机验证产品，它不基于传统“问题-答案”的检测模式，而是通过利用深度学习对验证过程中产生的行为数据进行高维分析，发现人机行为模式与行为特征的差异，更加精准地区分人机行为。例如但不限于注册、登录、短信接口、查询接口、营销活动、发帖评论等等，都可以部署使用「行为验证」，来抵御机器批量操作。LarryMS框架封装Geetest组件的目的是为了为使用极验的用户提供一种全新的使用方式（当然项目中使用极验还需要到极验官方申请账号有免费版和付费版，前端模块可以直接使用LarryMS框架提供的），下面请看在LarryMS框架下如何更简单高效的使用该组件:
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。Geetest组件当前版本：3.0
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-geetest">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        极验注册登录场景【效果示例】
+                    </div>
+                    <div class="layui-card-body geetest-body">
+                        <form action="" class="layui-form larryms-form" method="post">
+                            <h2>会员注册入口</h2>
+                            <div class="layui-form-item">
+                                <label class="user-login-icon layui-icon layui-icon-username" for="user-login-nickname"></label>
+                                <input type="text" name="username" id="larrymsUserName" data-url="/user/login/usercheck.html" lay-verify="required" placeholder="用户名" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="user-login-icon layui-icon layui-icon-password" for="user-login-password"></label>
+                                <input type="password" name="password" id="user-login-password" lay-verify="pass" placeholder="密码" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="user-login-icon layui-icon layui-icon-password" for="user-login-repass"></label>
+                                <input type="password" name="repass" id="user-login-repass" lay-verify="required" placeholder="确认密码" class="layui-input">
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="user-login-icon layui-icon layui-icon-cellphone" for="user-login-cellphone"></label>
+                                <input type="text" name="phone" id="larryms_phone" lay-verify="required|phone" placeholder="手机" class="layui-input larry-input" value="">
+                            </div>
+                            <div class="layui-form-item larryms-geetest">
+                                <div id="embed-captcha"></div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-row">
+                                    <div class="layui-col-xs6">
+                                        <label class="user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
+                                        <input type="text" name="smscode" id="user-login-vercode" lay-verify="required" lay-verType="alert" placeholder="验证码" class="layui-input">
+                                    </div>
+                                    <div class="layui-col-xs6">
+                                        <div style="margin-left: 10px;">
+                                            <button type="button" class="layui-btn layui-btn-normal layui-btn-fluid" id="larryms_getsmscode">获取验证码</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="larrymsUserReg">注 册</button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        极验注册登录场景【Code示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <pre class="layui-code">
+layui.use('geetest', function() {
+    var geetest = layui.geetest,
+        handlerEmbed = function(captchaObj) {
+            captchaObj.appendTo("#GeeTestCp");
+            form.on('submit(larryforum)', function(data){
+                var validate = captchaObj.getValidate();
+                if (!validate) {# your code}
+                # your code AND geetest 二次验证 可在larryms文档中查看
+            });
+        };
+    // 初始化极验验证码；这里需要说明的是极验需要服务端支持即：需要前往极验官网获得用户ID与密钥
+    $.get(layui.cache.startcpathUrl, function(data) {
+        initGeetest({
+            gt: data.gt,
+            challenge: data.challenge,
+            new_captcha: data.new_captcha,
+            product: "embed",
+            offline: !data.success
+        }, handlerEmbed);
+    });
+});</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            在larryms框架中geetest组件是对极验官网提供的产品做了封装适合模块化使用，是为了开发中方便快速的完成客户端界面效果展现，geetest功能介绍可参见：http://www.geetest.com/；如上述例子中对极验组件的使用，更多示例可在larryms文档中找到。
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'geetest',
+        startcpathUrl: "http://test.larryms.com/geetest.php?t=" + (new Date()).getTime()
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

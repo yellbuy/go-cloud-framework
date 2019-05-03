@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之swiper扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>swiper组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>swiper组件：</cite>Swiper常用于移动端网站的内容触摸滑动;为便于layui中模块化使用，LarryMS框架同步封装swiper官网最新（当前版本为swiper4.x）,swiper是自定义制作3D切换效果的利器,其特色：1:1的触摸滑动、丰富的API、真正支持RTL布局、Flexbox布局、图片懒加载、视差过渡、多行slides布局、完整的导航控制、全屏滚动HTML5动画、3D旋转、滑动菜单、tab、焦点图等等，本示例页将提供在larryms框架下swiper新使用方法与部分效果展示：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            swiper组件之于LarryMS框架中无需再使用传统引入方式手动页面加载swiper.css和js文件，只需和使用layui自带组件一样，哪里需要就在哪里按需使用智能加载，足够灵活可控，以最简单的方式诠释着高效，即：layui.use('swiper',function(){#...});
+                            <br>同时：larryms官方社区提供所有所提供扩展组件的维护和更新。
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-swiper">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        3D翻转切换【效果示例】按住鼠标左键左右滑动或点击
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="swiper-container" id="larrymsSwiper1">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide blue-slide">slider1</div>
+                                <div class="swiper-slide red-slide">slider2</div>
+                                <div class="swiper-slide orange-slide">slider3</div>
+                                <div class="swiper-slide blue-slide">slider4</div>
+                                <div class="swiper-slide red-slide">slider5</div>
+                                <div class="swiper-slide orange-slide">slider6</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        3D翻转切换【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+layui.use('swiper',function(){
+    var swiper = layui.swiper;//无需再模板页中手动引入js与swiper.css文件了
+    var mySwiper1 = new swiper('#larrymsSwiper1', {
+        effect: 'coverflow',
+        slidesPerView: 3,
+        centeredSlides: true,
+        coverflowEffect: {
+            rotate: 30,
+            stretch: 5,
+            depth: 70,
+            modifier: 3
+        },
+    }); 
+});</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-swiper">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        PC端横向循环焦点图【效果示例】
+                    </div>
+                    <div class="layui-card-body" style="padding-bottom: 5px;">
+                        <div id="certify">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="../../../larryms/images/demo/certify01.png" />
+                                        <p>非常难得又值钱的认证证书</p>
+                                    </div>
+                                    <div class="swiper-slide"><img src="../../../larryms/images/demo/certify02.png" />
+                                        <p>深圳市优秀互联网企业认定证书</p>
+                                    </div>
+                                    <div class="swiper-slide"><img src="../../../larryms/images/demo/certify03.png" />
+                                        <p>质量管理体系认证荣誉证书</p>
+                                    </div>
+                                    <div class="swiper-slide"><img src="../../../larryms/images/demo/certify04.png" />
+                                        <p>计算机软件著作权登记证书</p>
+                                    </div>
+                                    <div class="swiper-slide"><img src="../../../larryms/images/demo/certify05.png" />
+                                        <p>增值电信业务经营许可证</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        PC端横向焦点效果【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+//swiper组件如上个示例中引入即可，具体见demo.js中，下面是代码片段;
+var certifySwiper = new swiper('#certify .swiper-container', {
+    watchSlidesProgress: true,
+    slidesPerView: 'auto',
+    centeredSlides: true,loop: true,
+    loopedSlides: 5,autoplay: true,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },pagination: {
+        el: '.swiper-pagination',
+    },on: {
+        progress: function(progress) {
+            customprogress(progress);
+    },setTransition: function(transition) {
+        transitions(transition);
+    }
+}</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-swiper">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        移动端【效果示例】
+                    </div>
+                    <div class="layui-card-body library-wrap">
+                        <div class="phone-box loaded">
+                            <iframe width="320" height="480" scrolling="no" src="wrapswiper.html"></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        移动端效果演示【Code示例】
+                    </div>
+                    <div class="layui-card-body library-wrap">
+                        <pre class="layui-code">
+var bannerSwiper = new swiper('#banner', {
+    mousewheel: true,
+    effect: 'coverflow',
+    speed: 300,
+    watchSlidesProgress: true,
+    on: {
+        touchMove: function() {
+            progress = this.progress
+                for (i = 0; i < this.slides.length; i++) {
+                    slideProgress = this.slides[i].progress
+                    if (Math.abs(slideProgress) < 1) {
+                        thumbSwiper[i].setTranslate(thumbSwiper[i].width * (Math.abs(slideProgress) - 1))
+                    }
+                }
+            },
+            transitionStart: function() {
+                activeIndex = this.activeIndex
+                for (i = 0; i < thumbSwiper.length; i++) {
+                    if (i == activeIndex) {
+                        thumbSwiper[i].slideTo(1);
+                    } else {
+                        thumbSwiper[i].slideTo(0);
+                    }
+                }
+            },
+        }
+    });//# ... 省略部分code</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            swiper组件功能非常丰富，可用于PC端、移动端、小程序类等开发，限于篇幅本示例页面只展示了少部分示例，具体用法可在larryms框架开发者文档中查看 或阅读swiper官方文档。
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'swiperdemo'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

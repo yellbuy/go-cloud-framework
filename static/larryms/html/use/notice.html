@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LarryMS框架之消息推送功能使用示例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/demo/use.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+</head>
+
+<body class="larry-bg-gray notice">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 10]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid">
+        <div class="larry-container">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-body func-introduce">
+                            <cite>消息推送通知功能介绍：</cite>
+                            <p>
+                                1、直接调用 larryms.notice({参数1},{参数2},callback) 即可，默认为框架内推送，提供五种类型：info、success、error、warning、danger 可自定义类型；<br>
+                                2、支持用户自定义主题，以及消息文字、背景色设定，消息体出现位置默认为右下角，系统支持左上角、右上角、左下角、右下角、左侧居中、右侧居中、顶部居中、底部居中、水平垂直居中，自适应显示，以及用户可以自定义设置任意位置；支持动画自定义设置，支持通知图标自定义设定<br>
+                                3、消息体默认为停留5秒后自动隐藏关闭，可设置停留时间（time与delay参数）可通过参数设置为点击关闭，多个消息时自动堆叠显示<br>
+                                4、消息推送时支持语音提示，支持消息推送前置方法及callback<br>
+                                5、交互功能：消息体点击事件时默认隐藏，可自动实现tab选项卡打开关闭操作、页面弹层操作、新窗口打开等操作<br>
+                                6、可自定义消息体模板、支持标题显/隐，动态修改网页标题背景图标等，支持框架消息功能状态同步【会根据vip用户反馈持续完善】
+                            </p>
+                            <span class="btn-info"><em>备注：</em>LarryMS框架提供消息推送通知功能适用场景：1、框架内的任意消息推送 2、脱离浏览器页面的桌面消息推送【详细的api参数具体以larryMS框架开发者文档为主】，以下仅作演示示例：下个版本该功能会更加丰满</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-body demo">
+                            <h2>框架内消息推送位置：<em>为测试效果，下列所有按钮点击时会自动清空已有消息通知,不同位置自动默认动画，也可自定义</em></h2>
+                            <div class="top" id="topBtn">
+                                <div class="layui-btn" id="br">右下角消息</div>
+                                <div class="layui-btn layui-btn-normal" id="bl">左下角消息</div>
+                                <div class="layui-btn layui-btn-warm" id="tl">左上角消息</div>
+                                <div class="layui-btn layui-btn-danger" id="tr">右上角消息</div>
+                                <div class="layui-btn" id="bc">底部中间</div>
+                                <div class="layui-btn" id="lc">左侧中间</div>
+                                <div class="layui-btn" id="tc">顶部中间</div>
+                                <div class="layui-btn" id="rc">右侧中间</div>
+                                <div class="layui-btn layui-bg-black" id="cc">水平垂直居中</div>
+                            </div>
+                            <h2>消息类型（默认提供自带对应图标，可关闭图标）：<em>为演示这里的消息部分加了手动点击关闭</em></h2>
+                            <div class="type-box">
+                                <div class="layui-btn layui-bg-black" id="closeAll">先关闭所有消息</div>
+                                <div class="layui-btn larry-bg-info" id="info"><i class="larry-icon larry-info"></i>info</div>
+                                <div class="layui-btn larry-bg-success" id="success"><i class="larry-icon larry-caozuochenggong"></i>success</div>
+                                <div class="layui-btn layui-btn-primary larry-bg-error" id="error"><i class="larry-icon larry-cuowu4"></i>error</div>
+                                <div class="layui-btn larry-bg-warning" id="warning"><i class="larry-icon larry-jinggao5"></i>warning</div>
+                                <div class="layui-btn larry-bg-danger" id="danger"><i class="larry-icon larry-zhongyao"></i>danger</div>
+                                <div class="layui-btn layui-btn-normal" id="custom">我是自定义的</div>
+                            </div>
+                            <h2>消息通知声音开启或关闭(可自定义音频文件；另外2.1.0版将支持JS语音合成支持)</h2>
+                            <div class="layui-btn layui-btn-danger" id="audio"><i class="larry-icon larry-shengyin"></i>带声音提示的消息通知</div>
+                            <div class="layui-btn layui-bg-black" id="noneaudio">无声音提示的消息通知</div>
+                            <div class="layui-btn layui-btn-normal" id="callb">支持回调函数</div>
+                            <h2>自定义背景颜色及主题</h2>
+                            <div class="layui-btn" id="theme">默认主题</div>
+                            <div class="layui-btn layui-btn-normal" id="color">自定义颜色</div>
+                            <div class="layui-btn" id="desktop" lay-tips="下个版本更新当前系列示例！">桌面通知一</div>
+                            <div class="layui-btn layui-bg-black" lay-tips="下个版本更新当前系列示例！">待更新</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../larryms/',
+        mods:'demo/',
+        page: 'notices'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

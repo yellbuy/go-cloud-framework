@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之CountUp扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>数字动画组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>数字动画组件：</cite>countup，一个能让数字以非常有趣的动画方式显示，无依赖的、轻量级的 JavaScript 类，可以用来快速创建以一种更有趣的动画方式显示数值数据。尽管它的名字叫 countUp，但其实可以在两个方向进行变化，这是根据你传递的 startVal 和 endVal 参数判断的。下面是LarryMS框架中countup组件的示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。(countup组件来自github)
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <div class="layui-row  layui-col-space15 larryms-countup">
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        数字动态变化【效果示例】
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-countup-box">
+                            <ul>
+                                <li>
+                                    <cite id="one" class="number" style="color: #ff5722;">80000</cite>
+                                    <i class="larry-icon larry-xiangshang2"></i>
+                                    <span>click me!</span>
+                                </li>
+                                <li>
+                                    <cite id="two" class="number">18000</cite>
+                                    <i class="larry-icon larry-xiangshang2"></i>
+                                    <span>click me!</span>
+                                </li>
+                                <li class="last">
+                                    <cite id="three" class="number" style="color: #5FB878">1500</cite>
+                                    <i class="larry-icon larry-xiangshang2"></i>
+                                    <span>click me!</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                    <div class="layui-card-header">
+                       数字动画组件使用【code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+#LarryMS框架中使用countup组件：
+layui.use(['jqueyr','countup'],function(){
+    var countup = layui.countup;
+    var one = new countup('one', 0, $('#one').text()),
+        two = new countup('two', 0, $('#two').text()),
+        three = new countup('three', 0, $('#three').text());
+    one.start();two.start();three.start();
+    //可自定义触发事件
+    $('.larryms-countup-box li').on('click', function() {
+        var counterId = $(this).children('cite').attr('id');
+        var $counter = new countup(counterId, 0, $('#' + counterId).text().replace(/,/g, ''));
+        $counter.start();
+    });
+});</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于数字动画组件示例文档，请移步LarryMS框架开发者文档中查看
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'chartsdemo',
+        identified: 'countup'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

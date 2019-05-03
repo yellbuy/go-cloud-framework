@@ -1,0 +1,488 @@
+<link rel="stylesheet" href="/static/css/fixedflow.css" type="text/css">
+
+<!-- 高级搜索 end -->
+<!-- imMsgBox end -->
+
+<div class="yb-childrenBbody">
+<form id="flowForm" class=" layui-row" method="post" action="/flowtemplate/fixedflowedit">
+	<div class="layui-form layui-col-md9 layui-col-xs12">
+		<div class="layui-row layui-col-space10">
+			<div class="layui-col-md9 layui-col-xs7">
+				<div class="layui-form-item magt3">
+					<label class="layui-form-label"><span class="text-red">*</span>流程名称</label>
+					<div class="layui-input-block">
+						<input type="text" class="layui-input titleVal"  lay-verify="name" name="Name" value="{{ .info.Name }}" placeholder="请输入流程名称">
+					</div>
+				</div>
+                <div class="layui-form-item">
+					<label class="layui-form-label">排序</label>
+					<div class="layui-input-block">
+						<input type="text" class="layui-input"  lay-verify="number" name="Order" value="{{ .info.Order }}" placeholder="请输入排序号">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">说明</label>
+					<div class="layui-input-block">
+						<textarea placeholder="请输入说明" name="Description" class="layui-textarea descriptionVal">{{ .info.Description }}</textarea>
+					</div>
+				</div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="layui-icon">&#xe60e;</i> 状　  态</label>
+                    <div class="layui-input-block newsStatus">
+                        <select name="Status" lay-verify="required">
+                            <option value="0" {{ if eq .info.Status 0}}selected{{end}}>草稿</option>
+                            <option value="1" {{ if eq .info.Status 1}}selected{{end}}>发布</option>
+                        </select>
+                    </div>
+                </div>
+			</div>
+			<div class="layui-col-md3 layui-col-xs5">
+				<div class="layui-upload-list thumbBox mag0 magt3" style="height:202px">
+					<input type="hidden" id="pic_id" name="CoverId" value=""/>
+				</div>
+			</div>
+		</div>
+	</div>
+    <hr class="layui-bg-gray" />
+    <div class="layui-row layui-col-space10 editFlow">
+        <div class="layui-col-md12 layui-col-xs12">
+            <!--固定流程-->
+			<div id="fixed_demo">
+				<div class="form" id="fixedFlow_info" style="display:none;">
+					<div class="fixedFlow_edit">
+						<div class="top flex">
+							<span class="nodeAttr active">节点属性</span>
+						</div>
+						<div class="nodeAttrBox edit_content">
+							<div class="node_edit_item ">
+								<div class="node_edit_sidebar">步骤：</div>
+								<div class="node_edit_content" id="fixedFlow_step">1</div>
+							</div>
+							<div class="node_edit_item ">
+								<div class="node_edit_sidebar">节点名称：</div>
+								<div class="node_edit_content"><input id="flow_node_name" type="text" class="form-text" maxlength="20" placeholder="请填写名称（最多20字）"></div>
+							</div>
+							<div class="node_edit_item ">
+								<div class="node_edit_sidebar">类型：</div>
+								<div class="node_edit_content">
+									<label class="dropdown-tip-toggle mr20" dropdown-tip-toggle="表示审查后批准执行；微信端处理时使用“审批”、“退审”按钮"><input type="radio" name="nodeType" checked="checked" value="1" >审批 </label>
+									<label class="dropdown-tip-toggle mr20"  dropdown-tip-toggle="表示已领会、收到通知；微信端处理时使用“确认”、“退回”按钮"><input type="radio" name="nodeType" value="2">知会</label>
+									<label class="dropdown-tip-toggle"  dropdown-tip-toggle="表示承接经办、接受办理；微信端处理时使用“办理”、“退回”按钮"><input type="radio" name="nodeType" value="3">承办</label>
+								</div>
+							</div>
+
+							<div class="node_edit_item ">
+								<div class="node_edit_sidebar line30_1">处理人：</div>
+								<div class="node_edit_content line30_1">
+									<label class="dropdown-tip-toggle"  dropdown-tip-toggle="填写并提交表单的人"><input type="radio" name="is_lading" value="1">提单人</label>
+									<br><label class="dropdown-tip-toggle mr15"  dropdown-tip-toggle="提单人当前部门的直接负责人，勾选后如果没有直接负责人，则往上一级寻找（部门负责人在通讯录管理中设置）"><input type="radio" name="is_lading" value="3">部门负责人</label>
+									<label class="dropdown-tip-toggle"  dropdown-tip-toggle="根据组织架构逐级向上审批；可以添加结束条件，不添加则一直到往上逐级到最高负责人处理才进入下一节点">
+										<input type="checkbox" name="isQuery" disabled="disabled">组织架构逐级审批
+									</label><a class="ml15" target="_blank" href="/qwy/manager/form/preview_dept.jsp">查看架构图</a><br>
+									<div id="dept_approval" class="approval_bg" style="display:none;" >
+										<div class="pt5 border-bottom pb5 mb10">
+											<label><input type="radio" name="isCreateFirst" value="1"/>从提单人部门开始</label><br>
+											<label class="dropdown-tip-toggle"  dropdown-tip-toggle="例：流程为A→B→C→D，假设C为当前节点，则B为上一节点"><input type="radio" name="isCreateFirst" value="0"/>从上一节点处理人部门开始</label>
+										</div>
+										<div>
+											<div id="select_node_dept_div" class="line1_2 mt15">
+												<span class="f13">以下部门的负责人处理完成时，结束逐级审批：</span>
+											</div>
+											<div class="f13 mt10"><div>向上审批多少个层级，结束逐级审批</div><input onchange="checkMaxAndMiniVal(this,1)" class="form-text" style="width:50px;" name="upAuditNum" type="number"><span class="c999  ml5">0为不限制</span></div>
+											<div class="f13 mt10"><div>向上审批到第几层级时，结束逐级审批</div><input onchange="checkMaxAndMiniVal(this,1)" class="form-text" style="width:50px;" name="endLevelNum" type="number"><span class="c999 ml5">0为不限制</span></div>
+											<div id="skip_dept_ids" class="line1_2 mt15">
+												<span class="f13">逐级审批时，跳过的部门<span class="c999 ml10">（不参与处理的部门）</span></span>
+											</div>
+											<div class="f13 mt10"><div>  逐级审批时，跳过的层级<span class="c999 ml5">（不参与处理的层级）</span></div><input class="form-text" style="width:100px;" name="skipLevelNum" type="text"><span class="c999  ml5">多个层级用“,”分隔</span></div>
+										</div>
+									</div>
+									<label class=""  dropdown-tip-toggle="">
+										<input type="radio" name="is_lading" value="5">自由选择
+									</label><br>
+									<div id="free_pick" class="approval_bg" style="display:none;">
+										<div class="pt5 pb5">
+											<label><input type="radio" name="appointType" checked value="2"/>由上一节点选择</label><br>
+											<label><input type="radio" name="appointType" value="1"/>由提单人节点选择</label><br>
+											<label><input type="radio" name="appointType" value="3"/>由特定节点选择</label>
+											<div id="free_pick_node" style="display:none;">
+												<span class="btn lh30 twoBtn" onclick="add_appoint();">选择</span>
+												<div class="pick-node"></div>
+											</div>
+										</div>
+									</div>
+									<label class="dropdown-tip-toggle"  dropdown-tip-toggle="从通讯录中选择具体成员，其中标签适用于“审批角色”，即：流程选择某个标签后，只需在通讯录中统一管理该标签里的成员，不用因为人员变动再修改流程">
+										<input type="radio" name="is_lading" checked="checked" value="2">选择处理人/标签角色
+									</label>
+									<div class="form-node-set p0">
+										<div id="select_node_person">
+                                            <div class="form-id-num-wrap">
+                                                <input type="hidden" id="tagIds" name="tagIds" class="tagIds" value="">
+                                                <input type="hidden" id="node_personList" name="node_personList" class="userIds" value="">
+                                                <input type="hidden" class="ConfiIndex" value="">
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="tag-tips none">已选标签总人数不大于100，微信端审批才能正常操作</div>
+						<div id="node_setting">
+							<div class="node_edit_item mt10 ">
+								<div class="node_edit_sidebar line30_1">节点设置：</div>
+								<div class="node_edit_content line30_1">
+									<div id="node_setting_startNode">
+										<label class="mr15 dropdown-tip-toggle"  dropdown-tip-toggle="当前节点的所有处理人都需要处理才能进入下一节点"><input name="isSign" type="checkbox">当前节点启用会签</label>
+										<label class="mr15 dropdown-tip-toggle"  dropdown-tip-toggle="当前节点的处理人可以自由添加通讯录权限范围内的成员协助处理，加签类型：##· 加会签：在当前节点中添加处理人##· 加前签：在当前节点之前添加处理人##· 加后签：在当前节点之后添加处理人"><input name="isAddCountersign" type="checkbox">允许加签</label>
+										<br><label class="dropdown-tip-toggle"  dropdown-tip-toggle="当前节点需要在手机上进行指纹验证才能处理；如手机不支持指纹功能时，必须使用手写签名"><input disabled="disabled" name="isSoter" type="checkbox">使用指纹验证</label><span class="mobile-device c999 f12" onclick="soterQRCode()">查看支持的设备</span>
+										<br><label class="mr15"><input onclick="checkIsGold(event);" name="isUseHandWriteSign" type="checkbox">必须使用手写签名</label>
+										<label class="mr15 dropdown-tip-toggle"  dropdown-tip-toggle="使用后台存档的手写签名图，可规范审批##格式，同时提高审批效率。##· 签名图在“通讯录管理 > 设置”中管理"><input name="isUsePresetSign" type="checkbox">允许使用存档签名</label>
+										<br><label class="dropdown-tip-toggle"  dropdown-tip-toggle="当前节点处理人与上一节点处理人相同时，系统自动同意并通过##自动审批无效状况：##· 当前节点处理人使用“部门负责人”并且提单人属于多部门人时"><input name="isAutomaticAudit" type="checkbox">自动审批</label>
+										<br><label class=""><input name="isCanEnd" type="checkbox">允许当前节点提前结束流程</label>
+										<br><label class="mr15 dropdown-tip-toggle"  dropdown-tip-toggle="上一节点处理完毕时，可以从当前节点里##已设置的处理人中选择具体处理成员"><input name="isChoice" type="checkbox">允许被上一节点指定处理人</label><label class="dropdown-tip-toggle" dropdown-tip-toggle="默认选中当前节点全部处理人" ><input name="isChoice1" type="checkbox">默认全选</label>
+										<br><label><input name="isTimeSet" type="checkbox">节点时效设置</label>
+									</div>
+								</div>
+							</div>
+							<div id="isTimeout" class="node_isTimeout" style="display:none;">
+								<div class="node_edit_item ">
+									<div class="node_edit_sidebar wid50">时长：</div>
+									<div class="node_edit_content ml60">
+										<input name="waitDay" type="number" class="form-text w40" maxlength="3" value="0"><span class="ml10">天</span>
+										<input name="waitTime" type="number"  class="form-text w40" maxlength="3" value="2"><span class="ml10">时</span>
+										<input name="waitMinute" type="number"  class="form-text w40" maxlength="2" value="0"><span class="ml10">分</span>
+									</div>
+								</div>
+								<div class="node_edit_item ">
+									<div class="node_edit_sidebar wid50">超时：</div>
+									<div class="node_edit_content ml60">
+										<label class="mr15"><input name="invalidType" type="radio" checked value="1"><span>提醒</span></label>
+										<label class="mr15"><input name="invalidType" type="radio" value="2"><span>跳转到指定节点</span></label>
+									</div>
+								</div>
+								<div id="message_content" class="node_edit_item">
+									<div class="node_edit_sidebar wid50">内容：</div>
+									<div class="node_edit_content ml60"><textarea name="message" rows="3" cols="" style="width:240px;height:48px;"></textarea></div>
+								</div>
+								<div id="node_content" class="node_edit_item" style="display:none;">
+									<div class="node_edit_sidebar wid50">节点：</div>
+									<div class="node_edit_content ml60"><select name="returnNodeId" style="width:250px;"><option value="">开始节点</option><option value="over_node">结束节点</option></select></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+	<div class="layui-form-item">
+        <label class="layui-form-label">
+        </label>
+        <input type="hidden" name="Id" value="{{ .info.Id}}"/>
+        <input type="hidden" name="FlowNodeJson" id="flowNodeJson"/>
+        <button type="button" class="layui-btn" lay-submit onclick="saveFlow()"><i class="layui-icon">&#xe605;</i> 保存</button>
+    </div>
+</form>
+</div>
+
+<script src="/static/js/jquery.form.js"></script>
+<script src="/static/js/SelectSpecificObjects.js"></script>
+<script src="/static/js/flow/fixedFlow.js?ver=2018.10.18"></script>
+<script src="/static/js/jquery.dragsort-0.5.2.min.js"></script>
+<script>
+    ConfiData = [
+        {
+            "itemId":"isUpdate",//条目区域的id
+            "viewId":"chooseDeptAndUs",//该部分的选人呈现区域id
+            "viewPosition":"right",//该部分的选人呈现区域位置right:放右边，bottom：放下边
+            "range":"range",//范围id
+            "rangeNum":"1",//范围的取值
+            "deptDataId":"deptIds",//存放部门id的input的id
+            "userDataId":"userIds",//存放人员id的input的id
+            "radioAllIpt_id":"radio_all",//所有人的input的id
+            "radioAllLab_id":"radio_all_id",//所有人的lable的id
+            "radioSpecifiedIpt_id":"radio_specified",//特定人员的input的id
+            "radioSpecifiedLab_id":"radio_specified_id",//特定人员的lable的id
+            "radioName":"a1"
+        },
+        {
+            "itemId":"select_node_person",
+            "viewId":"chooseNodeUser",
+            "viewPosition":"bottom",
+            "tagDataId":"tagIds",
+            "userDataId":"node_personList",
+            "callback":{
+                submit:function(data){
+                    console.log(data);
+                    if(!data)return;
+                    if(data.tagList.length>0){
+                        $('.tag-tips').show();
+                    }else{
+                        $('.tag-tips').hide();
+                    }
+                    $('#node_personList').data('personList',data.userList).data('tagList',data.tagList);
+                    $('#flow_node_name').blur();
+                },
+                remove:function(ids) {
+                    //console.log(ids);
+                    if(ids.userId){
+                        var $node = $('#node_personList');
+                        var userList = $node.data('personList');
+                        if(ids.userId.indexOf("|")==-1){
+                            //清除这个id的数据
+                            var back_handle = [];
+                            for(var i=0;i<userList.length;i++){
+                                if(userList[i].userId != ids.userId){
+                                    back_handle.push(userList[i]);
+                                }
+                            }
+                            $node.data('personList',back_handle);
+                        }else{
+                            $node.data('personList',[]);
+                        }
+                        $('#flow_node_name').blur();
+                    }
+                    if(ids.tagId){
+                        var $node = $('#node_personList');
+                        var tagList = $node.data('tagList');
+                        if(ids.tagId.indexOf("|")==-1){
+                            //清除这个id的数据
+                            var back_handle = [];
+                            for(var i=0;i<tagList.length;i++){
+                                if(tagList[i].tagId != ids.tagId){
+                                    back_handle.push(tagList[i]);
+                                }
+                            }
+                            $node.data('tagList',back_handle);
+                        }else{
+                            $node.data('tagList',[]);
+                        }
+                        if($node.data('tagList').length>0){
+                            $('.tag-tips').show();
+                        }else{
+                            $('.tag-tips').hide();
+                        }
+                        $('#flow_node_name').blur();
+                    }
+                }
+            }
+        },
+        {
+            "itemId":"select_node_dept_div",
+            "viewId":"chooseNodeDept",
+            "viewPosition":"bottom",
+            "deptDataId":"node_deptList",
+            "callback":{
+                submit:function(data){
+                    //console.log(data);
+                    if(!data)return;
+                    $('#node_deptList').data('deptList',data.deptList);
+                    $('#flow_node_name').blur();
+                },
+                remove:function(ids) {
+                    //console.log(ids);
+                    if(ids.deptId){
+                        var $node = $('#node_deptList');
+                        var deptList = $node.data('deptList');
+                        if(ids.deptId.indexOf("|")==-1){
+                            //清除这个id的数据
+                            var back_handle = [];
+                            for(var i=0;i<deptList.length;i++){
+                                if(deptList[i].deptId != ids.deptId){
+                                    back_handle.push(deptList[i]);
+                                }
+                            }
+                            $node.data('deptList',back_handle);
+                        }else{
+                            $node.data('deptList',[]);
+                        }
+                        $('#flow_node_name').blur();
+                    }
+                }
+            }
+        },{
+            "itemId":"skip_dept_ids",
+            "viewId":"unchooseNodeDept",
+            "viewPosition":"bottom",
+            "deptDataId":"unnode_deptList",
+            "callback":{
+                submit:function(data){
+                    if(!data)return;
+                    $('#unnode_deptList').data('deptList',data.deptList);
+                    $('#flow_node_name').blur();
+                },
+                remove:function(ids) {
+                    if(ids.deptId){
+                        var $node = $('#unnode_deptList');
+                        var deptList = $node.data('deptList');
+                        if(ids.deptId.indexOf("|")==-1){
+                            //清除这个id的数据
+                            var back_handle = [];
+                            for(var i=0;i<deptList.length;i++){
+                                if(deptList[i].deptId != ids.deptId){
+                                    back_handle.push(deptList[i]);
+                                }
+                            }
+                            $node.data('deptList',back_handle);
+                        }else{
+                            $node.data('deptList',[]);
+                        }
+                        $('#flow_node_name').blur();
+                    }
+                }
+            }
+        }
+    ]
+</script>
+<script type="text/javascript">
+	var _flowType = "edit";
+	var demo;
+	//新增流程
+  $(function(){
+    if(_flowType == ''){
+        $('.cTitle h3').html('新增流程');
+        // $("#flowForm").attr("action","/qwy/flow/flowAction!ajaxAdd.action");
+        demo = $.createFixedFlow($('#fixed_demo'));
+        var data ={nodes:[{
+            "id": uuid(),
+            "isAutomaticAudit": '0',
+            "isCanEnd": "1",
+            "isChoice": "1",
+            "isLading": "2",
+            "isQuery": "0",
+            "isSign": "1",
+            "isSoter": "0",
+            "personList": [],
+            "nodeGroupList": [],
+            "nodeName": "节点1",
+            "nodeType": "1"
+        },{
+            "id": uuid(),
+            "isAutomaticAudit": '0',
+            "isCanEnd": "1",
+            "isChoice": "1",
+            "isLading": "2",
+            "isQuery": "0",
+            "isSign": "1",
+            "isSoter": "0",
+            "personList": [],
+            "nodeGroupList": [],
+            "nodeName": "节点2",
+            "nodeType": "1"
+        }]};
+        demo.loadData(data);
+        //编辑流程
+    } else if(_flowType == 'edit'||_flowType == 'copy'){
+        if(_flowType == 'edit'){
+            $('.cTitle h3').html('编辑流程');
+            // $("#flowForm").attr("action","/qwy/flow/flowAction!ajaxUpdate.action");
+        }else{
+            $('.cTitle h3').html('复制流程');
+            // $("#flowForm").attr("action","/qwy/flow/flowAction!ajaxAdd.action");
+        }
+
+        //var flowPo = _doGetDataSrc("/qwy/flow/flowAction!ajaxSearch.action?id=", null);
+        // var flowPo = _doGetDataSrc("/qwy/flow/flowAction!ajaxSearch.action?id=", null);
+        
+        //有特定人员
+        {{/* if(flowPo.ranges=="3"){
+            if(flowPo.departNameList!=null && flowPo.departNameList!=""){
+                var deptList=flowPo.departNameList;
+                var deptIdList=flowPo.departIdList;
+                var dept = [];
+                for(var i=0;i<deptList.length;i++){
+                    var deptli = {};
+                    deptli.deptId = deptIdList[i];
+                    deptli.deptName = deptList[i];
+                    dept.push(deptli);
+                }
+            }
+            makeSelectOutput('isUpdate',flowPo.persons,dept);
+        } */}}
+        ///初始化节点信息
+        var flowNodeList='[]';
+        var jsonStr = '{{ .info.FlowNodeJson}}';
+        if (jsonStr){
+            flowNodeList = JSON.parse(jsonStr)
+        }
+        demo = $.createFixedFlow($('#fixed_demo'));
+        if(_flowType == 'copy'){
+            for(var i = 0;i<flowNodeList.length;i++){
+                flowNodeList[i].id=uuid();
+            }
+        }
+        demo.loadData({nodes:flowNodeList});
+        //复制流程
+    }
+  });
+  
+</script>
+<script type="text/javascript">
+
+	var editIndex;
+    layui.use(['form','layer','layedit','laydate','upload'],function(){
+    var form = layui.form
+        layer = parent.layer === undefined ? layui.layer : top.layer,
+        laypage = layui.laypage,
+        upload = layui.upload,
+        layedit = layui.layedit,
+        laydate = layui.laydate,
+        $ = layui.jquery;
+    //用于同步编辑器内容到textarea
+    layedit.sync(editIndex);
+    
+    //上传缩略图
+    var uploadInst = upload.render({
+        elem: '.thumbBox',
+        url: '/ext/attachment/adminfile/uploadPicForLayedit',
+			before: function(obj){
+			//预读本地文件示例，不支持ie8
+			obj.preview(function(index, file, result){
+				// $('.thumbImg').attr('src', result); //图片链接（base64）
+			});
+		},
+        done: function(res, index, upload){
+			if(res.code==0){
+				var data = res.data;
+				$('#pic_id').val(data.id);
+				$('.thumbImg').attr('src',data.src);
+				$('.thumbBox').css("background","#fff");
+			}
+            else{
+				layer.alert('图片上传失败：'+res.msg, {icon: 5,title:'温馨提示'});
+			}
+        }, error: function(err) {
+			alert(err)
+		}
+    });
+
+    
+    form.verify({
+        name : function(val){
+            if(val == ''){
+                return "流程名称不能为空";
+            }
+        }
+    })
+	
+    //预览
+    form.on("submit(look)",function(){
+        layer.alert("此功能需要前台展示，实际开发中传入对应的必要参数进行文章内容页面访问");
+        return false;
+    })
+    //创建一个编辑器
+    editIndex = layedit.build('contentEdit',{
+        height : 335,
+        uploadImage : {
+            url : "/ext/attachment/adminfile/uploadPicForLayedit"
+        }
+    });
+    //body.find("#contentEdit").val({{/*info.content*/}});
+    form.render();
+    
+});
+function syncEditorData(){
+	layedit.sync(editIndex);
+	return false;
+}
+</script>

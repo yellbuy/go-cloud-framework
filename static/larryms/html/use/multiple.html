@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LarryMS框架之表单下拉框多选功能使用示例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/demo/use.css">
+</head>
+
+<body class="larry-bg-gray transfer">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 10]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid">
+        <div class="larry-container">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-body func-introduce">
+                            <cite>LarryMS模板框架中基础组件forms表单之下拉框多选功能：【以下是大致介绍】</cite>
+                            <p>
+                                1、在一些特定场景下需要用到下拉框多选，如后台中用户角色用户组分配，允许一个用户可以同时属于多个角色组<br>
+                                2、原生所有浏览器都支持select标签的multiple属性，但其外观样式确有待提升，因此在LarryMS中针对下拉框select标签进行了封装 <br>
+                                3、在layui社区扩展平台中也有不少相关功能组件的实现，但很少是基于原生select标签进行的，而且通过js或引入json数据渲染而成，因此对于下拉框多选需求不需要如此复杂，完全可以通过 给select标签添加本身就支持的multiple属性实现，larryms推崇layui开箱即用的理念，只需要交给forms表单自动渲染即可。
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15 pb100">
+                <div class="layui-col-lg6 layui-col-md7 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card pb100">
+                        <div class="layui-card-header transfer-title">下拉框多选演示：</div>
+                        <div class="layui-card-body pb100">
+                            <form class="larry-form pb100" action="">
+                                <blockquote class="layui-elem-quote layui-text mt6 mb20">
+                                    <p style="line-height: 26px;">下拉框多选功能的使用，与下拉框单选无异，仅仅是多了一个mulitple属性，这也是高度保持原生写法，减少过多的方法干扰和记忆成本，如下便是常规下拉框单选与多选的使用示例:forms表单自动完成渲染，手动动态渲染与select的渲染方法一致，forms.render('select')</p>
+                                </blockquote>
+                                <div class="larry-form-item">
+                                    <label class="larry-form-label">下拉框单选：</label>
+                                    <div class="larry-input-block">
+                                        <select name="one" lay-filter="one">
+                                            <option value=""></option>
+                                            <option value="a">写作1</option>
+                                            <option value="b" selected="">阅读1</option>
+                                            <option value="c" >游戏1</option>
+                                            <option value="d">音乐1</option>
+                                            <option value="e">旅行1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="larry-form-item">
+                                    <label class="larry-form-label larry-red">下拉框多选：</label>
+                                    <div class="larry-input-block">
+                                        <select name="more" lay-filter="more" multiple="multiple" lay-search="search">
+                                            <option value=""></option>
+                                            <option value="xz">写作</option>
+                                            <option value="yd" selected="selected">阅读</option>
+                                            <option value="yx" selected="selected">游戏</option>
+                                            <option value="yy" >音乐</option>
+                                            <option value="lx">旅行</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="larry-form-item">
+                                    <label class="larry-input-label"></label>
+                                    <div class="larry-input-block">
+                                        <div class="layui-btn layui-btn-sm" lay-submit lay-filter='multiples'>数据提交测试</div>
+                                    </div>
+                                </div>
+                            </form>
+                            <p style="font-size: 14px;font-style: italic;color: #bbb;line-height: 30px;">
+                                备注：下个版本将继续完善下拉框多选中的下拉树多选功能【目前已支持多选分组】
+                            </p>
+                        </div>
+                    </section>
+                </div>
+                <div class="layui-col-lg6 layui-col-md5 layui-col-sm12 layui-col-xs12">
+                    <section class="larry-card">
+                        <div class="larry-card-header">
+                            <p>
+                                下拉框多选在表单中使用代码示例如下：
+                            </p>
+                        </div>
+                        <div class="larry-card-body">
+                            <p>HTML结构如下，是不是使用很简洁，有多个默认值，则对于option上添加selected="selected"属性即可</p>
+                            <pre class="layui-code">
+<div class="larry-form-item">
+    <label class="larry-form-label">下拉框多选：</label>
+    <div class="larry-input-block">
+        <select name="test" lay-filter="aihao" multiple="multiple">
+            <option value=""></option>
+            <option value="xz">写作</option>
+            <option value="yd" selected="selected">阅读</option>
+            <option value="yx" selected="selected">游戏</option>
+            <option value="yx">游戏</option>
+            <option value="yy">音乐</option>
+            <option value="lx">旅行</option>
+        </select>
+    </div>
+</div>
+</pre>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../larryms/',
+        mods: 'demo/',
+        page: 'multipleSelect'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ztree组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/uidemo.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+    <style>
+        html,body{
+            height: 100%;
+            overflow: auto !important;
+        }
+    </style>
+</head>
+
+<body class="larry-bg-lightgrey larryui">
+    <!--[if lt IE 10]>
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <div class="larry-fluid p20 webuploader">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card bradius-5">
+                    <div class="larry-card-body pb15">
+                        <h1>大文件分片并发上传<em>【提供于标准版及以上】</em></h1>
+                        <p class="title">分片上传组件的封装来源于Baidu WebFE(FEX)开源提供的WebUploader，一个简单的以HTML5为主，FLASH为辅的现代文件上传组件。在现代的浏览器里面能充分发挥HTML5的优势，同时又不摒弃主流IE浏览器，沿用原来的FLASH运行时，兼容IE6+，iOS 6+, android 4+。两套运行时，同样的调用方式，可供用户任意选用，采用大文件分片并发上传，极大的提高了文件上传效率。下面是larryms框架模板中二次封装提供的webUploader组件使用举例：【实际项目中可结合form/forms表单组件使用】</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card bradius-5">
+                    <div class="larry-card-body pt15 pb15">
+                        <h3 class="larry-demo-title">您可以尝试文件拖拽，使用QQ截屏工具，然后激活窗口后粘贴，或者点击添加图片按钮，来体验此demo.</h3>
+                        <div id="container">
+                            <!--头部，相册选择和格式选择-->
+                            <div id="uploader">
+                                <div class="queueList">
+                                    <div id="dndArea" class="placeholder">
+                                        <div id="filePicker"></div>
+                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                    </div>
+                                </div>
+                                <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                        <span class="text">0%</span>
+                                        <span class="percentage"></span>
+                                    </div>
+                                    <div class="info"></div>
+                                    <div class="btns">
+                                        <div id="filePicker2"></div>
+                                        <div class="uploadBtn">开始上传</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="title pt15">当前页面示例中只是展示了分片上传组件的使用方式，后面时间充足随着更新，会有更详细的与form表单组件完成上传的实战项目示例和后台模板中得以体现</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: false,
+        base: '../../../larryms/',
+        mods: 'demo/',
+        page: 'uidemo',
+        identified: 'webuploader'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

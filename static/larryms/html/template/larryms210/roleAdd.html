@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>角色添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/admin/admin.css" media="all">
+    <style type="text/css">body{overflow-x: hidden;}</style>
+</head>
+
+<body>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="larry-row larry-col-space15 pb0 pt20">
+        <div class="layui-col-md12">
+            <form class="larry-form larry-form-pane larry-menu-form pt5" id="larrymsAdd" lay-filter="larryMenuAdd" action="">
+                <div class="larry-form-item">
+                    <label class="larry-form-label">角色名称</label>
+                    <div class="larry-input-block">
+                        <input type="text" name="title" class="larry-input" required lay-verify="required" autocomplete="off" placeholder="请输入角色名称">
+                    </div>
+                </div>
+                <div class="larry-form-item">
+                    <label class="larry-form-label">角色描述</label>
+                    <div class="larry-input-block">
+                        <input type="text" name="description" class="larry-input" autocomplete="off" placeholder="请输入该角色设定描述,可选">
+                    </div>
+                </div>
+            
+                <div class="larry-form-item">
+                    <label class="larry-form-label">角色状态</label>
+                    <div class="larry-input-block">
+                       <input type="checkbox" checked="" name="status" lay-skin="switch" lay-filter="switchStatus" lay-text="开启|关闭" value="1">
+                    </div>
+                </div>
+                <div class="larry-form-item mt30">
+                    <label class="layui-form-label"></label>
+                    <div class="larry-input-block">
+                        <span class="layui-btn layui-btn-sm mr30 pl25 pr25" lay-submit lay-filter="roleAdd">提交</span>
+                        <button class="layui-btn layui-btn-sm layui-btn-danger pl25 pr25" type="reset">重置</button>
+                    </div>
+                </div>  
+            </form>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        rightMenu: 'none',
+        layertype: 2
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry','forms','larryms'],function(){
+        var $ = layui.$,
+            larryms = layui.larryms,
+            forms = layui.forms;
+        var curIfr = parent.layer.getFrameIndex(window.name);
+        forms.on('submit(roleAdd)',function(data){
+        	larryms.alert('您提交表单数据为：'+JSON.stringify(data.field)+"点击确定会关闭当前窗口，并自动异步刷新父级页面的用户列表",function(){
+                parent.layer.close(curIfr);
+                parent.table.reload('userMange', {});
+            });
+            // $.post(data.form.action,data.field,function(res){
+            //     if(res.code == 2000){
+            //         larryms.msg(res.msg,{icon:1,time:800},function(){
+            //             parent.layer.close(curIfr);
+            //             parent.table.reload('roleMange',{});
+            //         });
+            //     }else{
+            //         larryms.msg(res.msg);
+            //     }
+            // });
+            return false;
+        });
+    });
+    </script>
+</body>
+
+</html>

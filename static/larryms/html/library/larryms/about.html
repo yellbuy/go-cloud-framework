@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于LarryMS框架核心组件库说明</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="LarryCMS Version:1.09" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/temp.css" media="all">
+</head>
+
+<body class="temp">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid larryms-svg-box">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                <h1 class="tit">关于LarryMS框架核心组件说明</h1>
+                <blockquote class="layui-elem-quote">
+                    LarryMS框架作为layui的扩展与应用，提供了自主开发的核心js组件库以支持全端场景的开发，紧贴业务需求，降低学习成本，遵循Layui开箱即用的理念，简洁，高效和极致，借助LarryMS，您可以用于快速开发各种MIS系统，如CMS、OA、CRM、ERP等。优秀，发自至心，品质源于执着，坚持，卓尔不群
+                </blockquote>
+                <p>
+                    <em>补充：</em>随着LarryMS全新上线，<em>将会以VIP社员的需求共性为导向</em>，紧贴业务需求，为用户企业缩短开发周期，提高工作效率，降低开发者上手成本，专属的VIP文档与场景规范示例。
+                </p>
+                <div class="margin-20"></div>
+                <p>
+                    LarryMS核心组件封装了大量基础功能，如第三方jquery插件智能加载，多终端设备智能识别匹配，前端常用工具类，各类验证扩展，高灵活度的右键菜单，Layui tab选项卡的高度扩展，解决传统iframe性能问题，常用表单封装，树形表等等不一一罗列，LarryMS所追求的目的是提高效率，解放前端，降低开发成本与周期，急您所需，供您所求。
+                </p>
+                
+                <p>
+                    使用举例：(详细介绍与使用范例在会员专属文档中查看)
+                </p>
+<pre class="layui-code">
+layui.use(['larryms','larryTab','LarryMenu'],function(){
+    var $ = layui.$,
+        larryms = layui.larryms,
+        larryTab = layui.larryTab,
+        LarryMenu = layui.LarryMenu; 
+    //菜单初始化
+    larryTab.menuSet({
+      type: 'GET',
+      url: layui.cache.menusUrl,
+      data: layui.cache.menuData,
+      left_menu: '#larryms_left_menu',
+      leftFilter: 'LarrySide'
+    });
+    larryTab.menu();
+    //使用larryms.plugin()加载各个版本的jq插件，有些jq插件使用频率不高但却需要到，可以智能加载，无需担忧jq低版本高版本兼容问题
+    //larryms底层已全部为您解决，无效率延迟问题
+    larryms.plugin('snap.svg-min',func);//func为您回调函数 可自定义
+    //详情可见会员专属文档示例
+    //...
+});
+</pre>
+            </div>
+                
+        </div>
+    </div>
+    <div id="loader" class="pageload-overlay" data-opening="m -5,-5 0,70 90,0 0,-70 z m 5,35 c 0,0 15,20 40,0 25,-20 40,0 40,0 l 0,0 C 80,30 65,10 40,30 15,50 0,30 0,30 z">
+        <svg width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+            <path d="m -5,-5 0,70 90,0 0,-70 z m 5,5 c 0,0 7.9843788,0 40,0 35,0 40,0 40,0 l 0,60 c 0,0 -3.944487,0 -40,0 -30,0 -40,0 -40,0 z" />
+        </svg>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.cache.page = 'temp';
+    layui.config({
+        version: "2.0.7",
+        base: '../../../larryms/',
+        mods:'demo/',
+        identified: 'one'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,306 @@
+{% extends "../../_share/base.html" %}
+{% block style %}
+<!--<link rel="stylesheet" href="/static/admin/js/zTree/metroStyle/metroStyle.css" type="text/css">-->
+<link rel="stylesheet" href="/static/admin/js/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
+<!-- <style> -->
+<!-- .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{ -->
+<!-- vertical-align:middle;    </style>  -->
+{% endblock%}
+{% block content %}
+<form class="layui-form">
+    <!-- <blockquote class="layui-elem-quote quoteBox"> -->
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width:100px;padding: 9px 0;">收/发货：</label>
+        <div class="layui-input-inline" style="width: 100px;">
+            <select class="kindVal">
+                <option value="-1">所有</option>
+                <option value="0">收货</option>
+                <option value="1">发货</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-inline">
+        <label class="layui-form-label" style="width:80px;padding: 9px 0;">姓名：</label>
+        <div class="layui-input-inline" style="width: 150px;">
+            <input type="text" class="layui-input searchVal" placeholder="输入姓名" />
+        </div>
+        <a class="layui-btn btnSearch" data-type="reload" style="padding: 0 10px;"><i class="layui-icon"></i> 搜索</a>
+    </div>
+    <!-- <div class="layui-inline">
+            <a class="layui-btn layui-btn-sm layui-btn-normal btnAddArticle"><i class="layui-icon">&#xe608;</i> 新增</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-sm layui-btn-danger layui-btn-normal btnDelAll"><i class="layui-icon">&#xe640;</i> 批量删除</a>
+        </div>  -->
+    <div class="layui-inline">
+        <a class="layui-btn layui-bg-cyan btnAudit" style="padding: 0 10px;margin-left:10px;">审核通过</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-primary btnNoAudit" style="padding: 0 10px;">审核不通过</a>
+    </div>
+    <!-- </blockquote> -->
+    <table id="mainTable" lay-filter="mainTable"></table>
+    <!--操作-->
+    <script type="text/html" id="mainTableBar">
+        <!--  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>  -->
+		<a class="layui-btn layui-btn-xs layui-btn-danger confirm" lay-event="del">删除</a>
+	</script>
+</form>
+
+{% endblock %} {% block footer %}
+<!-- <script type="text/javascript" charset="utf-8" src="/static/tenant/js/udeitor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/tenant/js/udeitor/ueditor.all.min.js"> </script> -->
+<!-- <script type="text/javascript" charset="utf-8" src="/static/tenant/js/udeitor/lang/zh-cn/zh-cn.js"></script>  -->
+<script type="text/javascript">
+    // layui.config({
+    //     base: '/static/layui/extend/'
+    // }).extend({
+    //     treeGrid:'treeGrid'})
+    layui.use(['larry', 'form', 'layer', 'laydate', 'table', 'laytpl'], function () {
+        var form = layui.form,
+            // layer = parent.layer === undefined ? layui.layer : top.layer,
+            layer = layui.layer,
+            $ = layui.jquery,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl,
+            table = layui.table;
+
+        //评论列表
+        var mainTable = table.render({
+            elem: '#mainTable',
+            url: '/wuliu/address/list',
+            cellMinWidth: 95,
+            page: true,
+            height: "full-105",
+            id: "mainTable",
+            cols: [
+                [{
+                        type: "numbers",
+                        title: '',
+                        align: "right",
+                        fixed: "left"
+                    },
+                    {
+                        type: "checkbox",
+                        fixed: "left"
+                    },
+                    // {# {field: 'id', title: '标识', width:70, align:"right",fixed:"left"}, #}
+                    // {field: 'Article_id', type:"space", templet: function(row){return "";}},
+
+                    {
+                        field: 'Name',
+                        title: '用户',
+                        width: 100,
+                        align: "left"
+                    },
+                    {
+                        field: 'Mobile',
+                        title: '电话',
+                        width: 350,
+                        align: "left"
+                    },
+                    {
+                        title: '地址',
+                        width: 220,
+                        align: "left",
+                        templet: function (row) {
+                            return row.Province + row.City + row.County + row.Addr;
+                        }
+                    },
+                    {
+                        field: 'Kind',
+                        title: '收发货',
+                        width: 100,
+                        align: "center",
+                        templet: function (row) {
+                            if (row.Kind == 0) {
+                                return '<span class="layui-badge layui-bg-orange">收货</span>';
+                            }
+                            if (row.Kind == 1) {
+                                return '<span class="layui-badge layui-bg-green">发货</span>'
+                            }
+                        }
+                    },
+
+                    {
+                        field: 'UpdateTime',
+                        title: '修改时间',
+                        width: 160,
+                        align: "left"
+                    },
+                    {
+                        field: 'AuditTime',
+                        title: '审核时间',
+                        width: 160,
+                        align: "left"
+                    },
+                    {
+                        title: '操作',
+                        width: 80,
+                        templet: '#mainTableBar',
+                        fixed: "right",
+                        align: "center"
+                    }
+                ]
+            ]
+        });
+
+        //监听单元格编辑
+        table.on('edit(mainTable)', function (obj) {
+            if (obj.field == 'sort') {
+                var value = obj.value //得到修改后的值
+                if (!isFloat(value)) {
+                    layer.msg('输入的值不正确');
+                    return;
+                }
+                $.post('logEdit', {
+                    id: obj.data.id,
+                    sort: value
+                }, function (data, status, xhr) {
+                    if (data.errcode == 0) {
+                        //layer.msg('保存成功',{icon: 16,time:true,shade:0.8});
+                        mainTable.reload();
+                    } else {
+                        layer.msg('保存失败：' + data.errmsg, {
+                            icon: 16,
+                            time: true,
+                            shade: 0.8
+                        });
+                    }
+                })
+            }
+        });
+
+        //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
+        $(".btnSearch").on("click", function () {
+            table.reload("mainTable", {
+                page: {
+                    curr: 1 //重新导航到首页
+                },
+                where: {
+                    key: $(".searchVal").val(), //关键字
+                    kind: $(".kindVal").val()
+                }
+            })
+        });
+        //批量删除
+        $(".btnDelAll").click(function () {
+            delCheckedData('/cms/articlelog/LogDel', 'mainTable', function (data, status) {
+                mainTable.reload();
+            });
+        });
+
+        //批量审核
+        $(".btnAudit").click(function () {
+            auditCheckedData('/cms/articlelog/logaudit', 'mainTable', 1, "您确定要审核通过吗？", function (data, status) {
+                mainTable.reload();
+            });
+        });
+        //批量取消审核
+        $(".btnNoAudit").click(function () {
+            auditCheckedData('/cms/articlelog/logaudit', 'mainTable', -1, "您确定要审核不通过吗？", function (data, status) {
+                mainTable.reload();
+            });
+        });
+        //封装方法--批量改变审核状态
+        function auditCheckedData(url, tableId, audit, title, success) {
+            layui.use(['table'], function () {
+                var table = layui.table;
+                var checkStatus = table.checkStatus(tableId),
+                    rowData = checkStatus.data,
+                    ids = [];
+                if (rowData.length > 0) {
+                    for (var i in rowData) {
+                        ids.push(rowData[i].Id);
+                    }
+
+                    layer.confirm(title, {
+                        icon: 3,
+                        title: '操作确认'
+                    }, function (index) {
+                        layer.close(index);
+                        $.post(url, {
+                            ids: ids,
+                            audit: audit
+                        }, function (data, status) {
+                            if (status = 'success' && data.status == 0) {
+                                if (success) {
+                                    success(data, status);
+                                    // mainTable.reload();
+                                }
+                            } else {
+                                layer.alert(data.errmsg, {
+                                    icon: 5,
+                                    title: '温馨提示'
+                                });
+                            }
+                        });
+                    });
+                } else {
+                    layer.msg('请选择需要操作的记录', {
+                        icon: 3,
+                        title: '温馨提示'
+                    });
+
+                }
+            });
+        }
+
+        form.on('switch(ajax_field_update)', function (data) {
+            var elem = data.elem;
+            var data = {
+                id: $(elem).data('id')
+            };
+            data[elem.name] = elem.checked ? 1 : 0;
+            updateField(data);
+        });
+        //直接更新字段值
+        function updateField(data) {
+            $.post('logEdit', data, function (data, status, xhr) {
+                if (data.errcode == 0) {
+                    layer.msg('操作成功！');
+                    mainTable.reload();
+                } else {
+                    layer.msg('保存失败：' + data.errmsg, {
+                        icon: 16,
+                        time: true,
+                        shade: 0.8
+                    });
+                }
+            })
+        }
+        //评论管理
+        function edit(data) {
+            var id = data ? data.Id : '';
+            var title = id ? "编辑评论" : "添加评论";
+            loadDialog("logEdit", {
+                id: id
+            }, {
+                title: title
+            }, true);
+        }
+        $(".btnAdd").click(function () {
+            edit();
+        })
+
+        //列表操作
+        table.on('tool(mainTable)', function (obj) {
+            var layEvent = obj.event,
+                data = obj.data;
+
+            if (layEvent === 'edit') { //编辑
+                edit(data);
+            } else if (layEvent === 'del') { //删除
+                delData('/cms/articlelog/logdel', {
+                    ids: data.Id,
+                    article_id: data.article_id
+                }, function (data) {
+                    mainTable.reload();
+                });
+            }
+        });
+
+    })
+</script>
+
+{% endblock %}

@@ -1,0 +1,679 @@
+<configuration version="">
+    <group key="APP_GROUP" name="APP参数" hide="false" state="">
+        <item key="APP_ANDROID_VERSION" name="安卓APP版本号" state="" order="0" hide="false" type="1">
+            <remark>安卓APP当前版本号</remark>
+            <value>0</value>
+            <options></options>
+        </item>
+        <item key="APP_ANDROID_DOWNLOAD_URL" name="安卓APP下载地址" state="" order="1" hide="false" type="1">
+            <remark>安卓APP安装包下载地址</remark>
+            <value></value>
+            <options></options>
+        </item>
+        <item key="APP_ANDROID_UPGRADE_URL" name="安卓APP升级地址" state="" order="2" hide="false" type="1">
+            <remark>安卓APP升级地址</remark>
+            <value></value>
+            <options></options>
+        </item>
+        <item key="APP_IOS_VERSION" name="IOS APP版本号" state="" order="4" hide="false" type="1">
+            <remark>IOS APP当前版本号</remark>
+            <value>0</value>
+            <options></options>
+        </item>
+        <item key="APP_IOS_DOWNLOAD_URL" name="IOS APP下载地址" state="" order="5" hide="false" type="1">
+            <remark>IOS APP安装包下载地址</remark>
+            <value></value>
+            <options></options>
+        </item>
+        <item key="APP_IOS_UPGRADE_URL" name="IOS APP升级地址" state="" order="6" hide="false" type="1">
+            <remark>IOS APP升级地址</remark>
+            <value></value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_BASE" name="基本" hide="false" state="" order="1">
+        <item key="WEB_SITE_TITLE" name="前台网站标题" state="" order="0" hide="false" type="1">
+            <remark>网站标题前台显示标题</remark>
+            <value>企业级多租户开发框架</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_DESCRIPTION" name="网站描述" state="" order="1" hide="false" type="2">
+            <remark>网站搜索引擎描述</remark>
+            <value>一款基于ThinkJS(Node.js MVC)和MySQL的功能强大的（PC端,手机端和微信公众平台）电子商务平台及CMS建站系统</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_KEYWORD" name="网站关键字" state="" order="8" hide="false" type="2">
+            <remark>网站搜索引擎关键字</remark>
+            <value>nodej,yellbuy,内容管理框架,thinkjs</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_CLOSE" name="关闭站点" state="" order="1" hide="false" type="4">
+            <remark>站点关闭后其他用户不能访问，管理员可以正常访问</remark>
+            <value></value>
+            <options>
+                <option value="0" >0:关闭</option>
+                <option value="1" >1:开启</option>
+            </options>
+        </item>
+        <item key="WEB_SITE_ICP" name="网站备案号" state="" order="9" hide="false" type="1">
+            <remark>设置在网站底部显示的备案号，如“陕ICP备16000909号“</remark>
+            <value>陕ICP备16000909号-2</value>
+            <options></options>
+        </item>
+        <item key="ADMIN_SITE_COLOR" name="后台色系" state="" order="130" hide="false" type="4">
+            <remark>后台颜色风格</remark>
+            <value></value>
+            <options>
+                <option value="blue" >blue:蓝色</option>
+                <option value="red">red:红色</option>
+                <option value="green">green:绿色</option>
+                <option value="purple" >purple:紫色</option>
+                <option value="yellow" >yellow:黄色</option>
+            </options>
+        </item>
+        <item key="WEB_TONGJI" name="统计代码" state="" order="60" hide="false" type="2">
+            <remark>统计代码</remark>
+            <value>&lt;script&gt;&#xD;&#xA;var _hmt = _hmt || [];&#xD;&#xA;(function() {&#xD;&#xA;  var hm = document.createElement(&#34;script&#34;);&#xD;&#xA;  hm.src = &#34;//hm.baidu.com/hm.js?db1838bfd0b81ebff469f5ef62a0621a&#34;;&#xD;&#xA;  var s = document.getElementsByTagName(&#34;script&#34;)[0]; &#xD;&#xA;  s.parentNode.insertBefore(hm, s);&#xD;&#xA;})();&#xD;&#xA;&lt;/script&gt;</value>
+            <options></options>
+        </item>
+        <item key="ADMIN_SITE_NAME" name="后台网站名称" state="" order="100" hide="false" type="1">
+            <remark></remark>
+            <value>业贝信息</value>
+            <options></options>
+        </item>
+        <item key="ADMIN_SITE_TITLE" name="后台网站标题" state="" order="120" hide="false" type="1">
+            <remark></remark>
+            <value>企业级多租户开发框架</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_VERSION" name="站点页脚版本信息" state="" order="40" hide="false" type="2">
+            <remark></remark>
+            <value>&lt;b&gt;Version&lt;/b&gt; 3.0  Powered by 业贝信息</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_RIGHT" name="站点页脚版权信息" state="" order="50" hide="false" type="2">
+            <remark></remark>
+            <value><strong>Copyright © 2016-2018 <a href="">YELLBUY</a></strong>. All rights reserved.</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_TITLE" name="网站后台标题" state="" order="0" hide="false" type="1">
+            <remark>网站租户前台显示标题</remark>
+            <value>企业级多租户框架</value>
+            <options></options>
+        </item>
+        <item key="TENANT_SITE_NAME" name="租户后台名称" state="" order="150" hide="false" type="1">
+            <remark></remark>
+            <value>租户管理</value>
+            <options></options>
+        </item>
+        <item key="TENANT_SITE_TITLE" name="租户后台标题" state="" order="160" hide="false" type="1">
+            <remark>租户后台标题</remark>
+            <value>租户后台管理</value>
+            <options></options>
+        </item>
+        <item key="WEB_SITE_HOST" name="站点域名" state="" order="2" hide="false" type="1">
+            <remark>站点域名，使用IIS或nginx等反向代理时进行微信授权需明确指定域名</remark>
+            <value>test.ynwtzj.com</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_CONTENT" name="内容" state="" order="2">
+        <item key="DOCUMENT_POSITION" name="文档推荐位" state="" order="3" hide="false" type="3">
+            <remark>文档推荐位，推荐到多个位置KEY值相加即可</remark>
+            <value>1:列表推荐&#xD;&#xA;2:频道推荐&#xD;&#xA;4:首页推荐</value>
+            <options></options>
+        </item>
+        <item key="DOCUMENT_DISPLAY" name="文档可见性" state="" order="4" hide="false" type="3">
+            <remark>文章可见性仅影响前台显示，后台不收影响</remark>
+            <value>0:所有人可见&#xD;&#xA;1:仅注册会员可见&#xD;&#xA;2:仅管理员可见</value>
+            <options></options>
+        </item>
+        <item key="OPEN_DRAFTBOX" name="是否开启草稿功能" state="" order="1" hide="false" type="4">
+            <remark>新增文章时的草稿功能配置</remark>
+            <value></value>
+            <options>
+                <option value="0" >0:关闭草稿功能</option>
+                <option value="1" >1:开启草稿功能</option>
+            </options>
+        </item>
+        <item key="DRAFT_AOTOSAVE_INTERVAL" name="自动保存草稿时间" state="" order="2" hide="false" type="0">
+            <remark>自动保存草稿的时间间隔，单位：秒</remark>
+            <value>60</value>
+            <options></options>
+        </item>
+        <item key="LIST_ROWS" name="后台每页记录数" state="" order="10" hide="false" type="0">
+            <remark>后台数据每页显示记录数</remark>
+            <value>10</value>
+            <options></options>
+        </item>
+        <item key="REPLY_LIST_ROWS" name="回复列表每页条数" state="" order="0" hide="false" type="0">
+            <remark></remark>
+            <value>10</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_USER" name="用户" state="" order="3">
+        <item key="USER_ALLOW_REGISTER" name="是否允许用户注册" state="" order="1" hide="false" type="4">
+            <remark>是否开放用户注册</remark>
+            <value></value>
+            <options>
+                <option value="0" >0:关闭注册</option>
+                <option value="1">1:允许注册</option>
+            </options>
+        </item>
+        <item key="USER_ALLOW_SMSREGISTER" name="注册方式" state="" order="1" hide="false" type="4">
+            <remark>短信注册，网站必须开启短信功能。</remark>
+            <value></value>
+            <options>
+                <option value="0" >0:传统注册</option>
+                <option value="1" >1:短信注册</option>
+            </options>
+        </item>
+        <item key="SYS_PRIV_ROLE" name="系统模型角色权限" state="" order="3" hide="false" type="3">
+            <remark>格式&lt;code&gt;权限名(英文):说明&lt;/code&gt;</remark>
+            <value>init:查看&#xD;&#xA;add:添加&#xD;&#xA;edit:编辑&#xD;&#xA;delete:删除&#xD;&#xA;examine:审核&#xD;&#xA;disable:禁用&#xD;&#xA;listorder:排序&#xD;&#xA;push:推送&#xD;&#xA;move:移动</value>
+            <options></options>
+        </item>
+        <item key="SYS_PRIV_GROUP" name="系统模型会员组权限" state="" order="4" hide="false" type="3">
+            <remark>格式 &lt;code&gt;权限名(英文):说明&lt;/code&gt;</remark>
+            <value>visit:访问&#xD;&#xA;add:投稿&#xD;&#xA;addexa:投稿审核&#xD;&#xA;editexa:编辑审核</value>
+            <options></options>
+        </item>
+        <item key="SP_PRIV_ROLE" name="单页模型角色权限" state="" order="5" hide="false" type="3">
+            <remark>格式&lt;code&gt;权限名(英文):说明&lt;/code&gt;</remark>
+            <value>init:查看&#xD;&#xA;add:添加&#xD;&#xA;edit:编辑&#xD;&#xA;delete:删除</value>
+            <options></options>
+        </item>
+        <item key="SP_PRIV_GROUP" name="单页模型会员组权限" state="" order="6" hide="false" type="3">
+            <remark>格式 &lt;code&gt;权限名(英文):说明&lt;/code&gt;</remark>
+            <value>visit:访问</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_SYS" name="系统" state="" order="4">
+        <item key="CONFIG_TYPE_LIST" name="配置类型列表" state="" order="2" hide="false" type="3">
+            <remark>主要用于数据解析和页面表单的生成</remark>
+            <value>0:数字&#xD;&#xA;1:字符&#xD;&#xA;2:文本&#xD;&#xA;3:数组&#xD;&#xA;4:枚举</value>
+            <options></options>
+        </item>
+        <item key="CONFIG_GROUP_LIST" name="系统配置分组" state="" order="4" hide="false" type="3">
+            <remark>系统配置分组</remark>
+            <value>1:基本&#xD;&#xA;2:内容&#xD;&#xA;3:用户&#xD;&#xA;4:系统&#xD;&#xA;5:商城&#xD;&#xA;6:微信&#xD;&#xA;7:第三方登录&#xD;&#xA;8:七牛云存储&#xD;&#xA;9:搜狐畅言&#xD;&#xA;10:验证码(极验)&#xD;&#xA;11:视频(videojj)&#xD;&#xA;12:短信</value>
+            <options></options>
+        </item>
+        <item key="HOOKS_TYPE" name="钩子的类型" state="" order="6" hide="false" type="3">
+            <remark>类型 1-用于扩展显示内容，2-用于扩展业务处理</remark>
+            <value>1:视图&#xD;&#xA;2:控制器</value>
+            <options></options>
+        </item>
+        <item key="AUTH_CONFIG" name="Auth配置" state="" order="8" hide="false" type="3">
+            <remark>自定义类配置</remark>
+            <value>AUTH_ON:1&#xD;&#xA;AUTH_TYPE:2</value>
+            <options></options>
+        </item>
+        <item key="CODEMIRROR_THEME" name="预览插件的CodeMirror主题" state="" order="3" hide="false" type="4">
+            <remark>详情见CodeMirror官网</remark>
+            <value></value>
+            <options>
+                <option value="3024-day" describe="3024-day:3024 day"></option>
+                <option value="3024-night" describe="3024-night:3024 night"></option>
+                <option value="ambiance" describe="ambiance:ambiance"></option>
+                <option value="base16-dark" describe="base16-dark:base16 dark"></option>
+                <option value="base16-light" describe="base16-light:base16 light"></option>
+                <option value="blackboard" describe="blackboard:blackboard"></option>
+                <option value="cobalt" describe="cobalt:cobalt"></option>
+                <option value="eclipse" describe="eclipse:eclipse"></option>
+                <option value="elegant" describe="elegant:elegant"></option>
+                <option value="erlang-dark" describe="erlang-dark:erlang-dark"></option>
+                <option value="lesser-dark" describe="lesser-dark:lesser-dark"></option>
+                <option value="midnight" describe="midnight:midnight"></option>
+            </options>
+        </item>
+        <item key="DATA_BACKUP_PATH" name="数据库备份根路径" state="" order="6" hide="false" type="1">
+            <remark>路径必须以 / 结尾</remark>
+            <value>./Data/</value>
+            <options></options>
+        </item>
+        <item key="DATA_BACKUP_PART_SIZE" name="数据库备份卷大小" state="" order="7" hide="false" type="0">
+            <remark>该值用于限制压缩后的分卷最大长度。单位：B；建议设置20M</remark>
+            <value>20971520</value>
+            <options></options>
+        </item>
+        <item key="DATA_BACKUP_COMPRESS" name="数据库备份文件是否启用压缩" state="" order="9" hide="false" type="4">
+            <remark>数据库备份文件是否启用压缩</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:不压缩"></option>
+                <option value="1" describe="1:启用压缩"></option>
+            </options>
+        </item>
+        <item key="DATA_BACKUP_COMPRESS_LEVEL" name="数据库备份文件压缩级别" state="" order="10" hide="false" type="4">
+            <remark>数据库备份文件的压缩级别，该配置在开启压缩时生效</remark>
+            <value></value>
+            <options>
+                <option value="1" describe="1:普通"></option>
+                <option value="4" describe="4:一般"></option>
+                <option value="9" describe="9:最高"></option>
+            </options>
+        </item>
+        <item key="DEVELOP_MODE" name="开启开发者模式" state="" order="11" hide="false" type="4">
+            <remark>是否开启开发者模式</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="ADMIN_ALLOW_IP" name="后台允许访问IP" state="" order="12" hide="false" type="2">
+            <remark>多个用逗号分隔，如果不配置表示不限制IP访问</remark>
+            <value></value>
+            <options></options>
+        </item>
+        <item key="SHOW_PAGE_TRACE" name="是否显示页面Trace" state="" order="1" hide="false" type="4">
+            <remark>是否显示页面Trace信息</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="MENU_GROUP" name="系统后台菜单分组" state="" order="33" hide="false" type="3">
+            <remark>后台菜单分组，左侧栏显示</remark>
+            <value>0:不分组&#xD;&#xA;10:内容&#xD;&#xA;20:电商&#xD;&#xA;40:系统&#xD;&#xA;99:微信</value>
+            <options></options>
+        </item>
+        <item key="CONFIG_GROUP_TENANT" name="租户配置分组" state="" order="5" hide="false" type="3">
+            <remark>租户配置分组</remark>
+            <value>1:基本&#xD;&#xA;2:内容&#xD;&#xA;3:用户&#xD;&#xA;4:系统&#xD;&#xA;5:商城&#xD;&#xA;6:微信&#xD;&#xA;7:第三方登录&#xD;&#xA;8:七牛云存储&#xD;&#xA;9:搜狐畅言&#xD;&#xA;10:验证码(极验)&#xD;&#xA;11:视频(videojj)&#xD;&#xA;12:短信</value>
+            <options></options>
+        </item>
+        <item key="MENU_GROUP_TENANT" name="后台租户菜单分组" state="" order="35" hide="false" type="3">
+            <remark></remark>
+            <value>0:不分组&#xD;&#xA;10:内容&#xD;&#xA;20:电商&#xD;&#xA;40:系统&#xD;&#xA;99:微信</value>
+            <options></options>
+        </item>
+        <item key="TENANT_MEMBER_SHARE" name="会员共享" state="" order="100" hide="false" type="4">
+            <remark>租户间是否共享会员</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:不共享"></option>
+                <option value="1" describe="1:共享"></option>
+            </options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_SHIP" name="商城" state="" order="5">
+        <item key="SYMBOL" name="货币符号" state="" order="1" hide="false" type="1">
+            <remark>例如：人民币“￥”</remark>
+            <value>￥</value>
+            <options></options>
+        </item>
+        <item key="UNIT" name="货币单位" state="" order="2" hide="false" type="1">
+            <remark>例如：人民币“元”</remark>
+            <value>元</value>
+            <options></options>
+        </item>
+        <item key="IS_INVOICE" name="发票功能" state="" order="3" hide="false" type="4">
+            <remark></remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="TAX" name="税率" state="" order="4" hide="false" type="0">
+            <remark>填写数字不带&#34;%&#34;</remark>
+            <value>0</value>
+            <options></options>
+        </item>
+        <item key="GRADE_DAYS" name="消费时长" state="" order="6" hide="false" type="0">
+            <remark>（天）默认365天，会员升级，消费金额需要统计的最近时长。</remark>
+            <value>365</value>
+            <options></options>
+        </item>
+        <item key="ORDER_DELAY_FLASH" name="抢购订单作废时长" state="" order="7" hide="false" type="0">
+            <remark>（分钟）默认120分钟，自下单之时起，用户在多长时间内没有支付，订单将自动作废。</remark>
+            <value>120</value>
+            <options></options>
+        </item>
+        <item key="ORDER_DELAY_GROUP" name="团购订单作废时长" state="" order="8" hide="false" type="0">
+            <remark>（分钟）默认120分钟，自下单之时起，用户在多长时间内没有支付，订单将自动作废。</remark>
+            <value>120</value>
+            <options></options>
+        </item>
+        <item key="ORDER_DELAY_BUND" name="捆绑订单作废时长" state="" order="9" hide="false" type="0">
+            <remark>（分钟）默认不限制（0表示不限制），自下单之时起，用户在多长时间内没有支付，订单将自动作废。</remark>
+            <value>0</value>
+            <options></options>
+        </item>
+        <item key="ORDER_DELAY" name="默认订单作废时长" state="" order="11" hide="false" type="0">
+            <remark>（分钟）默认不限制（0表示不限制），自下单之时起，用户在多长时间内没有支付，订单将自动作废。</remark>
+            <value>1440</value>
+            <options></options>
+        </item>
+        <item key="COD" name="货到付款" state="" order="0" hide="false" type="4">
+            <remark>货到付款只针对实物商品</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:支持货到付款"></option>
+                <option value="1" describe="1:不支持货到付款"></option>
+            </options>
+        </item>
+        <item key="PREPAID" name="预付款消费" state="" order="0" hide="false" type="4">
+            <remark>网站是否支持预付款消费，默认支持。</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:支持预付款消费"></option>
+                <option value="1" describe="1:不支持预付款消费"></option>
+            </options>
+        </item>
+        <item key="GOODS_CATEGORY" name="物品类别" state="" order="1000" hide="false" type="3">
+            <remark></remark>
+            <value>文件票据:文件票据&#xD;&#xA;特产食品:特产食品&#xD;&#xA;水果生鲜:水果生鲜&#xD;&#xA;数码电子:数码电子&#xD;&#xA;服装鞋帽:服装鞋帽&#xD;&#xA;配件物料:配件物料&#xD;&#xA;办公文体:办公文体&#xD;&#xA;日化洗护:日化洗护&#xD;&#xA;书籍影像:书籍影像&#xD;&#xA;养生保健:养生保健&#xD;&#xA;易碎物品[当面交件]:易碎物品[当面交件]&#xD;&#xA;贵重物品[当面交件]:贵重物品[当面交件]&#xD;&#xA;其它物品:其它物品[备注留言]</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_WEIXIN" name="微信" state="" order="6">
+        <item key="wx_AppID" name="AppID(应用ID)" state="" order="3" hide="false" type="1">
+            <remark>AppID(应用ID)&lt;/br&gt;&#xD;&#xA;URL(服务器地址):&lt;code&gt;http://或https://你的域名/home/wechat&lt;/code&gt;</remark>
+            <value>wx050169df24ba4652</value>
+            <options></options>
+        </item>
+        <item key="wx_AppSecret" name="AppSecret(应用密钥)" state="" order="4" hide="false" type="1">
+            <remark>AppSecret(应用密钥)</remark>
+            <value>b5ec58ec9a4afa08695ad8d5ee6eccc5</value>
+            <options></options>
+        </item>
+        <item key="wx_Token" name="Token(令牌)" state="" order="5" hide="false" type="1">
+            <remark>Token(令牌)</remark>
+            <value>yellbuy</value>
+            <options></options>
+        </item>
+        <item key="wx_name" name="公众号名称" state="" order="1" hide="false" type="1">
+            <remark>微信公共账号名称</remark>
+            <value>懒人寄件</value>
+            <options></options>
+        </item>
+        <item key="wx_type" name="公众号类型" state="" order="2" hide="false" type="4">
+            <remark>不同的公众号类型具备不同的接口权限，具体查看&lt;a href=&#39;https://mp.weixin.qq.com/wiki&#39; target=&#39;_blank&#39; class=&#39;text-info&#39;&gt;微信公众平台技术文档&lt;/a&gt;</remark>
+            <value></value>
+            <options>
+                <option value="1" describe="1:未认证订阅号"></option>
+                <option value="2" describe="2:认证订阅号"></option>
+                <option value="3" describe="3:未认证服务号"></option>
+                <option value="4" describe="4:认证服务号"></option>
+            </options>
+        </item>
+        <item key="wx_NewOrder_TemplateId" name="新订单提醒模板消息id" state="" order="10" hide="false" type="1">
+            <remark></remark>
+            <value>P6Srwxn6ca9teA0aP42E5wLKCUKUzktd4otbutZRBQw</value>
+            <options></options>
+        </item>
+        <item key="wx_OrderRemind_TemplateId" name="订单状态更改模板消息id" state="" order="15" hide="false" type="1">
+            <remark></remark>
+            <value>1voO0uS2kZ9el6rVfmDUqq1yZodX6zkpQ1TuSwSXhxs</value>
+            <options></options>
+        </item>
+        <item key="wx_Recharge_TemplateId" name="充值提醒模板消息id" state="" order="20" hide="false" type="1">
+            <remark></remark>
+            <value>JTl8A9e41vNxNlwqH631Os4dbcVKBwTDHz74G57C3O0</value>
+            <options></options>
+        </item>
+        <item key="wx_ID" name="公众号" state="" order="0" hide="false" type="1">
+            <remark>公众号的微信号</remark>
+            <value>YBXXLRJJ</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_THIRD" name="第三方登录" state="" order="7">
+        <item key="IS_QQ_LOGIN" name="是否开启QQ登陆" state="" order="1" hide="false" type="4">
+            <remark>开启后请配置下面的APP ID和APP KEY ，&lt;a href=&#34;http://connect.qq.com/&#34; class = &#34;text-info&#34; target=&#34;_blank&#34;&gt;APP ID和APP KEY申请&lt;/a&gt;&lt;br&gt;&#xD;&#xA;回调地址：&lt;code&gt;http://www.abc.com/uc/qq/index&lt;/code&gt;&lt;/br&gt;&#xD;&#xA;申请接口的是时候需要填写回调地址，你把www.abc.com替换成你网站的域名 如：http://www.cmswing.com/uc/qq/index</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="QQ_APPID" name="QQ  APP ID" state="" order="2" hide="false" type="1">
+            <remark>在QQ互联申请到的 APP ID ,填写到此处。</remark>
+            <value>101309492</value>
+            <options></options>
+        </item>
+        <item key="QQ_APPKEY" name="QQ APP KEY" state="" order="2" hide="false" type="1">
+            <remark>在QQ互联申请到的 APP KEY ,填写到此处。</remark>
+            <value>98c05261f58f2fe30478bb168d143113</value>
+            <options></options>
+        </item>
+        <item key="QQ_VALIDATION" name="QQ验证码" state="" order="4" hide="false" type="1">
+            <remark>申请QQ登录应用的时候，会提供给你一段代码进行网站验证,请填写到此处。</remark>
+            <value>&lt;meta property=&#34;qc:admins&#34; content=&#34;1271366777635371676375&#34; /&gt;</value>
+            <options></options>
+        </item>
+        <item key="IS_SINA_LOGIN" name="是否开启新浪微博登陆" state="" order="5" hide="false" type="4">
+            <remark>开启后请配置下面的APP ID和APP KEY ，&lt;a href=&#34;http://open.weibo.com/&#34; class = &#34;text-info&#34; target=&#34;_blank&#34;&gt;APP ID和APP KEY申请&lt;/a&gt;&lt;br&gt;&#xD;&#xA;回调地址：&lt;code&gt;http://www.abc.com/uc/sina/index&lt;/code&gt;&lt;/br&gt;&#xD;&#xA;申请接口的是时候需要填写回调地址，你把www.abc.com替换成你网站的域名 如：http://www.cmswing.com/uc/sina/index</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="SINA_APPKEY" name="SINA App Key" state="" order="6" hide="false" type="1">
+            <remark>在微博开放平台申请到的 App Key ,填写到此处。</remark>
+            <value>3868482864</value>
+            <options></options>
+        </item>
+        <item key="SINA_APPSECRET" name="SINA App Secret" state="" order="7" hide="false" type="1">
+            <remark>在微博开放平台申请到的 App Secret ,填写到此处。</remark>
+            <value>ec0c3346d244d91c6e0189b4448fb326</value>
+            <options></options>
+        </item>
+        <item key="SINA_VALIDATION" name="SINA验证码" state="" order="8" hide="false" type="1">
+            <remark>申请微博登录应用添加新网站的时候，会提供给你一段代码进行网站验证,请填写到此处。</remark>
+            <value>&lt;meta property=&#34;wb:webmaster&#34; content=&#34;bc4f6c6952e7529b&#34; /&gt;</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_SEVEN" name="七牛云存储" state="" order="8">
+        <item key="IS_QINIU" name="开启七牛云储存" state="" order="0" hide="false" type="4">
+            <remark>开启前先填写七牛的AccessKey/SecretKey，&lt;a href=&#34;http://www.qiniu.com/&#34; target=&#34;_blank&#34; class=&#34;text-info&#34;&gt;申请地址&lt;/a&gt;</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="QINIU_AK" name="七牛 AK" state="" order="1" hide="false" type="1">
+            <remark>七牛云储存 AccessKey</remark>
+            <value>OJD9JCXudNtPwz_bKrtdnP2uTd5BVGvEJxaiUB24</value>
+            <options></options>
+        </item>
+        <item key="QINIU_SK" name="七牛 SK" state="" order="2" hide="false" type="1">
+            <remark>七牛云储存 SK</remark>
+            <value>_Dmewmycq994GcYxG4N3WvOX0ED-5eUeeXvoOYcE</value>
+            <options></options>
+        </item>
+        <item key="QINIU_BUCKET" name="空间名" state="" order="4" hide="false" type="1">
+            <remark>在七牛后台创建的对象储存名称</remark>
+            <value>cmswing</value>
+            <options></options>
+        </item>
+        <item key="QINIU_DOMAIN_NAME" name="七牛空间域名" state="" order="5" hide="false" type="1">
+            <remark>七牛空间域名如：&#x9;7xt6v5.com1.z0.glb.clouddn.com 不带http://</remark>
+            <value>odhs9iog7.qnssl.com</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_SOHO" name="搜狐畅言" state="" order="9">
+        <item key="CY_APPID" name="APP ID" state="" order="0" hide="false" type="1">
+            <remark> 畅言APP ID  &lt;a href=&#34;http://changyan.kuaizhan.com/&#34; target=&#34;_blank&#34; class=&#34;text-info&#34;&gt;点击申请&lt;/a&gt;</remark>
+            <value>cysYegnR2</value>
+            <options></options>
+        </item>
+        <item key="CY_APPKEY" name="APP KEY" state="" order="1" hide="false" type="1">
+            <remark> 畅言 APP KEY  &lt;a href=&#34;http://changyan.kuaizhan.com/&#34; target=&#34;_blank&#34; class=&#34;text-info&#34;&gt;点击申请&lt;/a&gt;&#xD;&#xA; &lt;h4&gt;PC端单点登录配置参数&lt;/h4&gt;&#xD;&#xA;        &lt;p&gt;&#xD;&#xA;        登录行为(打开新页面登录):&lt;code&gt;http://网站域名/uc/changyan/signin 或 https://网站域名/uc/changyan/signin&lt;/code&gt;&#xD;&#xA;        &lt;/p&gt;&#xD;&#xA;        &lt;p&gt;&#xD;&#xA;            获取用户信息接口URL:&lt;code&gt;http://网站域名/uc/changyan/getuserinfo 或 https://网站域名/uc/changyan/getuserinfo&lt;/code&gt;&#xD;&#xA;        &lt;/p&gt;&#xD;&#xA;        &lt;p&gt;&#xD;&#xA;            用户退出接口URL:&lt;code&gt;http://网站域名/uc/public/logout 或 https://网站域名/uc/public/logout&lt;/code&gt;&#xD;&#xA;        &lt;/p&gt;&#xD;&#xA;&lt;h4&gt;WAP版设置&lt;/h4&gt;&#xD;&#xA;   &lt;p&gt;&#xD;&#xA;          wap登陆页地址:&lt;code&gt;http://网站域名/uc/public/login 或 https://网站域名/uc/public/login&lt;/code&gt;&#xD;&#xA;        &lt;/p&gt;&#xD;&#xA;   &lt;p&gt;&#xD;&#xA;            获取用户信息接口URL:&lt;code&gt;http://网站域名/uc/changyan/getuserinfo 或 https://网站域名/uc/changyan/getuserinfo&lt;/code&gt;&#xD;&#xA;        &lt;/p&gt;&#xD;&#xA;  &lt;p&gt;&#xD;&#xA;            用户退出接口URL:&lt;code&gt;http://网站域名/uc/public/logout 或 https://网站域名/uc/public/logout&lt;/code&gt;&#xD;&#xA;        &lt;/p&gt;</remark>
+            <value>b28eb67a3a8364878ee67d33c3febdce</value>
+            <options></options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_VERIFY" name="验证码(极验)" state="" order="10">
+        <item key="GEETEST_ID" name="ID" state="" order="1" hide="false" type="1">
+            <remark>从&lt;a class=&#34;text-info&#34; href=&#34;http://user.geetest.com/&#34; target=&#34;_blank&#34;&gt;验证后台&lt;/a&gt; 注册账号,添加验证，可以获取一组当前验证的ID (网页端)</remark>
+            <value>92acfb6e0d78970667d82144f4018b07</value>
+            <options></options>
+        </item>
+        <item key="GEETEST_KEY" name="KEY " state="" order="2" hide="false" type="1">
+            <remark>从&lt;a class=&#34;text-info&#34; href=&#34;http://user.geetest.com/&#34; target=&#34;_blank&#34;&gt;验证后台&lt;/a&gt; 注册账号,添加验证，可以获取一组当前验证的KEY (网页端)</remark>
+            <value>3d6e945d20479f530876ed7f1bd79eb9</value>
+            <options></options>
+        </item>
+        <item key="GEETEST_IS_LOGIN" name="前台登录验证" state="" order="5" hide="false" type="4">
+            <remark>是否开启、关闭前台登录验证码，默认关闭</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+        <item key="GEETEST_IS_ADMLOGIN" name="后台登录验证" state="" order="6" hide="false" type="4">
+            <remark>是否开启、关闭后台登录验证码，默认关闭</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:关闭"></option>
+                <option value="1" describe="1:开启"></option>
+            </options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_VIDEO" name="视频(videojj)" state="" order="11">
+        <item key="VIDEOJJ_appkey" name="APPKey" state="" order="1" hide="false" type="1">
+            <remark>必填，请在控制台查看应用标识  &lt;a href=&#34;http://videojj.com/&#34; target=&#34;_blank&#34; class=&#34;text-info&#34;&gt;videojj申请地址&lt;/a&gt;</remark>
+            <value>VJa72yR7W</value>
+            <options></options>
+        </item>
+        <item key="VIDEOJJ_videoStart" name="跳过片头" state="" order="2" hide="false" type="4">
+            <remark>选填，跳过片头，默认为0</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:是"></option>
+                <option value="1" describe="1:否"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_videoEnd" name="跳过片尾" state="" order="3" hide="false" type="4">
+            <remark>选填，跳过片尾，默认为0</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:是"></option>
+                <option value="1" describe="1:否"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_skinSelect" name="播放器皮肤" state="" order="4" hide="false" type="4">
+            <remark>选填，播放器皮肤，可选0、1、2，默认为0</remark>
+            <value></value>
+            <options>
+                <option value="0" describe="0:科技"></option>
+                <option value="1" describe="1:经典"></option>
+                <option value="3" describe="3:时尚"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_autoplay" name="是否自动播放" state="" order="5" hide="false" type="4">
+            <remark>选填，是否自动播放，默认为false</remark>
+            <value></value>
+            <options>
+                <option value="false" describe="false:否"></option>
+                <option value="true" describe="true:是"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_rightHand" name="右键菜单" state="" order="6" hide="false" type="4">
+            <remark>选填，是否开启右键菜单，默认为false</remark>
+            <value></value>
+            <options>
+                <option value="true" describe="true:开启"></option>
+                <option value="false" describe="false:关闭"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_autoFormat" name="选择清晰度" state="" order="7" hide="false" type="4">
+            <remark>是否自动选择最高清晰度，默认为false</remark>
+            <value></value>
+            <options>
+                <option value="false" describe="false:不自动选择"></option>
+                <option value="true" describe="true:自动选择"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_bubble" name="云泡功能:" state="" order="9" hide="false" type="4">
+            <remark>是否开启云泡功能，默认为true</remark>
+            <value></value>
+            <options>
+                <option value="true" describe="true:开启"></option>
+                <option value="false" describe="false:关闭"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_jumpStep" name="快进快退时间设置" state="" order="10" hide="false" type="0">
+            <remark>左右方向键快退快进的时间,单位‘秒’</remark>
+            <value>10</value>
+            <options></options>
+        </item>
+        <item key="VIDEOJJ_tagShow" name="热点默认显示功能" state="" order="11" hide="false" type="4">
+            <remark>云链是否显示，默认为false</remark>
+            <value></value>
+            <options>
+                <option value="true" describe="true:显示"></option>
+                <option value="false" describe="false:隐藏"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_tagTrack" name="热点默认跟踪功能" state="" order="12" hide="false" type="4">
+            <remark>云链是否跟踪，默认为false</remark>
+            <value></value>
+            <options>
+                <option value="true" describe="true:跟踪"></option>
+                <option value="false" describe="false:不跟踪"></option>
+            </options>
+        </item>
+        <item key="VIDEOJJ_tagDuration" name="热点显示时间" state="" order="14" hide="false" type="0">
+            <remark>云链显示时间，默认为5秒</remark>
+            <value>5</value>
+            <options></options>
+        </item>
+        <item key="VIDEOJJ_tagFontSize" name="热点字号" state="" order="13" hide="false" type="4">
+            <remark>云链文字大小，默认为16像素</remark>
+            <value></value>
+            <options>
+                <option value="12" describe="12:12px"></option>
+                <option value="14" describe="14:14px"></option>
+                <option value="16" describe="16:16px"></option>
+                <option value="18" describe="18:18px"></option>
+                <option value="20" describe="20:20px"></option>
+                <option value="22" describe="22:22px"></option>
+                <option value="24" describe="24:24px"></option>
+                <option value="26" describe="26:26px"></option>
+                <option value="28" describe="28:28px"></option>
+            </options>
+        </item>
+    </group>
+    <group key="CONFIG_GROUP_SMS" name="短信" state="" order="12">
+        <item key="SMS_TYPE" name="短信通道" state="" order="1" hide="false" type="4">
+            <remark>阿里大鱼 &lt;a href=&#34;http://www.alidayu.com/&#34; target=&#34;_blank&#34; class=&#34;text-info&#34;&gt;申请地址&lt;/a&gt;  ≤4.5分/条</remark>
+            <value></value>
+            <options>
+                <option value="1" describe="1:阿里大鱼"></option>
+            </options>
+        </item>
+        <item key="SMS_Key" name="APP证书" state="" order="2" hide="false" type="1">
+            <remark>在相应的短信通道后台获取。&lt;br&gt;&#xD;&#xA;阿里大鱼:App Key|App Secret</remark>
+            <value>23381127|3bb09aa73066dc1c469d6e7a9d909731</value>
+            <options></options>
+        </item>
+        <item key="SMS_qianming" name="短信签名" state="" order="3" hide="false" type="1">
+            <remark>在相应的短信后台获取&lt;/br&gt;&#xD;&#xA;短信示例：【阿里大鱼】 验证码${number}，您正进行支付宝的身份验证，打死不告诉别人！ &lt;/br&gt;&#xD;&#xA;短信签名：阿里大鱼 &lt;/br&gt;&#xD;&#xA;短信模板: 验证码${number}，您正进行支付宝的身份验证，打死不告诉别人！</remark>
+            <value>酷翼cms</value>
+            <options></options>
+        </item>
+        <item key="SMS_zhuce" name="用户注册验证码模版ID" state="" order="5" hide="false" type="1">
+            <remark>在短信渠道后台申请&lt;/br&gt;&#xD;&#xA;实例：验证码${code}，您正在注册成为${product}用户，感谢您的支持！</remark>
+            <value>SMS_10281005</value>
+            <options></options>
+        </item>
+        <item key="SMS_product" name="变量${product}" state="" order="4" hide="false" type="1">
+            <remark>设置模版的时候填入的值，会替换${product}</remark>
+            <value>CmsWing</value>
+            <options></options>
+        </item>
+    </group>
+</configuration>

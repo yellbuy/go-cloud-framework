@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LarryMS框架之表单左右穿梭框功能使用示例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/demo/use.css">
+</head>
+
+<body class="larry-bg-gray transfer">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 10]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid">
+        <div class="larry-container">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-body func-introduce">
+                            <cite>在LarryMS框架模板中forms组件新增有表单左右穿梭框功能：</cite>
+                            <p>
+                                1、支持自定义数据源，默认json格式:直接赋值或url<br> 2、穿梭框内容外观均可完全自定义，包括主题设置、左侧标题、是否开启智能输入补全、右侧标题，支持高度设定等，无需额外组件引入，只依赖于forms模块
+                                <br> 3、支持选项拖动、双击、单击进行选择、支持全选、支持标签飞入飞出动画、支持多层级树形选择
+                                <br> 4、支持搜索补全选择操作、选项例外项可自定义
+                                <br>
+                            </p>
+                            <span class="btn-info"><em>备注：</em>LarryMS框架在日常开发中遇到需要左右列表的分配，分配菜单、分配权限等场景时会用到穿梭选择功能，如下演示：</span>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg6 layui-col-md7 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-header transfer-title">transfer功能演示：<em>拖动、双击、单击、标签动画</em><span style="padding-left:15px;color: #ff5722;"></span></div>
+                        <div class="layui-card-body ">
+                            <form class="larry-form" action="">
+                                <blockquote class="layui-elem-quote layui-text mt6 mb20">
+                                    <p style="line-height: 26px;">穿梭框功能已实现于forms组件模块中，可以像表单的select、checkbox、radio等元素一样自动完成渲染或通过forms.transfer(options);完成渲染，支持自定义风格，外观样式；forms组件中的穿梭框支持普通模式与数据表格两种模式,如下示例所示：</p>
+                                </blockquote>
+                                <div class="larry-form-item">
+                                    <label class="larry-form-label">普通穿梭框：</label>
+                                    <div class="larry-input-block">
+                                        <input type="text" name="test" class="larry-input larry-transfer" larry-transfer="transfer" lay-filter="transfers" id="test" value="1111420000,2111110000">
+                                    </div>
+                                </div>
+                                <div class="larry-form-item">
+                                    <label class="larry-form-label">数据表格模式：</label>
+                                    <div class="larry-input-block">
+                                        <p  style="line-height: 38px;color: #ff5722;">
+                                            下一版本更新 穿梭框数据表格模式
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="larry-form-item">
+                                    <label  class="larry-input-label"></label>
+                                    <div class="larry-input-block">
+                                        <div class="layui-btn layui-btn-sm" lay-submit lay-filter='baseTransfer'>数据提交测试</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+                <div class="layui-col-lg6 layui-col-md5 layui-col-sm12 layui-col-xs12">
+                    <section class="larry-card">
+                        <div class="larry-card-header">
+                            <p>
+                                穿梭框在表单中使用代码示例如下：
+                            </p>
+                        </div>
+                        <div class="larry-card-body">
+                            <p>穿梭框的渲染，将input放入larry-form表单元素内，结构非固定，只用含有larry-transfer属性即可完成渲染</p>
+                            <pre class="layui-code">
+//html代码片段：
+<div class="larry-form-item">
+    <label class="larry-form-label">普通穿梭框：</label>
+    <div class="larry-input-block">
+        <input type="text" name="test" class="larry-input larry-transfer" larry-transfer="transfer" lay-filter="transfers" id="test" value="1111420000,2111110000">
+    </div>
+</div>
+                            </pre>
+                            <p>javascript代码如下：</p>
+<pre class="layui-code">
+//===============JS代码：==============
+layui.use('forms',function(){
+    var forms = layui.forms;
+    //若设置data-source属性，支持自动渲染，下方是手动渲染代码
+    forms.transfer({
+        elem:'#test',
+        source:'../../larryms/data/demo/transfer.json'
+    }); 
+    forms.on('submit(baseTransfer)',function(data){
+        larryms.msg(JSON.stringify(data.field));
+        return false;
+    });
+});
+</pre>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+        layui.config({
+            version: "2.1.0",
+            base: '../../larryms/',
+            mods: 'demo/',
+            page:'transferDemo'
+        }).extend({
+            larry: 'js/base'
+        }).use('larry');
+    </script>
+</body>
+
+</html>

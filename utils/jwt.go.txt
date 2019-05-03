@@ -1,0 +1,93 @@
+package utils
+
+import (
+	"errors"
+	"log"
+	"strconv"
+
+	"github.com/astaxie/beego/config"
+	"github.com/dgrijalva/jwt-go"
+)
+
+type EasyToken struct {
+	Username string
+	Name     string
+	Uid      int64
+	Roleids  string
+	Isleader int8
+	ExpireAt int64
+}
+
+var (
+	verifyKey  string
+	ErrAbsent  = "token absent"  // 令牌不存在
+	ErrInvalid = "token invalid" // 令牌无效
+	ErrExpired = "token expired" // 令牌过期
+	ErrOther   = "other error"   // 其他错误
+)
+
+func init() {
+	appConf, err := config.NewConfig("ini", "conf/app.conf")
+	if err != nil {
+		panic(err)
+	}
+	verifyKey = appConf.String("jwt::token")
+}
+
+func (e EasyToken) GetToken() (string, error) {
+	claims := jwt.MapClaims{}
+	claims["userId"] = e.Uid
+	claims["username"] = e.Username
+	claims["name"] = e.Name
+	claims["roleids"] = e.Roleids
+	claims["isleader"] = e.Isleader
+	claims["expireAt"] = e.ExpireAt
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte(verifyKey))
+	if err != nil {
+		log.Println(err)
+	}
+	return tokenString, err
+}
+
+func (e EasyToken) ValidateToken(tokenString string) (bool, *EasyToken, error) {
+	if tokenString == "" {
+		return false, nil, errors.New(ErrAbsent)
+	}
+	claims := jwt.StandardClaims{}
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		return []byte(verifyKey), nil
+	})
+	if token == nil {
+		return false, nil, errors.New(ErrInvalid)
+	}
+	if token.Valid {
+		claims := token.Claims.(jwt.MapClaims)
+		
+		uid := claims["userId"]
+		username := claims["username"]
+		name := claims["name"]
+		roleids := claims["roleids"]
+		isleader := claims["isleader"]
+		expireAt := claims["expireAt"]
+		
+		easyToken := new(EasyToken)
+		easyToken.Uid = uid.(int64)
+		easyToken.Name = name.(string)
+		easyToken.Username = username.(string)
+		easyToken.Roleids = roleids.(string)
+		easyToken.Isleader = int8(isleader.(int64))
+		easyToken.ExpireAt = expireAt.(int64)
+		return true, easyToken, nil
+	} else if ve, ok := err.(*jwt.ValidationError); ok {
+		if ve.Errors&jwt.ValidationErrorMalformed != 0 {
+			return false, nil, errors.New(ErrInvalid)
+		} else if ve.Errors&(jwt.ValidationErrorExpired|jwt.ValidationErrorNotValidYet) != 0 {
+			return false, nil, errors.New(ErrExpired)
+		} else {
+			return false, nil, errors.New(ErrOther)
+		}
+	} else {
+		return false, nil, errors.New(ErrOther)
+	}
+}

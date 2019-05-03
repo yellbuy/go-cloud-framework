@@ -1,0 +1,198 @@
+<html>
+<head>
+    <title>可编辑表格控件</title>
+    <script src="../../statics/libs/jquery-1.7.2.js"></script>
+    <link rel="stylesheet" href="../../statics/css/font-awesome.min.css">
+    <!--layui ztree样式-->
+    <link rel="stylesheet" href="../../statics/plugins/layui/css/layui.css" media="all">
+    <script src="../../statics/plugins/layer/layer.js"></script>
+    <script src="../../statics/plugins/layui/layui.js"></script>
+    <script src="../../statics/plugins/ztree/jquery.ztree.all.min.js"></script>
+    <link rel="stylesheet" href="../../statics/plugins/ztree/css/metroStyle/metroStyle.css">
+    <!--js组件-->
+    <script src="../../common/js/pageGrid.js"></script>
+    <script src="../../common/js/selectTool.js"></script>
+    <script src="../../common/js/radioTool.js"></script>
+    <script src="../../common/js/checkboxTool.js"></script>
+    <script src="../../common/js/treeTool.js"></script>
+    <script src="../../common/js/labelTool.js"></script>
+    <script src="../../common/js/linkSelectTool.js"></script>
+    <script src="../../common/js/uploadTool.js"></script>
+    <script src="../../common/js/HuploadTool.js"></script>
+    <script src="../../common/js/tplTool.js"></script>
+    <script src="../../common/js/editGrid.js"></script>
+    <!--全局-->
+    <script src="../../common/js/whole/cyLayer.js"></script>
+    <script src="../../common/js/whole/common.js"></script>
+    <script src="../../common/js/whole/setting.js"></script>
+    <script src="../../common/js/whole/utils.js"></script>
+    <script src="../../common/js/whole/monitor.js"></script>
+    <!--样式-->
+    <link rel="stylesheet" href="../../common/css/cyStyle.css">
+    <link rel="stylesheet" href="../../common/css/cyType.css">
+    <!-- editGrid -->
+    <script src="../../statics/plugins/editgrid/js/yrm.editGrid.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../statics/plugins/editgrid/css/editGrid.css" type="text/css"/>
+    <link rel="stylesheet" href="../../statics/plugins/editgrid/css/validationEngine.jquery.css" type="text/css"/>
+    <script src="../../statics/plugins/editgrid/plugin/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../statics/plugins/editgrid/plugin/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">代码</li>
+        <li>效果</li>
+        <li>参数详解</li>
+
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+              <pre class="layui-code">
+
+                  <!-- 引入js与样式 -->
+                <script src="/statics/plugins/editgrid/js/yrm.editGrid.js" type="text/javascript" charset="utf-8"></script>
+                <link href="/statics/plugins/editgrid/css/editGrid.css" rel="stylesheet" type="text/css"/>
+                <link href="/statics/plugins/editgrid/css/validationEngine.jquery.css" rel="stylesheet" type="text/css"/>
+                <script src="/statics/plugins/editgrid/plugin/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+                <script src="/statics/plugins/editgrid/plugin/jquery.validationEngine-zh_CN.js" type="text/javascript" charset="utf-8"></script>
+
+
+                <table name="editGrid">
+                    <thead>
+                    <tr>
+                        <th param="name:'id',type:'hide'">隐藏列</th>
+
+                        <th width="50" param="name:'header',type:'radio'" cmpProps="options:'uncheck:0,check:1'">团长</th>
+
+                        <th width="100" param="name:'name',type:'text',class:'validate[required]'">角色名</th>
+
+                        <th param="name:'guild',type:'readonly'">公会</th>
+
+                        <th width="80" param="name:'sex',type:'select'" cmpProps="options:'1:男,0:女'">性别</th>
+
+                        <th width="120" param="name:'joinTime',type:'duceap.date'" cmpProps="dateFmt:'yyyy-MM-dd'">入团时间</th>
+
+                        <th width="50" param="name:'onLine',type:'checkbox'" cmpProps="options:'uncheck:0,check:1'">是否在线</th>
+
+                        <th param="name:'note',type:'textarea'">备注</th>
+                    </tr>
+                    </thead>
+                </table>
+
+
+
+                   <script  type="text/javascript">
+                var gridData=[
+                    {"id":"1","header":"0","name":"泣血嫣然","guild":"Blizzard","sex":"0","onLine":"0",
+                        "career":"D","joinTime":"20141015","racist":"0101","note":"战斗刺杀贼"},
+                    {"id":"2","header":"0","name":"影入梦","guild":"Blizzard","sex":"0","onLine":"0",
+                        "career":"J","joinTime":"20150715","racist":"0101","note":"奶骑"},
+
+                    {"id":"3","header":"1","name":"吉安娜·普罗德摩尔","guild":"Blizzard","sex":"0","onLine":"0",
+                        "career":"A","joinTime":"20160413","racist":"0101","note":"我的魔法能击败一切"},
+                    {"id":"4","header":"0","name":"安度因","guild":"Blizzard","sex":"1","onLine":"0",
+                        "career":"C","joinTime":"20160413","racist":"0101","note":"心灵控制"},
+                    {"id":"5","header":"0","name":"古尔丹","guild":"Blizzard","sex":"1","onLine":"0",
+                        "career":"J","joinTime":"20160413","racist":"0206","note":"你的灵魂将受到折磨"},
+
+                    {"id":"6","header":"0","name":"瓦莉拉·萨古纳尔","guild":"Blizzard","sex":"0","onLine":"0",
+                        "career":"D","joinTime":"20160413","racist":"0203","note":"小心你的背后"},
+                    {"id":"7","header":"0","name":"玛法里奥·怒风","guild":"Blizzard","sex":"1","onLine":"1",
+                        "career":"E","joinTime":"20160413","racist":"0102","note":"我是大自然的守护者"},
+
+                    {"id":"8","header":"0","name":"萨尔","guild":"Blizzard","sex":"1","onLine":"1",
+                        "career":"G","joinTime":"20160413","racist":"0206","note":"为了霜狼氏族"},
+                    {"id":"9","header":"0","name":"雷克萨","guild":"Blizzard","sex":"1","onLine":"1",
+                        "career":"H","joinTime":"20160413","racist":"0206","note":"你将成为我的猎物"},
+
+                    {"id":"10","header":"0","name":"乌瑟尔","guild":"Blizzard","sex":"1","onLine":"0",
+                        "career":"J","joinTime":"20160413","racist":"0101","note":"圣光赐予我力量"},
+                    {"id":"11","header":"0","name":"地狱咆哮","guild":"Blizzard","sex":"1","onLine":"0",
+                        "career":"I","joinTime":"20160413","racist":"0206","note":"为了地狱咆哮"}
+                ];
+                $(document).ready(function(){
+
+                    var gridProps={data:gridData};
+                    //var gridProps={url:'data/myTeam.json'}
+                    //$("[name='editGrid']").editGrid(gridProps);
+
+                })
+            </script>
+              </pre>
+        </div>
+
+        <div class="layui-tab-item" id="result">
+
+            <table name="editGrid" >
+                <thead>
+                <tr>
+                    <th param="name:'id',type:'hide'">隐藏列</th>
+
+                    <th width="50" param="name:'header',type:'radio'" cmpProps="options:'uncheck:0,check:1'">团长</th>
+
+                    <th width="100" param="name:'name',type:'text',class:'validate[required]'">角色名</th>
+
+                    <th param="name:'guild',type:'readonly'">公会</th>
+
+                    <th width="80" param="name:'sex',type:'select'" cmpProps="options:'1:男,0:女'">性别</th>
+
+                    <th width="120" param="name:'joinTime',type:'duceap.date'" cmpProps="dateFmt:'yyyy-MM-dd'">入团时间</th>
+
+                    <th width="50" param="name:'onLine',type:'checkbox'" cmpProps="options:'uncheck:0,check:1'">是否在线</th>
+
+                    <th param="name:'note',type:'textarea'">备注</th>
+                </tr>
+                </thead>
+            </table>
+
+        </div>
+        <div class="layui-tab-item">
+                未完待续...
+        </div>
+    </div>
+</div>
+
+<script  type="text/javascript">
+    var gridData=[
+        {"id":"1","header":"0","name":"泣血嫣然","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"D","joinTime":"20141015","racist":"0101","note":"战斗刺杀贼"},
+        {"id":"2","header":"0","name":"影入梦","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"J","joinTime":"20150715","racist":"0101","note":"奶骑"},
+
+        {"id":"3","header":"1","name":"吉安娜·普罗德摩尔","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"A","joinTime":"20160413","racist":"0101","note":"我的魔法能击败一切"},
+        {"id":"4","header":"0","name":"安度因","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"C","joinTime":"20160413","racist":"0101","note":"心灵控制"},
+        {"id":"5","header":"0","name":"古尔丹","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"J","joinTime":"20160413","racist":"0206","note":"你的灵魂将受到折磨"},
+
+        {"id":"6","header":"0","name":"瓦莉拉·萨古纳尔","guild":"Blizzard","sex":"0","onLine":"0",
+            "career":"D","joinTime":"20160413","racist":"0203","note":"小心你的背后"},
+        {"id":"7","header":"0","name":"玛法里奥·怒风","guild":"Blizzard","sex":"1","onLine":"1",
+            "career":"E","joinTime":"20160413","racist":"0102","note":"我是大自然的守护者"},
+
+        {"id":"8","header":"0","name":"萨尔","guild":"Blizzard","sex":"1","onLine":"1",
+            "career":"G","joinTime":"20160413","racist":"0206","note":"为了霜狼氏族"},
+        {"id":"9","header":"0","name":"雷克萨","guild":"Blizzard","sex":"1","onLine":"1",
+            "career":"H","joinTime":"20160413","racist":"0206","note":"你将成为我的猎物"},
+
+        {"id":"10","header":"0","name":"乌瑟尔","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"J","joinTime":"20160413","racist":"0101","note":"圣光赐予我力量"},
+        {"id":"11","header":"0","name":"地狱咆哮","guild":"Blizzard","sex":"1","onLine":"0",
+            "career":"I","joinTime":"20160413","racist":"0206","note":"为了地狱咆哮"}
+    ];
+    $(document).ready(function(){
+
+        var gridProps={data:gridData};
+        //var gridProps={url:'data/myTeam.json'}
+       $($("[name='editGrid']")[1]).editGrid(gridProps);
+
+    });
+    layui.use('code', function(){ //加载code模块
+        layui.code({encode: true}); //引用code方法
+    });
+    layui.use('element', function () {
+    });
+</script>
+</body>
+</html>

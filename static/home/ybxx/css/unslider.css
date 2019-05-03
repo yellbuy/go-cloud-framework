@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+.wp-unslider_content .unslider_preview {position:absolute;left:0;top:0;}
+.wp-unslider_content .unslider_previewwrapper {position:relative;}
+.wp-unslider_content .unslider_previewwrapper img {position:absolute;}
+.wp-unslider_content .unslider_title {text-align:right;position:absolute;right:160px;top:-20px;}
+.wp-unslider_content .unslider_title h1 {font-size:40px;color:#fff;text-shadow:1px 1px #333;line-height:100%;}
+.wp-unslider_content .unslider_title .subtext {float:right;width:400px;font-size:14px;color:#fff;text-shadow:1px 1px #333;line-height:140%;}
+.wp-unslider_content .unslider_nav {list-style:none;position:absolute;right:0;top:0;z-index:899;background:url(../view/images/navbg.png);}
+.wp-unslider_content .unslider_nav li {margin:0;padding:5px 10px;}
+.wp-unslider_content .unslider_nav h3, .wp-unslider_content .unslider_nav p {display:none;}
+.wp-unslider_content .unslider_nav li.active img.thumb {filter:alpha(opacity=100);-moz-opacity:1;opacity:1;}
+.wp-unslider_content .unslider_nav .source {height:80px;width:120px;margin:0;padding:0;border:3px solid #666;cursor:pointer;position:relative;overflow:hidden;}
+.wp-unslider_content .unslider_nav img.thumb {display:none;filter:alpha(opacity=40);-moz-opacity:.4;opacity:.4;}
+.wp-unslider_content div.loading {background:none;position:absolute;left:0;top:0;}
+//unslider loop style
+.wp-unslider_content .banner {
+        position: relative;
+        width: 100%;
+        overflow: auto;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: center;
+        color: rgba(255,255,255,.6);
+        text-shadow: 0 0 1px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.3);
+        background: #5b4d3d;
+        box-shadow: 0 1px 2px rgba(0,0,0,.25);
+}
+.wp-unslider_content .banner ul {list-style: none;width: 300%;}
+.wp-unslider_content .banner ul li {
+        display: block;
+        float: left;
+        width: 33%;
+        min-height: 350px;
+        -o-background-size: 100% 100%;
+        -ms-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        -webkit-background-size: 100% 100%;
+        background-size: 100% 100%;
+/*        box-shadow: inset 0 -3px 6px rgba(0,0,0,.1);*/
+}
+
+.wp-unslider_content .banner .inner { padding: 160px 0 110px;text-align:center;}
+.wp-unslider_content .banner .inner p{ text-align:center;
+color: rgba(255,255,255,.6);
+text-shadow: 0 0 1px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.3);
+box-shadow: 0 1px 2px rgba(0,0,0,.25);position: relative;
+width: 100%;font-size:18px;
+overflow: auto;
+line-height: 24px;}
+.wp-unslider_content .banner .inner p a{ text-align:center;
+color: rgba(255,255,255,.6);
+text-shadow: 0 0 1px rgba(0,0,0,.05), 0 1px 2px rgba(0,0,0,.3);
+box-shadow: 0 1px 2px rgba(0,0,0,.25);position: relative;
+width: 100%;font-size:18px;
+overflow: auto;
+line-height: 24px;}
+.wp-unslider_content .banner h1, .banner h2 { font-size: 40px; line-height: 100%; color: #fff;padding-bottom: 12px;text-shadow:1px 1px #333;}
+.wp-unslider_content .banner h1 a, .banner h2 a {
+        font-size: 40px;line-height: 100%;color: #fff;padding-bottom: 12px;text-shadow:1px 1px #333;}
+
+.wp-unslider_content .banner .btn {
+        display: inline-block;
+        margin: 25px 0 0;padding: 9px 22px 7px;
+        clear: both;color: #fff;font-size: 12px;
+        font-weight: bold;text-transform: uppercase;
+        text-decoration: none;border: 2px solid rgba(255,255,255,.4);
+        border-radius: 5px;
+}
+.wp-unslider_content .banner .btn:hover {background: rgba(255,255,255,.05);}
+.wp-unslider_content .banner .btn:active {
+        -webkit-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
+        -moz-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
+        -ms-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
+        -o-filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
+        filter: drop-shadow(0 -1px 2px rgba(0,0,0,.5));
+}
+.wp-unslider_content .banner .btn, .banner .dot {
+        -webkit-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+        -moz-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+        -ms-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+        -o-filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,.3));
+}
+.wp-unslider_content .banner .dots {position: absolute;left: 0;right: 0;bottom: 20px;width: 100%;text-align:center;}
+.wp-unslider_content .banner .dots li {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        width: 10px;
+        height: 10px;
+        line-height: 10px;
+        margin: 0 4px;
+        text-indent: -999em;
+        *text-indent: 0;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        opacity: .4;
+        -webkit-transition: background .5s, opacity .5s;
+        -moz-transition: background .5s, opacity .5s;
+        transition: background .5s, opacity .5s;
+}
+.wp-unslider_content .banner .dots li.active {background: #fff;opacity: 1;}
+.wp-unslider_content .banner .arrows {position: absolute;bottom: 20px;right: 20px;color: #fff;}
+.wp-unslider_content .banner .arrow {display: inline;padding-left: 10px;cursor: pointer;}
+.wp-unslider_content .dotsnew {position: absolute;left: 0;right: 0;width: 100%;text-align:center;}
+.wp-unslider_content .dotsnew div{
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        width: 10px;
+        height: 10px;
+        line-height: 10px;
+        margin: 0 4px;
+        text-indent: -999em;
+        *text-indent: 0;
+        /*border: 2px solid #fff;*/
+        /*border-radius: 8px;*/
+        cursor: pointer;
+        opacity: .4;
+        -webkit-transition: background .5s, opacity .5s;
+        -moz-transition: background .5s, opacity .5s;
+        transition: background .5s, opacity .5s;
+		behavior: url(script/pie.htc);
+}
+.wp-unslider_content .dotsnew div.active {background: #fff;opacity: 1;}
+.wp-unslider_content .arrows {position: absolute;right: 20px;color: #fff;}
+.wp-unslider_content .arrow {display: inline;padding-left: 10px;cursor: pointer;}

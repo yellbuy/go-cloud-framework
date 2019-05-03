@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Larryms.js</title>
+    <meta name="keywords" content="404" />
+    <meta name="description" content="404" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgA box-blank library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title">
+                        <h1>框架核心组件之<cite> larryms.js</cite></h1>
+                    </div>
+                    <div class="layui-card-body">
+                        <p class="library-tips">
+                            <cite>larryms组件：</cite>作为LarryMS框架最核心的基础组件，用于支撑整个框架的运行，封装了非常多的常用基础功能，如：新老Jquery三方插件智能加载、多终端智能设备检测判断、表单独立验证扩展，密码复杂度检查中文验证、身份证验证、消息通知、十六进制颜色值、对象/数组类型检查与验证，字符串长度计算、HTML过滤、大小写转换、数组常用功能封装（排序/去重/遍历/包含检测/求和/最大最小值等等）、日期、数字金额格式转换、URL处理等等，以达到简化日常开发基础功能的复用
+                        </p>
+                    </div>
+                </section>
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <h2>larryms组件方法介绍</h2>
+                    </div>
+                    <div class="layui-card-body">
+                        <table class="layui-table library-talbe" lay-size="md">
+                            <colgroup>
+                                <col width="15%">
+                                <col width="25%">
+                                <col width="30%">
+                                <col>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">名称</th>
+                                    <th style="text-align: center;">参数</th>
+                                    <th style="text-align: center;">用法</th>
+                                    <th style="text-align: center;">说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>plugin</td>
+                                    <td>jsName,[callback],[jsConf]
+                                        <br>描述：插件名称，回调函数，自定义配置项
+                                    </td>
+                                    <td>larryms.plugin('jsupersized.min',supersized);//插件名称可省略.js后缀也可不省略</td>
+                                    <td>如加载supersized插件，即登录页所看到的多背景图切换效果插件，智能灵活的方式更方便</td>
+                                </tr>
+                                <tr>
+                                    <td>set</td>
+                                    <td>options <br>描述： options 参考开发者文档介绍   </td>
+                                    <td>larryms.set(options)</td>
+                                    <td>可以对框架相关核心参数做自定义，如弹窗提示标题自定义，框架名称修改、第三方Jq插件默认目录位置修改、动画库修改、字体默认设置等等</td>
+                                </tr>
+                                <tr>
+                                    <td>fontset</td>
+                                    <td>configs<br>描述： configs 参考开发者文档介绍</td>
+                                    <td>larryms.fontset({...})</td>
+                                    <td>譬如：设置自定义扩展字体（教程可larryms官网社区中找到），默认larry-icon字体修改</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>notice</td>
+                                    <td>options<br>描述： options 参考开发者文档介绍</td>
+                                    <td>larryms.notice(options)</td>
+                                    <td>用于桌面堆叠通知，消息自定义位置主题等通知，支持语音提示</td>
+                                </tr>
+                                <tr>
+                                    <td>message</td>
+                                    <td>msg，[mark],[icon],[time]</td>
+                                    <td>larryms.message(msg)</td>
+                                    <td>这是一个较为简单的消息弹窗提醒，一般用户ajax前后台交互消息提示</td>
+                                </tr>
+                                <tr>
+                                    <td>typeFn</td>
+                                    <td>如isString isNumber isFunction isNull isUndefined isObj isArray isRegExp isSymbol isIOS isPC browserType等等具体参看开发者文档</td>
+                                    <td>larryms.typeFn.isArray(); larryms.typeFn.browserType(); larryms.typeFn.isObj()等等</td>
+                                    <td>typeFn为类型检测常用小功能类封装，该方法涉及功能就较为多了，可以简化一些基础工作，开发更高效</td>
+                                </tr>
+                                <tr>
+                                    <td>stringFn</td>
+                                    <td>trim、strLenCount、changeCase、checkPwd、filterHtml等等，具体参看开发者文档</td>
+                                    <td>larryms.typeFn.trim(str, type); larryms.typeFn.checkPwd(str);</td>
+                                    <td>stringFn 该方法的封装对于日常开发是很有用的，如trim() 虽然js有该方法，但对于低版本浏览器如IE 则不支持，因此larryms框架弥补了这类问题</td>
+                                </tr>
+                                <tr>
+                                    <td>ArrayFn</td>
+                                    <td>contains、each、formArray、max、min、sum、average、remove、sort、map、unique等等，具体参考开发者文档</td>
+                                    <td>larryms.ArrayFn.contains(arr, val);//判断一个元素是否在数组中<br>larryms.ArrayFn.formArray(arr);//将类数组转换为数组的方法</td>
+                                    <td>关于数组常用功能封装，也是为了简化基础繁琐的功能书写，让开发更高效</td>
+                                </tr>
+                                <tr>
+                                    <td>utils</td>
+                                    <td>fixbar、getUrlParams、getUrlAllParams、delParamsUrl、random、numberToChinese、changeToChinese等等</td>
+                                    <td>larryms.utils.random(min, max)；//获得随机数，<br>larryms.utils.changeToChinese(Num);//将数字转换为大写金额</td>
+                                    <td>larryms组件之常用工具类封装，可以如财务数字金额互相转换，一句话即可搞定</td>
+                                </tr>
+                                <tr>
+                                    <td>fullSize</td>
+                                    <td>无</td>
+                                    <td>larryms.fullSize()</td>
+                                    <td>该方法应用场景较为单一，主要是针对iframe页面在特殊情况下的铺满窗口高度设置</td>
+                                </tr>
+                                <tr>
+                                    <td>isCardID</td>
+                                    <td>cardID</td>
+                                    <td>larryms.isCardID('xxxx');//身份证号码</td>
+                                    <td>用于身份证号码格式检查以及身份证号码中相关信息智能识别返回，如地区、生日、地区、性别等等 功能也较为实用</td>
+                                </tr>
+                                <tr>
+                                    <td>verify</td>
+                                    <td>无</td>
+                                    <td>该方法无需手动执行框架会自动加载，用于对layui表单的验证扩充，当然也可以给其自定义加入新的验证规则，默认已加入密码强度和常规格式校验、邮政编码、qq号码、中英文、财务金额、银行卡号、整数、电话座机等验证</td>
+                                    <td>larryms.verify是验证规则的扩展，同类型的还有独立验证，表单中使用larryms-verify 用于单个表单中可以参看文档更新内容</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align: center;">更多功能,可在开发者文档中查看,同时也会根据VIP用户需求不断增加</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="margin-top: 15px;font-size: 14px;">
+                            更多关于larryms组件方法介绍请查看官方开发者文档：
+                            <a href="http://www.larryms.com/docs.html" target="_blank" style="color:#01AAED;">LarryMS框架开发者文档</a>
+                        </blockquote>
+                    </div>
+                </section>
+                
+            </div>
+
+            <div class="layui-col-lg6 layui-col-md6 layui-colo-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <h2>场景应用【示例】</h2>
+                    </div>
+                    <div class="layui-card-body">
+                        <p><strong>1、larryms.js作为框架的基础组件，其露脸频率是较高的，下面针对larryms组件的使用做如下示例</strong></p>
+                        <p class="remark">譬如：larryms.plugin()方法智能加载一些项目中可能会用到的jquery插件，<em>告别传统模式下模板页中使用script引入一大堆 js文件，改为larryMS框架智能模块化按需加载</em>，而且可控制加载插件出现的位置，如默认紧跟layui.js文件之后...，如下截图是通过larryms加载的客户端执行结果，右侧可看代码示例，简化冗余代码更为规范化的开发，何乐而不为！</p>
+                        <p class="img-p"><img src="../../../larryms/images/library/plugin.png" alt=""></p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="layui-col-lg6 layui-col-md6 layui-colo-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <h2>JS代码【示例】</h2>
+                    </div>
+                    <div class="layui-card-body">
+                        <p>1、使用plugin方法加载第三方jq插件，代码示例</p>
+<pre class="layui-code">
+larryms.plugin('supersized.min',supersized);//加载supersized插件
+function supersized(){
+    $.supersized({
+        slide_interval: 3000,
+        transition: 1,
+        transition_speed: 1000,
+        performance: 1,
+        slide_links: 'blank',
+        slides: [{
+                image: layui.cache.imgPath+'1.jpg'
+            }, {
+                image: layui.cache.imgPath+'2.jpg'
+            }, {
+                image: layui.cache.imgPath+'3.jpg'
+            }]
+        });
+}
+</pre>
+                    </div>
+                </section>
+            </div>
+
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                     <div class="layui-card-body">
+                         <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;">
+                            鉴于时间关系，核心组件的场景示例会陆续添加，可在LarryMS框架开发者文档中查看更为详细的场景示例应用与开发文档。
+                        </blockquote>
+                     </div>
+                 </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page:'library'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

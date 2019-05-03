@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.wp-chtml_content .wp-script,
+.wp-chtml_content .wp-style,
+.wp-chtml_content .wp-iframe {display:none;font-size:0;width:0;height:0;}
+.wp-chtml_content img.wp-flash,
+.wp-chtml_content img.wp-rm,
+.wp-chtml_content img.wp-media {border:none;background-position:center center;background-repeat:no-repeat;width:32px;height:32px;}
+.wp-chtml_content img.wp-flash {background-image:url(../view/icons/flash.gif);}
+.wp-chtml_content img.wp-rm {background-image:url(../view/icons/rm.gif);}
+.wp-chtml_content img.wp-media {background-image:url(../view/icons/media.gif);}
+.wp-chtml_content img.wp-anchor {border:none;width:16px;height:16px;}
+.wp-chtml_content div.imgloading{position:absolute;left:0;top:0;background:url(/template/default/images/loading2.gif) no-repeat center; }

@@ -1,0 +1,200 @@
+ {% extends "../../_share/base.html"%}
+
+{% block header %}
+<link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css"/>
+<link rel="stylesheet" href="/static/layui/extend/wang/wangeditor.css">
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script>
+{% endblock %}
+
+{% block content %}
+<div-- class="layui-layout layui-layout-admin">
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+<form class="layui-form" action="" method="post" >
+    
+	<div class="layui-col-md9 layui-col-xs12">
+		<div class="layui-row layui-col-space10">
+            <div class="layui-col-md9 layui-col-xs9">
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label"><span class="text-red">*</span>名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="name" name="Name" value="{{info.Name}}" placeholder="请输入名称">
+                    </div>
+                </div>	
+                <div class="layui-form-item magt3">
+                    <label class="layui-form-label"><span class="text-red">*</span>编码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal"  lay-verify="code" name="Code" value="{{info.Code}}" placeholder="请输入编码">
+                    </div>
+                </div>
+                 <div-- class="layui-form-item">
+                    <label for="sort" class="layui-form-label">排序号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="sort" name="Order" value="{{info.Order}}" lay-verify="number" class="layui-input" placeholder="值越小越靠前">
+                    </div>
+                    <!--div class="layui-form-mid layui-word-aux">
+                        值越小显示越靠前
+                    </div-->
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">值</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input valueVal"  lay-verify="value" name="Value" value="{{info.Value}}" placeholder="">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">说明</label>
+                    <div class="layui-input-block">
+                        <textarea   class="layui-textarea" rows="8" placeholder="" name="Desc">{{info.Desc}}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="Status" value="1" title="启用" lay-skin="primary" {%if info.Status|integer == 1%}checked{%endif%}>
+                        <input type="radio" name="Status" value="0" title="禁用" lay-skin="primary" {%if info.Status|integer == 0%}checked{%endif%}>
+                    </div>
+                </div>
+            </div>
+		</div>
+        <hr class="layui-bg-gray" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+            </label>
+            <input type="hidden" name="Type" value="{{ info.Type}}"></input>
+            <input type="hidden" name="Id" value="{{info.Id}}"/>
+            <button class="layui-btn" lay-submit><i class="layui-icon">&#xe605;</i> 保存</button>
+        </div>
+	</div>
+</form>
+</div>
+{% endblock %}
+{% block footer %}
+
+<script>
+
+var $,form;
+    layui.use(['form', 'laydate','element','layer','jquery','upload'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      $ = layui.jquery;
+      var laydate = layui.laydate;
+      var upload = layui.upload;
+    //多文件列表示例
+  var fileListView = $('#fileList')
+    ,uploadListIns = upload.render({
+        elem: '#testList'
+        ,url: '/upload/'
+        ,accept: 'file'
+        ,multiple: true
+        ,auto: false
+        ,field: 'file'
+        ,size:10240
+        ,exts: 'zip|rar|7z|jpg|png|gif|bmp|jpeg|jpg|doc|docx|xls|xlsx|pdf|ppt|pptx|txt|wps'
+        ,bindAction: '#testListAction'
+        ,choose: function(obj){   
+        var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+        //读取本地文件
+        obj.preview(function(index, file, result){
+            var tr = $(['<tr id="upload-'+ index +'">'
+            ,'<td>'+ file.name +'</td>'
+            ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+            ,'<td>等待上传</td>'
+            ,'<td>'
+                ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+            ,'</td>'
+            ,'</tr>'].join(''));
+            
+            //单个重传
+            tr.find('.demo-reload').on('click', function(){
+            obj.upload(index, file);
+            });
+            
+            //删除
+            tr.find('.demo-delete').on('click', function(){
+            delete files[index]; //删除对应的文件
+            tr.remove();
+            uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+            });
+            
+            fileListView.append(tr);
+        });
+        }
+        ,done: function(res, index, upload){
+        if(res.code == 0){ //上传成功
+            var data = res.data;
+            var tr = fileListView.find('tr#upload-'+ index)
+            ,tds = tr.children();
+            tds.eq(0).html('<input type="hidden" name="attfiles[]" value="'+data.id+'"/><a target="_blank" href="'+data.src+'">'+data.name+'<a>');
+            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+            // tds.eq(3).html(''); //清空操作
+            return delete this.files[index]; //删除文件队列已经上传成功的文件
+        }
+        this.error(index, upload);
+        }
+        ,error: function(index, upload){
+        var tr = fileListView.find('tr#upload-'+ index)
+        ,tds = tr.children();
+        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+        tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+        }
+    });
+
+    $(".file-delete").on('click', function(){
+        $(this).closest("tr").remove()
+    });
+    form.verify({
+        rate: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(value<0||value>1){
+                return "输入数值只能在0和1之间"
+            }
+        }
+        ,amount: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(value<0){
+                return "输入数值不能小于0"
+            }
+        }
+        
+        ,amortization: function(value, item){ //value：表单的值、item：表单的DOM对象
+            if(value<3){
+                return "输入数值不能小于3"
+            }
+        }
+        //我们既支持上述函数式的方式，也支持下述数组的形式
+        //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+        ,pass: [
+            /^[\S]{6,12}$/
+            ,'密码必须6到12位，且不能出现空格'
+        ] 
+    });
+  
+       // formSelects.render('orgIds')
+      form.on("submit",function(data) {
+          console.log(data)
+          data =  $("form").serialize();
+            $.post('/common/commondata/concretedataedit', data, function (out) {
+                if (out.status == 0) {
+                    window.location.href="/common/commondata/concretedatalist/?type={{ info.Type}}";
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+
+        form.render();
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        
+    }); 
+</script>
+{% endblock %}

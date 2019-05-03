@@ -1,0 +1,91 @@
+<style>
+    .layui-form-label{
+    width:120px;
+}
+.layui-input-block {
+    margin-left: 150px;
+}
+</style>
+<div class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+    <!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+    <form class="layui-form" action="" method="post">
+        <div class="layui-col-md12 layui-col-xs12" style="padding:10px">
+
+
+
+            <div class="layui-col-md12 layui-col-xs12">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">物流状态</label>
+                    <div class="layui-input-inline">
+                        <select id="shipstate" name="shipstate" lay-filter="shipstate" lay-verify="required" lay-search="">
+                            <option value="">请选择物流状态</option>
+                            {% for val in stateList %}
+                            <option value="{{val}}">{{val}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block" style="text-align:left;">
+                <input type="hidden" name="Idlist" value="{{idlist}}" />
+                <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
+                <a class="layui-btn layui-btn-primary" id="btnClose">关闭</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var $, form;
+    // layui.config({
+    //     base: "/static/layui/extend/"
+    // }).extend({
+    //     // formSelects: 'formSelects-v4'
+    // });
+    layui.use(['larry', 'form', 'laydate', 'element', 'layer', 'jquery', 'upload'], function () {
+        form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        // $ = layui.jquery;
+        //   var formSelects = layui.formSelects;
+        // var laydate = layui.laydate;
+        // var upload = layui.upload;
+
+        //监听选择省
+
+
+
+        form.on("submit(sub)", function (data) {
+            console.log(data)
+            data = data.field
+            data = $("form").serialize();
+
+            $.post('/wuliu/shipping/state_update', data, function (out) {
+
+                if (out.status == 0) {
+                    // layer.closeAll();
+                    // active.reloadall();
+window.location.reload();
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+        // formSelects.render('orgIds')
+        $("#btnClose").on("click", function () {
+            layer.closeAll()
+            return false;
+        })
+        form.render();
+    });
+</script>

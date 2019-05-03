@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户自定义组件举例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/uidemo.css">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/thirdlib/dtree/dtree.css">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/thirdlib/dtree/font/iconfont.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+    <style>
+        html,body{
+            height: 100%;
+            overflow: auto !important;
+        }
+    </style>
+</head>
+
+<body class="larry-bg-lightgrey larryui">
+    <!--[if lt IE 10]>
+        <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+        <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <div class="larry-fluid p20 color">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card bradius-5">
+                    <div class="larry-card-body pb15">
+                        <h1>用户自定义符合layui模块定义规范的组件使用举例<em>【如：layui扩展平台的dtree扩展使用方法介绍】</em></h1>
+                        <p class="title"> 在larryms框架模板中提供有第三方或用户自定义的layui模块引入使用接口支持，下面就以dtree的使用举例：<cite>首先从layui扩展平台中下载dtree，将下载好的源码包拷贝至larryms/thirdlib/目录下，并根据组件名称以及相对路径填写好配置文件conf.json =>【"dtree":"dtree/dtree"】 即可开始使用</cite><em>【larryms官方不提供从第三方下载的扩展组件维护，也未将如下示例中的第三方dtree组件纳入larryms的收费模板中（用户需正确区分），<u style="color: #ff5722; text-decoration: none;">以下示例仅作为对第三方组件dtree引入使用方法的一个展示</u>】</em></p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <div class="larry-dtree-box">
+                    <section class="larry-card larry-dtree bradius-5">
+                        <div class="larry-card-body pb15">
+                            <ul id="dtree" class="dtree pt10" data-id="1" data-url="../../../larryms/data/admin/dtree.json"></ul>
+                        </div>
+                    </section>
+
+                    <section class="larry-card larry-dtree-detail bradius-5">
+                        <div class="larry-card-header larry-dtree-title">泰拉科技（武汉）有限公司</div>
+                        <div class="larry-card-body pt15">
+                            <div class="larry-top">
+                                <div class="larry-btn larry-btn-sm"><i class="larry-icon larry-jia"></i>新增用户</div>
+                                <div class="larry-btn larry-btn-sm larry-btn-danger"><i class="larry-icon larry-shanchu"></i>删除用户</div>
+                                <div class="larry-seacrh">
+                                    <input type="text" class="larry-input w160" placeholder="请输入搜索内容">
+                                    <button class="larry-btn larry-btn-sm larry-btn-info">搜索</button>
+                                </div>
+                            </div>
+                            <table id="adminuser" lay-filter="adminuser" class="larryms-table-id" data-url="../../../larryms/data/admin/user.json"></table>
+                            <p class="title">*以上仅作展示示例，具体可使用示例可在larryms模板内容中查找</p>
+                        </div>
+                        <!--操作-->
+                        <script type="text/html" id="userListBar">
+                            <a class="layui-btn layui-btn-xs" lay-event="edit" data-url="useredit.html">编辑</a>
+                            <a class="layui-btn layui-btn-xs layui-btn-danger" data-url="del.html" lay-event="del">删除</a>
+                        </script>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: true,
+        base: '../../../larryms/',
+        mods: 'demo/',
+        page: 'uidemo',
+        identified: 'dtree'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于LarryMS框架第三方JS扩展组件库说明</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="LarryCMS Version:1.09" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/temp.css" media="all">
+</head>
+
+<body class="temp">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid larryms-svg-box">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">
+                <h1 class="tit">关于LarryMS框架所封装的第三方JS库重要说明</h1>
+                <blockquote class="layui-elem-quote">
+                    为了快速提高开发效率，LarryMS框架扩展封装了大量优秀的Javascript组件库、动画库，以实用为初衷降低学习成本提供开发效率为目的，紧贴业务需求，从底层进行编写实现与layui自带组件贯通，让您和使用layui官方组件一样使用，无任何延迟，如同layui自带组件一样使用且无需担心因layui版本更新而存在覆盖或更新等问题，扩展组件库与Layui目录并列存在于LarryMS框架系统中，LarryMS框架对所封装JS库提供更新和必要的技术支持，并且提供专属的使用文档示例教程
+                </blockquote>
+                <p>
+                    <em>补充说明：</em>关于封装的第三方收费JS库说明：未存在盗版或侵权，举例：比如极验官方提供的极验客户端js，LarryMS是对其进行了封装，让其更易于开发环境使用，简化操作省去页面引用与layui结合的更彻底，原接口还是需获得极验官方提供的接口（LarryMS只是作为一种提高开发效率的解决方案）。
+                </p>
+                <p>
+                    关于第三方js库的封装，在LarryMS社区会给到大家封装教程，LarryMS框架中扩展了如：swiper、音频、视频、地图、百度统计、极验、区域打印、二维码生成、加解密、编码、excel表格、表格导入导出、水印、ztree、裁剪、剪贴板、多选select2、穿梭框、图片加载、echarts、css3动画库等等 多达60多个非常实用的第三方JS库,对这些优秀的Javascript库的使用LarryMS是作为服务提供,进行结合layui的封装扩展，对于来自github的开源库，larryMS框架中只是对其二次开发封装不涉及侵权，也不会将这些开源库用作商业收费，只是提供框架内对这些开源库进行二次开发使其符合LarryMS框架规范，模块化使用并提供服务，因此大家可放心使用，并提供持续更新与优化（可在larryMS社区反馈建议）
+                </p>
+                <div class="margin-20"></div>
+                <p>
+                    所有组件依赖已在底层解决和优化。使用举例：(如下所示无需extend别名，无需担心Jquery依赖等问题，就如同使用layer,form组件一样，撸起袖子就是干，方便直接，简单更高效)
+                </p>
+<pre class="layui-code">
+layui.use(['jquery','qrcode','ckplyer','geetest'],function(){
+    var $ = layui.$,
+        qrcode = layui.qrcode,
+        ckplayer = layui.ckpalyer,
+        geetest = layui.geetest; //无需在html页面中再去手动引入geetest.js文件
+    //如ckplayer视频播放
+    var vUrl = 'http://www.larryms.com/static/larrycms/video/larry.mp4',
+        videoObject ={
+                container: '#video',
+                loop: true,
+                autoplay: true,
+                video:[
+                    [vUrl, 'video/mp4']
+                ]
+    };
+    var player = new ckplayer(videoObject);
+    //qrcode使用
+    var qrcodes = new qrcode(document.getElementById("qrcode"), {
+        width : 300,
+        height : 300
+    });
+    $('#product').on('click',function(){
+        var url = $('#videoUrl').val().trim();
+        qrcodes.makeCode(url);
+        return false;
+    });
+});
+</pre>
+            </div>
+                
+        </div>
+    </div>
+    <div id="loader" class="pageload-overlay" data-opening="m -5,-5 0,70 90,0 0,-70 z m 5,35 c 0,0 15,20 40,0 25,-20 40,0 40,0 l 0,0 C 80,30 65,10 40,30 15,50 0,30 0,30 z">
+        <svg width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+            <path d="m -5,-5 0,70 90,0 0,-70 z m 5,5 c 0,0 7.9843788,0 40,0 35,0 40,0 40,0 l 0,60 c 0,0 -3.944487,0 -40,0 -30,0 -40,0 -40,0 z" />
+        </svg>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.cache.page = 'temp';
+    layui.config({
+        version: "2.0.7",
+        base: '../../../larryms/',
+        mods:'demo/',
+        identified: 'one'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

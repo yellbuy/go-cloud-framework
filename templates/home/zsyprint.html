@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>中石油油库自助打印系统</title>
+    </head>
+    <body>
+    <div>
+        <object classid="clsid:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="browser" width="0" style="display:none"></object>
+
+       {% for content in printContentList%}
+       <div style="page-break-after:always;">
+        {{content|safe}}
+        <div>
+       {% endfor %}
+        <input type=button value="直接打印" onclick="browser.ExecWB(6,1);"/>
+        <input type=button value="打印预览" onclick="browser.ExecWB(7,1);"/>
+        <input type=button value="页面设置" onclick="browser.ExecWB(8,1);"/>
+    </div>
+    </body>
+</html>

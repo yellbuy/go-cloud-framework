@@ -1,0 +1,145 @@
+<html>
+<head>
+    <title>弹出窗口</title>
+    <script src="../../statics/libs/jquery-1.7.2.js"></script>
+    <link rel="stylesheet" href="../../statics/css/font-awesome.min.css">
+    <!--layui ztree样式-->
+    <link rel="stylesheet" href="../../statics/plugins/layui/css/layui.css" media="all">
+    <script src="../../statics/plugins/layer/layer.js"></script>
+    <script src="../../statics/plugins/layui/layui.js"></script>
+    <script src="../../statics/plugins/ztree/jquery.ztree.all.min.js"></script>
+    <link rel="stylesheet" href="../../statics/plugins/ztree/css/metroStyle/metroStyle.css">
+    <!--js组件-->
+    <script src="../../common/js/pageGrid.js"></script>
+    <script src="../../common/js/selectTool.js"></script>
+    <script src="../../common/js/radioTool.js"></script>
+    <script src="../../common/js/checkboxTool.js"></script>
+    <script src="../../common/js/treeTool.js"></script>
+    <script src="../../common/js/labelTool.js"></script>
+    <script src="../../common/js/linkSelectTool.js"></script>
+    <script src="../../common/js/uploadTool.js"></script>
+    <script src="../../common/js/HuploadTool.js"></script>
+    <script src="../../common/js/tplTool.js"></script>
+    <script src="../../common/js/editGrid.js"></script>
+    <!--全局-->
+    <script src="../../common/js/whole/cyLayer.js"></script>
+    <script src="../../common/js/whole/common.js"></script>
+    <script src="../../common/js/whole/setting.js"></script>
+    <script src="../../common/js/whole/utils.js"></script>
+    <script src="../../common/js/whole/monitor.js"></script>
+    <!--样式-->
+    <link rel="stylesheet" href="../../common/css/cyStyle.css">
+    <link rel="stylesheet" href="../../common/css/cyType.css">
+</head>
+<body>
+<div class="layui-input-inline">
+    <button class="layui-btn" onclick="submitCode()">提交代码</button>
+</div>
+<div class="layui-tab" style="height:350px;">
+    <ul class="layui-tab-title">
+        <li class="layui-this">编写代码</li>
+        <li id="showResult">查看效果</li>
+        <li>参数详解</li>
+
+    </ul>
+    <div class="layui-tab-content" >
+        <div class="layui-tab-item layui-show">
+            <textarea class="layui-textarea" rows="12" class="layui-code">
+
+
+             <button class="layui-btn" onclick="Page.open('打开新窗口','/frontframe/layer/jsp/main.html','test1')">打开窗口</button> </br></br>
+
+             <button class="layui-btn" onclick="Page.max('窗口最大化','/frontframe/layer/jsp/main.html')">打开窗口最大化</button> </br></br>
+
+             <button class="layui-btn" onclick="Page.open({ id:'test2',type: 1, area: ['1000px', '700px'], content: $('#id') })">打开页面层</button> </br></br>
+
+           </textarea>
+
+        </div>
+
+        <div class="layui-tab-item" id="result">
+
+            <button class="layui-btn" onclick="Page.open('打开新窗口','/frontframe/layer/jsp/main.html','test1')">打开窗口</button> </br></br>
+
+            <button class="layui-btn" onclick="Page.max('窗口最大化','/frontframe/layer/jsp/main.html')">打开窗口最大化</button> </br></br>
+
+            <button class="layui-btn" onclick="Page.open({ id:'test2',type: 1, area: ['1000px', '700px'], content: $('#id') })">打开页面层</button> </br></br>
+
+        </div>
+
+        <div class="layui-tab-item">
+            <table class="layui-table">
+                <thead>
+                <tr>
+                    <th>方法</th>
+                    <th>功能</th>
+                    <th>参数</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Page.open(title,url,id)</td>
+                    <td>打开窗口</td>
+                    <td>title：标题    url：请求地址  id:窗口id</td>
+                </tr>
+                <tr>
+                    <td>Page.max(title,url,id)</td>
+                    <td>打开窗口后立即最大化显示</td>
+                    <td>title：标题    url：请求地址  id:窗口id</td>
+                </tr>
+                <tr>
+                    <td>Page.getElement(id,element)</td>
+                    <td>获取某个弹窗页面中的某个元素</td>
+                    <td>id:窗口id   element:元素节点 如#id</td>
+                </tr>
+                <tr>
+                    <td>closeWindow()</td>
+                    <td>关闭当前窗口并刷新父页面表格数据</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<a class="click-span ft-20" href="http://layer.layui.com/" target="_blank"> &gt;&gt;&gt; layer官网入口</a>
+<pre class="layui-code" id="id" >
+      //layer打开窗口方式
+      //打开iframe
+      parent.layer.open({
+            type: 2,                   //类型 1页面 2iframe
+            title: title,              //标题
+            shadeClose: false,         //是否关闭遮罩
+            shade: [0.3, '#000'],      //遮罩
+            maxmin: true,              //开启最大化最小化按钮
+            area: ['1000px', '700px'],
+            content: url
+      });
+
+      //打开页面
+       parent.layer.open({
+             type: 1,
+             content: $('#id') //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+        });
+
+</pre>
+
+</body>
+<script>
+    layui.use('element', function () {
+    });
+
+    function submitCode() {
+        var code = $("textarea").val();
+        $("#result").html(code);
+        Msg.success("代码提交成功,请查看效果!");
+        Tips.info("点此查看效果",$("#showResult"));
+    }
+
+    layui.use('code', function(){ //加载code模块
+        layui.code({encode: true}); //引用code方法
+    });
+
+</script>
+</html>

@@ -1,0 +1,324 @@
+{% extends "../../_share/base.html"%}
+{% block header %}
+<!--<link rel="stylesheet" href="/static/admin/js/zTree/metroStyle/metroStyle.css" type="text/css">-->
+<link rel="stylesheet" href="/static/admin/js/uploader/uploader.css"/>
+{% endblock%}
+{% block content %}
+<script type="text/html" id="toolbar">
+    <!-- <form class="layui-form"> -->
+   
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:75px;padding: 9px 0;">时间范围：</label>
+            <div class="layui-input-inline" style="width: 200px;">
+             <input type="text" class="layui-input" id="rangetime" placeholder="选择时间范围"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:80px;padding: 9px 0;">状态：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <select class="appstate">
+                    <option value="-2">全部</option>
+                    <option value="0">未审核</option>
+                    <option value="1">审核未通过</option>
+                    <option value="2">审核通过</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+                <label class="layui-form-label" style="width:80px;padding: 9px 0;">计费方式：</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <select class="appmode">
+                        <option value="">全部</option>
+                        <option value="1">时间</option>
+                        <option value="2">次数</option>                       
+                    </select>
+                </div>
+            </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width:60px;padding: 9px 0;">关键字：</label>
+            <div class="layui-input-inline" style="width: 220px;">
+                <input type="text" class="layui-input key" placeholder="输入名称、描述、备注等" />
+            </div>
+            <a class="layui-btn btnSearch" data-type="reload" lay-event="searchVal" style="padding: 0 10px;"><i class="layui-icon"></i> 搜索</a>
+            <a class="layui-btn btnAdd" data-type="add" lay-event="add" style="padding: 0 10px;"><i class="layui-icon layui-icon-add-circle"></i>增加</a>
+        </div>
+  
+<!-- </form> -->
+</script>
+<table id="mainTable" lay-filter="mainTable"></table>
+{% endblock %}
+{% block footer %}
+<!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+<!-- <script type="text/javascript" src="/static/admin/js/wangEditor/wangEditor.min.js"></script> -->
+<script type="text/javascript">
+    layui.use(['larry','form', 'layer', 'laydate', 'table', 'laytpl', 'timePicker'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.jquery,
+            laydate = layui.laydate,
+            laytpl = layui.laytpl,
+            table = layui.table;
+        var timePicker = layui.timePicker;
+
+        //文章列表
+        var mainTable = table.render({
+            elem: '#mainTable',
+            url: '/base/tenant/tenantlist',
+            cellMinWidth: 95,
+            page: true,
+            height: "full-75",
+            toolbar: '#toolbar',
+            id: "mainTable",
+            even: true,
+            cols: [
+                [{
+                        type: "numbers",
+                        title: '序号',
+                        align: "right",
+                        fixed: "left"
+                    },
+                    // {
+                    //     type: "checkbox",
+                    //     fixed: "left"
+                    // },
+
+                    {
+                        field: 'Name',
+                        title: '名称',
+                        width: 150,
+                        align: "left"
+                    },
+                    {
+                        field: 'Desc',
+                        title: '描述',
+                        width: 150,
+                        align: "left"
+                    },
+                    {
+                        field: 'ExpireTime',
+                        title: '到期时间',
+                        width: 150,
+                        align: "left",
+                        templet: function (row) {
+
+                            return row.ExpireTime.substring(0, 10)
+
+                        }
+                    },
+                    {
+                        field: 'Times',
+                        title: '剩余次数',
+                        width: 100,
+                        align: "right"
+                    },
+                    {
+                        field: 'AreaId',
+                        title: '区域代码',
+                        // width: 100,
+                        align: "right"
+
+                    },
+                    {
+                        field: 'Province',
+                        title: '省',
+                        // width: 160,
+                        align: "left"
+                    },
+                    {
+                        field: 'City',
+                        title: '市',
+                        // width: 160,
+                        align: "left"
+                    },
+                    {
+                        field: 'County',
+                        title: '县',
+                        // width: 160,
+                        align: "left"
+                    },
+                    {
+                        field: 'Addr',
+                        title: '地址',
+                        // width: 160,
+                        align: "left"
+                    },
+                    {
+                        field: 'Mode',
+                        title: '计费方式',
+                        // width: 75,
+                        align: "center",
+                        templet: function (row) {
+
+                            if (row.Mode == 1) {
+                                return '<span class="layui-badge layui-bg-green">时间</span>'
+                            }
+                            if (row.Mode == 2) {
+                                return '<span class="layui-badge layui-bg-red">次数</span>'
+                            }
+                        }
+                    },
+                    {
+                        field: 'EditionId',
+                        title: '版本',
+                        // width: 160,
+                        align: "right",
+                        templet: function (row) {
+                            return row.Edition.Name
+                        }
+                    },
+                    {
+                        field: 'Remark',
+                        title: '备注',
+                        width: 160,
+                        align: "left"
+                    },
+                    {
+                        field: 'Linkman',
+                        title: '联系人',
+                        width: 100,
+                        align: "left"
+                    },
+                    {
+                        field: 'Phone',
+                        title: '电话',
+                        width: 100,
+                        align: "right"
+                    },
+                    {
+                        // field: 'State',
+                        title: '状态',
+                        width: 120,
+                        fixed: "right",
+                        align: "center",
+                        templet: function (row) {
+                            if (row.State == 0) {
+                                return '<span class="layui-badge layui-bg-blue">未审核</span>';
+                            }
+                            if (row.State == -1) {
+                                return '<span class="layui-badge layui-bg-red">审核未通过</span>'
+                            }
+                            if (row.State == 1) {
+                                return '<span class="layui-badge layui-bg-green">审核通过</span>'
+                            }
+                        }
+                    },
+                    {
+                        title: '操作',
+                        width: 180,
+                        fixed: "right",
+                        align: "center",
+                        templet: function(row){
+                            var toolBar = '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>';
+                            if(row.State >=0){
+                                toolBar = toolBar + '<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="tenantmanage">租户后台</a>';
+                            }
+                            toolBar = toolBar + '<a class="layui-btn layui-btn-xs layui-btn-danger confirm" lay-event="del">删除</a>';
+                            return toolBar;
+                        }
+                    }
+                ]
+            ]
+        });
+
+
+        table.on('toolbar(mainTable)', function (obj) {
+            switch (obj.event) {
+                case 'searchVal':
+                    table.reload("mainTable", {
+                        page: {
+                            curr: 1 //重新导航到首页
+                        },
+                        where: {
+                            key: $(".key").val(), //关键字
+                            rangetime: $("#rangetime").val(),
+                            appstate: $(".appstate").val(),
+                            appmode: $(".appmode").val()
+                        }
+                    });
+                    timePicker.render({
+                        elem: '#rangetime', //定义输入框input对象
+                        options: { //可选参数timeStamp，format
+                            timeStamp: false, //true开启时间戳 开启后format就不需要配置，false关闭时间戳 //默认false
+                            format: 'YYYY-MM-DD', //格式化时间具体可以参考moment.js官网 默认是YYYY-MM-DD HH:ss:mm
+                        },
+                    });
+                    break;
+                case 'add':
+                    data = obj.data;
+                    edit(data);
+                    break;
+            }
+        });
+
+
+        //编辑
+        function tenantManage(data) {
+            var id = data ? data.Id : 0;
+            if (!id && id<0){
+                layer.msg("请选择待管理的应用");
+                return;
+            }
+            $.post("/base/tenant/tenantmanage",{id:id},function(res){
+                if (res.errcode!=0){
+                    layer.alert(res.errmsg);
+                } else {
+                    if(res.errmsg){
+                        layer.msg(res.errmsg+"<br/>即将进入页面跳转~")
+                    }
+                    window.setInterval(function() { 
+                        window.top.location.reload();
+                    },1500); 
+                } 
+            });
+        };
+
+        //封装方法--批量改变审核状态
+
+
+        //文章管理
+        function edit(data) {
+            var id = data ? data.Id : '';
+            var title = id ? "编辑APP" : "添加APP";
+            // window.location.href= "/cms/articleaudit/articleauditedit/?id=" + id;
+            loadDialog("/base/tenant/tenantedit", {
+                id: id
+            }, {
+                title: title
+            }, true);
+        };
+        // $(".btnAdd").click(function () {
+        //     edit();
+        // });
+        timePicker.render({
+            elem: '#rangetime', //定义输入框input对象
+            options: { //可选参数timeStamp，format
+                timeStamp: false, //true开启时间戳 开启后format就不需要配置，false关闭时间戳 //默认false
+                format: 'YYYY-MM-DD', //格式化时间具体可以参考moment.js官网 默认是YYYY-MM-DD HH:ss:mm
+            },
+        });
+        // laydate.render({ 
+        //     elem: '#rangetime'
+        //     ,type: 'date'
+        //     ,range: '到' //或 range: '~' 来自定义分割字符
+        //     });
+
+        // 列表操作
+        table.on('tool(mainTable)', function (obj) {
+            var layEvent = obj.event,
+                data = obj.data;
+            if (layEvent === 'tenantmanage') { //详情
+                tenantManage(data);
+            } else if (layEvent === 'edit') { //详情
+                edit(data);
+            } else if (layEvent === 'del') { //删除
+                delData('/base/tenant/tenantdel', {
+                    id: data.Id
+                }, function (data) {
+                    mainTable.reload();
+                });
+            }
+        });
+    })
+</script>
+
+{% endblock %}

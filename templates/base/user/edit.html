@@ -1,0 +1,183 @@
+ {% extends "../../_share/base.html"%}
+
+{% block header %}
+
+<link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css"/>
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script>
+{% endblock %}
+
+{% block content %}
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+    <form class="layui-form layui-row" action="" method="post">
+        <div class="layui-col-md12 layui-col-xs12">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md9 layui-col-xs7">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label"><span class="text-red">*</span>登录账号</label>
+                        <div class="layui-input-inline" style="line-height:36px">
+                            <input type="text" class="layui-input titleVal"  lay-verify="required" name="Username" value="{{ info.Username }}" readonly  placeholder="不支持更改">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>姓名</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal"  lay-verify="required" name="Name" value="{{info.Name}}" placeholder="请输入姓名">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-inline">
+                            <input type="checkbox" name="Enable" value="1" title="账号可用" lay-skin="primary" lay-text="是|否" {% if info.Enable %}checked{%endif%}>
+                        </div>
+                        <label class="layui-form-label">电话</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"  name="Tel" value="{{ info.Tel }}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" class="layui-input"  name="Password" value="" placeholder="如需修改密码，请输入新密码">
+                        </div>
+                        <label class="layui-form-label">确认密码</label>
+                        <div class="layui-input-inline">
+                            <input type="password" class="layui-input"  name="Repassword" value="" placeholder="请输入确认密码，确认密码必须和登录密码相同">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">性别</label>
+                        <div class="layui-input-inline">
+                            <select class="cateVal" name="Gender" >
+                                <option value="1" selected>男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>排序</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"  name="Order" value="{{ info.Order }}" lay-verify="required|number" placeholder="按从小到大排序，领导可设置更小值以便显示在更靠前的位置">
+                        </div>
+                    </div>
+                    <hr class="layui-bg-gray" />
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"><span class="text-red">*</span>手机号</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"  lay-verify="required|phone" name="Mobile" value="{{ info.Mobile }}" placeholder="请输入手机号">
+                        </div>
+                        <label class="layui-form-label"><span class="text-red">*</span>邮箱</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input"  lay-verify="required|email" name="Email" value="{{ info.Email }}" placeholder="请输入邮箱">
+                        </div>
+                    </div>
+                    <div class="layui-form-item newsTop">
+                        <label class="layui-form-label">职务</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input"  name="Position" value="{{info.Position}}" placeholder="请输入职务">
+                        </div>
+                    </div>
+                    <div class="layui-form-item newsTop">
+                        <label class="layui-form-label"><span class="text-red">*</span>所属组织</label>
+                        <div class="layui-input-block">
+                            <select name="OrgIds" xm-select="orgIds">
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item newsTop">
+                        <label class="layui-form-label">身份</label>
+                        <div class="layui-input-inline">
+                            <input type="radio" name="Isleader" value="0" title="普通人员" {% if info.Isleader|integer !=1 %}checked{%endif%} lay-skin="primary"/>
+                            <input type="radio" name="Isleader" value="1" title="领导" {% if info.Isleader|integer == 1 %}checked{%endif%} lay-skin="primary"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item newsTop">
+                        <label class="layui-form-label">角色</label>
+                        <div class="layui-input-block">
+                            {% for val in roleList %}
+                            <input type="checkbox" name="RoleIds[]" value="{{val.Id}}" {%if val.Checked %}checked{%endif%} 
+                                title="{{val.Name}}" lay-skin="primary"/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input type="hidden" name="Id" value={{ info.Id }} />
+                        <input type="hidden" name="Parentid" value={{ info.Parentid }} />
+                        <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<div id="orgContent" class="menuContent" style="display:none; position: absolute;">
+    <ul id="treeOrg" class="ztree" style="margin-top:0; width:200px; height: 200px"></ul>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+function parseOrgTreeNode(curNode){
+    curNode.name = curNode.Name;
+    curNode.value = curNode.Id;
+    if(curNode.Children && curNode.Children.length > 0){
+        curNode.children = curNode.Children;
+        $.each(curNode.children, function(index, child) {
+           parseOrgTreeNode(child)
+        });
+    }
+}
+var $,form;
+    layui.use(['larry','form','element','layer','jquery', 'formSelects'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      $ = layui.jquery;
+      var formSelects = layui.formSelects;
+      var arr = [JSON.parse('{{ tree|safe }}')];
+        //佛曰, 格式不可变, 不喜欢 name,value 可以使用config重新定义
+        //同样适合剥去外皮, 同样可以使用config beforeSuccess处理数据, 不过你需要这么写
+        layui.formSelects.config('orgIds', {
+            keyName: 'Name',            //自定义返回数据中name的key, 默认 name
+            keyVal: 'Id',            //自定义返回数据中value的key, 默认 value
+            keySel: 'Selected',  
+            keyChildren: 'Children'
+        }).data('orgIds', 'local', {
+            arr: arr
+        });
+       // formSelects.render('orgIds')
+      form.on("submit",function(data) {
+          console.log(data)
+          // data =  $("form").serialize();
+          var orgIds = layui.formSelects.value('orgIds', 'val'); 
+          if(!orgIds || orgIds.length == 0){
+              layer.msg("请选择所属组织")
+              return false;
+          }
+          // data.OrgIds=orgIds;
+            $.post('/base/user/edit', $("form").serialize(), function (out) {
+                
+                if (out.status == 0) {
+                    // layer.msg("操作成功")
+                    layer.alert('操作成功', {icon: 1},function(index){
+                        window.location.href="/base/org/list";
+                    });
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+
+        form.render();
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        
+    }); 
+</script>
+{% endblock %}

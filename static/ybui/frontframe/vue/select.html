@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .demonstration {
+            display: block;
+            color: #8492a6;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h3 >基础用法</h3>
+    <div style="width: 200px;">
+        <el-select v-model="value1" placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+    </div>
+    <h3 >有禁用值</h3>
+    <div style="width: 200px;margin: 20px 0">
+        <el-select v-model="value2" placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                    :disabled="item.disabled">
+            </el-option>
+        </el-select>
+    </div>
+    <h3 >禁用状态</h3>
+    <div style="width: 700px;margin: 20px 0">
+        <el-select v-model="value3" disabled placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+    </div>
+    <h3 >可清空</h3>
+    <div style="width: 700px;margin: 20px 0">
+        <el-select v-model="value4" clearable placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+    </div>
+
+    <h3 >可搜索</h3>
+    <div style="width: 700px;margin: 20px 0">
+        <el-select v-model="value8" filterable placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+    </div>
+
+    <h3 >下拉多选</h3>
+    <div style="width:500px;">
+        <el-select v-model="value5" multiple placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+
+        <el-select
+                v-model="value6"
+                multiple
+                collapse-tags
+                style="margin-left: 20px;"
+                placeholder="请选择">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+        </el-select>
+    </div>
+</div>
+
+
+</body>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var cityOptions = ['上海', '北京', '广州', '深圳'];
+    new Vue({
+        el: '#app',
+        data:{
+            options: [{
+                value: '选项1',
+                label: '黄金糕'
+            }, {
+                value: '选项2',
+                label: '双皮奶'
+            }, {
+                value: '选项3',
+                label: '蚵仔煎',
+                disabled: true
+            }, {
+                value: '选项4',
+                label: '龙须面'
+            }, {
+                value: '选项5',
+                label: '北京烤鸭'
+            }],
+            value1: '',
+            value2: '',
+            value3: '',
+            value4: '',
+            value5: [],
+            value6: [],
+            value8: ''
+        },
+        methods:{
+            handleCheckAllChange:function(val) {
+                this.checkedCities = val ? cityOptions : [];
+                this.isIndeterminate = false;
+            },
+            handleCheckedCitiesChange:function(value) {
+                var checkedCount = value.length;
+                this.checkAll = checkedCount === this.cities.length;
+                this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+            }
+        }
+    });
+
+</script>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之图像裁剪扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/cropperdemo.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header header-title library-tit">
+                        <h1>LarryMS框架扩展之<cite>图像裁剪组件</cite><em>【提供于标准版及以上】</em></h1>
+                    </div>
+                    <div class="layui-card-body library-body">
+                        <p class="library-tips">
+                            <cite>图像裁剪组件：</cite>一个简单而实用的图像裁剪组件，LarryMS框架封装的该组件来自Github，它依赖于jQuery支持，但在LarryMS框架中使用依然无需关注这些，直接用就是，支持图片放大缩小，支持图片旋转，支持触摸屏设备，支持canvas，并且支持跨浏览器使用。下面是图像裁剪组件的使用示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：v4.0.0
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-cropper">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        图像裁剪组件cropper【效果示例】 支持上传图片裁剪和下载（细节功能可自行查看）
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-col-space15">
+                            <!-- 图像区域 -->
+                            <div class="layui-col-lg9 layui-col-md8 layui-col-sm12 layui-col-xs12">
+                                <div class="img-container">
+                                    <img id="image" src="../../../larryms/images/library/picture3.jpg" alt="Picture">
+                                </div>
+                            </div>
+                            <!-- 图像裁剪后显示区域 -->
+                            <div class="layui-col-lg3 layui-col-md4 layui-col-sm12 layui-col-xs12 padding-25">
+                                <!-- <h3>Preview:</h3> -->
+                                <div class="docs-preview clearfix">
+                                    <div class="img-preview preview-lg"></div>
+                                    <div class="img-preview preview-md"></div>
+                                    <div class="img-preview preview-sm"></div>
+                                    <div class="img-preview preview-xs"></div>
+                                </div>
+                                <!-- <h3>Data:</h3> -->
+                                <div class="docs-data">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataX">X</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataX" placeholder="x">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">px</span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataY">Y</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataY" placeholder="y">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">px</span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataWidth">Width</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataWidth" placeholder="width">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">px</span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataHeight">Height</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataHeight" placeholder="height">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">px</span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataRotate">Rotate</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text">deg</span>
+                                        </span>
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataScaleX">ScaleX</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+                                    </div>
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataScaleY">ScaleY</label>
+                                        </span>
+                                        <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 下部 -->
+                        <div class="layui-row layui-col-space15">
+                            <!-- 图像裁剪工具条 -->
+                            <div class="layui-col-lg9 layui-col-md8 layui-col-sm12 layui-col-xs12 docs-buttons">
+                                <!-- <h3>Toolbar:</h3> -->
+                                <!-- <h3>Toolbar:</h3> -->
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+                                            <span class="fa fa-arrows"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
+                                            <span class="fa fa-crop"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;zoom&quot;, 0.1)">
+                                            <span class="fa fa-search-plus"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;zoom&quot;, -0.1)">
+                                            <span class="fa fa-search-minus"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, -10, 0)">
+                                            <span class="fa fa-arrow-left"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, 10, 0)">
+                                            <span class="fa fa-arrow-right"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, 0, -10)">
+                                            <span class="fa fa-arrow-up"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, 0, 10)">
+                                            <span class="fa fa-arrow-down"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;rotate&quot;, -45)">
+                                            <span class="fa fa-rotate-left"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;rotate&quot;, 45)">
+                                            <span class="fa fa-rotate-right"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;scaleX&quot;, -1)">
+                                            <span class="fa fa-arrows-h"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;scaleY&quot;, -1)">
+                                            <span class="fa fa-arrows-v"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="crop" title="Crop">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;crop&quot;)">
+                                            <span class="fa fa-check"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="clear" title="Clear">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;clear&quot;)">
+                                            <span class="fa fa-remove"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="disable" title="Disable">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;disable&quot;)">
+                                            <span class="fa fa-lock"></span>
+                                        </span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-method="enable" title="Enable">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;enable&quot;)">
+                                            <span class="fa fa-unlock"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;reset&quot;)">
+                                            <span class="fa fa-refresh"></span>
+                                        </span>
+                                    </button>
+                                    <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                                        <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="Import image with Blob URLs">
+                                            <span class="fa fa-upload"></span>
+                                        </span>
+                                    </label>
+                                    <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;destroy&quot;)">
+                                            <span class="fa fa-power-off"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="btn-group btn-group-crop">
+                                    <button type="button" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getCroppedCanvas&quot;, { maxWidth: 4096, maxHeight: 4096 })">获取裁剪画布</span>
+                                    </button>
+                                    <button type="button" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 160, &quot;height&quot;: 90 }">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getCroppedCanvas&quot;, { width: 160, height: 90 })">160&times;90</span>
+                                    </button>
+                                    <button type="button" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;width&quot;: 320, &quot;height&quot;: 180 }">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getCroppedCanvas&quot;, { width: 320, height: 180 })">320&times;180</span>
+                                    </button>
+                                </div>
+                                <!-- Show the cropped image in modal -->
+                                <div class="modal fade docs-cropped" id="getCroppedCanvasModal" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="getCroppedCanvasTitle">LarryMS图像裁剪</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body"></div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                                                <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">下载</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.modal -->
+                                <button type="button" class="btn btn-secondary" data-method="getData" data-option data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getData&quot;)">Get Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="setData" data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;setData&quot;, data)">Set Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="getContainerData" data-option data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getContainerData&quot;)">Get Container Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="getImageData" data-option data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getImageData&quot;)">Get Image Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="getCanvasData" data-option data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getCanvasData&quot;)">Get Canvas Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="setCanvasData" data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;setCanvasData&quot;, data)">Set Canvas Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="getCropBoxData" data-option data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;getCropBoxData&quot;)">Get Crop Box Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="setCropBoxData" data-target="#putData">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;setCropBoxData&quot;, data)">Set Crop Box Data</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="moveTo" data-option="0">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="cropper.moveTo(0)">Move to [0,0]</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="zoomTo" data-option="1">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="cropper.zoomTo(1)">Zoom to 100%</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="rotateTo" data-option="180">
+                                    <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="cropper.rotateTo(180)">Rotate 180°</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-method="scale" data-option="-2" data-second-option="-1">
+                                    <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scale(-2, -1)">Scale (-2, -1)</span>
+                                </button>
+                                <textarea type="text" class="form-control" id="putData" rows="1" placeholder="Get data to here or set data with this value"></textarea>
+                            </div>
+                            <div class="layui-col-lg3 layui-col-md4 layui-col-sm12 layui-col-xs12 padding-25 docs-toggles">
+                                <!-- <h3>Toggles:</h3> -->
+                                <div class="btn-group d-flex flex-nowrap" data-toggle="buttons">
+                                    <label class="btn btn-primary active">
+                                        <input type="radio" class="sr-only" id="aspectRatio0" name="aspectRatio" value="1.7777777777777777">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="aspectRatio: 16 / 9">16:9</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="aspectRatio1" name="aspectRatio" value="1.3333333333333333">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="aspectRatio: 4 / 3">4:3</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="aspectRatio2" name="aspectRatio" value="1">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="aspectRatio: 1 / 1">1:1</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="aspectRatio3" name="aspectRatio" value="0.6666666666666666">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="aspectRatio: 2 / 3">2:3</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="aspectRatio4" name="aspectRatio" value="NaN">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="aspectRatio: NaN">Free</span>
+                                    </label>
+                                </div>
+                                <div class="btn-group d-flex flex-nowrap" data-toggle="buttons">
+                                    <label class="btn btn-primary active">
+                                        <input type="radio" class="sr-only" id="viewMode0" name="viewMode" value="0" checked>
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="View Mode 0">VM0</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="viewMode1" name="viewMode" value="1">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="View Mode 1">VM1</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="viewMode2" name="viewMode" value="2">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="View Mode 2">VM2</span>
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" class="sr-only" id="viewMode3" name="viewMode" value="3">
+                                        <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="View Mode 3">VM3</span>
+                                    </label>
+                                </div>
+                                <div class="dropdown dropup docs-options">
+                                    <button type="button" class="btn btn-primary btn-block dropdown-toggle" id="toggleOptions" data-toggle="dropdown" aria-expanded="true">
+                                        Toggle Options
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="toggleOptions" role="menu">
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="responsive" type="checkbox" name="responsive" checked>
+                                                <label class="form-check-label" for="responsive">responsive</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="restore" type="checkbox" name="restore" checked>
+                                                <label class="form-check-label" for="restore">restore</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="checkCrossOrigin" type="checkbox" name="checkCrossOrigin" checked>
+                                                <label class="form-check-label" for="checkCrossOrigin">checkCrossOrigin</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="checkOrientation" type="checkbox" name="checkOrientation" checked>
+                                                <label class="form-check-label" for="checkOrientation">checkOrientation</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="modal" type="checkbox" name="modal" checked>
+                                                <label class="form-check-label" for="modal">modal</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="guides" type="checkbox" name="guides" checked>
+                                                <label class="form-check-label" for="guides">guides</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="center" type="checkbox" name="center" checked>
+                                                <label class="form-check-label" for="center">center</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="highlight" type="checkbox" name="highlight" checked>
+                                                <label class="form-check-label" for="highlight">highlight</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="background" type="checkbox" name="background" checked>
+                                                <label class="form-check-label" for="background">background</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="autoCrop" type="checkbox" name="autoCrop" checked>
+                                                <label class="form-check-label" for="autoCrop">autoCrop</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="movable" type="checkbox" name="movable" checked>
+                                                <label class="form-check-label" for="movable">movable</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="rotatable" type="checkbox" name="rotatable" checked>
+                                                <label class="form-check-label" for="rotatable">rotatable</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="scalable" type="checkbox" name="scalable" checked>
+                                                <label class="form-check-label" for="scalable">scalable</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="zoomable" type="checkbox" name="zoomable" checked>
+                                                <label class="form-check-label" for="zoomable">zoomable</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="zoomOnTouch" type="checkbox" name="zoomOnTouch" checked>
+                                                <label class="form-check-label" for="zoomOnTouch">zoomOnTouch</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="zoomOnWheel" type="checkbox" name="zoomOnWheel" checked>
+                                                <label class="form-check-label" for="zoomOnWheel">zoomOnWheel</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="cropBoxMovable" type="checkbox" name="cropBoxMovable" checked>
+                                                <label class="form-check-label" for="cropBoxMovable">cropBoxMovable</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="cropBoxResizable" type="checkbox" name="cropBoxResizable" checked>
+                                                <label class="form-check-label" for="cropBoxResizable">cropBoxResizable</label>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown-item">
+                                            <div class="form-check">
+                                                <input class="form-check-input" id="toggleDragModeOnDblclick" type="checkbox" name="toggleDragModeOnDblclick" checked>
+                                                <label class="form-check-label" for="toggleDragModeOnDblclick">toggleDragModeOnDblclick</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        图像裁剪组件cropper【Code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+#示例中的裁剪功能基于框架中提供封装的cropper组件，代码段如下：
+layui.use(['jquery','jqui','cropper'],function(){
+    var $ = layui.$,
+        jqui = layui.jqui,
+        cropper = layui.cropper;
+    var URL = window.URL || window.webkitURL;
+        var $image = $('#image');
+        var $download = $('#download');
+        var $dataX = $('#dataX');
+        var $dataY = $('#dataY');
+        var $dataHeight = $('#dataHeight');
+        var $dataWidth = $('#dataWidth');
+        var $dataRotate = $('#dataRotate');
+        var $dataScaleX = $('#dataScaleX');
+        var $dataScaleY = $('#dataScaleY');
+        var options = {
+            aspectRatio: 16 / 9,
+            preview: '.img-preview',
+            crop: function(e) {
+                $dataX.val(Math.round(e.detail.x));
+                $dataY.val(Math.round(e.detail.y));
+                $dataHeight.val(Math.round(e.detail.height));
+                $dataWidth.val(Math.round(e.detail.width));
+                $dataRotate.val(e.detail.rotate);
+                $dataScaleX.val(e.detail.scaleX);
+                $dataScaleY.val(e.detail.scaleY);
+            }
+        };
+        var originalImageURL = $image.attr('src');
+        var uploadedImageName = 'cropped.jpg';
+        var uploadedImageType = 'image/jpeg';
+        var uploadedImageURL;
+    $image.on({
+            ready: function(e) {
+                console.log(e.type);
+            },
+            cropstart: function(e) {
+                console.log(e.type, e.detail.action);
+            },
+            cropmove: function(e) {
+                console.log(e.type, e.detail.action);
+            },
+            cropend: function(e) {
+                console.log(e.type, e.detail.action);
+            },
+            crop: function(e) {
+                console.log(e.type);
+            },
+            zoom: function(e) {
+                console.log(e.type, e.detail.ratio);
+            }
+        }).cropper(options); 
+    //your coding ....
+    也可以使用本示例中写好的模块cropperdemo.js 就是依赖cropper组件实现的，可以作为用户自定义扩展组件，也可以与模版中使用page方式加载，左侧示例中是使用的LarryMS框架所支持的用户自定义扩展方式实现【如改成page方式加载，只需删掉conf.js中cropperdemo的设置，同时页面入库中 设置 layui.cache.page = 'cropperdemo'即可】;
+});
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            关于cropper组件深入场景使用文档与更多示例，请移步LarryMS框架开发者文档中查看
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'thirddemo',
+        identified: 'cropper'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

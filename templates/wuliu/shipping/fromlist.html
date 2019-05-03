@@ -1,0 +1,374 @@
+{% extends "../../_share/base.html"%}
+
+<head>
+    <meta charset="utf-8">
+    <title>layDate快速使用</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
+</head>
+{% block content %}
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-row">
+        <div class="layui-col-md12">
+            <table class="layui-hide" id="tableUsers" lay-filter="tableUsers">
+            </table>
+            <script type="text/html" id="toolbar">
+                <form class="layui-form" action="" onsubmit="javascript:return false;">
+                    <div class="demoTable"> 
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:90px">发货地址:</label>
+                             <div class="layui-input-inline" style="width:150px">
+                                <input class="layui-input" id="Fromaddress" name="Fromaddress" type="text" placeholder="发货人地址">
+                            </div>
+                             <label class="layui-form-label" style="width:90px">收货地址:</label>
+                            <div class="layui-input-inline" style="width:150px">
+                                <input class="layui-input" id="Toaddress" name="Toaddress" type="text" placeholder="收货人地址">
+                            </div>
+                            <label class="layui-form-label" style="width:90px">运单状态:</label>
+                            <div class="layui-input-inline" style="width: 120px">
+                                <select name="ShippingState" id="ShippingState">
+                                    <option value="">运单状态</option>
+                                    {% for val in shippingstate %}
+                                    <option value={{val|first}}>{{val}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                            <button class="layui-btn" data-type="reloadsearch"> 搜索</button>
+                            <button class="layui-btn" data-type="reloadall">所有</button>
+                            <button class="layui-btn" lay-event="updat_shipping"> 更新物流状态</button>
+                            <button class="layui-btn" lay-event="set_shipping"> 重置物流状态</button>
+                                                    
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width:100px">时间范围:</label>
+                            <div class="layui-input-inline" style="width:200px">
+                                <input type="text" name="rangDate" class="layui-input" id="rangDate" placeholder="yyyy-MM-dd - yyyy-MM-dd">
+                            </div>
+                           
+                            <label class="layui-form-label" style="width:90px">支付方式:</label>
+                             <div class="layui-input-inline" style="width: 80px">
+                                <select  name="PayMode" id="PayMode" lay-verify="required">
+                                    <option value="-1">不限</option>
+                                    <option value="0">现付</option>
+                                    <option value="1">到付</option>
+                                    <option value="2">月结</option>
+                                    <option value="3">回付</option>
+                                 </select>
+                             </div> 
+                            <label class="layui-form-label">代收款</label>
+                              <div class="layui-input-inline" style="width: 80px">
+                               <select  name="AgencyFund" id="AgencyFund" lay-verify="required">
+                                <option value="-1">不限</option>
+                                <option value="0">无</option>
+                                <option value="1">有</option>
+                                </select>
+                               </div> 
+                               <label class="layui-form-label">关键字:</label>
+                                 <div class="layui-input-inline" style="width: 120px">
+                                <input id="search" name="search" class="layui-input" data-options="prompt:'全文搜索',searcher:search" />
+                                </div>
+                               
+                           <!-- <button class="layui-btn">回收站</button> -->
+                            <button class="layui-btn" lay-event="add_shipping"> 添加</button>                          
+                            <button class="layui-btn">导出</button>
+                            <button class="layui-btn">打印</button>
+                        </div>
+                     
+                  </div>       
+                </form>
+          
+    </script>
+            <script type="text/html" id="bar">
+
+                <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+
+    </script>
+        </div>
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script>
+    var editObj = null,
+        ptable = null,
+        treeGrid = null,
+        tableId = 'treeMain',
+        layer = null;
+    layui.use(['larry', 'jquery', 'treeGrid', 'layer', 'table', 'form', 'element', 'laydate', 'timePicker'], function () {
+        var $ = layui.jquery;
+        var treeGrid = layui.treeGrid; //很重要
+        var layer = layui.layer;
+        var table = layui.table;
+        var laydate = layui.laydate;
+        var form = layui.form;
+        var element = layui.element;
+        var timePicker = layui.timePicker;
+
+        //方法级渲染
+        table.render({
+            elem: '#tableUsers',
+            url: '/wuliu/shipping/fromlist',
+            id: 'userList',
+            page: true,
+            height: "full-83",
+            toolbar: "#toolbar",
+            defaultToolbar: ['filter'],
+            even: false //开启隔行背景
+                ,
+            limit: 20,
+            cols: [
+                [{
+                        checkbox: true,
+                        fixed: true
+                    },
+                    {
+                        field: 'Id',
+                        title: '标识',
+                        width: 100,
+                        align: 'right'
+                    }, {
+                        field: 'No',
+                        title: '运单号',
+                        width: 150,
+                        align: 'right'
+                    }, {
+                        field: 'ListDate',
+                        title: '收货日期',
+                        width: 200,
+                        align: 'right'
+                    },
+                    {
+                        field: 'TruckNo',
+                        width: 90,
+                        title: '发货车号'
+                    },
+                    {
+                        field: 'SendUnit',
+                        width: 120,
+                        title: '发货人'
+                    }, {
+                        field: 'SendMobile',
+                        width: 120,
+                        title: '发货人电话'
+                    }, {
+                        field: 'SendAddress',
+                        width: 240,
+                        title: '发货人地址',
+                        templet: function (row) {
+                            return row.SendProvince + " " + row.SendCity + " " + row.SendCounty + " " + row.SendStreet + " " + row.SendAddr
+                        }
+                    },
+                    {
+                        field: 'ReceiveUnit',
+                        width: 120,
+                        title: '收货人'
+                    }, {
+                        field: 'ReceiveMobile',
+                        width: 120,
+                        title: '收货人电话'
+                    }, {
+                        field: 'ReceiveAddress',
+                        width: 240,
+                        title: '收货人地址',
+                        templet: function (row) {
+                            return row.ReceiveProvince + " " + row.ReceiveCity + " " + row.ReceiveCounty + " " + row.ReceiveStreet + " " + row.ReceiveAddr
+                        }
+                    },
+                    {
+                        field: 'ReceiveCustomerName',
+                        width: 120,
+                        title: '签收人'
+                    },
+                    {
+                        field: 'GoodsName',
+                        width: 120,
+                        title: '货物品名'
+                    }, {
+                        field: 'Amount',
+                        width: 120,
+                        title: '数量'
+                    }, {
+                        field: 'Pack',
+                        width: 120,
+                        title: '包装'
+                    }, {
+                        field: 'Weight',
+                        width: 120,
+                        title: '重量'
+                    },
+                    {
+                        field: 'ShippingState',
+                        title: '订单状态',
+                        width: 100,
+                        align: "center",
+                        templet: function (row) {
+                            if (row.ShippingState == 0) {
+                                return '<span class="layui-badge layui-bg-orange">下单</span>';
+                            }
+                            if (row.ShippingState == 1) {
+                                return '<span class="layui-badge layui-bg-green">揽件</span>'
+                            }
+                            if (row.ShippingState == 2) {
+                                return '<span class="layui-badge layui-bg-black">收货</span>';
+                            }
+                            if (row.ShippingState == 3) {
+                                return '<span class="layui-badge layui-bg-blue">运输</span>'
+                            }
+                            if (row.ShippingState == 4) {
+                                return '<span class="layui-badge layui-bg-cyan">到站</span>';
+                            }
+                            if (row.ShippingState == 5) {
+                                return '<span class="layui-badge layui-bg-green">配送</span>'
+                            }
+                            if (row.ShippingState == 6) {
+                                return '<span class="layui-badge layui-bg-orange">预约</span>';
+                            }
+                            if (row.ShippingState == 7) {
+                                return '<span class="layui-badge layui-bg-green">签收</span>'
+                            }
+                        }
+                    },
+                    {
+                        fixed: 'right',
+                        width: 160,
+                        align: 'center',
+                        toolbar: '#bar'
+                    }
+                ]
+            ]
+
+        });
+
+        var $ = layui.$,
+            active = {
+                reloadsearch: function () {
+                    var str = $('#rangDate').val() || "";
+                    var faddress = $('#Fromaddress').val() || "";
+                    var toaddress = $('#Toaddress').val() || "";
+                    table.reload('userList', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        where: {
+                            rangtime: str,
+                            Faddress: faddress,
+                            Toaddress: toaddress,
+                            shipstate: $('#ShippingState').val() || "",
+                            PayMode: $('#PayMode').val() || "",
+                            AgencyFund: $('#AgencyFund').val() || ""
+                            // fetchChild: $("input[name='fetchChild']:checked").val()||"false",
+                            // Name: str
+                        }
+                    });
+                    $('#rangDate').val(str);
+                    $('#Fromaddress').val(faddress);
+                    $('#Toaddress').val(toaddress);
+                    $('#rangDate').val(str);
+                    timePicker.render({
+                        elem: '#rangDate', //定义输入框input对象
+                        options: { //可选参数timeStamp，format
+                            timeStamp: false, //true开启时间戳 开启后format就不需要配置，false关闭时间戳 //默认false
+                            format: 'YYYY-MM-DD', //格式化时间具体可以参考moment.js官网 默认是YYYY-MM-DD HH:ss:mm
+                        },
+                    });
+                },
+                reloadall: function () {
+                    var str = $('#rangDate').val() || "";
+                    table.reload('userList', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        where: {
+                            rangtime: "",
+                            Faddress: "",
+                            Toaddress: "",
+                            shipstate: "",
+                            PayMode: -1,
+                            AgencyFund: -1
+                        }
+                    });
+                    $('#rangDate').val(str);
+                    timePicker.render({
+                        elem: '#rangDate', //定义输入框input对象
+                        options: { //可选参数timeStamp，format
+                            timeStamp: false, //true开启时间戳 开启后format就不需要配置，false关闭时间戳 //默认false
+                            format: 'YYYY-MM-DD', //格式化时间具体可以参考moment.js官网 默认是YYYY-MM-DD HH:ss:mm
+                        },
+                    });
+                }
+            };
+        table.on('toolbar(tableUsers)', function (obj) {
+            if (obj.event == "add_shipping") {
+                window.location.href = "/wuliu/shipping/edit?kind=form"
+            } else if (obj.event == "updat_shipping") {
+                var check = table.checkStatus('userList');
+                var ids = "";
+                $.each(check["data"], function (k, v) {
+
+                    ids += v.Id + ",";
+
+                })
+                var url = "/wuliu/shipping/state_update/?idlist=" + ids;
+                $.get(url, function (html, status) {
+                    //自定页
+                    layer.open({
+                        type: 1,
+                        anim: 2,
+                        closeBtn: 0,
+                        shadeClose: true, //开启遮罩关闭
+                        content: html,
+                        area: ['40%', '40%']
+                    });
+                });
+            };
+        });
+
+
+        //监听工具条
+        table.on('tool(tableUsers)', function (obj) {
+            var data = obj.data;
+            var enableClick = true;
+            if (obj.event === 'edit') {
+                window.location.href = "/wuliu/shipping/edit?kind=from&id=" + data.Id
+
+            } else if (obj.event === 'del') {
+                acts = "删除";
+                layer.confirm('真的' + acts + '【' + data.Username + '】账号么', function (index) {
+                    var jsData = {
+                        'id': data.Id
+                    }
+
+                    layer.close(index);
+                })
+            } else {
+                layer.msg('操作不存在');
+            }
+        });
+
+        $(document).on('click', '.demoTable .layui-btn', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
+
+        //执行一个laydate实例
+
+        //指定元素
+        // laydate.render({
+        //     elem: '#rangDate',
+        //     type: 'datetime'
+
+        // });
+        timePicker.render({
+            elem: '#rangDate', //定义输入框input对象
+            options: { //可选参数timeStamp，format
+                timeStamp: false, //true开启时间戳 开启后format就不需要配置，false关闭时间戳 //默认false
+                format: 'YYYY-MM-DD', //格式化时间具体可以参考moment.js官网 默认是YYYY-MM-DD HH:ss:mm
+            },
+        });
+    });
+</script>
+{% endblock %}

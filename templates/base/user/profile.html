@@ -1,0 +1,115 @@
+
+ {% extends "../../_share/base.html"%}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="layui-layout layui-layout-admin" style="padding-left: 40px;margin-top: 20px;">
+    <form class="layui-form" action="" method="post" >
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录用户名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="login_name" readonly id="Username" lay-verify="required" autocomplete="off" placeholder="登录账号" class="layui-input" value="{{info.Username}}">
+            </div>
+            <div class="layui-form-mid layui-word-aux">*登录用户名不允许修改</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Nickname" id="Nickname" autocomplete="off" placeholder="昵称" class="layui-input" value="{{info.Nickname}}">
+            </div>
+            <div class="layui-form-mid layui-word-aux"></div>
+            <label class="layui-form-label"><span class="text-red">*</span>真实姓名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Name" id="Name" lay-verify="required" autocomplete="off" placeholder="真实姓名" class="layui-input" value="{{info.Name}}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="text-red">*</span>手机号码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Mobile" lay-verify="mobile|required" autocomplete="off" placeholder="手机号码" class="layui-input" value="{{info.Mobile}}">
+            </div>
+            {# <div class="layui-form-mid layui-word-aux">*</div> #}
+            <label class="layui-form-label">电话号码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Tel" lay-verify="tel" autocomplete="off" placeholder="电话号码" class="layui-input" value="{{info.Tel}}">
+            </div>  
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="text-red">*</span>电子邮箱</label>
+            <div class="layui-input-inline">
+                <input type="text" name="Email" id="Email" lay-verify="Email" autocomplete="off" placeholder="电子邮箱" class="layui-input" value="{{info.Email}}">
+            </div>
+            <label class="layui-form-label">修改密码</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="ResetPwd" lay-verify="ResetPwd" value="1" title="是">
+                <input type="radio" name="ResetPwd" lay-verify="ResetPwd" value="2" title="否" checked>
+            </div>
+        </div>
+
+        <div class="layui-form-item password" style="display:none;">
+            <label class="layui-form-label">旧密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="PasswordOld" id="PasswordOld" lay-verify="" autocomplete="off" placeholder="旧密码" class="layui-input" value="">
+            </div>
+            <div class="layui-form-mid layui-word-aux"></div>
+        </div>
+
+        <div class="layui-form-item password" style="display:none;">
+            <label class="layui-form-label">设置密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="PasswordNew" id="PasswordNew" lay-verify="" autocomplete="off" placeholder="新密码" class="layui-input" value="">
+            </div>
+            <div class="layui-form-mid layui-word-aux"></div>
+            <label class="layui-form-label">重复密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="PasswordConfirm" id="PasswordConfirm" lay-verify="" autocomplete="off" placeholder="新密码" class="layui-input" value="">
+            </div>
+            <div class="layui-form-mid layui-word-aux"></div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="sub">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+    var $;
+    layui.use(['form','element','layer','jquery'],function(){
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        var $ = layui.jquery;
+
+        form.on('radio', function(data){
+            if(data.value==1){
+                $(".password").show()
+            }else{
+                $(".password").hide()
+            }
+        });
+        form.on('submit(sub)', function(data){
+            var form_data = $("form").serialize();
+            $.post('/base/user/profile', form_data, function (out) {
+                if (out.status == 0) {
+                    layer.msg("操作成功,请重新登录",{icon: 1},function () {
+                        top.location.href="/login_out"
+                    })
+                } else {
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        form.render();
+    });
+</script>
+{% endblock %}

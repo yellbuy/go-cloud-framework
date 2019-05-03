@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>larryms框架之ckplayer扩展组件</title>
+    <meta name="keywords" content="swiper" />
+    <meta name="description" content="swiper" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/library.css" media="all">
+</head>
+
+<body class="larryms-layout-bgB box-blank  library-box">
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                             LarryMS框架提供封装的echarts组件丰富的可视化类型、多种数据格式无需转换直接使用、千万数据的前端展现、移动端优化、多渲染方案，跨平台使用！深度的交互式数据探索、多维数据的支持以及丰富的视觉编码手段、动态数据、绚丽的特效...简直是无所不能【LarryMS框架默认提供5种不同风格任君选择，而且是可扩展主题echartStyle组件】<br>
+                            larryms官方社区提供所有所提供扩展组件的维护和更新。当前版本：version:4.2.0-rc.1
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-echarts">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之散点图【效果示例】(使用主题五)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box last-charts" id="demo9"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                    <div class="layui-card-header">
+                        LarryMS框架种Echarts使用【code示例】
+                    </div>
+                    <div class="layui-card-body library-code">
+                        <pre class="layui-code">
+#LarryMS框架种使用百度Echarts组件亦很简洁：
+layui.use(['jquery','echarts'],function(){
+    var $ = layui.$,
+        echarts = layui.echarts;
+    //定义数据
+    var options ={
+        #your data;
+    }
+    var myChart = echarts.init(document.getElementById('chartsID'), layui.echartStyle('larry'));
+    myChart.setOption(options);
+    //添加onresize监听
+    setTimeout(function() {
+            window.onresize = function() {
+                myChart.resize();
+            };
+    }, 200);
+    #是不是很简单，即完成图表，echarts功能非常丰富，大量API需要查看文档
+#当前LarryMS框架标准版是封装的Echarts最新版4.x系列，LarryMS框架专业版中后续还会扩展echarts的组件（功能会非常实用）
+</pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row  layui-col-space15 larryms-echarts">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之标准饼状图【效果示例】(使用主题四)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo5"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之漏斗图【效果示例】(使用主题一)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo6"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="layui-row  layui-col-space15 larryms-echarts">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之堆积面积图【效果示例】(使用主题二)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo2"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之标准柱状图【效果示例】(使用主题一)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo1"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="layui-row  layui-col-space15 larryms-echarts">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之双数值柱形图【效果示例】(使用主题二)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo3"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之折线图【效果示例】(使用主题三)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo4"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        
+        <div class="layui-row  layui-col-space15 larryms-echarts">
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之标准K线图【效果示例】(使用主题一)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo7"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg6 layui-col-md6 layui-col-sm12 layui-col-xs12">
+                 <section class="layui-card">
+                    <div class="layui-card-header">
+                        Echarts之多图联动【效果示例】(使用主题二)
+                    </div>
+                    <div class="layui-card-body">
+                        <div class="larryms-charts-box" id="demo8"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 14px;color: #09B4EF;line-height: 25px;">
+                            更多关于Echarts示例文档，请移步LarryMS框架开发者文档中查看，LarryMS框架后续更新会加入动态数据，地图等示例;当前LarryMS框架标准版是封装的Echarts最新版4.x系列，LarryMS框架专业版中后续会重新封装echarts的组件增加更多扩展支持（功能会非常实用）
+                        </blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'chartsdemo',
+        identified: 'echarts'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <!-- 灵通打单 -->
+    <permission key="admin" name="管理后台">
+        <module key="admin_sys_profile" name="个人中心" icon="fa-user-circle-o" isSpread="true" path="" isHide="true">
+            <module key="admin_sys_profile_edit" name="修改" icon="fa-edit" path="/base/user/profile" target="btnEdit"></module>
+        </module>
+    </permission>
+</configuration>

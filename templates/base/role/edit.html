@@ -1,0 +1,108 @@
+ {% extends "../../_share/base.html"%}
+
+{% block header %}
+<!--script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script-- type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script-->
+{% endblock %}
+
+{% block content %}
+<div class="layui-row layui-form">
+    <div style="margin: 10px 20px">
+        <blockquote class="layui-elem-quote">
+            修改角色以及角色权限
+        </blockquote>
+    </div>
+        
+    <div class="layui-col-md4" style="margin-left: 20px;margin-right: 0px">
+        <div class="layui-form-item" style="height:450px;padding:5px;overflow:auto">
+            <div id="LAY-auth-tree-index" ></div>
+        </div>
+    </div>
+    <div class="layui-col-md5">
+        <div class="layui-layout layui-layout-admin" style="padding-left: 40px;margin-top: 20px;">
+            <form class="layui-form" action="" onsubmit="javascript:;" name="form" method="post">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">角色编码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="code" id="code" lay-verify="required" {% if role.is_static|integer == 1%}readonly{%endif%} 
+                            autocomplete="off" placeholder="请输入角色编码" class="layui-input" value="{{role.code}}">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux"></div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">角色名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name" id="name" lay-verify="required" {% if role.is_static|integer == 1%}readonly{%endif%}  
+                            autocomplete="off" placeholder="请输入角色名称" class="layui-input" value="{{role.name}}">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux"></div>
+                </div>
+                
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">备注</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" id="remark" placeholder="请输入内容" class="layui-textarea">{{role.remark}}</textarea>
+                    </div>
+                </div>
+
+                <input type="hidden" value="{{role.id}}" name="id" id="id">
+                
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit="" lay-filter="save">保存</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block footer %}
+<script>
+var $,form;
+    layui.use(['larry','form','authtree','element','layer','jquery'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      var authtree = layui.authtree;
+      var $authtreeId="#LAY-auth-tree-index"
+      $ = layui.jquery;
+      $.ajax({
+            url: '/base/role/getnodes/?id={{role.id}}',
+            dataType: 'json',
+            success: function(res){
+                var trees = res.data;
+                // 如果后台返回的不是树结构，请使用 authtree.listConvert 转换
+                authtree.render($authtreeId, trees, {
+                    inputname: 'authids[]', 
+                    layfilter: 'lay-check-auth', 
+                    autowidth: true,
+                    autoclose:false
+                });
+                authtree.showDept($authtreeId, 4)
+            }
+        });
+        form.on('submit', function(body){
+            data = body.field;
+            data["nodes_data"]=authtree.getChecked($authtreeId)
+            console.log(data) //当前容器的全部表单字段，名值对形式：{name: value}
+            $.post('/base/role/ajaxsave', data, function (out) {
+                    if (out.status == 0) {
+                        layer.alert('操作成功', {icon: 1},function(index){
+                            window.location.href="/base/role/list"
+                        });
+                    } else {
+                        layer.msg(out.message)
+                    }
+                }, "json");
+            return false;
+        });
+
+        form.render();
+        //但是，如果你的HTML是动态生成的，自动渲染就会失效
+        //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+        
+    }); 
+</script>
+{% endblock %}

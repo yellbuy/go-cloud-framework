@@ -1,0 +1,63 @@
+
+/*按钮*/
+.larryms-card-btnbox{
+	text-align: center;
+	padding: 30px 15px;
+	min-height: 65px;
+}
+.larryms-card-btnbox .layui-btn{
+	margin-bottom: 15px;
+}
+.larryms-card-auxbox{
+	padding: 20px 15px;
+	text-align: left;
+	height: 95px;
+}
+.larryms-card-auxbox .layui-progress{
+	margin-bottom: 20px;
+}
+.larryms-card-auxbox .layui-progress-big{
+	margin-bottom: 16px;
+}
+.larryms-card-auxbox .larryms-progress-text{
+	margin-bottom: 16px;
+}
+.layui-card-header strong{
+	color: #000;
+	font-weight: normal;
+}
+.larryms-card-auxbox .demo-slider{
+	margin-bottom: 32px;
+}
+.larryms-card-auxbox .layui-slider-vertical{
+	height: 100px;
+	height: 100px !important;
+}
+.larryms-badge{
+	font-size: 13px;
+	margin-bottom: 13px;
+}
+.larryms-badge cite{
+	font-size: 15px;
+}
+.auxbox1{
+	height: 145px;
+	padding-top: 15px;
+}
+.auxbox1 .layui-timeline-item{
+	padding-bottom: 13px;
+}
+.auxbox1 .layui-timeline-title{
+	margin-bottom: 0px;
+}
+.auxbox1 hr{
+	margin:13px 0px;
+}
+.auxbox1 .layui-rate{
+	padding-top: 3px;
+	padding-bottom: 4px;
+}
+/*表单*/
+body.form-demo-box{
+	font-size: 14px;
+}

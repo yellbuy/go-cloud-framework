@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LarryMS框架之表单验证器扩展</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/demo/use.css">
+    <!--[if lt IE 9]>
+    <script>document.documentElement.focus();</script>
+    <![endif]-->
+</head>
+
+<body class="larry-bg-grey step larryui">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 10]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="larry-fluid p15">
+        <div class="larry-row larry-col-space15">
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card">
+                    <div class="larry-card-body">
+                        <h1>表单验证器：</h1>
+                        <p class="title pb5">为了提高良好可扩展性、功能丰富性和兼容layui版本升级等原因，在larryms框架模板中重写了layui官方的form组件为forms组件；并封装了常用ajax请求以及对axios库的支持,对其新增了多选、新增了无限级联动、新增了丰富的<em style="color: #ff5722;font-weight: bold;padding: 0px 3px;">表单验证器</em>，如 密码强度检测、银行卡号验证、社会统一信用代码验证、身份证号码细化到性别城市完整格式验证等大量常用验证规则（多达50多个）、多种验证结果反馈方式【不再局限于单一的提示方式】、支持（元素失去焦点、获得焦点、元素值改变等系列的自定义回调处理外部验证器）、支持用户自定义错误文本提示优先于内置规则默认提示信息设置、支持文本框文本域字符统计 等等扩展【详见新版开发者专属文档】：用法如<cite>lay-verify="chs|min:6|max:18"  &nbsp;lay-error="我是自定义的错误提示|最小6位|最大18位长度" &nbsp;lay-verType="anim [tips] [below] [alert] [other]" &nbsp;lay-vaild="blur [keyup] [focus] [keydown]"</cite></p>
+                    </div>
+                </section>
+            </div>
+            <div class="larry-col-lg12 larry-col-md12 larry-col-sm12 larry-col-xs12">
+                <section class="larry-card">
+                    <div class="larry-card-body">
+                        <p class="ui-p pt10 pb5">通过给<em>input</em>或<em>textarea</em>元素添加<cite>maxlength</cite>属性,实现文本框/文本域字符字数限制以及字符统计；添加<cite>.larry-*-sahdow</cite>改变表单元素获取焦点时的颜色提醒【有多种默认主题可选，也支持用户任意定制，我们拒绝千篇一律】</p>
+                        <form action="" class="larry-form pt10">
+                            <div class="larry-form-item">
+    <label class="larry-form-label">单选框</label>
+    <div class="larry-input-block">
+      <input type="radio" name="sex" value="男" title="男" checked="">
+      <input type="radio" name="sex" value="女" title="女">
+      <input type="radio" name="sex" value="禁" title="禁用" disabled="">
+    </div>
+  </div>
+  <div class="larry-form-item">
+    <label class="larry-form-label">复选框</label>
+    <div class="larry-input-block">
+      <input type="checkbox" name="like[write]" lay-skin="primary" title="写作">
+      <input type="checkbox" name="like[read]" lay-skin="primary" title="阅读">
+      <input type="checkbox" name="like[daze]" lay-skin="primary" title="发呆">
+    </div>
+  </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../larryms/',
+        mods: 'demo/'
+    }).extend({
+        larry: 'js/base'
+    }).use(['larry', 'forms'], function() {
+        var forms = layui.forms;
+
+        forms.on('submit(demo1)',function(data){
+            larryms.alert(JSON.stringify(data.field));
+            return false;
+        });
+        forms.on('submit(demo2)',function(){
+            // alert('ddd');
+            return false;
+        });
+    });
+    </script>
+</body>
+
+</html>

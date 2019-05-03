@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>四级菜单2</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="LarryCMS Version:1.09" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../../larryms/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/temp.css" media="all">
+</head>
+
+<body>
+    <div class="text larryms-svg-box">
+        <h1>这里是第四级菜单示例页面2</h1>
+        <p>
+            LarryMS将持续更新，提供不同布局模板与框架系统和扩展实用的JS组件库
+            <br>
+            <a href="http://www.larryms.com/forums.html" target="_blank">LarryMS社区地址：http://www.larryms.com/forums.html</a>
+            <p style="text-align: left;">这三个菜单页面均用到了路径动画，如下示例为动画在larryms框架中的使用方式：（是不是很简单，只需和使用layui官方组件一样使用另外如果使用页面路径动画库，也可以将框架本身选项卡页切换效果在页面或任意地方选择性关闭，默认开启）</p>
+        </p>
+<pre class="layui-code">
+var $ = layui.$,
+    larryms = layui.larryms,
+    svgLoader = layui.svgLoader;
+// 执行svg插件引入
+// larryms.plugin('snap.svg-min');（这里svgLoader已经自动完成了svg加载所以无需通过plugin执行）
+var loader = new SVGLoader(document.getElementById('loader'), {
+    speedIn: 400,
+    easingIn: mina.easeinout
+});
+loader.show();
+</pre>
+    </div>
+    <div id="loader" class="pageload-overlay" data-opening="m -10,-10 0,80 100,0 0,-80 z m 50,-30.5 0,70.5 0,70 0,-70 z">
+        <svg width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+            <path d="m -10,-10 0,80 100,0 0,-80 z M 40,-40.5 120,30 40,100 -40,30 z" />
+        </svg>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.cache.page = 'temp';
+    layui.config({
+        version: "2.0.7",
+        base: '../../../larryms/',
+        mods:'demo/',
+        identified: 'one'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+/*
+* @Author: larry
+* @Date:   2019-03-11 14:52:20
+* @Last Modified by:   larry
+* @Last Modified time: 2019-03-12 02:18:02
+*/
+body { overflow-x: hidden; background: #F2F2F2; }
+
+/*订单页面*/
+.larry-worker section.larry-worker-order .larry-card-header,
+.larry-worker section.larry-worker-auth .larry-card-header { height: auto; min-height: 42px; overflow: visible; }
+.larry-worker section.larry-worker-order .larry-card-header .larry-form-item,
+.larry-worker section.larry-worker-auth .larry-card-header .larry-form-item { margin-bottom: 0px; }
+.larry-worker .larry-form-item { white-space: normal; }
+.larry-worker .larry-form-item .larry-inline { position: static; padding: 0px; display: inline-block; white-space: normal; margin-bottom: 15px; }
+.larry-worker .larry-form-item .larry-form-label { display: inline-block; vertical-align: top; float: none; }
+.larry-worker .larry-form-item .larry-input-block { display: inline-block; vertical-align: top; margin-left: 15px; }
+.larry-worker .larry-form-item .larry-input-block .larry-input { padding-right: 0px; }
+.larry-worker .larry-form-select .larry-edge { margin-top: -20px; }
+.larry-worker .larry-form-selected .larry-edge { margin-top: -23px; }
+.larry-worker .larry-order-btn { position: relative; top: -1px; }
+.larry-worker .larry-order-btn i.larry-icon { font-size: 20px !important; }
+.larry-worker .larry-auth-btn { position: relative; top: -4px; }
+
+/* 进度条样式 */
+.larry-order-progress { position: relative; top: 12px; }
+
+/*权限管理系列*/
+.larry-top-select { display: inline-block; vertical-align: top; min-width: 230px; }
+.larry-top-select input.larry-input { display: inline-block; height: 33px; line-height: 33px; box-sizing: border-box; }
+.larry-top-select button { display: inline-block; }
+.larry-form-item .larry-input-company { width: 30px; padding-right: 10px; line-height: 38px; margin-right: 0px; color: #888; font-size: 14px; }
+.larry-email p { color: #666; }

@@ -1,0 +1,490 @@
+<!--link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" href="/static/layui/extend/wang/wangeditor.css"-->
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css"/>
+<link rel="stylesheet" href="/static/layui/extend/steps/style.css">
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<!--script type="text/javascript" src="/static/zTree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="/static/zTree3/js/jquery.ztree.excheck.js"></script>
+<script- type="text/javascript" src="/static/zTree3/js/jquery.ztree.exedit.js"></script-->
+<div-- class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+
+<!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+<form class="layui-form" >
+    <table class="layui-table" lay-size="lg" border="1">  
+                <colgroup>
+                    <col width="120" style="background:#f2f2f2">
+                    <col width="150">
+                    <col width="120" style="background:#f2f2f2">
+                    <col width="150">
+                    <col width="120" style="background:#f2f2f2">
+                    <col width="200" >
+                </colgroup>
+                
+                <tbody>
+                    <tr>
+                        <td class="layui-bg-gray"> 编号</td>
+                        <td>{{ .info.No}}</td>
+                        <td> 接收方</td>
+                        <td>{{ .info.Purchaser}}</td>
+                        <td>单位名称</td>
+                        <td>{{ .info.Company}}</td>
+                    </tr>
+                    <tr>
+                        <td>联系人</td>
+                        <td>{{ .info.Linkman}}</td>
+                        <td></span>电话</td>
+                        <td>{{ .info.Phone}}</td>
+                        <td>申请日期</td>
+                        <td>{{ .applydate}}</td>
+                    </tr>
+                    <tr>
+                        <td>总金额</td>
+                        <td>{{ .info.Total}}</td>
+                        <td>处置方式</td>
+                        <td>{{ .info.DisposalWay}}</td>
+                        <td>资产类型</td>
+                        <td>{{.type}}</td>
+                    </tr>
+
+                </tbody>
+    </table>
+                
+                 <label class="layui-form-label"></span>资产列表</label>
+     
+                <hr class="layui-bg-green">
+                <!-- <div class="layui-input-block"> -->
+                    <table class="layui-hide" id="tableMain" lay-filter="tableMain">
+                    </table>
+                <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="step-list"> -->
+                    <label class="layui-form-label"></span>附件文件</label>
+                    <hr class="layui-bg-green">
+                <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <div class="layui-upload">
+                            <!-- <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>  -->
+                            <div class="layui-upload-list">
+                                <table class="layui-table">
+                                
+                                <tbody id="fileList">
+                                {{range $i, $v := .attfileList}}
+                                    <tr>
+                                        <td>
+                                            <input type="hidden" name="Attfiles[]" value="{{ $v.Id}}"/>
+                                            <a target="_blank" href="{{ $v.Savepath}}">{{$v.Name}}<a>'
+                                        </td>
+                                        <td></td>
+                                        <td>已上传</td>
+                                        <!-- <td>
+                                            <a href="javascript:void();" class="layui-btn layui-btn-xs layui-btn-danger file-delete">删除</a>
+                                        </td> -->
+                                    </tr>
+                                {{end}}
+                                </tbody>
+                                </table>
+                            </div>
+                            <!-- <a type="button" class="layui-btn" id="testListAction">开始上传</a> -->
+                        </div> 
+                    </div>
+                </div>
+                </div>
+            <!-- </div> -->
+            <!-- <div class="step-list"> -->
+                    <!-- <label class="layui-form-label"></span>收益</label>
+                    <hr class="layui-bg-green"> -->
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <input type="hidden" name="Id" value="{{ .info.Id}}"/>
+                            <input type="hidden" name="OrgId" value="{{ .info.OrgId}}"/>
+                            <input type="hidden" name="OrgFid" value="{{ .info.OrgFid}}"/>
+                            <input type="hidden" name="OrgFname" value="{{ .info.OrgFname}}"/>
+                            <!-- <button class="layui-btn" lay-submit="" lay-filter="draft">保存草稿</button> -->
+                            <!-- <button class="layui-btn layui-btn-danger" lay-submit="" lay-filter="sub">立即上报</button> -->
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <!-- <div class="step-list">填处置收益</div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+    <hr class="layui-bg-green">
+    
+    
+    <div class="layui-form-item">
+            <!-- <textarea  name="textaudit"> 
+                    {{.info.InchargeAuditComment}} dsfdsdf
+                           </textarea>    -->
+     <label class="layui-form-label">审核意见</label>
+     <div class="layui-input-block">
+            <textarea name="textaudit"id="textaudit"  class="layui-textarea"{{if eq .info.AssetAuditState 0}}{{else}} readonly{{end}}>{{.info.InchargeAuditComment}}</textarea>
+        </div>
+        </div>
+       
+       
+   <div class="layui-row">
+        <div class="layui-input-block" style="text-align:center;margin-left:0px">
+            <!-- <a class="layui-btn layui-btn-normal" id="preBtn">上一步</a> -->
+            <!-- <a class="layui-btn layui-btn-normal" lay-submit lay-filter="nextBtn" id="nextBtn">下一步</a> -->
+            {{if eq .info.AssetAuditState 0}}
+            <a class="layui-btn layui-btn-normal" id="passaudit">审核通过</a>
+            <a class="layui-btn layui-btn-normal" id="nopassAudit">审核不通过</a> {{end}}
+            <a class="layui-btn layui-btn-normal"  id="backBtn">返回</a>   
+           
+        </div>
+        
+    </div>
+
+</form>
+</div>
+<script>
+    // 选中的资产
+    var data = JSON.parse({{.assetapplyList}});
+    var $,form,mainTable,layer;
+    layui.config({
+            base : "/static/layui/extend/"
+    }).extend({
+        formSelects: 'formSelects-v4',
+        steps:"steps/steps"
+    });
+    layui.use(['form','layer', 'laydate','table','element','jquery', 'formSelects','upload','steps'],function(){
+      form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+      $ = layui.jquery;
+      table = layui.table;
+      layer=layui.layer
+      var formSelects = layui.formSelects;
+      var laydate = layui.laydate;
+      var upload = layui.upload;
+      var $step= $("#step_apply").step();
+     var id="{{$.info.Id}}"
+        form.on('radio(type)', function(radioData){
+            data = []
+            mainTable.reload({
+                data: data
+            });
+            sumTotal(data);
+        });  
+        // $(".file-delete").on('click', function(){
+        //     $(this).closest("tr").remove()
+        // });
+        // $("#btnSelAssetInfo").click(function (event){
+        //     var type = $("input[name='Type']:checked").val();
+        //     loadDialog("/assetinfo/listselect", {type:type}, {title: "选择固定资产"});
+        // });
+        // $("#btnDelAssetInfo").click(function (event){
+        //     var checkStatus = table.checkStatus('tableMain'); //test即为基础参数id对应的值
+        //     delAssetInfo(data,checkStatus.data);
+        
+        //     mainTable.reload({
+        //         data: data
+        //     });
+        //     sumTotal(data);
+        // });
+        // console.log(data);
+        //方法级渲染
+            mainTable =table.render({
+                elem: '#tableMain'
+                ,cols: [[
+                    // {checkbox: true}
+                    {field:'No', title: '编号', width:150}
+                    ,{field:'Name', title: '名称', width:150}
+                    ,{field:'Cate', title: '资产大类', width:150}
+                    ,{field:'ChildCate', title: '资产分类', width:150}
+                    ,{field:'Num',align:'right',  title: '数量'}
+                    ,{field:'ValuationType',  title: '价值类型'}
+                    ,{field:'Valuation',align:'right',  title: '价值'}
+                    ,{field:'Brand',  title: '品牌'}
+                    ,{field:'Spec',  title: '规格'}
+                    ,{field:'LicenseNo',  title: '车牌号'}
+                    ,{field:'Area', title: '面积'}
+                    ,{field:'Site', title: '存放地点'}
+                ]]
+                ,data: data
+                ,id: 'tableMain'
+                ,page: false
+                ,width:1100
+                // ,height: 200
+            });
+
+        //  var wang=layui.wangeditor('wang');
+        //  wang.customConfig.uploadImgShowBase64 = true
+        // 普通的自定义菜单
+        // wang.config.menus = [
+        //     'source',
+        //     '|',     // '|' 是菜单组的分割线
+        //     'bold',
+        //     'underline',
+        //     'italic',
+        //     'strikethrough',
+        //     'eraser',
+        //     'forecolor',
+        //     'bgcolor'
+        // ];
+        // wang.create();
+        //多文件列表示例
+    var fileListView = $('#fileList')
+        ,uploadListIns = upload.render({
+            elem: '#testList'
+            ,url: '/upload/'
+            ,accept: 'file'
+            ,multiple: true
+            ,auto: false
+            ,field: 'file'
+            ,size:10240
+            ,exts: 'zip|rar|7z|jpg|png|gif|bmp|jpeg|jpg|doc|docx|xls|xlsx|pdf|ppt|pptx|txt|wps'
+            ,bindAction: '#testListAction'
+            ,choose: function(obj){   
+            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+            //读取本地文件
+            obj.preview(function(index, file, result){
+                var tr = $(['<tr id="upload-'+ index +'">'
+                ,'<td>'+ file.name +'</td>'
+                ,'<td>'+ (file.size/1014).toFixed(1) +'kb</td>'
+                ,'<td>等待上传</td>'
+                ,'<td>'
+                    ,'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                    ,'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                ,'</td>'
+                ,'</tr>'].join(''));
+                
+                //单个重传
+                tr.find('.demo-reload').on('click', function(){
+                obj.upload(index, file);
+                });
+                
+                //删除
+                tr.find('.demo-delete').on('click', function(){
+                delete files[index]; //删除对应的文件
+                tr.remove();
+                uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                });
+                
+                fileListView.append(tr);
+            });
+            }
+            ,done: function(res, index, upload){
+            if(res.code == 0){ //上传成功
+                var data = res.data;
+                var tr = fileListView.find('tr#upload-'+ index)
+                ,tds = tr.children();
+                tds.eq(0).html('<input type="hidden" name="Attfiles[]" value="'+data.id+'"/><a target="_blank" href="'+data.src+'">'+data.name+'<a>');
+                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                // tds.eq(3).html(''); //清空操作
+                return delete this.files[index]; //删除文件队列已经上传成功的文件
+            }
+            this.error(index, upload);
+            }
+            ,error: function(index, upload){
+            var tr = fileListView.find('tr#upload-'+ index)
+            ,tds = tr.children();
+            tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+            tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+            }
+        });
+        // loadDialog("/tenant/common/addressbook/deptEdit", {id:id}, {title: title,area: '600px'});
+        // laydate.render({
+            // elem: '#ApplyDate'
+            // ,value: new Date()
+        // });        
+      
+            
+            //监听有无保险
+            // form.on('switch(hasCarInsurance)', function(data){
+            //     this.checked ? $("#insuranceLayout").show() : $("#insuranceLayout").hide();
+            // });
+            // $("#preBtn").click(function(event) {
+            //     $step.preStep();//上一步                       
+               
+      
+            // })
+           
+            // $("#audit").click(function() {
+               //到指定步
+//                layer.prompt({
+//   formType: 2,
+//   value: '',
+//   title: '请输入审核意见'
+// //   area: ['800px', '350px'] //自定义文本域宽高
+// }, function(value, index, elem){               
+                
+//   layer.close(index);
+$("#passaudit").on("click",function(){
+    var add_audit_data = {"ids":id,"audit_state":1,"adv":$(textaudit).context.value,"audit_depart":2}
+              $.post('{{urlfor "DisposalapplyController.AjaxAudit"}}', add_audit_data, function (out) {
+                  if (out.status == 0) {
+                      layer.msg("操作成功",{icon: 1},function () {
+                          window.location.reload();
+                      })
+                  } else {
+                      layer.msg(out.message)
+                  }
+              }, "json");
+
+})
+$("#nopassAudit").on("click",function(){
+    var add_audit_data = {"ids":id,"audit_state":-1,"adv":$(textaudit).context.value,"audit_depart":2}
+            $.post('{{urlfor "DisposalapplyController.AjaxAudit"}}', add_audit_data, function (out) {
+                  if (out.status == 0) {
+                      layer.msg("操作成功",{icon: 1},function () {
+                          window.location.reload();
+                      })
+                  } else {
+                      layer.msg(out.message)
+                  }
+              }, "json");
+})
+$("#backBtn").on("click",function(){
+    window.location.href="/disposalapply/inchargelist"
+  })
+
+        //         layer.confirm('是否审核通过', {
+        //   btn: ['通过', '不通过','取消'] //可以无限个按钮
+        //   ,function(index, layero){
+        //       //取消
+        //     }, function(index, layero){
+        //         //通过
+        //         var add_audit_data = {"ids":id,"status":3,"adv":value}
+              
+        //         $.post('{{urlfor "DisposalapplyController.AjaxAuditChangeStatus"}}', add_audit_data, function (out) {
+        //             if (out.status == 0) {
+        //                 layer.msg("操作成功",{icon: 1},function () {
+        //                     window.location.reload();
+        //                 })
+        //             } else {
+        //                 layer.msg(out.message)
+        //             }
+        //         }, "json");
+        //     },
+        //     function(index){
+        //          //不通过
+        //          var add_audit_data = {"ids":id,"status":4,"adv":value}
+        //       $.post('{{urlfor "DisposalapplyController.AjaxAuditChangeStatus"}}', add_audit_data, function (out) {
+        //             if (out.status == 0) {
+        //                 layer.msg("操作成功",{icon: 1},function () {
+        //                     window.location.reload();
+        //                 })
+        //             } else {
+        //                 layer.msg(out.message)
+        //             }
+        //         }, "json");
+            
+        //   })
+        // });
+            // });
+
+            // form.on("submit(nextBtn)",function(value) {
+            //     if(!data || data.length == 0){
+            //         layui.layer.msg("请选择待处置的资产")
+            //     } else {
+            //         $step.nextStep();//下一步
+            //     }
+            //     return false;
+            // }); 
+
+          
+    //   form.on("submit(sub)",function(formdata) {
+            // 上报
+        //    
+        // });
+        // form.on("submit(sub)",function(formdata) {
+        //     // 上报
+        //     var obj =  $("form").serializeObject();
+        //     var status = 1
+        //     obj.State=status
+        //     submitDisposal(obj)
+        //     return false;
+        // });
+       
+        // form.render();
+            //但是，如果你的HTML是动态生成的，自动渲染就会失效
+            //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+     
+    }); 
+    
+   
+    // function getAssetinfoIds(arr){
+    //     var ids = [];
+    //     for (var i=0;i<arr.length;i++)
+    //     {
+    //         ids.push(arr[i].AssetinfoId)
+    //     }
+    //     return ids;
+    // }
+    // function submitDisposal(formdata){
+    //       var ids = getAssetinfoIds(data);
+    //       for(var i=0;i<ids.length;i++){
+    //           var id = ids[i];
+    //           formdata["Assetinfo["+i+"]"]=id;
+    //       }
+    //      console.log(formdata.Assetapply)
+    //     $.post('{{urlfor "DisposalapplyController.Edit"}}', formdata, function (res) {
+            
+    //         if (res.status == 0) {
+    //             // layer.msg("操作成功")
+    //             layui.layer.alert('操作成功', {icon: 1},function(index){
+    //                 window.location.reload();
+    //             });
+    //         } else {
+    //             layui.layer.msg(res.message)
+    //         }
+    //     }, "json");
+    // }
+  
+    
+    // function addAssetInfo(result){
+    //     checkSelArr(data,result)
+    //     mainTable.reload({
+    //         data: data
+    //     });
+    //     sumTotal(data);
+    //     layui.layer.closeAll();
+    // }
+    // function delAssetInfo(srcArr,targetArr){
+    //     for(var i=0;i<targetArr.length;i++){
+    //         var item = targetArr[i];
+    //         var len=srcArr.length;
+    //         for(var j=0;j<len;j++){
+    //             if(item.No == srcArr[j].No){
+    //                 srcArr.splice(j,1)
+    //                 break;
+    //             }
+    //         };
+    //     };
+    // }
+
+    // function checkSelArr(srcArr, targetArr){ 
+    //     for(var j=0;j<targetArr.length;j++){
+    //         var item = targetArr[j];
+    //         var len=srcArr.length;
+    //         var hasObj = false;
+    //         for(var i=0;i<len;i++){
+    //             if(item.No == srcArr[i].No){
+    //                 hasObj = true
+    //                 break;
+    //             }
+    //         };
+    //         if(!hasObj){
+    //             item.AssetinfoId = item.Id;
+    //             srcArr.push(item)
+    //         }
+    // };
+    
+    // }
+    // function sumTotal(srcArr){ 
+    //     var total = 0;
+    //     for(var j=0;j<srcArr.length;j++){
+    //         var item = srcArr[j];
+    //         total += item.Valuation || 0;
+    // };
+    // total = total.toFixed(2);
+    // $("#txtTotal").val(total);
+    // }
+   
+</script>

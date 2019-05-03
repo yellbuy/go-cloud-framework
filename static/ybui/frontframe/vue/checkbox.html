@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .demonstration {
+            display: block;
+            color: #8492a6;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h3 >基础用法</h3>
+    <div style="width: 200px;">
+        <el-checkbox v-model="checked">备选项</el-checkbox>
+    </div>
+    <h3 >禁用状态</h3>
+    <div style="width: 200px;margin: 20px 0">
+        <el-checkbox v-model="checked1" disabled>备选项1</el-checkbox>
+        <el-checkbox v-model="checked2" disabled>备选项</el-checkbox>
+    </div>
+    <h3 >多选框组</h3>
+    <div style="width: 700px;margin: 20px 0">
+        <el-checkbox-group v-model="checkList">
+            <el-checkbox label="复选框 A"></el-checkbox>
+            <el-checkbox label="复选框 B"></el-checkbox>
+            <el-checkbox label="复选框 C"></el-checkbox>
+            <el-checkbox label="禁用" disabled></el-checkbox>
+            <el-checkbox label="选中且禁用" disabled></el-checkbox>
+        </el-checkbox-group>
+    </div>
+    <h3 >全选</h3>
+    <div style="width: 700px;margin: 20px 0">
+        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+        <div style="margin: 15px 0;"></div>
+        <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+            <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+        </el-checkbox-group>
+    </div>
+
+    <h3 >带边框</h3>
+    <div style="width: 200px;">
+        <el-checkbox-group v-model="checkboxGroup5" size="small">
+            <el-checkbox label="备选项1" border></el-checkbox>
+            <el-checkbox label="备选项2" border disabled></el-checkbox>
+        </el-checkbox-group>
+    </div>
+</div>
+
+
+</body>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    var cityOptions = ['上海', '北京', '广州', '深圳'];
+    new Vue({
+        el: '#app',
+        data:{
+            checked: true,
+            checked1: false,
+            checked2: true,
+            checkList: ['选中且禁用','复选框 A'],
+            checkAll: false,
+            checkedCities: ['上海', '北京'],
+            cities: cityOptions,
+            isIndeterminate: true,
+            checkboxGroup5: [],
+        },
+        methods:{
+            handleCheckAllChange:function(val) {
+                this.checkedCities = val ? cityOptions : [];
+                this.isIndeterminate = false;
+            },
+            handleCheckedCitiesChange:function(value) {
+                var checkedCount = value.length;
+                this.checkAll = checkedCount === this.cities.length;
+                this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+            }
+        }
+    });
+
+</script>
+</html>

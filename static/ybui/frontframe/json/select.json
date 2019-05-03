@@ -1,0 +1,110 @@
+{
+  "code": 0,
+  "data": [
+    {
+      "id": "217",
+      "pId": "216",
+      "name": "代码生成器",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "218",
+      "pId": "216",
+      "name": "sql监控",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "219",
+      "pId": "216",
+      "name": "api接口文档",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "2",
+      "pId": "1",
+      "name": "管理员列表",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "4",
+      "pId": "1",
+      "name": "菜单管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "216",
+      "pId": "0",
+      "name": "开发工具",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "1",
+      "pId": "0",
+      "name": "系统管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "3",
+      "pId": "1",
+      "name": "角色管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "86",
+      "pId": "1",
+      "name": "部门管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "17",
+      "pId": "1",
+      "name": "参数管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "81",
+      "pId": "1",
+      "name": "字典管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "208",
+      "pId": "1",
+      "name": "oss配置",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "18",
+      "pId": "1",
+      "name": "系统日志",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "20",
+      "pId": "1",
+      "name": "地区管理",
+      "open": "null",
+      "chkDisabled": "false"
+    },
+    {
+      "id": "0",
+      "pId": "-1",
+      "name": "顶级菜单",
+      "open": "true",
+      "chkDisabled": "false"
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "status": {
+    "code": 200,
+    "message": "操作成功"
+  },
+  "data": [{
+    "id": "100001",
+    "title": "泰拉科技（武汉）有限公司",
+    "isLast": false,
+    "level": "1",
+    "parentId": "0",
+    "children": [{
+      "id": "888",
+      "title": "董事会",
+      "isLast": true,
+      "parentId": "0",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2"
+    }, {
+      "id": "666",
+      "title": "总经理",
+      "isLast": true,
+      "parentId": "0",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2"
+    },{
+      "id": "1",
+      "title": "人力资源部",
+      "isLast": false,
+      "parentId": "100001",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2",
+      "children": [{
+        "id": "2",
+        "title": "人事经理",
+        "isLast": true,
+        "parentId": "1",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "2",
+        "title": "前台接待",
+        "isLast": true,
+        "parentId": "1",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "3",
+        "title": "行政文员",
+        "isLast": true,
+        "parentId": "1",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      }]
+    },{
+      "id": "4",
+      "title": "财务部",
+      "isLast": false,
+      "parentId": "100001",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2",
+      "children": [{
+        "id": "5",
+        "title": "财务部经理",
+        "isLast": true,
+        "parentId": "4",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "6",
+        "title": "出纳",
+        "isLast": true,
+        "parentId": "4",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "7",
+        "title": "会计",
+        "isLast": true,
+        "parentId": "4",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      }]
+    },{
+      "id": "8",
+      "title": "研发部",
+      "isLast": false,
+      "parentId": "100001",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2",
+      "children": [{
+        "id": "9",
+        "title": "产品经理",
+        "isLast": true,
+        "parentId": "8",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "10",
+        "title": "项目经理",
+        "isLast": true,
+        "parentId": "8",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "11",
+        "title": "程序员",
+        "isLast": true,
+        "parentId": "8",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      }]
+    },{
+      "id": "12",
+      "title": "销售部",
+      "isLast": false,
+      "parentId": "100001",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2",
+      "children": [{
+        "id": "13",
+        "title": "销售部主管",
+        "isLast": true,
+        "parentId": "12",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "14",
+        "title": "销售部职员",
+        "isLast": true,
+        "parentId": "12",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      }]
+    },{
+      "id": "15",
+      "title": "市场部",
+      "isLast": false,
+      "parentId": "100001",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2",
+      "children": [{
+        "id": "16",
+        "title": "市场部经理",
+        "isLast": true,
+        "parentId": "15",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "17",
+        "title": "市场部职员",
+        "isLast": true,
+        "parentId": "15",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      }]
+    },{
+      "id": "18",
+      "title": "客服部",
+      "isLast": false,
+      "parentId": "100001",
+      "checkArr": [{
+        "type": "0",
+        "isChecked": "0"
+      }],
+      "level": "2",
+      "children": [{
+        "id": "19",
+        "title": "客服主管",
+        "isLast": true,
+        "parentId": "18",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      },{
+        "id": "20",
+        "title": "客服部职员",
+        "isLast": true,
+        "parentId": "18",
+        "checkArr": [{
+          "type": "0",
+          "isChecked": "0"
+        }],
+        "level": "3"
+      }]
+    }]
+  }]
+}

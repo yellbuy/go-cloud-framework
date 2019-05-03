@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>LarryMS框架之无限级联动功能使用示例</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="Author" content="larry" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../larryms/css/demo/use.css">
+</head>
+
+<body class="larry-bg-gray transfer">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 10]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid">
+        <div class="larry-container">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-body func-introduce">
+                            <cite>LarryMS模板框架中基础组件无限级联动功能：【以下是大致介绍】</cite>
+                            <p>
+                                1、在larryms基础组件中提供无限级联动选择器功能<br>
+                                2、包含城市联动选择器，默认提供五级中国行政划分省市区县街道数据及联动示例<br>
+                                3、支持异步获取数据，以及自定义事件触发
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <section class="layui-card">
+                        <div class="layui-card-header transfer-title">无限级联动示例：</div>
+                        <div class="layui-card-body pb100" style="min-height: 400px;">
+                            <form class="larry-form pb100" action="">
+                                <blockquote class="layui-elem-quote layui-text mt6 mb20">
+                                    <p style="line-height: 26px;">下方提供larryms中cascade组件使用示例(当前提供了城市联动示例)，备注：[该组件当前存在一定的局限，同一个页面不能有多个不同数据源的无限级分类，由于时间原因将会于下个版本彻底解决该问题并更加完善该功能]</p>
+                                </blockquote>
+                                <div class="larry-form-item">
+                                    <label class="larry-form-label">城市联动选择：</label>
+                                    <div class="larry-input-block">
+                                        <input type="text" name="city"  id="city" class="larry-input larry-hide">
+                                    </div>
+                                </div>
+                                <div class="larry-form-item mb100">
+                                    <label class="larry-input-label"></label>
+                                    <div class="larry-input-block">
+                                        <div class="layui-btn layui-btn-sm" lay-submit lay-filter='tags'>数据提交测试</div>
+                                    </div>
+                                </div>
+                            </form>
+                           
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../larryms/',
+        mods: 'demo/',
+        page: 'linkage'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

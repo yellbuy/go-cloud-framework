@@ -1,0 +1,138 @@
+ {% extends "../../_share/minibase.html"%}
+{% block content %}
+ <ul class="layui-nav layui-bg-green">
+ {% for val in TypeList%}
+  <li class="layui-nav-item {% if Type == val.Code %}layui-this{%endif%}"><a href="/common/commondata/concretedatalist/?type={{val.Code}}">{{val.Name}}</a></li>
+  {% endfor %}
+  <li class="layui-nav-item {% if Type == "concretecommondata" %}layui-this{%endif%}"><a href="/common/commondata/concretedatalist/?type=concretecommondata">基础代码</a></li>
+  <li class="layui-nav-item {% if Type == "hierarchycommondata" %}layui-this{%endif%}"><a href="/common/commondata/concretedatalist/?type=hierarchycommondata">层次代码</a></li>
+</ul>
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <input type="hidden" name="type" class="typeVal" value='{{  Type }}'></input>
+        <div class="layui-inline">
+            <!--<label class="layui-form-label">关键字：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="key" class="layui-input searchVal" placeholder="输入关键字进行模糊查询" />
+            </div>-->
+            <a class="layui-btn btnSearch" data-type="reload"><i class="layui-icon"></i> 刷新</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-normal btnAdd" href="/common/commondata/concretedataedit/?type={{  Type }}"><i class="layui-icon">&#xe608;</i> 添加</a>
+        </div>
+        <div class="layui-inline">
+            <a class="layui-btn layui-btn-danger layui-btn-normal btnDelAll"><i class="layui-icon">&#xe640;</i> 批量删除</a>
+        </div>
+	</blockquote>
+	<table id="tableMain" lay-filter="tableMain"></table>
+</form>
+{% endblock %}
+{% block footer %}
+<script>
+    var editObj=null,ptable=null,treeGrid=null,tableId='treeMain',layer=null;
+    layui.use(['larry','jquery','treeGrid','layer','table','form','element'], function(){
+        var $=layui.jquery;
+        var treeGrid = layui.treeGrid;//很重要
+        var layer=layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+       
+        //方法级渲染
+        table.render({
+            elem: '#tableMain'
+            ,url: '/common/commondata/concretedatalist/?type={{ Type }}'
+            ,cols: [[
+             {type: "numbers", title: '', align:"right", fixed:"left", width:60},
+            {field: 'Name', title: '名称', width:300, align:"left"},
+            {field: 'Code', title: '编码', width:300, align:"left"},
+            {field: 'Desc', title: '描述', width:300, align:"left"},
+             {field: 'Order', title: '排序', width:70,edit:'text',align:"right"},
+            {field: 'Status', title: '状态', width:75,align:"center", templet: function(d){
+                        if(d.Status==1){
+                            return '<span class="layui-badge layui-bg-green">启用</span>'
+                        }
+                        return '<span class="layui-badge layui-bg-red">停用</span>'
+                    }},
+           
+            {title: '操作', width:170,fixed:"right",align:"center",templet: function(d){
+                if(d.Predefined){
+                    return '';
+                }
+                return '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>' + 
+		                '<a class="layui-btn layui-btn-xs layui-btn-danger btnDelAll" lay-event="del">删除</a>'
+            }}
+        ]]
+            ,id: 'mainList'
+            ,page: true
+            ,limit:30
+            ,height: "full-145"
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                table.reload('mainList', {
+                    page: {
+                        curr: 1 //重新导航到首页
+                    },where: {
+                        type: '{{  Type }}'
+                        //title: $('#title').val(),
+                        //bankno: $('#bankno').val()
+                    }
+                });
+            }
+        };
+
+        //监听工具条
+        table.on('tool(tableMain)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'edit'){
+                window.location.href="/common/commondata/concretedataedit?id="+data.Id
+            } else if(obj.event === 'del'){
+                acts = "删除";
+                layer.confirm('真的要删除当前记录吗？', function(index){
+                    var jsData = {'id':data.Id}
+                    $.post('/common/commondata/del', jsData, function (out) {
+                        if (out.status == 0) {
+                                active.reload()
+                                layer.alert("操作成功！", {icon: 1},function(index){
+                                layer.close(index);
+                            });
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");
+                    // obj.del();
+                    layer.close(index);
+                })
+            } else{
+                layer.msg('操作不存在');
+            }
+        });
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    var i=1000;
+    //添加
+    function add(pObj) {
+        var param={};
+        param.name='水果'+Math.random();
+        param.id=++i;
+        param.pId=pObj?pObj.id:0;
+        treeGrid.addRow(tableId,pObj?pObj.LAY_TABLE_INDEX+1:0,param);
+    }
+
+    function print() {
+        console.log(treeGrid.cache[tableId]);
+        var loadIndex=layer.msg("对象已打印，按F12，在控制台查看！", {
+            time:3000
+            ,offset: 'auto'//顶部
+            ,shade: 0
+        });
+    }
+</script>
+{% endblock %}

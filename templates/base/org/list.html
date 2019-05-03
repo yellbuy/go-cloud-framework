@@ -1,0 +1,264 @@
+ {% extends "../../_share/base.html"%}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-row">
+        <div class="layui-col-xs4">
+            <div class="layui-row">
+                <div class="layui-col-xs12">
+                {%if allowAdd%}
+                    <a class="layui-btn" data-type="tabAdd" href="/base/org/add">新增</a> 
+                {%endif%}
+                </div>
+                <div class="layui-col-xs12">
+                    <table class="layui-hide" id="treeMain" lay-filter="treeMain">
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs8">
+            <div class="layui-row">
+                <div class="layui-col-xs5">
+                    <div style="padding: 10px;">当前单位：<span id="curOrgSpan">{{ org.Name }}</span></div>
+                </div>
+                <div class="layui-col-xs7 search_text" style="text-align:right">
+                    <form class="layui-form" action="" onsubmit="javascript:return false;">
+                        <div class="demoTable">
+                            <div class="layui-inline">
+                                <input type="checkbox" id="fetchChild" name="fetchChild" title="所有下级" 
+                                    value="true" lay-skin="primary">
+                            </div>
+                            <div class="layui-inline">
+                                
+                                <input class="layui-input" name="name" id="name" autocomplete="off" placeholder="真实姓名" >
+                            </div>
+                            <input type="hidden" name="parentid" id="parentid" value="{{org.Id}}">
+                            <button class="layui-btn" data-type="reload">查询</button>
+                            <a class="layui-btn" href="/base/user/add">新增</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-col-xs12" style="padding: 10px;">
+                    <table class="layui-hide" id="tableUsers" lay-filter="tableUsers">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="bar">
+       <!--  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+        {# <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="status">启|禁</a> #}
+
+    </script>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+    var editObj=null,ptable=null,treeGrid=null,tableId='treeMain',layer=null;
+    layui.use(['larry','jquery','treeGrid','layer','table','form','element'], function(){
+        var $=layui.jquery;
+        var treeGrid = layui.treeGrid;//很重要
+        var layer=layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+        ptable=treeGrid.render({
+            id:tableId
+            ,height: 'full-{%if allowAdd%}150{%else%}100{%endif%}'
+            ,elem: '#'+tableId
+            ,idField:'Id'
+            ,url:'/base/org/list'
+            ,cellMinWidth: 100
+            ,treeId:'Id'//树形id字段名称
+            ,treeUpId:'Parentid'//树形父id字段名称
+            ,treeShowName:'Name'//以树形式显示的字段
+            ,cols: [[
+                {width:150,title: '操作', align:'center'/*toolbar: '#barDemo'*/
+                    ,templet: function(d){
+                        var html='';
+                        var addBtn='<a class="layui-btn layui-btn-info layui-btn-xs" href="/base/org/add/?parentid='+d.Id+'">添加</a>';
+                        var editBtn='<a class="layui-btn layui-btn-info layui-btn-xs" href="/base/org/edit/?id='+d.Id+'">编辑</a>';
+                        var delBtn=d.Parentid == 0 ? "" : '<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>';
+                        return addBtn+editBtn+delBtn;
+                    }
+                }
+                ,{field:'Name', width:300, title: '名称', event: 'select'}
+                ,{field:'Code', width:100, title: '编码'}
+            ]]
+            ,page:false
+        });
+
+        treeGrid.on('tool('+tableId+')',function (obj) {
+            if(obj.event === 'del'){ //删除行
+                del(obj.data);
+            } else if(obj.event === 'select'){ //删除行
+                var data = obj.data;
+            
+                $("#curOrgSpan").text(data.Name)
+                $("#parentid").val(data.Id)
+                //标注选中样式
+                obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+                active.reload()
+            }
+        });
+       
+        //方法级渲染
+        table.render({
+            elem: '#tableUsers'
+            ,url: '/base/user/list'
+            ,cols: [[
+                {checkbox: true, fixed: true}
+                ,{field:'Username',title: '登录账号',width:120}
+                ,{field:'Name', title: '真实姓名',width:120}
+                ,{field:'Mobile', title: '手机号码',width:120}
+                ,{field:'Email', title: '电子邮箱',width:180}
+                ,{field:'Enable', title: '状态',width:90, align:"center",templet: function(d){
+                        if(d.Enable==1){
+                            return '<span class="layui-badge layui-bg-green">有效</span>'
+                        }
+                        return '<span class="layui-badge layui-bg-danger">禁用</span>'
+                    }}
+                ,{fixed: 'right', title: '操作', width:150, align:'center', toolbar: '#bar'}
+            ]]
+            ,id: 'userList'
+            ,page: true
+            ,height: "full-140"
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                table.reload('userList', {
+                    page: {
+                        curr: 1 //重新导航到首页
+                    },where: {
+                        fetchChild: $("input[name='fetchChild']:checked").val()||"false",
+                        name: $('#name').val(),
+                        parentid: $('#parentid').val()
+                    }
+                });
+            },
+            addUser: function(){
+                table.reload('userList', {
+                    page: {
+                        curr: 1 //重新导航到首页
+                    },where: {
+                        fetchChild: $("input[name='fetchChild']:checked").val()||"false",
+                        name: $('#name').val(),
+                        parentid: $('#parentid').val()
+                    }
+                });
+            }
+        };
+
+        //监听工具条
+        table.on('tool(tableUsers)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'edit'){
+                window.location.href="/base/user/edit?id="+data.Id
+            } else if(obj.event === 'del'){
+                acts = "删除";
+                layer.confirm('真的'+acts+'【'+data.Username+'】账号么', function(index){
+                    var jsData = {'id':data.Id}
+                    $.post('/base/user/del', jsData, function (out) {
+                        if (out.status == 0) {
+                             active.reload()
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");
+                    // obj.del();
+                    layer.close(index);
+                })
+            }else if(obj.event === 'enable'){
+
+                acts = "禁用";
+                status = "disable";
+                if (data.status === 0) {
+                    acts = '启用';
+                    status = "enable";
+                }
+                if (data.id==1 && obj.event === 'disable') {
+                   layer.msg('超级管理员不允许操作');
+                   return false;
+                }
+
+                layer.confirm('真的'+acts+'【'+data.Username+'】账号么', function(index){
+                    var jsData = {'id':data.id,'status':status}
+                    $.post('/base/user/ajaxdel', jsData, function (out) {
+                        if (out.status == 0) {
+                            layer.alert(out.message, {icon: 1},function(index){
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");
+                    // obj.del();
+                    layer.close(index);
+                })
+                
+            }else{
+                layer.msg('操作不存在');
+            }
+        });
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    function del(obj) {
+        if(obj.Parentid == 0){
+            layer.msg("不能删除根节点")
+            return 
+        }
+        layer.confirm("你确定删除数据吗？此操作不能撤销！", {icon: 3, title:'提示'},
+            function(index){//确定回调
+                var $=layui.jquery;
+                $.post('/base/org/del', {id:obj.Id}, function (out) {
+                    if (out.status == 0) {
+                        window.location.reload();
+                        // layer.msg("操作成功")
+                        //layer.alert('你成功了', {icon: 1},function(index){
+                        //    window.location.reload();
+                        //});
+                    } else {
+                        layer.msg(out.message)
+                    }
+                }, "json");
+                layer.close(index);
+            },function (index) {//取消回调
+               layer.close(index);
+            }
+        );
+    }
+
+
+    var i=1000;
+    //添加
+    function add(pObj) {
+        var param={};
+        param.name='水果'+Math.random();
+        param.id=++i;
+        param.pId=pObj?pObj.id:0;
+        treeGrid.addRow(tableId,pObj?pObj.LAY_TABLE_INDEX+1:0,param);
+    }
+
+    function print() {
+        console.log(treeGrid.cache[tableId]);
+        var loadIndex=layer.msg("对象已打印，按F12，在控制台查看！", {
+            time:3000
+            ,offset: 'auto'//顶部
+            ,shade: 0
+        });
+    }
+</script>
+{% endblock %}

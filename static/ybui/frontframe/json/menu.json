@@ -1,0 +1,23 @@
+{
+  "menuList": [
+
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "cy-fast",
+          "type":0,
+          "navtab":"",
+          "url": "http://fast.cymall.xin"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "cy-security",
+          "type": 0,
+          "url": "http://admin.cymall.xin"
+        }
+  ],
+  "code": 0
+}

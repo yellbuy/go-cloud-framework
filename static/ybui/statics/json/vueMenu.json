@@ -1,0 +1,86 @@
+{
+  "menuList": [
+    {
+      "children": null,
+      "icon": "fa fa-wpforms",
+      "name": "表单元素",
+      "type": 0,
+      "list": [
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "按钮",
+          "type": 1,
+          "url": "frontframe/vue/button.html"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "input输入框",
+          "type": 1,
+          "url": "frontframe/vue/input.html"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "单选框",
+          "type": 1,
+          "url": "frontframe/vue/radio.html"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "复选框",
+          "type": 1,
+          "url": "frontframe/vue/checkbox.html"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "下拉框",
+          "type": 1,
+          "url": "frontframe/vue/select.html"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "级联选择",
+          "type": 1,
+          "url": "frontframe/vue/cascader.html"
+        },
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "日期选择器",
+          "type": 1,
+          "url": "frontframe/vue/date.html"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "children": null,
+      "icon": "fa fa-wpforms",
+      "name": "其他组件",
+      "type": 0,
+      "list": [
+        {
+          "children": null,
+          "icon": "",
+          "list": null,
+          "name": "tree树形组件",
+          "type": 1,
+          "url": "frontframe/vue/tree.html"
+        }
+      ]
+    }
+  ],
+  "code": 0
+}

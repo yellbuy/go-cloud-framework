@@ -1,0 +1,56 @@
+.uploader{position:relative; display:inline-block;vertical-align:top}
+
+.js-upload-hover{display:none;position:absolute;left:0;top:0;z-index:5;width:100%;height:100%;-moz-box-sizing:border-box;box-sizing:border-box;border:2px solid #4497ff}
+.js-upload-hover:hover{display:block;}
+.js-upload-hover .btns{position:absolute;bottom:0;z-index:8;width:100%;height:31px;color:#fff;text-align:center}
+.js-upload-hover .delete-icon{position:absolute;top:-10px;right:-10px;width:20px;height:20px;cursor:pointer;background-image:url(/static/admin/img/delete.png)}
+.js-upload-hover .icons{height:100%;width:100%;position:absolute;top:0}
+.js-upload-hover .zoomin-icon,.js-upload-hover .upload-icon{display:inline-block;width:45%;height:100%;padding-top:5px;-moz-box-sizing:border-box;box-sizing:border-box;cursor:pointer}
+.js-upload-hover .zoomin-icon i,.js-upload-hover .upload-icon i{display:inline-block;width:20px;height:20px;background-size:contain}
+.js-upload-hover .zoomin-icon i{background-image:url(/static/admin/img/zoom_in.png)}
+.js-upload-hover .cover{width:100%;height:100%;background:#000;opacity:.6}
+
+.imgListContainer{
+  height:105px;
+  border: lightgray dashed 1px;
+  padding: 5px;
+}
+/* 以下CSS是批量图片 */
+.imgContainer{
+  display: inline-block;
+  float:left;
+  width: 100px;
+  height: 100px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  border: 0px solid #666666;
+  position: relative;
+  box-sizing: border-box;
+}
+.imgContainer img{
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: lightgray solid 1px;
+}
+.imgContainer p{
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  background: #000000;
+  text-align: center;
+  line-height: 24px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  opacity:0.7;
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
+}
+.imgContainer:hover p{
+  display: block;
+}

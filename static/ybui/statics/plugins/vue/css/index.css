@@ -1,0 +1,90 @@
+html,body{height:100%; margin:0;}
+
+#navMenu{
+    background-color: rgb(84, 92, 100);
+    position: fixed;
+    top: 60px;
+    width: 200px;
+    overflow-x: hidden;
+    z-index: 999;
+}
+#navMenu::-webkit-scrollbar {display:none}
+
+.side-scroll{
+    background-color: rgb(84, 92, 100);
+    overflow-x: hidden;
+}
+.side-scroll::-webkit-scrollbar {display:none}
+.el-menu{
+    border-right: none!important;
+}
+.el-menu--horizontal {
+    border-right: none;
+    border-bottom: none!important;
+}
+
+.isCollapse{
+    position: absolute;
+    left:20px;
+    top:5px;
+}
+
+
+#main{
+    position: fixed;
+    top:60px;
+    left: 200px;
+    width: 100%;
+}
+
+.logo{
+    position: absolute;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 10px 20px;
+    color: white;
+}
+
+.toggle-collapse {
+
+}
+
+.toggle-collapse {
+    background: url(../img/toggleCollapse.png) no-repeat 0 0;
+    width: 9px;
+    height: 50px;
+    display: inline-block;
+    position: fixed;
+    left: 200px;
+    top: 50%;
+    margin-top: -17px;
+    z-index: 50;
+    cursor: pointer;
+}
+
+.toggle-collapse.toggle-show {
+    background-position: right 0;
+}
+/*.el-row {*/
+    /*margin-bottom: 20px;*/
+/*}*/
+/*.el-col {*/
+    /*border-radius: 4px;*/
+/*}*/
+/*.bg-purple-dark {*/
+    /*background: #99a9bf;*/
+/*}*/
+/*.bg-purple {*/
+    /*background: #d3dce6;*/
+/*}*/
+/*.bg-purple-light {*/
+    /*background: #e5e9f2;*/
+/*}*/
+/*.grid-content {*/
+    /*border-radius: 4px;*/
+    /*min-height: 36px;*/
+/*}*/
+/*.row-bg {*/
+    /*padding: 10px 0;*/
+    /*background-color: #f9fafc;*/
+/*}*/

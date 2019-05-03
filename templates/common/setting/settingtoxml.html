@@ -1,0 +1,82 @@
+{% extends "../../_share/base.html"%}
+
+{% block header %}
+<link rel="stylesheet" href="/static/zTree3/css/demo.css?t=5" type="text/css">
+<link rel="stylesheet" href="/static/zTree3/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="/static/layui/extend/formSelects-v4.css" />
+<link rel="stylesheet" href="/static/layui/extend/wang/wangeditor.css">
+
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div-- class="layui-layout layui-layout-admin">
+    <!--div style="margin: 10px 0px">
+        <blockquote class="layui-elem-quote">
+            添加用户
+        </blockquote>
+    </div-->
+    <form class="layui-form" action="" method="post">
+
+        <div class="layui-col-md11 layui-col-xs11" style="margin-top: 20px;">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item magt3">
+                        <label class="layui-form-label"><span class="text-red">*</span>配置设置</label>
+                        <div class="layui-input-block">
+                            <textarea class="layui-textarea" rows="20" lay-verify="required" autocomplete="off"
+                                placeholder="" name="Content">{{content}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-form-mid layui-word-aux">回车符用" ; "代替</div>
+        </div> -->
+            <hr class="layui-bg-gray" />
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item" style="text-align:center">
+                        <button class="layui-btn" lay-submit><i class="layui-icon">&#xe605;</i> 保存</button>
+                        <button type="reset" class="layui-btn layui-btn-primary"> 重置</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+    {% endblock %}
+    {% block footer %}
+
+    <script>
+        var $, form;
+        layui.use(['larry','form', 'laydate', 'element', 'layer', 'jquery', 'formSelects', 'upload', 'wangeditor'], function () {
+            form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+            $ = layui.jquery;
+            var formSelects = layui.formSelects;
+            var laydate = layui.laydate;
+            var upload = layui.upload;
+
+            // formSelects.render('orgIds')
+            form.on("submit", function (data) {
+                console.log(data)
+                data = $("form").serialize();
+                $.post('/common/{{curController}}/settingxmledit', data, function (out) {
+                    if (out.status == 0) {
+                        layer.msg("操作成功")
+                    } else {
+                        layer.msg(out.message)
+                    }
+                }, "json");
+                return false;
+            });
+
+            form.render();
+            //但是，如果你的HTML是动态生成的，自动渲染就会失效
+            //因此你需要在相应的地方，执行下述方法来手动渲染，跟这类似的还有 element.init();
+
+        });
+    </script>
+    {% endblock %}

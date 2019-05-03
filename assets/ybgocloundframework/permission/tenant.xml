@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <permission key="admin" name="管理后台">
+        <!-- 导航2 -->
+        <module key="admin_sys" name="系统" path="" isPublic="false" icon="fa-object-group" desc="" isSpread="false" event="">
+            <module key="admin_sys_group" name="系统管理" icon="fa-newspaper-o" path="" isPublic="false" isSpread="true" desc="" event="">
+                <module key="admin_sys_commondata" name="基础代码" icon="fa-user-circle-o" path="/common/commondata/concretedatalist">
+                    <action key="admin_sys_commondata_area" name="读取" path="/common/area/getchildren" isHide="true" isPublic="true"></action>
+                    <action key="admin_sys_commondata_add" name="添加" path="/common/commondata/concretedataadd" target="btnAdd"></action>
+                    <action key="admin_sys_commondata_edit" name="修改" path="/common/commondata/concretedataedit" target="btnEdit"></action>
+                    <action key="admin_sys_commondata_del" name="删除" path="/common/commondata/concretedatadel" target="btnDel"></action>
+                </module>
+                <!-- 配置设置 -->
+            <module key="admin_common_settingcfg_edit" name="租户配置设置" icon="fa-user-circle-o" path="/common/setting/settinggroupedit">
+                    </module>
+            </module>
+            
+        </module>
+        <module key="admin_sys_profile" name="个人中心" icon="fa-user-circle-o" isSpread="true" path="" isHide="true">
+            <module key="admin_sys_profile_edit" name="修改" icon="fa-edit" path="/base/user/profile" target="btnEdit"></module>
+        </module>
+    </permission>
+</configuration>

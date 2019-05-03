@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>按钮</title>
+    <meta name="keywords" content="404" />
+    <meta name="description" content="404" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="Shortcut Icon" href="/favicon.ico" />
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../../../larryms/larry/css/larry.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/base.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/animate.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../../larryms/css/demo/uidemo.css" media="all">
+</head>
+
+<body class="larryms-layout-bgA box-blank aux-demo-box">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+  <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+  <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+    <div class="layui-fluid margin15">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body">
+                        <p class="library-tips" style="padding:15px 0px;">
+                            <cite>layui相关辅助元素模块介绍：</cite>进度条、徽章、滑块（slider模块）、面板、引用、字段集区块等，本页主要罗列出一些可能会用到的简单辅助元素，这些辅助元素和小工具模块应用于许多业务场景，如任务完成进度、loading、拖拽式交互、服务满意度评价；下面就分别针对这些非常实用的元素模块做下示例：
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>默认进度条及颜色选取</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div class="layui-progress">
+                            <div class="layui-progress-bar" lay-percent="70%"></div>
+                        </div>
+                        <div class="layui-progress">
+                            <div class="layui-progress-bar layui-bg-red" lay-percent="30%"></div>
+                        </div>
+                        <div class="layui-progress">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="90%"></div>
+                        </div>
+                        <div class="layui-progress">
+                            <div class="layui-progress-bar layui-bg-orange" lay-percent="60%"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>大尺寸进度条</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div class="layui-progress layui-progress-big">
+                            <div class="layui-progress-bar layui-bg-green" lay-percent="35%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="55%"></div>
+                        </div>
+                        <div class="layui-progress layui-progress-big">
+                            <div class="layui-progress-bar layui-bg-cyan" lay-percent="85%"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>显示进度比文本</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div class="layui-progress larryms-progress-text" lay-showpercent="true">
+                            <div class="layui-progress-bar" lay-percent="30%"></div>
+                        </div>
+                        <div class="layui-progress larryms-progress-text" lay-showpercent="true">
+                            <div class="layui-progress-bar" lay-percent="5 / 10"></div>
+                        </div>
+                        <div class="layui-progress larryms-progress-text" lay-showpercent="true">
+                            <div class="layui-progress-bar layui-bg-red" lay-percent="80%"></div>
+                        </div>
+                        <div class="layui-progress larryms-progress-text layui-progress-big" lay-showpercent="true">
+                            <div class="layui-progress-bar layui-bg-blue" lay-percent="70%"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>动态改变进度</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div class="layui-progress layui-progress-big" lay-showpercent="true" lay-filter="demo" style="margin-top: 5px;">
+                            <div class="layui-progress-bar layui-bg-red" lay-percent="10%"></div>
+                        </div>
+                        <div class="site-demo-button" style="margin-top: 25px; margin-bottom: 0;">
+                            <button class="layui-btn site-demo-active" data-type="setPercent">设置50%</button>
+                            <button class="layui-btn site-demo-active" data-type="loading">模拟loading</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- 滑块演示 -->
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>滑块基本演示</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div id="slideTest1" class="demo-slider"></div>
+                        <div id="slideTest2" class="demo-slider" title="定义初始值"></div>
+                        <div id="slideTest3" class="demo-slider" title="设置最大最小值"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>滑块颜色、文本、步长设置</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div id="slideTest15" class="demo-slider"></div>
+                        <div id="slideTest16" class="demo-slider"></div>
+                        <div id="slideTest17" class="demo-slider"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>滑块输入框、范围、禁用</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div id="slideTest8" class="demo-slider" style="margin-top: 5px;"></div>
+                        <div id="slideTest9" class="demo-slider"></div>
+                        <div id="slideTest18" class="demo-slider"></div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>垂直滑块示例</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox">
+                        <div id="slideTest11" style="margin: 0px 15px; display: inline-block;"></div>
+                        <div id="slideTest12" style="margin: 0px 15px; display: inline-block;"></div>
+                        <div id="slideTest13" style="margin: 0px 15px; display: inline-block;"></div>
+                        <div id="slideTest14" style="margin: 0px 15px; display: inline-block;"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>小徽章、大家族</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox auxbox1">
+                        <div class="larryms-badge">
+                            <cite>小圆点：</cite>
+                            <span class="layui-badge-dot"></span>
+                            <span class="layui-badge-dot layui-bg-orange"></span>
+                            <span class="layui-badge-dot layui-bg-green"></span>
+                            <span class="layui-badge-dot layui-bg-cyan"></span>
+                            <span class="layui-badge-dot layui-bg-blue"></span>
+                            <span class="layui-badge-dot layui-bg-black"></span>
+                            <span class="layui-badge-dot layui-bg-gray"></span>
+                        </div>
+                        <div class="larryms-badge">
+                            <cite>常规弧形徽章：</cite>
+                            <span class="layui-badge">6</span>
+                            <span class="layui-badge">赤</span>
+                            <span class="layui-badge layui-bg-orange">橙</span>
+                            <span class="layui-badge layui-bg-green">绿</span>
+                            <span class="layui-badge layui-bg-cyan">青</span>
+                            <span class="layui-badge layui-bg-blue">蓝</span>
+                            <span class="layui-badge layui-bg-black">黑</span>
+                            <span class="layui-badge layui-bg-gray">灰</span>
+                        </div>
+                        <div class="larryms-badge">
+                            <cite>边框徽章：</cite>
+                            <span class="layui-badge-rim">6</span>
+                            <span class="layui-badge-rim">Hot</span>
+                        </div>
+                        <div class="larryms-badge">
+                            <cite>与其它元素的搭配：</cite>
+                            <button class="layui-btn layui-btn-sm">消息<span class="layui-badge layui-bg-gray">1</span></button>
+                            <button class="layui-btn layui-btn-sm layui-bg-cyan">动态<span class="layui-badge-dot layui-bg-red"></span></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>时间线</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox auxbox1">
+                        <ul class="layui-timeline">
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title">2018年，正式确定larryMS框架商业授权模式，基于layui进行全端框架的开发</div>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title">2017年，使用layui并基于layui开发larryms1.0</div>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title">2016年，首次使用layui写后台模板并获得案例第1名</div>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop layui-timeline-axis"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title">更久前，学习前端、使用layer等组件</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>引用、字段区块</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox auxbox1">
+                        <blockquote class="layui-elem-quote">这个貌似不用多介绍，因为你已经在太多的地方都看到</blockquote>
+                        <hr class="layui-bg-blue">
+                        <fieldset class="layui-elem-field">
+                            <legend>爱好</legend>
+                            <div class="layui-field-box">
+                                你可以在这里放任何内容，比如表单神马的
+                            </div>
+                        </fieldset>
+                    </div>
+                </section>
+            </div>
+            <div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-header">
+                        <strong>评分模块</strong>
+                    </div>
+                    <div class="layui-card-body larryms-card-auxbox auxbox1">
+                        <ul>
+                            <li>
+                                <div id="test10"></div>
+                            </li>
+                            <li>
+                                <div id="test11"></div>
+                            </li>
+                            <li>
+                                <div id="test12"></div>
+                            </li>
+                            <li>
+                                <div id="test13"></div>
+                            </li>
+                            <li>
+                                <div id="test14"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+
+            <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <section class="layui-card">
+                    <div class="layui-card-body" style="padding: 20px 15px;">
+                        <blockquote class="layui-elem-quote larryms-doc-quote" style="font-size: 16px;">对于layui相关常用模块与辅助元素本页只展现了一部分示例，更多请查看larryms框架对与这些元素在开发场景的应用举例和技巧分享</blockquote>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="../../../larryms/layui/layui.js"></script>
+    <script type="text/javascript">
+    layui.config({
+        version: "2.0.8",
+        base: '../../../larryms/',
+        mods:'demo/',
+        page: 'layuidemo',
+        identified: 'auxs'
+    }).extend({
+        larry: 'js/base'
+    }).use('larry');
+    </script>
+</body>
+
+</html>

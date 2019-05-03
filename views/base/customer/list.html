@@ -1,0 +1,137 @@
+<div class="layui-layout layui-layout-admin">
+    <table class="layui-hide" id="tableUsers" lay-filter="tableUsers">
+    </table>
+    <script type="text/html" id="toolbar">
+        <div class="layui-row">
+            <div class="layui-col-xs12">
+                <form class="layui-form" action="" onsubmit="javascript:return false;">
+                    <div class="demoTable">
+                        <div class="layui-inline">
+                            <input class="layui-input" name="name" id="name" autocomplete="off" placeholder="真实姓名" >
+                        </div>
+                        <button class="layui-btn" data-type="reload">查询</button>
+                        <a class="layui-btn" href="/base/customer/add">新增</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="bar">
+       <!--  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a> -->
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="del">删除</a>
+        <!--  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="status">启|禁</a>-->
+
+    </script>
+</div>
+<script>
+    var editObj=null,ptable=null,treeGrid=null,tableId='treeMain',layer=null;
+    layui.config({
+        base: '/static/layui/extend/'
+    }).extend({
+        treeGrid:'treeGrid'
+    }).use(['jquery','treeGrid','layer','table','form','element'], function(){
+        var $=layui.jquery;
+        var treeGrid = layui.treeGrid;//很重要
+        var layer=layui.layer;
+        var table = layui.table;
+        var form = layui.form;
+        var element = layui.element;
+       
+        //方法级渲染
+        table.render({
+            elem: '#tableUsers'
+            ,url: '/base/customer/list'
+            ,id: 'userList'
+            ,page: true
+            ,height: "full-83"
+            ,toolbar:"#toolbar"
+            ,defaultToolbar: ['filter']
+            ,even: false //开启隔行背景
+            ,limit:20
+            ,cols: [[
+                {field:'Name', title: '名称'}
+                ,{field:'Kind', title: '身份', align:'center', width:100, templet: function(d){
+                        if(d.Kind==1){
+                            return '<span class="layui-badge layui-bg-green">个人</span>'
+                        }
+                        if(d.Kind==2){
+                            return '<span class="layui-badge layui-bg-blue">单位</span>'
+                        }
+                        return ""
+                    }}
+                ,{field:'Username', width:180,title: '证件号码'}
+                ,{field:'Mobile', width:150, title: '手机号码'}
+                ,{field:'Tel', width:150, title: '座机号码'}
+                ,{field:'Address', title: '地址'}
+                ,{field:'Balance', align:'right', width:120, title: '账户余额'}
+                ,{fixed: 'right', title: '操作', width:120, align:'center', toolbar: '#bar'}
+            ]]
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                table.reload('userList', {
+                    page: {
+                        curr: 1 //重新导航到首页
+                    },where: {
+                        // fetchChild: $("input[name='fetchChild']:checked").val()||"false",
+                        name: $('#name').val()
+                    }
+                });
+            }
+        };
+
+        //监听工具条
+        table.on('tool(tableUsers)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'edit'){
+                window.location.href="/base/customer/edit?id="+data.Id
+            } else if(obj.event === 'del'){
+                acts = "删除";
+                layer.confirm('真的'+acts+'【'+data.Username+'】账号么', function(index){
+                    var jsData = {'id':data.Id}
+                    $.post('{{urlfor "CustomerController.Del"}}', jsData, function (out) {
+                        if (out.status == 0) {
+                             active.reload()
+                            layer.alert("操作成功！", {icon: 1},function(index){
+                                layer.close(index);
+                            });
+                        } else {
+                            layer.msg(out.message)
+                        }
+                    }, "json");
+                    // obj.del();
+                    layer.close(index);
+                })
+            } else{
+                layer.msg('操作不存在');
+            }
+        });
+
+        $(document).on('click', '.demoTable .layui-btn', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    var i=1000;
+    //添加
+    function add(pObj) {
+        var param={};
+        param.name='水果'+Math.random();
+        param.id=++i;
+        param.pId=pObj?pObj.id:0;
+        treeGrid.addRow(tableId,pObj?pObj.LAY_TABLE_INDEX+1:0,param);
+    }
+
+    function print() {
+        console.log(treeGrid.cache[tableId]);
+        var loadIndex=layer.msg("对象已打印，按F12，在控制台查看！", {
+            time:3000
+            ,offset: 'auto'//顶部
+            ,shade: 0
+        });
+    }
+</script>
+

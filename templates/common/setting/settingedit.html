@@ -1,0 +1,206 @@
+<style>
+    .layui-form-label{
+            width:120px;
+        }
+        .layui-input-block {
+            margin-left: 150px;
+        }
+        </style>
+<div class="layui-layout layui-layout-admin" style="margin-top: 10px;">
+    <!--div style="margin: 10px 0px">
+                <blockquote class="layui-elem-quote">
+                    添加用户
+                </blockquote>
+            </div-->
+    <form class="layui-form" action="" method="post">
+        <div class="layui-col-md12 layui-col-xs12" style="padding:10px">
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md5 layui-col-xs12">
+                    <div class="layui-form-item magt4">
+                        <label class="layui-form-label"><span class="text-red">*</span>标识名称</label>
+
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" lay-verify="required" name="Key" value="{{info.Key}}" placeholder="标识名称">
+                        </div>
+                        <!-- <input type="hidden" class="layui-input"  lay-verify="required" name="ProductCompanyId" value="{{info.ProductCompanyId}}" placeholder="请输入项目名称"> -->
+
+                    </div>
+                    <span class="help-block m-b-none">（用于this.model("setup").getset()函数调用，只能使用英文且不能重复）</span>
+
+                </div>
+                <div class="layui-col-md5 layui-col-xs12">
+                    <label class="layui-form-label"><span class="text-red">*</span>配置标题</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input titleVal" lay-verify="required" name="Title" value="{{info.Title}}" placeholder="配置标题">
+                        <span class="help-block m-b-none">（用于后台显示的配置标题）</span>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row layui-col-space10">
+                <div class="layui-col-md5 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">配置分组</label>
+                        <div class="layui-input-inline">
+                            <select class="pidVal" name="Group" lay-filter="Group">
+                                {% for item in tablist %}
+                                <option value="{{item.Id}}" {%if info.Group| integer==item.Id| integer%} selected {%endif%}>{{item.Name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <!-- <input type="Text" class="layui-input titleVal" name="Phone" value="{{info.Typ}}" placeholder="配置类型" > -->
+                            <div class="layui-form-item magt4">
+                                <span class="help-block m-b-none">（系统会根据不同类型解析配置值）</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="layui-col-md5 layui-col-xs12">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">配置类型</label>
+                        <div class="layui-input-inline">
+                            <select class="pidVal" name="Type" lay-filter="Type">
+                                {% for item in typelist %}
+                                <option value="{{item.Id}}" {%if info.Type| integer==item.Id| integer%} selected {%endif%}>{{item.Name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <!-- <input type="text" class="layui-input titleVal" name="Postcode" value="{{info.Group}}" placeholder="配置分组"> -->
+                        </div>
+                        <div class="layui-form-item magt4">
+                            <span class="help-block m-b-none">（配置分组 用于批量设置 不分组则不会显示在系统设置中）</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row layui-col-space10">
+                    <div class="layui-col-md5 layui-col-xs12">
+                        <!-- <div class="layui-inline"> -->
+                        <label class="layui-form-label">配置值</label>
+
+                        <div class="layui-input-block">
+                            <textarea type="text" class="layui-textarea" name="Value" placeholder="配置值">{{info.Value}}</textarea>
+                            <span class="help-block m-b-none">（配置值）</span>
+                        </div>
+                        <!-- </div>    -->
+
+                    </div>
+
+                    <div class="layui-col-md5 layui-col-xs12">
+                        <div class="layui-inline">
+                            <label class="layui-form-label"><span class="text-red"></span>配置项</label>
+                            <div class="layui-input-inline">
+                                <textarea type="text" class="layui-textarea" name="Extra" placeholder="请输入配置项">{{info.Extra}}</textarea>
+                            </div>
+                        </div>
+                        <span class="help-block m-b-none">（如果是枚举型 需要配置该项）</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="layui-form-item">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label">排序</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input titleVal" name="Address" value="{{info.Order}}" placeholder="排序号">
+                        </div>
+                        <span class="help-block m-b-none">（用于分组显示的顺序）</span>
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label">说明</label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入说明" name="Remark" class="layui-textarea">{{info.Remark}}</textarea>
+                        <span class="help-block m-b-none">（配置详细说明）</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block" style="text-align:left;">
+                <input type="hidden" name="Id" value="{{info.Id}}" />
+                <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
+                <a class="layui-btn layui-btn-primary" id="btnClose">关闭</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    var $, form;
+    layui.use(['larry', 'form', 'element', 'layer', 'jquery'], function () {
+        form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        $ = layui.jquery;
+        //   var formSelects = layui.formSelects;
+        var laydate = layui.laydate;
+        var upload = layui.upload;
+        form.verify({
+            rate: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (value < 0 || value > 1) {
+                    return "输入数值只能在0和1之间"
+                }
+            },
+            amount: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (value < 0) {
+                    return "输入数值不能小于0"
+                }
+            },
+            amortization: function (value, item) { //value：表单的值、item：表单的DOM对象
+                    if (value < 3) {
+                        return "输入数值不能小于3"
+                    }
+                }
+                //我们既支持上述函数式的方式，也支持下述数组的形式
+                //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+                ,
+            pass: [
+                /^[\S]{6,12}$/, '密码必须6到12位，且不能出现空格'
+            ]
+        });
+        //监听有无保险
+        // form.on('switch(hasCarInsurance)', function(data){
+        //     this.checked ? $("#insuranceLayout").show() : $("#insuranceLayout").hide();
+        // });
+        // formSelects.render('orgIds')
+
+
+
+        form.on("submit(sub)", function (data) {
+            console.log(data)
+            data = data.field
+            data = $("form").serialize();
+
+            $.post('/common/{{curController}}/settingedit', data, function (out) {
+
+                if (out.status == 0) {
+                    // console.log(mainTable)
+                    layer.closeAll();
+                    // active.reloadAddress();
+                    // active.reload();
+                    // console.log("table"+mainTable)
+                    //   window.location.reload();
+                    mainTable.reload();
+                } else {
+                    console.log(out)
+                    layer.msg(out.message)
+                }
+            }, "json");
+            return false;
+        });
+        // formSelects.render('orgIds')
+        $("#btnClose").on("click", function () {
+            layer.closeAll()
+            return false;
+        })
+        form.render();
+    });
+</script>

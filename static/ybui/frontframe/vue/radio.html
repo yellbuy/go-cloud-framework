@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .demonstration {
+            display: block;
+            color: #8492a6;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h3 >基础用法</h3>
+    <div style="width: 200px;">
+        <el-radio v-model="radio" label="1">备选项</el-radio>
+        <el-radio v-model="radio" label="2">备选项</el-radio>
+    </div>
+    <h3 >禁用状态</h3>
+    <div style="width: 200px;margin: 20px 0">
+        <el-radio disabled v-model="radio1" label="禁用">备选项</el-radio>
+        <el-radio disabled v-model="radio1" label="选中且禁用">备选项</el-radio>
+    </div>
+    <h3 >带边框</h3>
+    <div style="width: 500px;margin: 20px 0">
+        <el-radio v-model="radio8" label="1" border size="medium">备选项1</el-radio>
+        <el-radio v-model="radio8" label="2" border size="medium">备选项2</el-radio>
+    </div>
+
+
+</div>
+
+
+</body>
+<!-- 先引入 Vue -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            radio: '1',
+            radio7: '1',
+            radio8: '1',
+            radio9: '1',
+            radio10: '1'
+        }
+    });
+
+</script>
+</html>
