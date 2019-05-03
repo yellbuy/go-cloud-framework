@@ -35,20 +35,13 @@ https://github.com/yellbuy/go-cloud-framework/edit/master/LICENSE.txt?raw=true
 效果展示
 ----
 基础框架：本次开源部分截图<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.1.png"github")
-<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.2.png"github")
-<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.3.png"github")
-<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.4.png"github")
-<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.5.png"github")
-<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.6.png"github")
-<br/>
-![github](https://github.com/yellbuy/go-cloud-framework/demo/demo/1.7.png"github")
-
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.1.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.2.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.3.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.4.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.5.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.6.png?raw=true)
+![image](https://github.com/yellbuy/go-cloud-framework/blob/master/demo/1.7.png?raw=true)
 <br/><br/>
 权限界面<br/>
 
