@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/astaxie/beego/orm"
-	. "yellbuy.com/YbGoCloundFramework/libs"
+	. "yellbuy.com/YbCloudDataApi/libs"
 )
 
 type CommonData struct {

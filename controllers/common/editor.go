@@ -18,16 +18,21 @@ import (
 	"time"
 
 	"github.com/disintegration/imaging"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/models/common"
+	"yellbuy.com/YbCloudDataApi/utils"
 
 	"github.com/sipt/GoJsoner"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
 
-	"yellbuy.com/YbGoCloundFramework/libs"
+	"yellbuy.com/YbCloudDataApi/libs"
 )
 
 type EditorController struct {
 	share.AdminBaseController
+}
+
+func (self *EditorController) Prepare() {
+	self.AdminBaseController.Prepare()
 }
 
 func (self *EditorController) Ueditor() {
@@ -53,16 +58,58 @@ func (self *EditorController) Ueditor() {
 		res["url"] = url
 		break
 	case "listimage":
-		config, _ := ueditorLoadConfigByCache()
-		self.Data["json"] = config
-		self.ServeJSON()
-		self.StopRun()
+		start, _ := self.GetUint("start", 0)
+		size, _ := self.GetUint("size", 20)
+		scopeIds := self.GetScopeLevelIds()
+
+		total, list, err := common.AttfileGetPagedListBy(start, size, "image", scopeIds...)
+		files := make([]map[string]interface{}, len(list))
+		if err == nil {
+			res["state"] = "SUCCESS"
+			for index, val := range list {
+				// urls[index] = fmt.Sprintf("%v%v","http://localhost:8081",val.Savepath)
+				file := make(map[string]interface{})
+				file["url"] = val.Savepath
+				file["title"] = val.Name
+				file["alt"] = val.Name
+				files[index] = file
+			}
+
+		} else {
+			fmt.Println(err)
+			res["state"] = "加载图片时发生错误"
+
+		}
+		res["list"] = files
+		res["start"] = start
+		res["size"] = size
+		res["total"] = total
 		break
 	case "listfile":
-		config, _ := ueditorLoadConfigByCache()
-		self.Data["json"] = config
-		self.ServeJSON()
-		self.StopRun()
+		start, _ := self.GetUint("start", 0)
+		size, _ := self.GetUint("size", 20)
+		scopeIds := self.GetScopeLevelIds()
+		total, list, err := common.AttfileGetPagedList(start, size, "file", scopeIds...)
+		files := make([]map[string]interface{}, len(list))
+		if err == nil {
+			res["state"] = "SUCCESS"
+			for index, val := range list {
+				file := make(map[string]interface{})
+				file["url"] = val.Savepath
+				file["title"] = val.Name
+				file["alt"] = val.Name
+				files[index] = file
+			}
+
+		} else {
+			fmt.Println(err)
+			res["state"] = "加载图片时发生错误"
+
+		}
+		res["list"] = files
+		res["start"] = start
+		res["size"] = size
+		res["total"] = total
 		break
 	}
 	self.Data["json"] = res

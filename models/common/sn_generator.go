@@ -9,7 +9,7 @@ import (
 
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	. "yellbuy.com/YbGoCloundFramework/libs"
+	. "yellbuy.com/YbCloudDataApi/libs"
 )
 
 type SnGenerator struct {

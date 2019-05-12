@@ -15,11 +15,11 @@ import (
 	"strings"
 	// "time"
 
-	// "yellbuy.com/YbGoCloundFramework/utils"
+	// "yellbuy.com/YbCloudDataApi/utils"
 
 	// cache "github.com/patrickmn/go-cache"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	CommonModels "yellbuy.com/YbGoCloundFramework/models/common"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	CommonModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 
 type AreaController struct {

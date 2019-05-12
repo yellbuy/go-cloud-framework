@@ -19,8 +19,8 @@ import (
 	"github.com/antchfx/xmlquery"
 	"github.com/astaxie/beego"
 	cache "github.com/patrickmn/go-cache"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/libs"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 type PermissionOpt interface {

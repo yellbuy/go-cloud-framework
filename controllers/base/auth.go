@@ -14,10 +14,10 @@ import (
 	"strings"
 	"time"
 
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	libs "yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	libs "yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 type AuthController struct {

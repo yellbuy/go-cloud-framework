@@ -9,10 +9,10 @@ import (
 	"strings"
 	"time"
 
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	commonModels "yellbuy.com/YbGoCloundFramework/models/common"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	"yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
+	commonModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 
 type TenantController struct {
@@ -73,21 +73,35 @@ func (self *TenantController) TenantEdit() {
 		if err != nil {
 			self.AjaxMsg(err.Error(), libs.E100000)
 		}
+		var tid int64
 		if id == 0 {
-			_, err = baseModels.TenantAdd(self.Appid, form)
+			tid, err = baseModels.TenantAdd(self.Appid, form)
+			if err == nil {
+				id = uint(tid)
+			}
 		} else {
 			_, err = baseModels.TenantUpdate(self.Appid, form, baseModels.TenantAdminUpdateFields)
 		}
 		if err != nil {
 			fmt.Println(err)
 			self.AjaxMsg(err.Error(), libs.E100000)
+		} else if form.Logo != "" {
+			src := form.Logo
+			if string(src[0]) == "/" {
+				src = src[1:len(src)]
+				dest := fmt.Sprintf("static/img/avatar/tenant/%v.png", id)
+				// 复制文件
+				if src != dest {
+					libs.CopyFile(src, dest)
+				}
+			}
 		}
 		self.AjaxMsg("", libs.E0)
 	} else {
 
 		var mode *baseModels.Tenant
 		if id > 0 {
-			mode, _ = baseModels.TenantGetById(id,self.Appid)
+			mode, _ = baseModels.TenantGetById(id, self.Appid)
 		} else {
 			mode = new(baseModels.Tenant)
 			mode.ExpireTime.Time = time.Now()
@@ -219,7 +233,7 @@ func form2Tenant(self *TenantController, id uint) (*baseModels.Tenant, error) {
 
 func (self *TenantController) GetTenantById() {
 	id, _ := self.GetUint("id")
-	list, _ := baseModels.TenantGetById(id,self.Appid)
+	list, _ := baseModels.TenantGetById(id, self.Appid)
 	self.Data["json"] = list
 	self.ServeJSON()
 	self.StopRun()

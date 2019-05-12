@@ -296,7 +296,7 @@ func (self *AdminBaseController) PermissonCheck() {
 	} else {
 		// 走Url地址校验方式
 		//不需要权限检查
-		publicAuth := "ajaxsave/ajaxdel/table/loginin/loginout/getnodes/getfields/gettree/start/show/print/ajaxapisave/index/group/public/home/env/code/apidetail/ajaxmenu/oauth"
+		publicAuth := "ajaxsave/ajaxdel/table/loginin/loginout/getnodes/getfields/gettree/start/show/print/ajaxapisave/index/group/public/home/env/code/apidetail/ajaxmenu/oauth/upload/avatarupload/ueditor"
 		// 检查公共权限
 		hasAuth = strings.Contains(publicAuth, self.ActionName)
 		if !hasAuth {

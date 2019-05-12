@@ -16,9 +16,9 @@ import (
 	// "json"
 
 	// cache "github.com/patrickmn/go-cache"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	commonModels "yellbuy.com/YbGoCloundFramework/models/common"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	"yellbuy.com/YbCloudDataApi/libs"
+	commonModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 
 type SettingController struct {

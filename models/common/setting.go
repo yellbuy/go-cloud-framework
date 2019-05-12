@@ -18,10 +18,10 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/utils"
 
 	"github.com/astaxie/beego/validation"
-	"yellbuy.com/YbGoCloundFramework/libs"
+	"yellbuy.com/YbCloudDataApi/libs"
 )
 
 type Setting struct {
@@ -29,7 +29,7 @@ type Setting struct {
 	Id int64
 	// 配置名称',
 	Key string
-	// 配置类型',0:数字，1:字符，2:文本，3:数组，4:枚举
+	// 配置类型',0:字符，1:数字，2:文本，3:数组，4:枚举 5：密码，6：图片上传，10：富文本编辑器
 	Type int8
 	//'分类，0：平台，1：租户，2：用户',
 	Kind uint8
@@ -240,8 +240,10 @@ func SettingListSave(appid, tid, uid uint, settinglist []*Setting) (int64, error
 		// key存在？更新：插入
 		count, _ := query.Filter("appid", appid).Filter("tid", tid).Filter("uid", uid).Filter("kind", kind).Filter("group", item.Group).Filter("Key", item.Key).Count()
 		if count > 0 {
+			// 同时更新group和key，解决map结构大小写敏感而数据库存储不敏感的BUG
 			num, err = query.Filter("appid", appid).Filter("tid", tid).Filter("uid", uid).Filter("kind", kind).Filter("group", item.Group).Filter("Key", item.Key).Update(orm.Params{
-				"value": item.Value, "kind": kind, "update_time": item.UpdateTime.Time, "type": item.Type, "extra": item.Extra, "name": item.Name, "remark": item.Remark, "order": item.Order})
+				"group": item.Group, "key": item.Key, "value": item.Value, "kind": kind, "update_time": item.UpdateTime.Time,
+				"type": item.Type, "extra": item.Extra, "name": item.Name, "remark": item.Remark, "order": item.Order})
 		} else {
 			num, err = o.Insert(item)
 		}
@@ -251,6 +253,7 @@ func SettingListSave(appid, tid, uid uint, settinglist []*Setting) (int64, error
 		total += num
 	}
 	if err != nil {
+		fmt.Println(err)
 		o.Rollback()
 	} else {
 		o.Commit()
@@ -407,7 +410,6 @@ func SettingLoad(kind uint8) (*Settings, error) {
 		}
 		settings.GroupMap[group.Key] = &group
 	}
-	
 
 	return settings, nil
 }

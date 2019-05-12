@@ -14,15 +14,15 @@ import (
 
 	"strings"
 
-	"yellbuy.com/YbGoCloundFramework/libs"
+	"yellbuy.com/YbCloudDataApi/libs"
 
-	// "yellbuy.com/YbGoCloundFramework/utils"
+	// "yellbuy.com/YbCloudDataApi/utils"
 
 	// cache "github.com/patrickmn/go-cache"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	// BaseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	// commonModels "yellbuy.com/YbGoCloundFramework/models/common"
-	smsModels "yellbuy.com/YbGoCloundFramework/models/common"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	// BaseModels "yellbuy.com/YbCloudDataApi/models/base"
+	// commonModels "yellbuy.com/YbCloudDataApi/models/common"
+	smsModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 
 type SmsController struct {

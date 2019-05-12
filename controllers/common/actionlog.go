@@ -14,15 +14,15 @@ import (
 
 	"strings"
 
-	"yellbuy.com/YbGoCloundFramework/libs"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	// "yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/libs"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	// "yellbuy.com/YbCloudDataApi/utils"
 
 	// cache "github.com/patrickmn/go-cache"
-	// "yellbuy.com/YbGoCloundFramework/controllers"
-	// BaseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	// commonModels "yellbuy.com/YbGoCloundFramework/models/common"
-	logModels "yellbuy.com/YbGoCloundFramework/models/common"
+	// "yellbuy.com/YbCloudDataApi/controllers"
+	// BaseModels "yellbuy.com/YbCloudDataApi/models/base"
+	// commonModels "yellbuy.com/YbCloudDataApi/models/common"
+	logModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 
 type ActionLogController struct {

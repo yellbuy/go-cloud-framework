@@ -77,27 +77,16 @@
                         align: "right",
                         fixed: "left"
                     },
-                    // {
-                    //     type: "checkbox",
-                    //     fixed: "left"
-                    // },
-
                     {
                         field: 'Name',
                         title: '名称',
-                        width: 150,
-                        align: "left"
-                    },
-                    {
-                        field: 'Desc',
-                        title: '描述',
-                        width: 150,
+                        width: 180,
                         align: "left"
                     },
                     {
                         field: 'ExpireTime',
                         title: '到期时间',
-                        width: 150,
+                        width: 130,
                         align: "left",
                         templet: function (row) {
 
@@ -110,13 +99,6 @@
                         title: '剩余次数',
                         width: 100,
                         align: "right"
-                    },
-                    {
-                        field: 'AreaId',
-                        title: '区域代码',
-                        // width: 100,
-                        align: "right"
-
                     },
                     {
                         field: 'Province',
@@ -133,12 +115,6 @@
                     {
                         field: 'County',
                         title: '县',
-                        // width: 160,
-                        align: "left"
-                    },
-                    {
-                        field: 'Addr',
-                        title: '地址',
                         // width: 160,
                         align: "left"
                     },
@@ -161,33 +137,27 @@
                         field: 'EditionId',
                         title: '版本',
                         // width: 160,
-                        align: "right",
+                        align: "center",
                         templet: function (row) {
                             return row.Edition.Name
                         }
                     },
                     {
-                        field: 'Remark',
-                        title: '备注',
-                        width: 160,
-                        align: "left"
-                    },
-                    {
                         field: 'Linkman',
                         title: '联系人',
-                        width: 100,
+                        width: 110,
                         align: "left"
                     },
                     {
                         field: 'Phone',
                         title: '电话',
-                        width: 100,
+                        width: 130,
                         align: "right"
                     },
                     {
                         // field: 'State',
                         title: '状态',
-                        width: 120,
+                        width: 110,
                         fixed: "right",
                         align: "center",
                         templet: function (row) {
@@ -208,10 +178,12 @@
                         fixed: "right",
                         align: "center",
                         templet: function(row){
-                            var toolBar = '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>';
+                            var toolBar="";
                             if(row.State >=0){
-                                toolBar = toolBar + '<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="tenantmanage">租户后台</a>';
+                                toolBar=toolBar+'<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="tenantManage">租户后台</a>';
                             }
+
+                            toolBar = toolBar + '<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>'
                             toolBar = toolBar + '<a class="layui-btn layui-btn-xs layui-btn-danger confirm" lay-event="del">删除</a>';
                             return toolBar;
                         }

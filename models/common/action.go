@@ -10,10 +10,10 @@ import (
 	//    "strings"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	. "yellbuy.com/YbGoCloundFramework/libs"
-	// "yellbuy.com/YbGoCloundFramework/models/common"
-	// "yellbuy.com/YbGoCloundFramework/models"
-	// baseModels "yellbuy.com/YbGoCloundFramework/models/base"
+	. "yellbuy.com/YbCloudDataApi/libs"
+	// "yellbuy.com/YbCloudDataApi/models/common"
+	// "yellbuy.com/YbCloudDataApi/models"
+	// baseModels "yellbuy.com/YbCloudDataApi/models/base"
 )
 // '系统行为表';
 type Action struct{

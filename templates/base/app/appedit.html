@@ -104,8 +104,8 @@
                         <label class="layui-form-label">封面图</label>
 
                         <div class="layui-inline layui-upload-list thumbBox mag0" style="width:150px;height:110px;line-height:110px;">
-                            <input type="hidden" id="Pin" name="Pin" value="{{info.Pin}}" />
-                            <img class="layui-upload-img thumbImg" style="width:150px;height:110px;" src="{{ info.Pin|filePath}}">
+                            <input type="hidden" id="Logo" name="Logo" value="{{info.Logo}}" />
+                            <img class="layui-upload-img thumbImg" style="width:150px;height:110px;" src="{% if info.Logo %}{{ info.Logo}}{% else %}/static/img/avatar/app/0.png{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -351,7 +351,7 @@
         //上传缩略图
         var uploadInst = upload.render({
             elem: '.thumbBox',
-            url: '/upload',
+            url: '/common/file/upload',
             // auto: false,
             before: function (obj) {
                 //预读本地文件示例，不支持ie8
@@ -362,14 +362,14 @@
                 });
             },
             done: function (res, index, upload) {
-                if (res.code == 0) {
+                if (res.errcode == 0) {
                     var data = res.data;
-                    $('#Pin').val(data.id);
+                    $('#Logo').val(data.src);
                     $('.thumbImg').attr('src', data.src);
                     $('.thumbBox').css("background", "#fff");
                     console.log(data);
                 } else {
-                    layer.alert('图片上传失败：' + res.msg, {
+                    layer.alert('图片上传失败：' + res.errmsg, {
                         icon: 5,
                         title: '温馨提示'
                     });
@@ -382,7 +382,7 @@
       //多图片上传
       upload.render({
             elem: '#picBtn',
-            url: '/upload',
+            url: '/common/file/upload',
             multiple: true,
             acceptMime: 'image/*',
             before: function(obj){
@@ -392,6 +392,13 @@
             });
             }
             ,done: function(res){
+                if (res.errcode != 0) {
+                   layer.alert('图片上传失败：' + res.errmsg, {
+                        icon: 5,
+                        title: '温馨提示'
+                    });
+                    return;
+                } 
                 //上传完毕
                 var data = res.data;
                 $('#picList').append('<div class="upload-block"><img class="layui-upload-img" heigh="55" width="55" src="'

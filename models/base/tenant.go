@@ -13,9 +13,9 @@ import (
 
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	. "yellbuy.com/YbGoCloundFramework/libs"
-	"yellbuy.com/YbGoCloundFramework/models/common"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	. "yellbuy.com/YbCloudDataApi/libs"
+	"yellbuy.com/YbCloudDataApi/models/common"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 // 租户表';

@@ -19,10 +19,10 @@ import (
 	// "time"
 
 	//cache "github.com/patrickmn/go-cache"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	"yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 type UserController struct {
@@ -81,10 +81,20 @@ func (self *UserController) Add() {
 			self.AjaxMsg(err.Error(), libs.E100000)
 			self.StopRun()
 		} else {
-			if _, err := baseModels.UserAdd(user, pwd); err != nil {
+			if uid, err := baseModels.UserAdd(user, pwd); err != nil {
 				fmt.Println(err)
 				self.AjaxMsg(err.Error(), libs.E100000)
 			} else {
+				id = uint(uid)
+				src := user.Avatar
+				if string(src[0]) == "/" {
+					src = src[1:len(src)]
+					dest := fmt.Sprintf("static/img/avatar/user/%v.png", id)
+					// 复制文件
+					if src != dest {
+						libs.CopyFile(src, dest)
+					}
+				}
 				self.AjaxMsg("", libs.E0)
 			}
 		}
@@ -131,6 +141,17 @@ func (self *UserController) Edit() {
 				// 删除缓存
 				kind := libs.GetAuthKindValue(user.Appid, user.Tid, user.Id)
 				self.DeleteCache(kind, user.Id)
+
+				src := user.Avatar
+				if string(src[0]) == "/" {
+					src = src[1:len(src)]
+					dest := fmt.Sprintf("static/img/avatar/user/%v.png", id)
+					// 复制文件
+					if src != dest {
+						libs.CopyFile(src, dest)
+					}
+				}
+
 				self.AjaxMsg("", libs.E0)
 			}
 		}

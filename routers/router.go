@@ -58,7 +58,7 @@ func init() {
 	ns := beego.NewNamespace("/api",
 		beego.NSInclude(
 			&api_controllers.UserController{},
-
+			&api_controllers.ApiSettingController{},
 			&api_controllers.ApiFileController{},
 			&api_controllers.ApiActionController{},
 		),

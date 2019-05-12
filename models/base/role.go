@@ -11,7 +11,7 @@ import (
 	"errors"
 	"time"
 
-	. "yellbuy.com/YbGoCloundFramework/libs"
+	. "yellbuy.com/YbCloudDataApi/libs"
 
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"

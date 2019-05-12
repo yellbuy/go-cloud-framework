@@ -11,9 +11,9 @@ package controllers
 import (
 	"strings"
 
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	libs "yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	libs "yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
 )
 
 type PermissionController struct {

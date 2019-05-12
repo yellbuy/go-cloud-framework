@@ -9,7 +9,7 @@ import (
 
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	. "yellbuy.com/YbGoCloundFramework/libs"
+	. "yellbuy.com/YbCloudDataApi/libs"
 )
 // '版本信息表';
 type Edition struct{

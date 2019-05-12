@@ -11,8 +11,8 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	. "yellbuy.com/YbGoCloundFramework/libs"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	. "yellbuy.com/YbCloudDataApi/libs"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 type Area struct {

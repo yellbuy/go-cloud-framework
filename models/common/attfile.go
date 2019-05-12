@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/astaxie/beego/orm"
-	"yellbuy.com/YbGoCloundFramework/libs"
+	"yellbuy.com/YbCloudDataApi/libs"
 )
 
 type Attfile struct {
@@ -21,6 +21,8 @@ type Attfile struct {
 	Location   uint8
 	Url        string
 	CreateTime time.Time
+	Kind       string
+	Uid        uint
 	Tid        uint // 租户标识',
 	Appid      uint //'应用标识',
 }
@@ -34,13 +36,42 @@ func AttfileAdd(file *Attfile) (int64, error) {
 }
 
 //  加载文件
-func AttfileGetList(appid uint, tid uint, ids []interface{}) ([]*Attfile, error) {
+func AttfileGetPagedList(pageIndex, pageSize uint, kind string, scopeIds ...interface{}) (int64, []*Attfile, error) {
+	if pageSize == 0 {
+		pageSize = 10
+	}
+	offset := pageIndex * pageSize
+
+	return AttfileGetPagedListBy(offset, pageSize, kind, scopeIds...)
+}
+
+//  加载文件
+func AttfileGetPagedListBy(offset, pageSize uint, kind string, scopeIds ...interface{}) (int64, []*Attfile, error) {
+	list := make([]*Attfile, 0)
+	if pageSize == 0 {
+		pageSize = 10
+	}
+	query := orm.NewOrm().QueryTable(AttfileTableName())
+	query = libs.AppendFilter(query, scopeIds...)
+	if kind != "" {
+		query = query.Filter("kind", kind)
+	}
+	total, err := query.Count()
+	if total > 0 {
+		_, err = query.OrderBy("-id").Limit(pageSize, offset).All(&list)
+	}
+
+	return total, list, err
+}
+
+//  加载文件
+func AttfileGetList(ids []interface{}, scopeIds ...interface{}) ([]*Attfile, error) {
 	list := make([]*Attfile, 0)
 	if len(ids) == 0 {
 		return list, errors.New("文件标识不能为空")
 	}
 	query := orm.NewOrm().QueryTable(AttfileTableName())
-	query = query.Filter("appid", appid).Filter("tid", tid)
+	query = libs.AppendFilter(query, scopeIds...)
 	query = query.Filter("id__in", ids...)
 	query.Limit(len(ids), 0).All(&list)
 	return list, nil

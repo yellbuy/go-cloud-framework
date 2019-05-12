@@ -40,7 +40,7 @@
                 <input type="text" class="layui-input key" placeholder="输入名称、描述、备注等" />
             </div>
             <a class="layui-btn btnSearch" data-type="reload" lay-event="searchVal" style="padding: 0 10px;"><i class="layui-icon"></i> 搜索</a>
-            <a class="layui-btn btnAdd" data-type="add" lay-event="add" style="padding: 0 10px;"><i class="layui-icon layui-icon-add-circle"></i>增加</a>
+            <a class="layui-btn btnAdd" data-type="add" lay-event="add" style="padding: 0 10px;"><i class="layui-icon layui-icon-add-circle"></i>新增</a>
         </div>
   
 <!-- </form> -->
@@ -85,21 +85,15 @@
                         align: "left"
                     },
                     {
-                        field: 'Desc',
-                        title: '描述',
-                        width: 150,
-                        align: "left"
-                    },
-                    {
                         field: 'Domain',
-                        title: '域名',
+                        title: '绑定域名',
                         width: 150,
                         align: "left"
                     },
                     {
                         // field: 'ExpireTime',
                         title: '到期时间',
-                        width: 100,
+                        width: 120,
                         align: "right",
                         templet: function (row) {
                             return row.ExpireTime.substring(0, 10)
@@ -111,37 +105,6 @@
                         title: '剩余次数',
                         width: 100,
                         align: "right"
-                    },
-                    {
-                        field: 'AreaId',
-                        title: '区域代码',
-                        // width: 100,
-                        align: "right"
-
-                    },
-                    {
-                        field: 'Province',
-                        title: '省',
-                        // width: 160,
-                        align: "left"
-                    },
-                    {
-                        field: 'City',
-                        title: '市',
-                        // width: 160,
-                        align: "left"
-                    },
-                    {
-                        field: 'County',
-                        title: '县',
-                        // width: 160,
-                        align: "left"
-                    },
-                    {
-                        field: 'Addr',
-                        title: '地址',
-                        // width: 160,
-                        align: "left"
                     },
                     {
                         field: 'Mode',
@@ -161,28 +124,22 @@
                     {
                         // field: 'Edition.',
                         title: '版本',
-                        // width: 160,
-                        align: "right",
+                        width: 120,
+                        align: "center",
                         templet: function (row) {
                             return row.Edition.Name
                         }
                     },
                     {
-                        field: 'Remark',
-                        title: '备注',
-                        width: 100,
-                        align: "left"
-                    },
-                    {
                         field: 'Linkman',
                         title: '联系人',
-                        width: 100,
+                        width: 120,
                         align: "left"
                     },
                     {
                         field: 'Phone',
                         title: '电话',
-                        width: 100,
+                        width: 130,
                         align: "right"
                     },{
                         // field: 'State',

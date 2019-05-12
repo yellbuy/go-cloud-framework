@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"github.com/astaxie/beego"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	"yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
 )
 
 type RoleController struct {

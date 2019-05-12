@@ -28,22 +28,20 @@
                 {% if !item.Hide %}
                 {%if item.Type|integer==0%}
                 <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name}}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <input type="text" class="layui-input titleVal" lay-verify="title" name="{{item.Key}}" value="{{item.Value}}" placeholder="{{item.Remark}}">
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+                </div>
+                {% elif  item.Type|integer==1 %}
+                <div class="layui-form-item layui-row layui-col-space10">
                     <label class="layui-form-label" style="width: 200px">
                         <span class="yb-red">{{item.Name }}</label>
                     <div class="layui-input-inline" style="width: 400px">
                         <input type="number" class="layui-input titleVal" lay-verify="title" name="{{item.Key}}" value="{{item.Value}}" placeholder="{{item.Remark}}">
                         <span class="help-block m-b-none">{{item.Remark}}</span>
                     </div>
-
-                </div>
-                {% elif  item.Type|integer==1 %}
-                <div class="layui-form-item layui-row layui-col-space10">
-                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name}}</label>
-                    <div class="layui-input-inline" style="width: 400px">
-                        <input type="text" class="layui-input titleVal" lay-verify="title" name="{{item.Key}}" value="{{item.Value}}" placeholder="{{item.Remark}}">
-                        <span class="help-block m-b-none">{{item.Remark}}</span>
-                    </div>
-
                 </div>
                 {% elif  item.Type|integer==2%}
                 <div class="layui-form-item layui-row layui-col-space10">
@@ -52,7 +50,6 @@
                         <textarea placeholder="{{item.Remark}}" name="{{item.Key}}" class="layui-textarea">{{item.Value}}</textarea>
                         <span class="help-block m-b-none">{{item.Remark}}</span>
                     </div>
-
                 </div>
                 {% elif  item.Type|integer==3%}
                 <div class="layui-form-item layui-row layui-col-space10">
@@ -61,7 +58,6 @@
                         <textarea placeholder="{{item.Remark}}" name="{{item.Key}}" class="layui-textarea">{{item.Value}}</textarea>
                         <span class="help-block m-b-none">{{item.Remark}}</span>
                     </div>
-
                 </div>
                 {% elif  item.Type|integer==4%}
                 <div class="layui-form-item layui-row layui-col-space10">
@@ -75,7 +71,31 @@
                         </select>
                         <span class="help-block m-b-none">{{item.Remark}}</span>
                     </div>
-
+                </div>
+                {% elif  item.Type|integer==5%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name}}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <input type="password" class="layui-input" lay-verify="title" name="{{item.Key}}" value="{{item.Value}}" placeholder="{{item.Remark}}">
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+                </div>
+                {% elif  item.Type|integer==6%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <label class="layui-form-label" style="width: 200px"><span class="yb-red">{{item.Name}}</label>
+                    <div class="layui-input-inline" style="width: 400px">
+                        <div class="layui-upload-list thumbBox thumbBox_{{item.Key}} mag0" style="width:150px;height:150px;line-height:150px;">
+                            <input type="hidden" id="pic_{{item.Key}}" name="{{item.Key}}" value="{{item.Value}}"/>
+                            <img class="layui-upload-img thumbImg thumbImg_{{item.Key}}" style="width:150px;height:150px;" src="{% if item.Value %}{{item.Value}} {%else%}/static/admin/img/image.png{% endif %}">
+                        </div>
+                        <span class="help-block m-b-none">{{item.Remark}}</span>
+                    </div>
+                </div>
+                {% elif  item.Type|integer==10%}
+                <div class="layui-form-item layui-row layui-col-space10">
+                    <span class="help-block m-b-none">{{item.Name}}</span>
+                    <div id="editor_{{item.Key}}"></div>
+                        
                 </div>
                 {%endif%}
                 {% endif %}
@@ -83,9 +103,8 @@
                 {%endfor%}
             </div>
             <div class="layui-form-item">
-
-                <!-- <label class="layui-form-label"></label> -->
-                <div class="layui-input-block" style="text-align:left;">
+                <label class="layui-form-label" style="width: 200px"></label>
+                <div class="layui-input-block">
                     <input type="hidden" name="group" value="{{group}}" />
                     <button class="layui-btn" lay-submit="" lay-filter="sub">提交</button>
                     <!-- <a class="layui-btn layui-btn-primary" id="btnClose">关闭</a> -->
@@ -101,19 +120,16 @@
 <!-- <script src="/static/layui/layui.js?s=36"></script> -->
 <script type="text/javascript">
     var editIndex;
-    layui.use(['larry', 'form', 'layer', 'layedit', 'laydate', 'upload'], function () {
+    layui.use(['larry', 'form', 'layer', 'layedit', 'laydate', 'upload','ueditor'], function () {
         var form = layui.form
         layer = parent.layer === undefined ? layui.layer : top.layer,
             // laypage = layui.laypage,
-            // upload = layui.upload,
-            // layedit = layui.layedit,
+            upload = layui.upload,
+            ueditor = layui.ueditor,
             // laydate = layui.laydate,
             $ = layui.jquery;
         //用于同步编辑器内容到textarea
         // layedit.sync(editIndex); 
-
-
-
         form.verify({
             title: function (val) {
                 if (val == '') {
@@ -126,10 +142,47 @@
                 }
             }
         });
-        form.on("submit", function (data) {
-            console.log(data)
-            data = data.field
-            data = $("form").serialize();
+        {% for item in items %}
+        {% if item.Type|integer == 6 %}
+            //上传图片
+            upload.render({
+                elem: '.thumbBox.thumbBox_{{item.Key}}',
+                url: '/common/file/upload',
+                    before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        // $('.thumbImg').attr('src', result); //图片链接（base64）
+                    });
+                },
+                done: function(res, index, upload){
+                    if(res.errcode==0){
+                        var data = res.data;
+                        $('#pic_{{item.Key}}').val(data.src);
+                        $('.thumbImg.thumbImg_{{item.Key}}').attr('src',data.src);
+                        $('.thumbBox.thumbBox_{{item.Key}}').css("background","#fff");
+                    }
+                    else{
+                        layer.alert('图片上传失败：'+res.errmsg, {icon: 5,title:'温馨提示'});
+                    }
+                }, error: function(err) {
+                    alert(err)
+                }
+            });
+        {% elif item.Type|integer == 10 %}
+        var editor_{{item.Key}} = UE.getEditor('editor_{{item.Key}}');
+        editor_{{item.Key}}.ready(function() {
+            editor_{{item.Key}}.setHeight(300);
+            editor_{{item.Key}}.setContent('{{item.Value|safe}}')
+        });
+        {% endif %}
+        {% endfor %}
+        form.on("submit", function (obj) {
+           var data = obj.field
+            {% for item in items %}
+            {% if item.Type|integer == 10%}
+            data.{{item.Key}}=editor_{{item.Key}}.getContent();
+            {% endif %}
+            {% endfor %}
             console.log(data)
             $.post('/common/{{curController}}/settinggroupedit', data, function (out) {
 

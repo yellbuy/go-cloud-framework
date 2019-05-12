@@ -7,10 +7,10 @@ import (
 		// "time"
 			// "errors"
 			// "strconv"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	commonModels "yellbuy.com/YbGoCloundFramework/models/common"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	"yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
+	commonModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 type EditionController struct {
 	share.AdminBaseController

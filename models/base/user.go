@@ -15,8 +15,8 @@ import (
 
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	. "yellbuy.com/YbGoCloundFramework/libs"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	. "yellbuy.com/YbCloudDataApi/libs"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 type IAttactUser interface {

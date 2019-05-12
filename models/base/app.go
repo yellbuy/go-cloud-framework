@@ -12,8 +12,8 @@ import (
 
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	. "yellbuy.com/YbGoCloundFramework/libs"
-	"yellbuy.com/YbGoCloundFramework/utils"
+	. "yellbuy.com/YbCloudDataApi/libs"
+	"yellbuy.com/YbCloudDataApi/utils"
 )
 
 // 租户表';
@@ -41,7 +41,7 @@ type App struct {
 	//` 价格',
 	Price float32
 	//`头像',
-	Pin int64
+	Logo string
 	//` 多图上传',
 	Pics string
 	//`所在区域代码',
@@ -65,7 +65,7 @@ type App struct {
 }
 
 var AppListFields = []string{"Name", "Desc", "Mode", "Times", "ExpireTime",
-	/* "CreationTime", */ "State", "Amount", "Price", "Pin", "Pics",
+	/* "CreationTime", */ "State", "Amount", "Price", "Logo", "Pics",
 	"AreaId", "Province", "City", "County", "Addr", "Linkman", "Phone",
 	"Remark", "Domain"}
 
@@ -132,13 +132,17 @@ func AppUpdate(model *App) error {
 	}
 	o := orm.NewOrm()
 	if model.Id == 0 {
-		_, err = o.Insert(model)
+		id, err := o.Insert(model)
+		if err == nil {
+			model.Id = uint(id)
+		}
 	} else {
 		//  query := o.QueryTable(AppTableName())
 		_, err = o.Update(model, AppListFields...)
 		cacheKey := getCacheKeyForId(model.Id)
 		utils.Cache.Delete(cacheKey)
 	}
+
 	return err
 }
 

@@ -9,10 +9,10 @@ import (
 	"strings"
 	"time"
 
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	"yellbuy.com/YbGoCloundFramework/libs"
-	baseModels "yellbuy.com/YbGoCloundFramework/models/base"
-	commonModels "yellbuy.com/YbGoCloundFramework/models/common"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	"yellbuy.com/YbCloudDataApi/libs"
+	baseModels "yellbuy.com/YbCloudDataApi/models/base"
+	commonModels "yellbuy.com/YbCloudDataApi/models/common"
 )
 
 type AppController struct {
@@ -75,9 +75,18 @@ func (self *AppController) AppEdit() {
 			if err := baseModels.AppUpdate(form); err != nil {
 				fmt.Println(err)
 				self.AjaxMsg(err.Error(), libs.E100000)
-			} else {
-				self.AjaxMsg("", libs.E0)
+			} else if form.Logo != "" {
+				src := form.Logo
+				if string(src[0]) == "/" {
+					src = src[1:len(src)]
+					dest := fmt.Sprintf("static/img/avatar/app/%v.png", id)
+					// 复制文件
+					if src != dest {
+						libs.CopyFile(src, dest)
+					}
+				}
 			}
+			self.AjaxMsg("", libs.E0)
 		}
 
 	} else {
@@ -164,7 +173,7 @@ func form2app(self *AppController, id uint) (*baseModels.App, error) {
 	form.Desc = strings.TrimSpace(self.GetString("Desc"))
 	form.Phone = strings.TrimSpace(self.GetString("Phone"))
 	form.Addr = strings.TrimSpace(self.GetString("Address"))
-	form.Pin, _ = self.GetInt64("Pin")
+	form.Logo = self.GetString("Logo")
 	form.Pics = strings.TrimSpace(self.GetString("Pics"))
 	form.Domain = strings.TrimSpace(self.GetString("Domain"))
 	form.Times, _ = self.GetUint64("Times")

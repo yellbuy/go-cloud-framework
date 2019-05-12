@@ -10,7 +10,7 @@ import (
 	"github.com/astaxie/beego/validation"
 
 	"github.com/astaxie/beego/orm"
-	. "yellbuy.com/YbGoCloundFramework/libs"
+	. "yellbuy.com/YbCloudDataApi/libs"
 )
 
 type Category struct {

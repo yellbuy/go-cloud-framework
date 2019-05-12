@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/astaxie/beego/orm"
-	. "yellbuy.com/YbGoCloundFramework/libs"
+	. "yellbuy.com/YbCloudDataApi/libs"
 )
 
 type Org struct {

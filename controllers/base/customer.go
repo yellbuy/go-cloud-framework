@@ -14,12 +14,12 @@ import (
 	"strings"
 	"time"
 
-	"yellbuy.com/YbGoCloundFramework/libs"
-	// "yellbuy.com/YbGoCloundFramework/utils"
+	"yellbuy.com/YbCloudDataApi/libs"
+	// "yellbuy.com/YbCloudDataApi/utils"
 
 	// cache "github.com/patrickmn/go-cache"
-	"yellbuy.com/YbGoCloundFramework/controllers/share"
-	BaseModels "yellbuy.com/YbGoCloundFramework/models/base"
+	"yellbuy.com/YbCloudDataApi/controllers/share"
+	BaseModels "yellbuy.com/YbCloudDataApi/models/base"
 )
 
 type CustomerController struct {
