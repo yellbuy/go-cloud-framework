@@ -10,7 +10,6 @@ package common
 
 import (
 	"fmt"
-	"net/url"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -39,31 +38,10 @@ var JobQueue = goworkqueue.NewQueue(beego.AppConfig.DefaultInt("jobqueue.size", 
 	})
 
 func init() {
-	dbhost := beego.AppConfig.String("db.host")
-	dbport := beego.AppConfig.String("db.port")
-	dbuser := beego.AppConfig.String("db.user")
-	dbpassword := beego.AppConfig.String("db.password")
-	dbname := beego.AppConfig.String("db.name")
-	timezone := beego.AppConfig.String("db.timezone")
-	maxidleconns := beego.AppConfig.DefaultInt("db.maxidleconns", 0)
-	maxopenconns := beego.AppConfig.DefaultInt("db.maxopenconns", 0)
-	if dbport == "" {
-		dbport = "3306"
-	}
-	dsn := dbuser + ":" + dbpassword + "@tcp(" + dbhost + ":" + dbport + ")/" + dbname + "?charset=utf8"
-	// fmt.Println(dsn)
 
-	if timezone != "" {
-		dsn = dsn + "&loc=" + url.QueryEscape(timezone)
-	}
-	orm.RegisterDataBase("common", "mysql", dsn, maxidleconns, maxopenconns)
 	orm.RegisterModel(new(Attfile), new(CommonData), new(Category), new(Area),
 		new(SnGenerator), new(Setting), new(Sms), new(ActionLog),
 		new(Action), new(OauthToken), new(Statistics))
-	fmt.Println("dsn", dsn)
-	if beego.AppConfig.String("runmode") == "dev" {
-		orm.Debug = true
-	}
 }
 
 func TableName(name string) string {
